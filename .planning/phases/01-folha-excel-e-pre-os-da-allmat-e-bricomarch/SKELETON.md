@@ -5,7 +5,7 @@
 
 ## Capability Proven End-to-End
 
-O utilizador grava o modelo com `uv run python -m strata modelo`, preenche-o e `uv run python -m strata pesquisar modelo.xlsx` mostra no terminal, para cada linha, a secção da Allmat com o estado da loja e as ofertas com preço com IVA, origem do IVA, stock e link (plano 01-01). Os planos 01-02 a 01-06 acrescentam fatias por cima deste esqueleto sem mudar as decisões abaixo.
+O utilizador grava o modelo com `uv run python -m strata modelo`, preenche-o e `uv run python -m strata pesquisar modelo.xlsx` mostra no terminal, para cada linha, a secção da Allmat com o estado da loja e as ofertas com preço com IVA, origem do IVA, stock e link (plano 01-01, provado com uma corrida ao vivo). A tarefa 1 do plano 01-02 acrescenta os testes sem rede deste esqueleto; os planos 01-02 a 01-06 acrescentam fatias por cima dele sem mudar as decisões abaixo.
 
 ## Architectural Decisions
 
@@ -20,7 +20,7 @@ O utilizador grava o modelo com `uv run python -m strata modelo`, preenche-o e `
 | Dinheiro | `Decimal` em todo o lado: `json.loads(..., parse_float=Decimal)`, cêntimos da Store API com `money.from_minor`, arredondamento só ao mostrar (`ROUND_HALF_UP`) | Erros de dinheiro são o risco principal; o preço vem sempre de campo estruturado |
 | Modelo de dados | `src/strata/models.py`: `Item`, `Invalida`, `Offer`, `Found`, `StoreResult`, `ItemResult` (dataclasses) | Contrato que as Phases 2–5 estendem |
 | Saída | Só terminal (`src/strata/report.py`), um item de cada vez à medida que fica pronto (D-04) | A folha preenchida chega na Phase 4 e a app NiceGUI na Phase 5, por cima do mesmo núcleo |
-| Testes | pytest; `tests/conftest.py` com `FakeFetcher` (rotas por substring do URL, ficheiros em `tests/fixtures/`) e bloqueio de rede autouse; `--record DIR` grava corpos de resposta para fixtures | O vcrpy não interceta curl_cffi; separar "buscar" de "interpretar" |
+| Testes | pytest; `tests/conftest.py` com `FakeFetcher` (rotas por substring do URL, ficheiros em `tests/fixtures/`) e bloqueio de rede autouse; `--record DIR` grava corpos de resposta para fixtures | O vcrpy não interceta curl_cffi; separar "buscar" de "interpretar". O harness chega no plano 01-02 (tarefa 1): o esqueleto do 01-01 já ocupa o limite de ficheiros por plano |
 | Layout | `src/strata/{__main__,models,text,sheet,money,fetch,words,search,report}.py` + `src/strata/stores/{allmat,bricomarche,obras360}.py`; `tests/test_*.py` | Pacote plano; sem `woo.py` genérico (Allmat e Bricomarché só partilham os cêntimos) |
 
 ## Stack Touched in Phase 1

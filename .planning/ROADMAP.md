@@ -35,8 +35,8 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans:** 6 plans
 
 Plans:
-- [ ] 01-01-PLAN.md — Esqueleto: modelo Excel → pesquisar folha → Allmat no terminal (checkpoint de pacotes + tracer)
-- [ ] 01-02-PLAN.md — Entrada: folha validada linha a linha e texto colado no terminal
+- [ ] 01-01-PLAN.md — Esqueleto: modelo Excel → pesquisar folha → Allmat no terminal, provado ao vivo (checkpoint de pacotes + tracer)
+- [ ] 01-02-PLAN.md — Testes sem rede do esqueleto (FakeFetcher, modelo), folha validada linha a linha e texto colado no terminal
 - [ ] 01-03-PLAN.md — Pesquisa alargada, filtro de título, ordem por unidade pedida, caixas da Allmat e estados de loja
 - [ ] 01-04-PLAN.md — Bricomarché: mais barato entre lojas físicas, com loja, link e stock
 - [ ] 01-05-PLAN.md — Obras 360: uma oferta por variante, IVA da loja, escalões e stock

@@ -599,15 +599,18 @@ def broadened(query):    # "OSB 12mm" → "OSB"; "placa osb 12 mm" → "placa os
 | A8 | A consola interativa do Windows já lê UTF-8; o Excel mostra "m²" na lista pendente | Pitfall 8, Modelo | Texto com "²" estragado; testar à mão no fim da fase |
 | A9 | Bricomarché inclui IVA (regra B2C, sem rótulo no site) | Pattern 4 | Preços 23% abaixo do real; confirmar à mão um produto numa loja física ou no talão |
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **Bricomarché: mais barata absoluta ou mais barata com stock?**
    - O que se sabe: a variação mais barata pode estar "Esgotado"; RES-02 proíbe filtrar.
    - Recomendação: mostrar a mais barata com o stock dela; se estiver esgotada e houver outra loja com stock, acrescentar na mesma oferta "com stock: 19,99 € em Faro". São mais 3 linhas de código; o planner decide se entra.
+   - **RESOLVED:** mostra-se a variação mais barata absoluta com o stock dela e, se não tiver stock e outra loja física tiver, a dica "com stock: X em Y" na mesma oferta (plano 01-04).
 2. **D-15 deixa tudo escondido: estado "ok" ou "sem resultados"?**
    - Recomendação: o estado reflete a resposta da loja ("ok"), e a linha "+N ofertas escondidas" explica o resto. A D-14 só dispara com zero cru da loja (texto literal da decisão).
+   - **RESOLVED:** o estado fica "ok" com a linha "+N ofertas escondidas"; a D-14 só dispara com zero cru da loja (plano 01-03).
 3. **Allmat com rótulo "M2" e sem caixa na página (ex.: azulejo 21574 a 5,99 € "M2")**
    - Recomendação: seguir a discrição do CONTEXT (preço por artigo, €/m² desconhecido, fim da lista).
+   - **RESOLVED:** preço por artigo, €/m² desconhecido e oferta no fim da lista com o motivo, nunca escondida (discrição do CONTEXT, plano 01-03).
 
 ## Environment Availability
 

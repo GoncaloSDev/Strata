@@ -29,7 +29,7 @@ created: "2026-10-22"
 
 ## Sampling Rate
 
-- **After every task commit:** Run `uv run pytest -q -x`
+- **After every task commit:** Run `uv run pytest -q -x` (from 01-02-T1 on; plan 01-01 has no pytest tests yet, its tracer is checked by the live run in its `<verify>`)
 - **After every plan wave:** Run `uv run pytest -q`
 - **Before `/gsd-verify-work`:** Full suite must be green and `uv run python -m strata verificar` reports the three stores OK
 - **Max feedback latency:** 30 seconds
@@ -42,18 +42,20 @@ Task IDs are assigned by the planner; each requirement below must map to at leas
 
 | Task ID | Plan | Wave | Requirement | Threat Ref | Secure Behavior | Test Type | Automated Command | File Exists | Status |
 |---------|------|------|-------------|------------|-----------------|-----------|-------------------|-------------|--------|
-| 01-02-T2 | 01-02 | 2 | LIST-01 | — | N/A | unit | `uv run pytest tests/test_text.py -q` | ❌ W0 | ⬜ pending |
-| 01-03-T1 | 01-03 | 2 | LIST-02 | — | N/A | unit | `uv run pytest tests/test_search.py -q` | ❌ W0 | ⬜ pending |
-| 01-01-T3 | 01-01 | 1 | LIST-04 | T-01-03 | template never overwritten (`open(path, "xb")`) | unit | `uv run pytest tests/test_sheet.py -k modelo -q` | ❌ W0 | ⬜ pending |
-| 01-02-T1 | 01-02 | 2 | LIST-05 | T-01-10 | malformed sheet rows flagged, never crash | unit | `uv run pytest tests/test_sheet.py -q` | ❌ W0 | ⬜ pending |
-| 01-04-T1/T2 | 01-04 | 3 | STORE-01 | T-01-19 | N/A | unit | `uv run pytest tests/test_bricomarche.py -q` | ❌ W0 | ⬜ pending |
-| 01-03-T3 | 01-03 | 2 | STORE-02 | T-01-14 | N/A | unit | `uv run pytest tests/test_allmat.py -q` | ❌ W0 | ⬜ pending |
-| 01-05-T1/T2 | 01-05 | 4 | STORE-03 | T-01-23 | N/A | unit | `uv run pytest tests/test_obras360.py -q` | ❌ W0 | ⬜ pending |
-| 01-03-T1 | 01-03 | 2 | STORE-05 | T-01-18 | failures surfaced as a status, never omitted | unit | `uv run pytest tests/test_search.py -q` | ❌ W0 | ⬜ pending |
-| 01-06-T1 | 01-06 | 5 | STORE-07 | T-01-28 | N/A | unit + live | `uv run pytest tests/test_search.py -k verificar -q` | ❌ W0 | ⬜ pending |
-| 01-05-T1 | 01-05 | 4 | PRICE-01 | T-01-23 | money as `Decimal`, never float | unit | `uv run pytest tests/test_money.py -q` | ❌ W0 | ⬜ pending |
-| 01-03-T2 | 01-03 | 2 | PRICE-02 | T-01-17 | N/A | unit | `uv run pytest tests/test_money.py -q` | ❌ W0 | ⬜ pending |
-| 01-04-T1 | 01-04 | 3 | RES-02 | T-01-19 | N/A | unit | `uv run pytest tests/test_obras360.py tests/test_bricomarche.py -q` | ❌ W0 | ⬜ pending |
+| 01-02-T3 | 01-02 | 2 | LIST-01 | — | N/A | unit | `uv run pytest tests/test_text.py -q` | ❌ W0 | ⬜ pending |
+| 01-03-T1 | 01-03 | 3 | LIST-02 | — | N/A | unit | `uv run pytest tests/test_search.py -q` | ❌ W0 | ⬜ pending |
+| 01-01-T2 | 01-01 | 1 | LIST-04, LIST-05, STORE-05 | T-01-03 | template never overwritten; invalid row flagged, rest searched | live e2e (tracer) | Task 2 `<verify>` in 01-01-PLAN: `modelo` → row 4 "caixa" appended → `pesquisar lista.xlsx` against the real Allmat; second `modelo` exits 1 with the file unchanged | ❌ W0 | ⬜ pending |
+| 01-02-T1 | 01-02 | 2 | LIST-04 | T-01-03 | template never overwritten (`open(path, "xb")`) | unit | `uv run pytest tests/test_sheet.py -k modelo -q` | ❌ W0 | ⬜ pending |
+| 01-02-T1 | 01-02 | 2 | STORE-05 | T-01-31 | tests never reach the stores (network blocked) | e2e (no network) | `uv run pytest tests/test_tracer.py -q` | ❌ W0 | ⬜ pending |
+| 01-02-T2 | 01-02 | 2 | LIST-05 | T-01-10 | malformed sheet rows flagged, never crash | unit | `uv run pytest tests/test_sheet.py -q` | ❌ W0 | ⬜ pending |
+| 01-04-T1/T2 | 01-04 | 4 | STORE-01 | T-01-19 | N/A | unit | `uv run pytest tests/test_bricomarche.py -q` | ❌ W0 | ⬜ pending |
+| 01-03-T3 | 01-03 | 3 | STORE-02 | T-01-14 | N/A | unit | `uv run pytest tests/test_allmat.py -q` | ❌ W0 | ⬜ pending |
+| 01-05-T1/T2 | 01-05 | 5 | STORE-03 | T-01-23 | N/A | unit | `uv run pytest tests/test_obras360.py -q` | ❌ W0 | ⬜ pending |
+| 01-03-T1 | 01-03 | 3 | STORE-05 | T-01-18 | failures surfaced as a status, never omitted | unit | `uv run pytest tests/test_search.py -q` | ❌ W0 | ⬜ pending |
+| 01-06-T1 | 01-06 | 6 | STORE-07 | T-01-28 | N/A | unit + live | `uv run pytest tests/test_search.py -k verificar -q` | ❌ W0 | ⬜ pending |
+| 01-05-T1 | 01-05 | 5 | PRICE-01 | T-01-23 | money as `Decimal`, never float | unit | `uv run pytest tests/test_money.py -q` | ❌ W0 | ⬜ pending |
+| 01-03-T2 | 01-03 | 3 | PRICE-02 | T-01-17 | N/A | unit | `uv run pytest tests/test_money.py -q` | ❌ W0 | ⬜ pending |
+| 01-04-T1 | 01-04 | 4 | RES-02 | T-01-19 | N/A | unit | `uv run pytest tests/test_obras360.py tests/test_bricomarche.py -q` | ❌ W0 | ⬜ pending |
 
 *Status: ⬜ pending · ✅ green · ❌ red · ⚠️ flaky*
 
@@ -61,9 +63,9 @@ Task IDs are assigned by the planner; each requirement below must map to at leas
 
 ## Wave 0 Requirements
 
-- [ ] `pyproject.toml` (`uv init --package`) + deps (curl_cffi, openpyxl, selectolax `>=1.0,<1.1`, pytest) + `[tool.pytest.ini_options]`
-- [ ] `tests/conftest.py` — `FakeFetcher` (same `get`/`get_json` interface, reads `tests/fixtures/`) and autouse network block
-- [ ] `tests/fixtures/` — seeded from `.planning/phases/01-folha-excel-e-pre-os-da-allmat-e-bricomarch/samples/`, later from `--record`
+- [ ] `pyproject.toml` (`uv init --package`) + deps (curl_cffi, openpyxl, selectolax `>=1.0,<1.1`, pytest) + `[tool.pytest.ini_options]` — 01-01-T2
+- [ ] `tests/conftest.py` — `FakeFetcher` (same `get`/`get_json` interface, reads `tests/fixtures/`) and autouse network block — 01-02-T1
+- [ ] `tests/fixtures/` (Allmat seeds in 01-02-T1) — seeded from `.planning/phases/01-folha-excel-e-pre-os-da-allmat-e-bricomarch/samples/`, later from `--record`
 - [ ] `tests/test_text.py`, `test_sheet.py`, `test_money.py`, `test_allmat.py`, `test_bricomarche.py`, `test_obras360.py`, `test_search.py`
 
 ---
