@@ -1,0 +1,43 @@
+{
+  "contract": "1.0.0",
+  "flavor": "core",
+  "milestone": null,
+  "phases": [
+    {
+      "number": "1",
+      "name": "Folha Excel e preços da Allmat, Bricomarché e Obras 360",
+      "status": "in_progress"
+    },
+    {
+      "number": "2",
+      "name": "Obramat e cadeia de recurso",
+      "status": "pending"
+    },
+    {
+      "number": "3",
+      "name": "Especificações e classificação exato/parecido",
+      "status": "pending"
+    },
+    {
+      "number": "4",
+      "name": "Embalagens, custo total e folha preenchida",
+      "status": "pending"
+    },
+    {
+      "number": "5",
+      "name": "App no browser e exportação",
+      "status": "pending"
+    },
+    {
+      "number": "6",
+      "name": "Descoberta de lojas",
+      "status": "pending"
+    }
+  ],
+  "next": {
+    "command": "/gsd-progress --next",
+    "label": "Advance to the next step",
+    "reason": "Phase 1 of 6 · 0% · executing"
+  },
+  "updated_at": "2026-10-22T22:27:30.962Z"
+}
