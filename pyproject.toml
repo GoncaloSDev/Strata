@@ -1,0 +1,25 @@
+[project]
+name = "strata"
+version = "0.1.0"
+description = "Procura o fornecedor mais barato para uma lista de compras de obra em lojas online portuguesas"
+authors = [
+    { name = "GoncaloSousa2019", email = "goncalosousa.pt@gmail.com" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "curl-cffi>=0.16.3",
+    "openpyxl>=3.1.5",
+    "selectolax>=1.0,<1.1",
+]
+
+[build-system]
+requires = ["uv_build>=0.12.6,<0.13.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
