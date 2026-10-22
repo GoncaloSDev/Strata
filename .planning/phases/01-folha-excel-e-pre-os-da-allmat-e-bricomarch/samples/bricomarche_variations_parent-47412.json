@@ -1,0 +1,2472 @@
+[
+ {
+  "id": 3447164,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-65",
+  "variation": "Loja: Felgueiras",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=felgueiras",
+  "prices": {
+   "price": "2141",
+   "regular_price": "2141",
+   "sale_price": "2141",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "115 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=felgueiras&#038;variation_id=3447164&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 115,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 3367785,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-64",
+  "variation": "Loja: Vila Nova de Foz Côa",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=vila-nova-de-foz-coa",
+  "prices": {
+   "price": "2099",
+   "regular_price": "2099",
+   "sale_price": "2099",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "42 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=vila-nova-de-foz-coa&#038;variation_id=3367785&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 42,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 3238052,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-63",
+  "variation": "Loja: Cartaxo",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=cartaxo",
+  "prices": {
+   "price": "2299",
+   "regular_price": "2299",
+   "sale_price": "2299",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "128 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=cartaxo&#038;variation_id=3238052&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 128,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 2932461,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-62",
+  "variation": "Loja: Mangualde",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=mangualde",
+  "prices": {
+   "price": "2189",
+   "regular_price": "2189",
+   "sale_price": "2189",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "76 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=mangualde&#038;variation_id=2932461&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 76,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 2895341,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-61",
+  "variation": "Loja: Castro Verde",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=castro-verde",
+  "prices": {
+   "price": "2289",
+   "regular_price": "2289",
+   "sale_price": "2289",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "47 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=castro-verde&#038;variation_id=2895341&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 47,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 2766988,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-60",
+  "variation": "Loja: Faro",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=faro",
+  "prices": {
+   "price": "2189",
+   "regular_price": "2189",
+   "sale_price": "2189",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "32 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=faro&#038;variation_id=2766988&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 32,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 2728009,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-59",
+  "variation": "Loja: Estarreja",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=estarreja",
+  "prices": {
+   "price": "2099",
+   "regular_price": "2099",
+   "sale_price": "2099",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "64 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=estarreja&#038;variation_id=2728009&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 64,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 2549576,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-58",
+  "variation": "Loja: Alcácer do Sal",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=alcacer-do-sal",
+  "prices": {
+   "price": "2499",
+   "regular_price": "2499",
+   "sale_price": "2499",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "63 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=alcacer-do-sal&#038;variation_id=2549576&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 63,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 2445175,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-57",
+  "variation": "Loja: Estremoz",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=estremoz",
+  "prices": {
+   "price": "2699",
+   "regular_price": "2699",
+   "sale_price": "2699",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "50 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=estremoz&#038;variation_id=2445175&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 50,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 2445174,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-56",
+  "variation": "Loja: Monção",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=moncao",
+  "prices": {
+   "price": "1999",
+   "regular_price": "1999",
+   "sale_price": "1999",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "118 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=moncao&#038;variation_id=2445174&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 118,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 2367378,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-55",
+  "variation": "Loja: Ponte de Sor",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=ponte-de-sor",
+  "prices": {
+   "price": "2399",
+   "regular_price": "2399",
+   "sale_price": "2399",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "78 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=ponte-de-sor&#038;variation_id=2367378&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 78,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 2337438,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-54",
+  "variation": "Loja: Anadia",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=anadia",
+  "prices": {
+   "price": "2299",
+   "regular_price": "2299",
+   "sale_price": "2299",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "26 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=anadia&#038;variation_id=2337438&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 26,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 2291700,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-53",
+  "variation": "Loja: Coina - Barreiro",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=coina-barreiro",
+  "prices": {
+   "price": "1849",
+   "regular_price": "1849",
+   "sale_price": "1849",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "0 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=coina-barreiro&#038;variation_id=2291700&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 9999,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 2147186,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-52",
+  "variation": "Loja: Águeda",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=agueda",
+  "prices": {
+   "price": "2299",
+   "regular_price": "2299",
+   "sale_price": "2299",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "60 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=agueda&#038;variation_id=2147186&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 60,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 2072046,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-51",
+  "variation": "Loja: Fundão",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=fundao",
+  "prices": {
+   "price": "2499",
+   "regular_price": "2499",
+   "sale_price": "2499",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "21 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=fundao&#038;variation_id=2072046&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 21,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 2072045,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-50",
+  "variation": "Loja: Famões",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=famoes",
+  "prices": {
+   "price": "2289",
+   "regular_price": "2289",
+   "sale_price": "2289",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "46 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=famoes&#038;variation_id=2072045&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 46,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 1662332,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-49",
+  "variation": "Loja: Arco do Cego - Lisboa",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=arco-do-cego",
+  "prices": {
+   "price": "1924",
+   "regular_price": "1924",
+   "sale_price": "1924",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "Esgotado",
+   "class": "out-of-stock"
+  },
+  "is_in_stock": false,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Ler mais",
+   "description": "Leia mais sobre &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=arco-do-cego&#038;variation_id=1662332&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 9999,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 1203259,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-48",
+  "variation": "Loja: Vila Real",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=vila-real",
+  "prices": {
+   "price": "2099",
+   "regular_price": "2099",
+   "sale_price": "2099",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "54 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=vila-real&#038;variation_id=1203259&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 54,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 1203258,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-47",
+  "variation": "Loja: Vila Nova de Santo André",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=vila-nova-de-santo-andre",
+  "prices": {
+   "price": "2289",
+   "regular_price": "2289",
+   "sale_price": "2289",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "24 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=vila-nova-de-santo-andre&#038;variation_id=1203258&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 24,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 1203257,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-46",
+  "variation": "Loja: Vila do Conde",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=vila-do-conde",
+  "prices": {
+   "price": "2189",
+   "regular_price": "2189",
+   "sale_price": "2189",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "47 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=vila-do-conde&#038;variation_id=1203257&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 47,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 1203256,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-45",
+  "variation": "Loja: Viana do Castelo",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=viana-do-castelo",
+  "prices": {
+   "price": "2189",
+   "regular_price": "2189",
+   "sale_price": "2189",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "35 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=viana-do-castelo&#038;variation_id=1203256&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 35,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 1203255,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-44",
+  "variation": "Loja: Seia",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=seia",
+  "prices": {
+   "price": "2289",
+   "regular_price": "2289",
+   "sale_price": "2289",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "49 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=seia&#038;variation_id=1203255&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 49,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 1203254,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-43",
+  "variation": "Loja: São Domingos de Rana",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=sao-domingos-de-rana",
+  "prices": {
+   "price": "2099",
+   "regular_price": "2099",
+   "sale_price": "2099",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "24 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=sao-domingos-de-rana&#038;variation_id=1203254&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 24,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 1203253,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-42",
+  "variation": "Loja: Ponte de Lima",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=ponte-de-lima",
+  "prices": {
+   "price": "2189",
+   "regular_price": "2189",
+   "sale_price": "2189",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "32 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=ponte-de-lima&#038;variation_id=1203253&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 32,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 1203252,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-41",
+  "variation": "Loja: Marinha da Guia",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=marinha-guia",
+  "prices": {
+   "price": "2099",
+   "regular_price": "2099",
+   "sale_price": "2099",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "69 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=marinha-guia&#038;variation_id=1203252&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 69,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 1203251,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-40",
+  "variation": "Loja: Marinha Grande",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=marinha-grande",
+  "prices": {
+   "price": "2209",
+   "regular_price": "2209",
+   "sale_price": "2209",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "82 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=marinha-grande&#038;variation_id=1203251&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 82,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 1203250,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-39",
+  "variation": "Loja: Mazarres - Leiria",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=marrazes-leiria",
+  "prices": {
+   "price": "2099",
+   "regular_price": "2099",
+   "sale_price": "2099",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "71 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=marrazes-leiria&#038;variation_id=1203250&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 71,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 1203249,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-38",
+  "variation": "Loja: Figueira da Foz",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=figueira-da-foz",
+  "prices": {
+   "price": "2189",
+   "regular_price": "2189",
+   "sale_price": "2189",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "16 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=figueira-da-foz&#038;variation_id=1203249&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 16,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 1203248,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-37",
+  "variation": "Loja: Castelo Branco",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=castelo-branco",
+  "prices": {
+   "price": "2099",
+   "regular_price": "2099",
+   "sale_price": "2099",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "30 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=castelo-branco&#038;variation_id=1203248&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 30,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 1203247,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-36",
+  "variation": "Loja: Carvalhos",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=carvalhos",
+  "prices": {
+   "price": "2299",
+   "regular_price": "2299",
+   "sale_price": "2299",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "48 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=carvalhos&#038;variation_id=1203247&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 48,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 1203246,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-35",
+  "variation": "Loja: Caldas da Rainha",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=caldas-da-rainha",
+  "prices": {
+   "price": "2099",
+   "regular_price": "2099",
+   "sale_price": "2099",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "44 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=caldas-da-rainha&#038;variation_id=1203246&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 44,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 1203245,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-34",
+  "variation": "Loja: Arcozelo - V.N. Gaia",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=arcozelo",
+  "prices": {
+   "price": "2199",
+   "regular_price": "2199",
+   "sale_price": "2199",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "21 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=arcozelo&#038;variation_id=1203245&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 21,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 1203244,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-14",
+  "variation": "Loja: master",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=master",
+  "prices": {
+   "price": "1999",
+   "regular_price": "1999",
+   "sale_price": "1999",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "989 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=master&#038;variation_id=1203244&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 989,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 1051967,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-30",
+  "variation": "Loja: Tondela",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=tondela",
+  "prices": {
+   "price": "2999",
+   "regular_price": "2999",
+   "sale_price": "2999",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "29 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=tondela&#038;variation_id=1051967&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 29,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 1035608,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-29",
+  "variation": "Loja: Fafe",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=fafe",
+  "prices": {
+   "price": "2497",
+   "regular_price": "2497",
+   "sale_price": "2497",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "44 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=fafe&#038;variation_id=1035608&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 44,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 1016533,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-23",
+  "variation": "Loja: Entroncamento",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=entroncamento",
+  "prices": {
+   "price": "2699",
+   "regular_price": "2699",
+   "sale_price": "2699",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "60 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=entroncamento&#038;variation_id=1016533&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 60,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 998220,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-19",
+  "variation": "Loja: Elvas",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=elvas",
+  "prices": {
+   "price": "2499",
+   "regular_price": "2499",
+   "sale_price": "2499",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "41 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=elvas&#038;variation_id=998220&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 41,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 960708,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-13",
+  "variation": "Loja: Cantanhede",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=cantanhede",
+  "prices": {
+   "price": "2299",
+   "regular_price": "2299",
+   "sale_price": "2299",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "Esgotado",
+   "class": "out-of-stock"
+  },
+  "is_in_stock": false,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Ler mais",
+   "description": "Leia mais sobre &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=cantanhede&#038;variation_id=960708&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 9999,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 941819,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-7",
+  "variation": "Loja: Taveiro - Coimbra",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=taveiro",
+  "prices": {
+   "price": "2299",
+   "regular_price": "2299",
+   "sale_price": "2299",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "79 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=taveiro&#038;variation_id=941819&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 79,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 923739,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-33",
+  "variation": "Loja: Benavente",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=benavente",
+  "prices": {
+   "price": "2290",
+   "regular_price": "2290",
+   "sale_price": "2290",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "84 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=benavente&#038;variation_id=923739&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 84,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 906138,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-32",
+  "variation": "Loja: Santarém",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=santarem",
+  "prices": {
+   "price": "2189",
+   "regular_price": "2189",
+   "sale_price": "2189",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "4 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=santarem&#038;variation_id=906138&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 4,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 888229,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-31",
+  "variation": "Loja: Guimarães",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=guimaraes",
+  "prices": {
+   "price": "2189",
+   "regular_price": "2189",
+   "sale_price": "2189",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "3 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=guimaraes&#038;variation_id=888229&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 3,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 825194,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-28",
+  "variation": "Loja: Pombal",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=pombal",
+  "prices": {
+   "price": "2199",
+   "regular_price": "2199",
+   "sale_price": "2199",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "40 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=pombal&#038;variation_id=825194&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 40,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 806060,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-27",
+  "variation": "Loja: Ourém",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=ourem",
+  "prices": {
+   "price": "2299",
+   "regular_price": "2299",
+   "sale_price": "2299",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "5 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=ourem&#038;variation_id=806060&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 5,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 787037,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-26",
+  "variation": "Loja: Viseu",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=viseu",
+  "prices": {
+   "price": "2099",
+   "regular_price": "2099",
+   "sale_price": "2099",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "1 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=viseu&#038;variation_id=787037&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 1,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 768289,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-25",
+  "variation": "Loja: Oliveira de Azeméis",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=oliveira-de-azemeis",
+  "prices": {
+   "price": "2299",
+   "regular_price": "2299",
+   "sale_price": "2299",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "85 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=oliveira-de-azemeis&#038;variation_id=768289&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 85,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 750502,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-24",
+  "variation": "Loja: Ovar",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=ovar",
+  "prices": {
+   "price": "2189",
+   "regular_price": "2189",
+   "sale_price": "2189",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "52 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=ovar&#038;variation_id=750502&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 52,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 712901,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-22",
+  "variation": "Loja: Guarda",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=guarda",
+  "prices": {
+   "price": "2189",
+   "regular_price": "2189",
+   "sale_price": "2189",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "32 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=guarda&#038;variation_id=712901&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 32,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 694204,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-21",
+  "variation": "Loja: Évora",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=evora",
+  "prices": {
+   "price": "2490",
+   "regular_price": "2490",
+   "sale_price": "2490",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "1 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=evora&#038;variation_id=694204&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 1,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 676004,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-20",
+  "variation": "Loja: Paços de Ferreira",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=pacos-de-ferreira",
+  "prices": {
+   "price": "2499",
+   "regular_price": "2499",
+   "sale_price": "2499",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "Esgotado",
+   "class": "out-of-stock"
+  },
+  "is_in_stock": false,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Ler mais",
+   "description": "Leia mais sobre &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=pacos-de-ferreira&#038;variation_id=676004&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 9999,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 639087,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-18",
+  "variation": "Loja: Abrantes",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=abrantes",
+  "prices": {
+   "price": "2289",
+   "regular_price": "2289",
+   "sale_price": "2289",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "1 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=abrantes&#038;variation_id=639087&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 1,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 621708,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-17",
+  "variation": "Loja: Charneca da Caparica",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=almada",
+  "prices": {
+   "price": "2099",
+   "regular_price": "2099",
+   "sale_price": "2099",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "55 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=almada&#038;variation_id=621708&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 55,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 603149,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-16",
+  "variation": "Loja: Malveira",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=malveira",
+  "prices": {
+   "price": "2299",
+   "regular_price": "2299",
+   "sale_price": "2299",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "14 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=malveira&#038;variation_id=603149&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 14,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 584884,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-15",
+  "variation": "Loja: Carregado",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=carregado",
+  "prices": {
+   "price": "2189",
+   "regular_price": "2189",
+   "sale_price": "2189",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "67 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=carregado&#038;variation_id=584884&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 67,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 529396,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-12",
+  "variation": "Loja: Arrifana",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=arrifana",
+  "prices": {
+   "price": "2189",
+   "regular_price": "2189",
+   "sale_price": "2189",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "85 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=arrifana&#038;variation_id=529396&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 85,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 511570,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-11",
+  "variation": "Loja: Portalegre",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=portalegre",
+  "prices": {
+   "price": "2399",
+   "regular_price": "2399",
+   "sale_price": "2399",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "41 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=portalegre&#038;variation_id=511570&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 41,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 494597,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-10",
+  "variation": "Loja: Penafiel",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=penafiel",
+  "prices": {
+   "price": "2497",
+   "regular_price": "2497",
+   "sale_price": "2497",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "50 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=penafiel&#038;variation_id=494597&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 50,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 476300,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-9",
+  "variation": "Loja: Alcobaça",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=alcobaca",
+  "prices": {
+   "price": "2184",
+   "regular_price": "2184",
+   "sale_price": "2184",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "11 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=alcobaca&#038;variation_id=476300&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 11,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 456791,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-8",
+  "variation": "Loja: Covilhã",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=covilha",
+  "prices": {
+   "price": "2099",
+   "regular_price": "2099",
+   "sale_price": "2099",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "84 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=covilha&#038;variation_id=456791&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 84,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 417801,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-6",
+  "variation": "Loja: Chaves",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=chaves",
+  "prices": {
+   "price": "2299",
+   "regular_price": "2299",
+   "sale_price": "2299",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "58 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=chaves&#038;variation_id=417801&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 58,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 397945,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-5",
+  "variation": "Loja: Sines",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=sines",
+  "prices": {
+   "price": "2189",
+   "regular_price": "2189",
+   "sale_price": "2189",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "86 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=sines&#038;variation_id=397945&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 86,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 377888,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-4",
+  "variation": "Loja: Lagos",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=lagos",
+  "prices": {
+   "price": "2299",
+   "regular_price": "2299",
+   "sale_price": "2299",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "90 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=lagos&#038;variation_id=377888&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 90,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 357690,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-3",
+  "variation": "Loja: Tomar",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=tomar",
+  "prices": {
+   "price": "2299",
+   "regular_price": "2299",
+   "sale_price": "2299",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "74 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=tomar&#038;variation_id=357690&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 74,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 337568,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation-2",
+  "variation": "Loja: Barcelos",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=barcelos",
+  "prices": {
+   "price": "2099",
+   "regular_price": "2099",
+   "sale_price": "2099",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "43 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=barcelos&#038;variation_id=337568&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 43,
+   "multiple_of": 1
+  }
+ },
+ {
+  "id": 71502,
+  "parent": 47412,
+  "type": "variation",
+  "name": "PLACA OSB 12 MM",
+  "slug": "product-47412-variation",
+  "variation": "Loja: Beja",
+  "sku": "2002421234956",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=beja",
+  "prices": {
+   "price": "2099",
+   "regular_price": "2099",
+   "sale_price": "2099",
+   "price_range": null,
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "stock_availability": {
+   "text": "63 em stock",
+   "class": "in-stock"
+  },
+  "is_in_stock": true,
+  "is_purchasable": true,
+  "add_to_cart": {
+   "text": "Adicionar",
+   "description": "Add to cart: &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/?attribute_pa_loja=beja&#038;variation_id=71502&#038;add-to-cart=47412",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 63,
+   "multiple_of": 1
+  }
+ }
+]
