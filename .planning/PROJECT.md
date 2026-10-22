@@ -18,7 +18,7 @@ Para cada produto da lista, mostrar o custo total mais baixo real (com IVA, para
 
 - [ ] Introduzir uma lista de compras com vários produtos, cada um com a sua quantidade
 - [ ] Pesquisa em texto livre para qualquer produto (OSB, tijolo, mesa, mobília...), sem categorias fixas no código
-- [ ] Obter preços das lojas fixas: Obra360, Obramat, Allmat, Bricomarché
+- [ ] Obter preços das lojas fixas: Obras 360, Obramat, Allmat, Bricomarché
 - [ ] Descobrir automaticamente outras lojas online portuguesas que vendem o produto
 - [ ] Recolher preços na hora da pesquisa (não de uma base de dados pré-recolhida)
 - [ ] Normalizar todos os preços para "com IVA 23%", detetando se cada loja mostra o preço com ou sem IVA
@@ -46,7 +46,8 @@ Para cada produto da lista, mostrar o custo total mais baixo real (com IVA, para
 ## Context
 
 - **Utilizador:** compra materiais para obras. Hoje compara preços abrindo vários sites à mão.
-- **Lojas fixas iniciais:** Obra360, Obramat, Allmat, Bricomarché. URLs, plataforma de e-commerce e proteção anti-bot de cada uma ficam por confirmar na pesquisa.
+- **Lojas fixas iniciais:** Obras 360 (`obras360.pt`, confirmado pelo utilizador; não `obra360.pt`), Obramat (`obramat.pt`), Allmat (`allmat.pt`, confirmado pelo utilizador), Bricomarché (`bricomarche.pt`).
+- **Bricomarché tem preço por loja física** (a mesma placa varia entre lojas). Decisão do utilizador: usar o mais barato entre todas as lojas Bricomarché e mostrar qual é a loja.
 - **IVA:** algumas lojas (sobretudo as orientadas a profissionais) mostram preços sem IVA e outras com IVA. Comparar sem normalizar dá resultados errados, por isso este é um ponto crítico.
 - **Extração de preços nas lojas fixas (abordagem discutida, por ordem de preferência):**
   1. API interna de pesquisa que o próprio site usa (Algolia, Doofinder, Magento, VTEX...) → JSON com nome, preço, stock
@@ -79,6 +80,7 @@ Para cada produto da lista, mostrar o custo total mais baixo real (com IVA, para
 | Em falha, tentar outra via antes de desistir | Uma loja em falta pode esconder o preço mais baixo | — Pending |
 | Jev (TypeSafe AI) como candidato para classificar anúncios | Sugestão do utilizador; barato e feito para decisões tipadas | — Pending |
 | Sem categorias fixas no código | Tem de encontrar tijolos, OSB e também mobília | — Pending |
+| Bricomarché: preço mais barato entre todas as lojas físicas, com o nome da loja | O preço varia por loja; o utilizador quer o mínimo | — Pending |
 
 ## Evolution
 
