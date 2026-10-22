@@ -2,7 +2,7 @@
 
 ## What This Is
 
-Ferramenta pessoal, para usar no PC, que recebe uma lista de compras de obra (produto + quantidade) e procura cada produto em lojas online portuguesas para encontrar o fornecedor mais barato. Os preços são normalizados com IVA (23%) e por unidade, e o custo é calculado para a quantidade pedida (ex.: uma palete de 50 pode sair mais barata do que 30 avulsas). Serve materiais de construção, bricolage e também mobília, sem categorias fixas no código.
+Ferramenta pessoal, para usar no PC, que recebe uma lista de compras de obra (sobretudo uma folha Excel com produto, família, tamanho, unidade e quantidade) e procura cada produto em lojas online portuguesas para encontrar o fornecedor mais barato. Os preços são normalizados com IVA (23%) e por unidade, e o custo é calculado para a quantidade pedida (ex.: uma palete de 50 pode sair mais barata do que 30 avulsas). Serve materiais de construção, bricolage e também mobília, sem categorias fixas no código.
 
 ## Core Value
 
@@ -16,7 +16,9 @@ Para cada produto da lista, mostrar o custo total mais baixo real (com IVA, para
 
 ### Active
 
-- [ ] Introduzir uma lista de compras com vários produtos, cada um com a sua quantidade
+- [ ] Entrada principal: folha Excel de formato fixo (Produto, Família, Tamanho, Unidade, Qty, Referência, Notas), com modelo fornecido pela app
+- [ ] Devolver a folha original preenchida com o melhor preço, loja e link, além do Excel detalhado
+- [ ] Introduzir também uma lista de compras colada como texto, para pesquisas rápidas
 - [ ] Pesquisa em texto livre para qualquer produto (OSB, tijolo, mesa, mobília...), sem categorias fixas no código
 - [ ] Obter preços das lojas fixas: Obras 360, Obramat, Allmat, Bricomarché
 - [ ] Descobrir automaticamente outras lojas online portuguesas que vendem o produto
@@ -83,6 +85,9 @@ Para cada produto da lista, mostrar o custo total mais baixo real (com IVA, para
 | Bricomarché: preço mais barato entre todas as lojas físicas, com o nome da loja | O preço varia por loja; o utilizador quer o mínimo | — Pending |
 | Obramat: usar a pesquisa direta do site (`/search?q=`) apesar do robots.txt | Escolha do utilizador: mais simples e rápido; uso pessoal, baixo volume, um pedido de cada vez | — Pending |
 | Claude Haiku 5.5 para extração e classificação na v1; Jev só num teste comparativo | O Jev não extrai valores (só escolha/pontuação/sim-não) | — Pending |
+| Excel de formato fixo como entrada principal; texto colado como secundária | É a base do uso real; formato fixo evita adivinhar colunas | — Pending |
+| Resultados na folha original preenchida + Excel detalhado | O utilizador continua a trabalhar na sua folha e tem o detalhe à parte | — Pending |
+| Folha preenchida gravada como cópia, nunca por cima do original | O openpyxl apaga imagens e gráficos ao gravar; não perder dados do utilizador | — Pending |
 
 ## Evolution
 

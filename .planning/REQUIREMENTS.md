@@ -12,6 +12,9 @@ Requirements for initial release. Each maps to roadmap phases.
 - [ ] **LIST-01**: Utilizador cola uma lista multilinha em que cada linha tem descrição em texto livre, quantidade e unidade (un, m², m, kg, L, saco)
 - [ ] **LIST-02**: Utilizador pesquisa qualquer produto em texto livre (OSB, tijolo, mesa, mobília...) sem escolher categoria
 - [ ] **LIST-03**: Uma lista de 10 itens fica resolvida nas 4 lojas fixas em menos de 5 minutos
+- [ ] **LIST-04**: Utilizador obtém da app um modelo Excel de formato fixo com as colunas Produto, Família, Tamanho, Unidade, Qty (obrigatórias: Produto, Unidade, Qty) e as opcionais Referência (EAN/ref. do fabricante) e Notas
+- [ ] **LIST-05**: Utilizador carrega uma folha Excel nesse formato e cada linha passa a ser um item da pesquisa (entrada principal da app); linhas inválidas são assinaladas com o número da linha e o motivo, sem parar as restantes
+- [ ] **LIST-06**: Família, Tamanho e Referência da folha são usados como contexto na pesquisa e na classificação exato/parecido, sem categorias fixas no código
 
 ### Lojas fixas
 
@@ -56,6 +59,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [ ] **RES-05**: Utilizador repete só um item ou só uma loja sem refazer a lista toda
 - [ ] **RES-06**: Utilizador exporta para Excel: folha com o melhor por item e o total, folha com todos os resultados, links clicáveis, data/hora e lojas que falharam
 - [ ] **RES-07**: Utilizador exporta os resultados para PDF
+- [ ] **RES-08**: Utilizador recebe a sua folha Excel original preenchida com colunas novas (melhor custo total, loja, link, classe exato/parecido, preço unitário), mantendo as colunas e a ordem das linhas originais
 
 ## v2 Requirements
 
@@ -93,13 +97,48 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| (preenchido na criação do roadmap) | | |
+| LIST-01 | Phase 1 | Pending |
+| LIST-02 | Phase 1 | Pending |
+| LIST-03 | Phase 2 | Pending |
+| LIST-04 | Phase 1 | Pending |
+| LIST-05 | Phase 1 | Pending |
+| LIST-06 | Phase 3 | Pending |
+| STORE-01 | Phase 1 | Pending |
+| STORE-02 | Phase 1 | Pending |
+| STORE-03 | Phase 2 | Pending |
+| STORE-04 | Phase 2 | Pending |
+| STORE-05 | Phase 1 | Pending |
+| STORE-06 | Phase 2 | Pending |
+| STORE-07 | Phase 1 | Pending |
+| DISC-01 | Phase 6 | Pending |
+| DISC-02 | Phase 6 | Pending |
+| DISC-03 | Phase 6 | Pending |
+| DISC-04 | Phase 6 | Pending |
+| PRICE-01 | Phase 1 | Pending |
+| PRICE-02 | Phase 1 | Pending |
+| PRICE-03 | Phase 4 | Pending |
+| PRICE-04 | Phase 4 | Pending |
+| PRICE-05 | Phase 4 | Pending |
+| MATCH-01 | Phase 3 | Pending |
+| MATCH-02 | Phase 3 | Pending |
+| MATCH-03 | Phase 3 | Pending |
+| MATCH-04 | Phase 5 | Pending |
+| MATCH-05 | Phase 3 | Pending |
+| MATCH-06 | Phase 3 | Pending |
+| RES-01 | Phase 5 | Pending |
+| RES-02 | Phase 1 | Pending |
+| RES-03 | Phase 4 | Pending |
+| RES-04 | Phase 5 | Pending |
+| RES-05 | Phase 5 | Pending |
+| RES-06 | Phase 5 | Pending |
+| RES-07 | Phase 5 | Pending |
+| RES-08 | Phase 4 | Pending |
 
 **Coverage:**
-- v1 requirements: 32 total
-- Mapped to phases: 0
-- Unmapped: 32 ⚠️
+- v1 requirements: 36 total
+- Mapped to phases: 36
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-10-22*
-*Last updated: 2026-10-22 after initial definition*
+*Last updated: 2026-10-22 after roadmap revision (folha Excel como entrada principal)*
