@@ -42,18 +42,18 @@ Task IDs are assigned by the planner; each requirement below must map to at leas
 
 | Task ID | Plan | Wave | Requirement | Threat Ref | Secure Behavior | Test Type | Automated Command | File Exists | Status |
 |---------|------|------|-------------|------------|-----------------|-----------|-------------------|-------------|--------|
-| TBD | TBD | TBD | LIST-01 | — | N/A | unit | `uv run pytest tests/test_text.py -q` | ❌ W0 | ⬜ pending |
-| TBD | TBD | TBD | LIST-02 | — | N/A | unit | `uv run pytest tests/test_text.py -q` | ❌ W0 | ⬜ pending |
-| TBD | TBD | TBD | LIST-04 | — | template never overwritten (`open(path, "xb")`) | unit | `uv run pytest tests/test_sheet.py -k modelo -q` | ❌ W0 | ⬜ pending |
-| TBD | TBD | TBD | LIST-05 | — | malformed sheet rows flagged, never crash | unit | `uv run pytest tests/test_sheet.py -q` | ❌ W0 | ⬜ pending |
-| TBD | TBD | TBD | STORE-01 | — | N/A | unit | `uv run pytest tests/test_bricomarche.py -q` | ❌ W0 | ⬜ pending |
-| TBD | TBD | TBD | STORE-02 | — | N/A | unit | `uv run pytest tests/test_allmat.py -q` | ❌ W0 | ⬜ pending |
-| TBD | TBD | TBD | STORE-03 | — | N/A | unit | `uv run pytest tests/test_obras360.py -q` | ❌ W0 | ⬜ pending |
-| TBD | TBD | TBD | STORE-05 | — | failures surfaced as a status, never omitted | unit | `uv run pytest tests/test_search.py -q` | ❌ W0 | ⬜ pending |
-| TBD | TBD | TBD | STORE-07 | — | N/A | unit + live | `uv run pytest tests/test_search.py -k verificar -q` | ❌ W0 | ⬜ pending |
-| TBD | TBD | TBD | PRICE-01 | — | money as `Decimal`, never float | unit | `uv run pytest tests/test_money.py -q` | ❌ W0 | ⬜ pending |
-| TBD | TBD | TBD | PRICE-02 | — | N/A | unit | `uv run pytest tests/test_money.py -q` | ❌ W0 | ⬜ pending |
-| TBD | TBD | TBD | RES-02 | — | N/A | unit | `uv run pytest tests/test_obras360.py tests/test_bricomarche.py -q` | ❌ W0 | ⬜ pending |
+| 01-02-T2 | 01-02 | 2 | LIST-01 | — | N/A | unit | `uv run pytest tests/test_text.py -q` | ❌ W0 | ⬜ pending |
+| 01-03-T1 | 01-03 | 2 | LIST-02 | — | N/A | unit | `uv run pytest tests/test_search.py -q` | ❌ W0 | ⬜ pending |
+| 01-01-T3 | 01-01 | 1 | LIST-04 | T-01-03 | template never overwritten (`open(path, "xb")`) | unit | `uv run pytest tests/test_sheet.py -k modelo -q` | ❌ W0 | ⬜ pending |
+| 01-02-T1 | 01-02 | 2 | LIST-05 | T-01-10 | malformed sheet rows flagged, never crash | unit | `uv run pytest tests/test_sheet.py -q` | ❌ W0 | ⬜ pending |
+| 01-04-T1/T2 | 01-04 | 3 | STORE-01 | T-01-19 | N/A | unit | `uv run pytest tests/test_bricomarche.py -q` | ❌ W0 | ⬜ pending |
+| 01-03-T3 | 01-03 | 2 | STORE-02 | T-01-14 | N/A | unit | `uv run pytest tests/test_allmat.py -q` | ❌ W0 | ⬜ pending |
+| 01-05-T1/T2 | 01-05 | 4 | STORE-03 | T-01-23 | N/A | unit | `uv run pytest tests/test_obras360.py -q` | ❌ W0 | ⬜ pending |
+| 01-03-T1 | 01-03 | 2 | STORE-05 | T-01-18 | failures surfaced as a status, never omitted | unit | `uv run pytest tests/test_search.py -q` | ❌ W0 | ⬜ pending |
+| 01-06-T1 | 01-06 | 5 | STORE-07 | T-01-28 | N/A | unit + live | `uv run pytest tests/test_search.py -k verificar -q` | ❌ W0 | ⬜ pending |
+| 01-05-T1 | 01-05 | 4 | PRICE-01 | T-01-23 | money as `Decimal`, never float | unit | `uv run pytest tests/test_money.py -q` | ❌ W0 | ⬜ pending |
+| 01-03-T2 | 01-03 | 2 | PRICE-02 | T-01-17 | N/A | unit | `uv run pytest tests/test_money.py -q` | ❌ W0 | ⬜ pending |
+| 01-04-T1 | 01-04 | 3 | RES-02 | T-01-19 | N/A | unit | `uv run pytest tests/test_obras360.py tests/test_bricomarche.py -q` | ❌ W0 | ⬜ pending |
 
 *Status: ⬜ pending · ✅ green · ❌ red · ⚠️ flaky*
 
