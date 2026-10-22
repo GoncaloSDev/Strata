@@ -81,6 +81,8 @@ Para cada produto da lista, mostrar o custo total mais baixo real (com IVA, para
 | Jev (TypeSafe AI) como candidato para classificar anúncios | Sugestão do utilizador; barato e feito para decisões tipadas | — Pending |
 | Sem categorias fixas no código | Tem de encontrar tijolos, OSB e também mobília | — Pending |
 | Bricomarché: preço mais barato entre todas as lojas físicas, com o nome da loja | O preço varia por loja; o utilizador quer o mínimo | — Pending |
+| Obramat: usar a pesquisa direta do site (`/search?q=`) apesar do robots.txt | Escolha do utilizador: mais simples e rápido; uso pessoal, baixo volume, um pedido de cada vez | — Pending |
+| Claude Haiku 5.5 para extração e classificação na v1; Jev só num teste comparativo | O Jev não extrai valores (só escolha/pontuação/sim-não) | — Pending |
 
 ## Evolution
 
