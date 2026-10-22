@@ -1,6 +1,13 @@
 ---
-gsd_state_version: '1.0'
+gsd_state_version: "1.0"
+current_phase: 1
+current_phase_name: Folha Excel e preços da Allmat e Bricomarché
 status: planning
+stopped_at: Phase 1 context gathered
+last_updated: "2026-10-22T18:36:35.953Z"
+last_activity: 2026-10-22
+last_activity_desc: "Roadmap revisto: folha Excel como entrada principal (6 fases, 36/36 requisitos mapeados)"
+state_head: b7420499455a6b27279ae12e0152b7f3ff07c32f
 progress:
   total_phases: 6
   completed_phases: 0
@@ -83,6 +90,6 @@ Items acknowledged and deferred at milestone close, most recent first:
 
 ## Session Continuity
 
-Last session: 2026-10-22
-Stopped at: Roadmap revisto (folha Excel como entrada principal); à espera de aprovação
-Resume file: None
+Last session: 2026-10-22T18:36:35.931Z
+Stopped at: Phase 1 context gathered
+Resume file: .planning/phases/01-folha-excel-e-pre-os-da-allmat-e-bricomarch/01-CONTEXT.md
