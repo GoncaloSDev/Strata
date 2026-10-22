@@ -1,18 +1,18 @@
 ---
 gsd_state_version: "1.0"
-current_phase: 1
+current_phase: 01
 current_phase_name: Folha Excel e preços da Allmat, Bricomarché e Obras 360
 status: executing
-stopped_at: Phase 1 context gathered
-last_updated: "2026-10-22T22:27:30.898Z"
-last_activity: 2026-10-22
-last_activity_desc: "Roadmap revisto: folha Excel como entrada principal (6 fases, 36/36 requisitos mapeados)"
-state_head: 87e41fa2411a2d9bcab1000243c49cc618da3bdb
+stopped_at: Completed 01-01-PLAN.md
+last_updated: "2026-10-22T23:55:13.547Z"
+last_activity: 2026-10-23
+last_activity_desc: Phase 01 execution started
+state_head: 6e1cff6028842b7295233bdb3156bf577bb553d7
 progress:
   total_phases: 6
   completed_phases: 0
   total_plans: 6
-  completed_plans: 0
+  completed_plans: 1
   percent: 0
 ---
 
@@ -23,14 +23,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-10-22)
 
 **Core value:** Para cada produto da lista, mostrar o custo total mais baixo real (com IVA, para a quantidade pedida) entre as lojas portuguesas, com link para comprar: igual ou mais barato do que uma pesquisa feita à mão, e em minutos em vez de horas.
-**Current focus:** Phase 1 — Folha Excel e preços da Allmat, Bricomarché e Obras 360
+**Current focus:** Phase 01 — Folha Excel e preços da Allmat, Bricomarché e Obras 360
 
 ## Current Position
 
-Phase: 1 (Folha Excel e preços da Allmat, Bricomarché e Obras 360) — READY TO EXECUTE
-Plan: 0 of TBD in current phase
+Phase: 01 (Folha Excel e preços da Allmat, Bricomarché e Obras 360) — EXECUTING
+Plan: 2 of 6
 Status: Ready to execute
-Last activity: 2026-10-22 — Roadmap revisto: folha Excel como entrada principal (6 fases, 36/36 requisitos mapeados)
+Last activity: 2026-10-23 — Phase 01 execution started
 
 Progress: [░░░░░░░░░░] 0%
 
@@ -52,6 +52,11 @@ Progress: [░░░░░░░░░░] 0%
 - Trend: -
 
 *Updated after each plan completion*
+**Per-Plan Metrics:**
+
+| Plan | Duration | Tasks | Files |
+|------|----------|-------|-------|
+| Phase 01 P01 | 4 min | 2 tasks | 14 files |
 
 ## Accumulated Context
 
@@ -70,6 +75,8 @@ Recent decisions affecting current work:
 - [Revisão]: openpyxl entra na Phase 1 para ler a folha e na Phase 4 para escrever na do utilizador (o XlsxWriter só escreve ficheiros novos); o STACK.md ainda diz só XlsxWriter
 - [Phase 1]: Obras 360 (STORE-03) passou da Phase 2 para a Phase 1, a pedido do utilizador (D-16)
 - [Phase 1 plan]: O utilizador aceitou o aviso do verificador sobre o 01-01 (14 ficheiros, zona de aviso 10–14): é o custo do tracer ponta a ponta; 4 dos ficheiros são gerados pelo uv ou vazios
+- [Phase 01]: selectolax fixado em >=1.0,<1.1 (aprovado pelo utilizador; resolveu para 1.0.2)
+- [Phase 01]: Allmat: rótulo Unid -> 1 un; M2 ou outro rótulo -> €/unidade desconhecido com nota visível até ao 01-03
 
 ### Pending Todos
 
@@ -92,6 +99,6 @@ Items acknowledged and deferred at milestone close, most recent first:
 
 ## Session Continuity
 
-Last session: 2026-10-22T18:36:35.931Z
-Stopped at: Phase 1 context gathered
-Resume file: .planning/phases/01-folha-excel-e-pre-os-da-allmat-e-bricomarch/01-CONTEXT.md
+Last session: 2026-10-22T23:55:13.514Z
+Stopped at: Completed 01-01-PLAN.md
+Resume file: None
