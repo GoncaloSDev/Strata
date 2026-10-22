@@ -1,7 +1,7 @@
 ---
 gsd_state_version: "1.0"
 current_phase: 1
-current_phase_name: Folha Excel e preços da Allmat e Bricomarché
+current_phase_name: Folha Excel e preços da Allmat, Bricomarché e Obras 360
 status: planning
 stopped_at: Phase 1 context gathered
 last_updated: "2026-10-22T18:36:35.953Z"
@@ -23,11 +23,11 @@ progress:
 See: .planning/PROJECT.md (updated 2026-10-22)
 
 **Core value:** Para cada produto da lista, mostrar o custo total mais baixo real (com IVA, para a quantidade pedida) entre as lojas portuguesas, com link para comprar: igual ou mais barato do que uma pesquisa feita à mão, e em minutos em vez de horas.
-**Current focus:** Phase 1 — Folha Excel e preços da Allmat e Bricomarché
+**Current focus:** Phase 1 — Folha Excel e preços da Allmat, Bricomarché e Obras 360
 
 ## Current Position
 
-Phase: 1 of 6 (Folha Excel e preços da Allmat e Bricomarché)
+Phase: 1 of 6 (Folha Excel e preços da Allmat, Bricomarché e Obras 360)
 Plan: 0 of TBD in current phase
 Status: Ready to plan
 Last activity: 2026-10-22 — Roadmap revisto: folha Excel como entrada principal (6 fases, 36/36 requisitos mapeados)

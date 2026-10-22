@@ -2,7 +2,7 @@
 
 ## Overview
 
-O Strata começa pela folha Excel, que é a base da aplicação: a app dá um modelo de formato fixo, o utilizador preenche-o e a linha de comandos lê-o e procura cada linha na Allmat e na Bricomarché (as duas lojas que partilham a mesma API), já com o dinheiro certo (IVA 23%, unidades, preço unitário). O texto colado fica como entrada secundária para pesquisas rápidas. Depois junta as duas lojas difíceis (Obras 360 e Obramat) e a cadeia de recurso, até uma folha de 10 itens se resolver nas 4 lojas fixas em menos de 5 minutos. Com ofertas reais na mão, vem a classificação exato/parecido (com Família, Tamanho e Referência da folha como contexto), a seguir o custo total para a quantidade pedida (embalagens e escalões) com a folha original devolvida preenchida, depois a app local no browser com progresso e exportação detalhada, e por fim a descoberta de outras lojas portuguesas.
+O Strata começa pela folha Excel, que é a base da aplicação: a app dá um modelo de formato fixo, o utilizador preenche-o e a linha de comandos lê-o e procura cada linha na Allmat e na Bricomarché (as duas lojas que partilham a mesma API) e na Obras 360 (API própria, com as variantes expandidas), já com o dinheiro certo (IVA 23%, unidades, preço unitário). O texto colado fica como entrada secundária para pesquisas rápidas. Depois junta a loja difícil (Obramat) e a cadeia de recurso, até uma folha de 10 itens se resolver nas 4 lojas fixas em menos de 5 minutos. Com ofertas reais na mão, vem a classificação exato/parecido (com Família, Tamanho e Referência da folha como contexto), a seguir o custo total para a quantidade pedida (embalagens e escalões) com a folha original devolvida preenchida, depois a app local no browser com progresso e exportação detalhada, e por fim a descoberta de outras lojas portuguesas.
 
 ## Phases
 
@@ -12,8 +12,8 @@ O Strata começa pela folha Excel, que é a base da aplicação: a app dá um mo
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Folha Excel e preços da Allmat e Bricomarché** - Modelo Excel e leitura da folha na linha de comandos (texto colado como pesquisa rápida), preços na hora das duas lojas Woo, com IVA 23%, preço unitário e estado por loja
-- [ ] **Phase 2: Obras 360, Obramat e cadeia de recurso** - As 4 lojas fixas respondem para uma folha de 10 itens em menos de 5 minutos, com recurso a JSON-LD, browser e IA
+- [ ] **Phase 1: Folha Excel e preços da Allmat, Bricomarché e Obras 360** - Modelo Excel e leitura da folha na linha de comandos (texto colado como pesquisa rápida), preços na hora das duas lojas Woo e da Obras 360, com IVA 23%, preço unitário e estado por loja
+- [ ] **Phase 2: Obramat e cadeia de recurso** - As 4 lojas fixas respondem para uma folha de 10 itens em menos de 5 minutos, com recurso a JSON-LD, browser e IA
 - [ ] **Phase 3: Especificações e classificação exato/parecido** - Exatos primeiro, parecidos à parte com a diferença escrita, sem falsos exatos; Família, Tamanho e Referência da folha como contexto; teste Haiku vs Jev
 - [ ] **Phase 4: Embalagens, custo total e folha preenchida** - Custo total mais baixo para a quantidade pedida, com embalagens e escalões, poupança do parecido, total da lista e a folha original devolvida preenchida
 - [ ] **Phase 5: App no browser e exportação** - App local com a folha Excel, progresso em tempo real, tabela por item, exclusão de resultados, repetição seletiva, Excel detalhado e PDF
@@ -21,30 +21,29 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 ## Phase Details
 
-### Phase 1: Folha Excel e preços da Allmat e Bricomarché
-**Goal**: O utilizador preenche o modelo Excel da app, passa o caminho do `.xlsx` à linha de comandos e recebe, para cada linha, os preços na hora da Allmat e da Bricomarché, já com IVA 23% e preço unitário normalizado, com o estado de cada loja sempre visível; para uma pesquisa rápida pode colar texto em vez da folha
+### Phase 1: Folha Excel e preços da Allmat, Bricomarché e Obras 360
+**Goal**: O utilizador preenche o modelo Excel da app, passa o caminho do `.xlsx` à linha de comandos e recebe, para cada linha, os preços na hora da Allmat, da Bricomarché e da Obras 360, já com IVA 23% e preço unitário normalizado, com o estado de cada loja sempre visível; para uma pesquisa rápida pode colar texto em vez da folha
 **Mode:** mvp
 **Depends on**: Nothing (first phase)
-**Requirements**: LIST-01, LIST-02, LIST-04, LIST-05, STORE-01, STORE-02, STORE-05, STORE-07, PRICE-01, PRICE-02, RES-02
+**Requirements**: LIST-01, LIST-02, LIST-04, LIST-05, STORE-01, STORE-02, STORE-03, STORE-05, STORE-07, PRICE-01, PRICE-02, RES-02
 **Success Criteria** (what must be TRUE):
   1. O utilizador obtém da app o modelo Excel (Produto, Família, Tamanho, Unidade, Qty, Referência, Notas), preenche-o e corre a linha de comandos com o caminho do `.xlsx`; cada linha válida passa a ser um item, e uma linha sem Produto, Unidade ou Qty (ou com Qty que não é um número positivo, ou Unidade desconhecida) aparece assinalada com o número da linha e o motivo, sem parar as restantes
   2. Para uma pesquisa rápida, o utilizador cola em vez disso uma lista multilinha (ex.: "OSB 12mm 30 un", "cimento 10 saco") e cada linha é lida com descrição, quantidade e unidade; nas duas entradas, qualquer produto em texto livre é pesquisado sem escolher categoria
-  3. A Bricomarché devolve o preço mais barato entre todas as lojas físicas, com o nome dessa loja e o link para a página do produto nessa loja; a Allmat devolve o preço por caixa convertido com a área/conteúdo da caixa
+  3. A Bricomarché devolve o preço mais barato entre todas as lojas físicas, com o nome dessa loja e o link para a página do produto nessa loja; a Allmat devolve o preço por caixa convertido com a área/conteúdo da caixa; a Obras 360 devolve todas as variantes do produto como ofertas separadas (ex.: OSB 9, 12 e 15 mm, cada uma com o seu preço), com os preços sem IVA da loja convertidos para IVA 23% e os escalões por quantidade mostrados quando existem
   4. Cada oferta mostra o preço com IVA 23%, a origem do IVA (indicado pela loja / regra da loja / assumido), o preço unitário normalizado (€/un, €/m², €/m, €/kg, €/L) e o stock quando a loja o indica, sem filtrar
-  5. Cada item mostra o estado das duas lojas (ok / sem resultados / bloqueada / erro / tempo esgotado), por exemplo "OSB" na Allmat aparece como "sem resultados", nunca como erro nem omitido; e a verificação das lojas diz, por adaptador, se ainda devolve preços válidos (preço acima de zero, IVA e unidade coerentes)
+  5. Cada item mostra o estado das três lojas (ok / sem resultados / bloqueada / erro / tempo esgotado), por exemplo "OSB" na Allmat aparece como "sem resultados", nunca como erro nem omitido; e a verificação das lojas diz, por adaptador, se ainda devolve preços válidos (preço acima de zero, IVA e unidade coerentes)
 **Plans**: TBD
 **Stack note**: ler a folha do utilizador obriga a usar openpyxl (o XlsxWriter, escolhido no STACK.md, só escreve ficheiros novos e não lê `.xlsx`); gerar o modelo com o mesmo openpyxl evita uma segunda biblioteca Excel
 
-### Phase 2: Obras 360, Obramat e cadeia de recurso
+### Phase 2: Obramat e cadeia de recurso
 **Goal**: As 4 lojas fixas respondem na hora para uma lista inteira em menos de 5 minutos, e uma loja que falha pelo método principal é tentada por outras vias antes de ser marcada como falhada
 **Mode:** mvp
 **Depends on**: Phase 1
-**Requirements**: STORE-03, STORE-04, STORE-06, LIST-03
+**Requirements**: STORE-04, STORE-06, LIST-03
 **Success Criteria** (what must be TRUE):
-  1. A Obras 360 devolve todas as variantes do produto como ofertas separadas (ex.: OSB 9, 12 e 15 mm, cada uma com o seu preço), com os preços convertidos para IVA 23% e os escalões por quantidade quando existem
-  2. A Obramat devolve preços através da pesquisa direta do site, um pedido de cada vez; ao primeiro CAPTCHA a loja fica marcada "abrir à mão", com o link, e o resto da lista continua
-  3. Quando o método principal de uma loja falha (ex.: desativado à força num teste), a app tenta JSON-LD, browser automático e IA, por esta ordem, e cada oferta mostra o método que funcionou; se todos falharem, a loja aparece como falhada com o motivo
-  4. Uma folha Excel de 10 itens fica resolvida nas 4 lojas fixas em menos de 5 minutos, cada item mostra o estado das 4 lojas e a verificação das lojas cobre as 4
+  1. A Obramat devolve preços através da pesquisa direta do site, um pedido de cada vez; ao primeiro CAPTCHA a loja fica marcada "abrir à mão", com o link, e o resto da lista continua
+  2. Quando o método principal de uma loja falha (ex.: desativado à força num teste), a app tenta JSON-LD, browser automático e IA, por esta ordem, e cada oferta mostra o método que funcionou; se todos falharem, a loja aparece como falhada com o motivo
+  3. Uma folha Excel de 10 itens fica resolvida nas 4 lojas fixas em menos de 5 minutos, cada item mostra o estado das 4 lojas e a verificação das lojas cobre as 4
 **Plans**: TBD
 **Research flag**: yes — tolerância do DataDome da Obramat ao longo de uma lista de 10 itens; onde está a tabela de escalões da Obramat; se `contextCode=000` dá o preço certo
 
@@ -113,8 +112,8 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Folha Excel e preços da Allmat e Bricomarché | 0/TBD | Not started | - |
-| 2. Obras 360, Obramat e cadeia de recurso | 0/TBD | Not started | - |
+| 1. Folha Excel e preços da Allmat, Bricomarché e Obras 360 | 0/TBD | Not started | - |
+| 2. Obramat e cadeia de recurso | 0/TBD | Not started | - |
 | 3. Especificações e classificação exato/parecido | 0/TBD | Not started | - |
 | 4. Embalagens, custo total e folha preenchida | 0/TBD | Not started | - |
 | 5. App no browser e exportação | 0/TBD | Not started | - |

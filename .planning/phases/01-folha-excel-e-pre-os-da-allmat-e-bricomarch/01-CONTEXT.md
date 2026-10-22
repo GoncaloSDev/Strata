@@ -1,4 +1,4 @@
-# Phase 1: Folha Excel e preços da Allmat e Bricomarché - Context
+# Phase 1: Folha Excel e preços da Allmat, Bricomarché e Obras 360 - Context
 
 **Gathered:** 2026-10-22
 **Status:** Ready for planning
@@ -6,9 +6,9 @@
 <domain>
 ## Phase Boundary
 
-Linha de comandos que lê a folha Excel do modelo da app (ou texto colado no terminal, para pesquisas rápidas) e devolve, para cada linha, os preços na hora da Allmat e da Bricomarché: preço com IVA 23% e origem do IVA, preço unitário normalizado, stock quando a loja o indica e o estado de cada loja. Inclui o comando que gera o modelo Excel e a verificação das lojas (STORE-07).
+Linha de comandos que lê a folha Excel do modelo da app (ou texto colado no terminal, para pesquisas rápidas) e devolve, para cada linha, os preços na hora da Allmat, da Bricomarché e da Obras 360: preço com IVA 23% e origem do IVA, preço unitário normalizado, stock quando a loja o indica e o estado de cada loja. Inclui o comando que gera o modelo Excel e a verificação das lojas (STORE-07).
 
-Fora desta fase: Obras 360 e Obramat (Phase 2), classificação exato/parecido e uso de Família/Tamanho/Referência (Phase 3), custo total para a quantidade e folha preenchida (Phase 4), UI e exportação (Phase 5).
+Fora desta fase: Obramat e cadeia de recurso (Phase 2), classificação exato/parecido e uso de Família/Tamanho/Referência (Phase 3), custo total para a quantidade e folha preenchida (Phase 4), UI e exportação (Phase 5).
 
 </domain>
 
@@ -16,7 +16,7 @@ Fora desta fase: Obras 360 e Obramat (Phase 2), classificação exato/parecido e
 ## Implementation Decisions
 
 ### Saída no terminal
-- **D-01:** Cada item aparece com uma secção por loja (Allmat, depois Bricomarché). Cada secção começa pelo estado da loja (ok / sem resultados / bloqueada / erro / tempo esgotado), sempre visível, também quando não há ofertas.
+- **D-01:** Cada item aparece com uma secção por loja (Allmat, Bricomarché, depois Obras 360). Cada secção começa pelo estado da loja (ok / sem resultados / bloqueada / erro / tempo esgotado), sempre visível, também quando não há ofertas.
 - **D-02:** Até 5 ofertas por loja e por item. Quando há mais, uma linha diz quantas ficaram de fora (ex.: "+14 ofertas não mostradas"). Nada desaparece em silêncio.
 - **D-03:** Ordem: mais barato primeiro, pelo preço em € na unidade pedida pela linha (ex.: €/m² se a linha pede m²). As ofertas que não dá para converter para a unidade pedida (ex.: vendidas à unidade, área desconhecida) vão para o fim, com o motivo escrito.
 - **D-04:** Só terminal. Esta fase não grava CSV nem JSON de resultados para o utilizador. A folha preenchida chega na Phase 4 e o Excel detalhado na Phase 5.
@@ -38,6 +38,9 @@ Fora desta fase: Obras 360 e Obramat (Phase 2), classificação exato/parecido e
 - **D-14:** Se uma loja devolver zero resultados, a app faz uma segunda pesquisa alargada, sem medidas nem números (ex.: "OSB 12mm" → "OSB"), e marca essas ofertas como "pesquisa alargada". Se continuar a zero, o estado fica "sem resultados". É uma só tentativa extra por loja e por item (na Bricomarché custa cerca de 12 s a mais).
 - **D-15:** As ofertas cujo título não contém as palavras da pesquisa são escondidas, mas contadas numa linha visível (ex.: "+12 ofertas escondidas: título sem 'osb'"). Serve para cortar resultados que só batem na descrição, como parafusos "para OSB". Na pesquisa alargada, compara com as palavras dessa pesquisa.
 
+### Obras 360 (acrescentada à fase pelo utilizador em 2026-10-22)
+- **D-16:** A Obras 360 (`obras360.pt`, nunca `obra360.pt`) entra nesta fase (STORE-03, antes na Phase 2). Cada variante do produto é uma oferta separada: a linha pai da pesquisa (ex.: "Placa OSB 9-30MM") mostra só o preço da variante mais barata, por isso o adaptador expande as variantes pelo `product-details` antes de mostrar qualquer preço. O preço da loja vem sem IVA e é convertido para IVA 23% com a evidência da loja (`tax_percentage`). Os escalões por quantidade (`DiscountByQuantity`) são lidos e mostrados na oferta; aplicá-los ao custo total fica para a Phase 4 (PRICE-04).
+
 ### Claude's Discretion
 - Verificação das lojas (STORE-07): nome do comando, produtos de teste por loja (ex.: "cimento" na Allmat, que não vende OSB) e formato do relatório. Tem de dizer, por adaptador, se ainda devolve preços válidos (preço acima de zero, IVA e unidade coerentes).
 - Ritmo, timeouts, paralelismo e paginação por loja (ex.: leitura de 30 s na Bricomarché, que demora cerca de 12 s por página). Confirmar se `orderby=price` funciona com `type=variation`.
@@ -55,7 +58,7 @@ Fora desta fase: Obras 360 e Obramat (Phase 2), classificação exato/parecido e
 
 ### Âmbito e requisitos
 - `.planning/ROADMAP.md` §Phase 1 — objetivo, os 5 critérios de sucesso e a nota de stack (openpyxl para ler a folha e gerar o modelo)
-- `.planning/REQUIREMENTS.md` — LIST-01, LIST-02, LIST-04, LIST-05, STORE-01, STORE-02, STORE-05, STORE-07, PRICE-01, PRICE-02, RES-02
+- `.planning/REQUIREMENTS.md` — LIST-01, LIST-02, LIST-04, LIST-05, STORE-01, STORE-02, STORE-03, STORE-05, STORE-07, PRICE-01, PRICE-02, RES-02
 - `.planning/PROJECT.md` §Key Decisions — Bricomarché com o mínimo entre lojas físicas, Excel de formato fixo, folha preenchida sempre em cópia
 - `.planning/STATE.md` §Decisions e §Blockers/Concerns — decisões de revisão (openpyxl) e a lentidão da Bricomarché
 
@@ -65,6 +68,10 @@ Fora desta fase: Obras 360 e Obramat (Phase 2), classificação exato/parecido e
 - `.planning/research/ARCHITECTURE.md` §Anti-Pattern 1–3 — não confiar no `price` de topo, comparar a variante e não a linha pai, estados separados em vez de um só "falhou"
 - `.planning/research/ARCHITECTURE.md` §Recommended Project Structure — organização sugerida (`core/` sem I/O, adaptadores, fetcher)
 - `.planning/research/SUMMARY.md` §Phase 1 e conflitos C4–C6 — o que a fase entrega; `[]` da Allmat = sem resultados; bibliotecas da STACK em vez das da ARCHITECTURE
+
+### Loja Obras 360 (Beevo)
+- `.planning/research/ARCHITECTURE.md` §Per-Store Extraction Feasibility (linha Obras 360), §Anti-Pattern 1–2 e o fluxo de variantes ("Obras360 variant flow") — API `product-list/{widgetId}` + `product-details`, ID do widget lido da página `/pesquisa?search=`, preço sem IVA, `tax_percentage`, stock por variante, `DiscountByQuantity`
+- `.planning/research/PITFALLS.md` §Pitfall 14 — domínio certo é `obras360.pt`
 
 ### Armadilhas a evitar
 - `.planning/research/PITFALLS.md` §Pitfall 1 (IVA), §Pitfall 2 (número errado: 0,00 € do mini-carrinho, cêntimos da Store API), §Pitfall 3 (preço por loja física), §Pitfall 4 (falhas silenciosas, "sem resultados" só com o marcador da loja), §Pitfall 6 (unidades e embalagens)

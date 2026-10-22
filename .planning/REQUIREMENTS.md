@@ -105,7 +105,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | LIST-06 | Phase 3 | Pending |
 | STORE-01 | Phase 1 | Pending |
 | STORE-02 | Phase 1 | Pending |
-| STORE-03 | Phase 2 | Pending |
+| STORE-03 | Phase 1 | Pending |
 | STORE-04 | Phase 2 | Pending |
 | STORE-05 | Phase 1 | Pending |
 | STORE-06 | Phase 2 | Pending |
