@@ -59,10 +59,8 @@ def read_sheet(path) -> tuple[list[Item], list[Invalida]]:
         raise SheetError(f"ficheiro não encontrado: {path}") from None
     except PermissionError:
         raise SheetError(f"sem permissão para ler {path} (está aberto noutro programa?)") from None
-    except InvalidFileException:
-        raise SheetError(f"formato não suportado: {path.name} (guarde a folha como .xlsx)") from None
-    except (zipfile.BadZipFile, KeyError, ValueError, OSError):
-        raise SheetError(f"não foi possível ler {path.name}: ficheiro corrompido ou não é .xlsx") from None
+    except (InvalidFileException, zipfile.BadZipFile, KeyError, ValueError, OSError):
+        raise SheetError(f"não consegui abrir {path.name}: é .xls ou não é um .xlsx válido (guarde a folha como .xlsx)") from None
 
     ws, header, cols = find_table(wb)
 
