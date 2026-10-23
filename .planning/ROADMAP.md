@@ -34,7 +34,7 @@ Decimal phases appear between their surrounding integers in numeric order.
   4. Cada oferta mostra o preço com IVA 23%, a origem do IVA (indicado pela loja / regra da loja / assumido), o preço unitário normalizado (€/un, €/m², €/m, €/kg, €/L) e o stock quando a loja o indica, sem filtrar
   5. Cada item mostra o estado das três lojas (ok / sem resultados / bloqueada / erro / tempo esgotado), por exemplo "OSB" na Allmat aparece como "sem resultados", nunca como erro nem omitido; e a verificação das lojas diz, por adaptador, se ainda devolve preços válidos (preço acima de zero, IVA e unidade coerentes)
 
-**Plans:** 2/6 plans executed
+**Plans:** 3/6 plans executed
 
 Plans:
 **Wave 1**
@@ -44,7 +44,7 @@ Plans:
 - [x] 01-02-PLAN.md — Testes sem rede do esqueleto (FakeFetcher, modelo), folha validada linha a linha e texto colado no terminal
 
 **Wave 3** *(blocked on Wave 2 completion)*
-- [ ] 01-03-PLAN.md — Pesquisa alargada, filtro de título, ordem por unidade pedida, caixas da Allmat e estados de loja
+- [x] 01-03-PLAN.md — Pesquisa alargada, filtro de título, ordem por unidade pedida, caixas da Allmat e estados de loja
 
 **Wave 4** *(blocked on Wave 3 completion)*
 - [ ] 01-04-PLAN.md — Bricomarché: mais barato entre lojas físicas, com loja, link e stock
@@ -144,7 +144,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Folha Excel e preços da Allmat, Bricomarché e Obras 360 | 2/6 | In Progress | - |
+| 1. Folha Excel e preços da Allmat, Bricomarché e Obras 360 | 3/6 | In Progress | - |
 | 2. Obramat e cadeia de recurso | 0/TBD | Not started | - |
 | 3. Especificações e classificação exato/parecido | 0/TBD | Not started | - |
 | 4. Embalagens, custo total e folha preenchida | 0/TBD | Not started | - |

@@ -3,16 +3,16 @@ gsd_state_version: "1.0"
 current_phase: 01
 current_phase_name: Folha Excel e preços da Allmat, Bricomarché e Obras 360
 status: executing
-stopped_at: Completed 01-02-PLAN.md
-last_updated: "2026-10-23T00:02:41.712Z"
+stopped_at: Completed 01-03-PLAN.md
+last_updated: "2026-10-23T00:13:20.387Z"
 last_activity: 2026-10-23
 last_activity_desc: Phase 01 execution started
-state_head: 232f71469aa4a804f3577c31897280c4318f251d
+state_head: c61536535575009768f541940b7143120badc0c9
 progress:
   total_phases: 6
   completed_phases: 0
   total_plans: 6
-  completed_plans: 2
+  completed_plans: 3
   percent: 0
 ---
 
@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-10-22)
 ## Current Position
 
 Phase: 01 (Folha Excel e preços da Allmat, Bricomarché e Obras 360) — EXECUTING
-Plan: 3 of 6
+Plan: 4 of 6
 Status: Ready to execute
 Last activity: 2026-10-23 — Phase 01 execution started
 
@@ -58,6 +58,7 @@ Progress: [░░░░░░░░░░] 0%
 |------|----------|-------|-------|
 | Phase 01 P01 | 4 min | 2 tasks | 14 files |
 | Phase 01 P02 | 4 min | 3 tasks | 10 files |
+| Phase 01 P03 | 7 min | 3 tasks | 8 files |
 
 ## Accumulated Context
 
@@ -81,6 +82,9 @@ Recent decisions affecting current work:
 - [Phase 01]: Linha colada só com número ('30 un') dá 'linha sem descrição'
 - [Phase 01]: Erros de abertura da folha (.xls, zip corrompido) com uma só mensagem: 'não consegui abrir <nome>: é .xls ou não é um .xlsx válido'
 - [Phase 01]: Texto colado só com linhas inválidas: 'Nenhuma linha válida para pesquisar.' e código 2
+- [Phase 01]: 01-03: pesquisa alargada a zero dá 'sem resultados' com "também sem resultados com '<b>'"; broadened_query só quando há ofertas
+- [Phase 01]: 01-03: caixas M2 da Allmat começam com a nota do limite de 10 páginas; só a leitura da página a troca (nenhuma caixa sem motivo)
+- [Phase 01]: 01-03: preço da página Allmat lido no formato da loja (vírgula decimal); formato diferente -> 'área da caixa não encontrada', nunca um €/m² errado
 
 ### Pending Todos
 
@@ -103,6 +107,6 @@ Items acknowledged and deferred at milestone close, most recent first:
 
 ## Session Continuity
 
-Last session: 2026-10-23T00:02:41.678Z
-Stopped at: Completed 01-02-PLAN.md
+Last session: 2026-10-23T00:13:20.351Z
+Stopped at: Completed 01-03-PLAN.md
 Resume file: None

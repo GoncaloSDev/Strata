@@ -77,7 +77,7 @@ coverage:
     requirement: PRICE-02
     verification:
       - kind: unit
-        ref: "uv run pytest tests/test_money.py -q (16 testes)"
+        ref: "uv run pytest tests/test_money.py -q (14 testes)"
         status: pass
       - kind: unit
         ref: "tests/test_search.py#test_ordem_estavel_pelo_preco_na_unidade_pedida, test_allmat_cimento_saco_mais_barato_primeiro, test_allmat_conteudo_pelo_titulo"
@@ -142,7 +142,7 @@ Sem commits de REFACTOR: não houve limpeza a fazer.
 - `src/strata/money.py`: `content_from_title` e `in_unit`. Continua sem float.
 - `src/strata/search.py`: pesquisa alargada D-14 e ordenação estável D-03 com o motivo na nota.
 - `src/strata/stores/allmat.py`: filtro de título com `hidden`, conteúdo pelo título, `parse_box`, `_read_box`, `MAX_BOX_PAGES = 10` (com `shortcut:`), `INCOHERENT`. `parse_products` devolve agora também as caixas `(id, oferta)` e só é usada dentro do módulo.
-- `tests/test_search.py` (26 testes), `tests/test_money.py` (16), `tests/test_allmat.py` (8).
+- `tests/test_search.py` (26 testes), `tests/test_money.py` (14), `tests/test_allmat.py` (8).
 - `tests/fixtures/allmat_product-page_39233_box.html`: cópia da amostra da fase.
 
 ## TDD
@@ -196,7 +196,7 @@ Nenhum. O stub do 01-01 (rótulo M2 sem área) ficou resolvido e foi marcado `fi
 ## Verification
 
 - `uv run pytest tests/test_search.py -q`: 26 passed (critério: pelo menos 14). PASS
-- `uv run pytest tests/test_money.py tests/test_search.py -q`: 42 passed (critério: pelo menos 24). PASS
+- `uv run pytest tests/test_money.py tests/test_search.py -q`: 40 passed (critério: pelo menos 24). PASS
 - `uv run pytest tests/test_allmat.py -q`: 8 passed (critério: pelo menos 8). PASS
 - `uv run pytest -q`: 87 passed. PASS
 - Greps: `def title_matches`/`def broadened` em words.py; `broadened(` e `também sem resultados com` em search.py; `title_matches(`, `LexborHTMLParser`, `allmat-loop-price-box`, `MAX_BOX_PAGES = 10` e `shortcut:` em allmat.py; `def content_from_title`/`def in_unit` em money.py; `in_unit(` em search.py; `float(` ausente de money.py; "PAINEL AQUECIMENTO", "bloqueada", "tempo esgotado" e "página de desafio" em test_search.py; `product-39233` na fixture. PASS
