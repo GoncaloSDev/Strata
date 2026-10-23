@@ -8,7 +8,7 @@ from decimal import Decimal
 from strata.fetch import StoreError
 from strata.models import Found, Offer
 from strata.money import add_vat, fmt_qty
-from strata.words import broadened, title_matches
+from strata.words import broadened, title_matches, words
 
 NAME = "Obras 360"
 BASE = "https://www.obras360.pt"  # domínio com "s" (Pitfall 14)
@@ -124,9 +124,10 @@ async def search(query: str, fetch) -> Found:
     loose = broadened(query) or query
     kept = [p for p in products if title_matches(loose, p["product"]["name"])]
     # Nenhum preço da lista é mostrado (só traz a variante mais barata); só escolhe quem expandir.
-    # Primeiro os pais que batem na pesquisa completa ("M8", "E27"): a solta só serve para não perder
-    # os pais cuja medida está na variante (CR-04).
-    kept.sort(key=lambda p: (not title_matches(query, p["product"]["name"]), _list_price(p) is None,
+    # Primeiro os pais com mais palavras da pesquisa ("M8" em "parafuso m8x40", onde o "40" só está na
+    # variante): a solta só serve para não perder os pais cuja medida está na variante (CR-04, CR-06).
+    need = words(query)
+    kept.sort(key=lambda p: (-len(need & words(p["product"]["name"])), _list_price(p) is None,
                              _list_price(p) or 0))
     chosen = kept[:K]
     results = await asyncio.gather(*(fetch.get_json(BASE + DETAILS_PATH, {
