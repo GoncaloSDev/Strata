@@ -17,6 +17,13 @@ VAT_EVIDENCE = "páginas de produto da Allmat: IVA incluído"
 UNIT_LABEL = re.compile(r'class="wd-price-unit"[^>]*>\s*([^<]*?)\s*<')
 
 
+INCOHERENT = "área da caixa incoerente com o preço por m²"
+
+
+def parse_box(page: str, product_id: int, api_price: Decimal) -> tuple[Decimal | None, Decimal | None, str]:
+    return None, None, ""
+
+
 def parse_products(rows) -> tuple[list[Offer], int]:
     """Ofertas e quantos produtos ficaram de fora por preço <= 0."""
     offers, no_price = [], 0
