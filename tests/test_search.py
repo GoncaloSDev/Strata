@@ -85,6 +85,18 @@ def fake_store(name, *answers):
     ("projetor ip65", "Projetor LED IP65", True),
     ("azulejo 2,5 m²", "Azulejo 2,5 m2", True),
     ("projetor ip65", "Projetor LED IP44", False),
+    # WR-12: -eis átono de têxtil e plurais nasais (-ins/-ons/-uns); -éis tónico continua -el
+    ("mantas geotêxteis", "Manta Geotêxtil", True),
+    ("têxteis", "Têxtil", True),
+    ("coxins", "Coxim", True),
+    ("jardins", "Jardim", True),
+    ("pincéis", "Pincel", True),
+    ("papéis", "Papel", True),
+    ("listéis", "Listel", True),
+    ("plafons", "Plafon LED", True),
+    # WR-13: unidades por extenso
+    ("tubo 3 metros", "Tubo 3m", True),
+    ("cimento 25 quilos", "Cimento 25kg", True),
 ])
 def test_title_matches(query, title, expected):
     assert title_matches(query, title) is expected
@@ -97,6 +109,11 @@ def test_title_matches(query, title, expected):
     ("osb", None),
     ("12mm", None),
     ("tinta 15 litros", "tinta"),  # IN-08
+    ("tubo 3 metros", "tubo"),  # WR-13
+    ("cimento 25 quilos", "cimento"),
+    ("tinta 15 l.", "tinta"),
+    ("parafuso 10 unidades", "parafuso"),
+    ("metro articulado 2m", "metro articulado"),  # unidade só a seguir a um número
 ])
 def test_broadened(query, expected):
     assert broadened(query) == expected
