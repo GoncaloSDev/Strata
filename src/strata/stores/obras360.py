@@ -124,7 +124,10 @@ async def search(query: str, fetch) -> Found:
     loose = broadened(query) or query
     kept = [p for p in products if title_matches(loose, p["product"]["name"])]
     # Nenhum preço da lista é mostrado (só traz a variante mais barata); só escolhe quem expandir.
-    kept.sort(key=lambda p: (_list_price(p) is None, _list_price(p) or 0))
+    # Primeiro os pais que batem na pesquisa completa ("M8", "E27"): a solta só serve para não perder
+    # os pais cuja medida está na variante (CR-04).
+    kept.sort(key=lambda p: (not title_matches(query, p["product"]["name"]), _list_price(p) is None,
+                             _list_price(p) or 0))
     chosen = kept[:K]
     results = await asyncio.gather(*(fetch.get_json(BASE + DETAILS_PATH, {
         "_beevo_decoded_params[0][product_id]": p["product"]["product"]["product_id"]}) for p in chosen),
