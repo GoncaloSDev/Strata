@@ -5,11 +5,11 @@ titles: json
 findings:
   - id: CR-04
     severity: critical
-    disposition: open
+    disposition: fixed
     title: "Obras 360 escolhe os pais sem os números e o corte K=20 por preço deita fora o produto pedido — CORRIGIDO no caso citado (resto no CR-06)"
   - id: CR-05
     severity: critical
-    disposition: open
+    disposition: fixed
     title: "`_stem` não tratava os plurais -ais, -is, -ens, -óis nem palavras de 3 letras — CORRIGIDO nos casos citados (resto no WR-12)"
   - id: CR-06
     severity: critical
@@ -89,7 +89,7 @@ findings:
     title: "\"12,0 mm\" não bate em \"12mm\" (resto do CR-03, adiado pelo 01-08) — ABERTO"
   - id: IN-08
     severity: info
-    disposition: open
+    disposition: fixed
     title: "`broadened` não conhecia os sinónimos do LITRE: \"tinta 15 litros\" alargava para \"tinta litros\" — CORRIGIDO (resto no WR-13)"
   - id: IN-09
     severity: info
@@ -125,7 +125,7 @@ findings:
     title: "Estado \"ok\" com zero ofertas mostradas, e sem nova tentativa — CORRIGIDO (resto no WR-10)"
   - id: WR-10
     severity: warning
-    disposition: open
+    disposition: fixed
     title: "\"ok\" sozinho com zero ofertas quando nada foi escondido pelo filtro (resto do WR-01)"
 open: 27
 total: 31
@@ -136,8 +136,8 @@ recorded: 2026-10-23T11:42:57.017Z
 
 | Finding | Severity | Disposition | Source |
 |---------|----------|-------------|--------|
-| CR-04 | critical | open | - |
-| CR-05 | critical | open | - |
+| CR-04 | critical | fixed | 01-09, re-review (casos citados) |
+| CR-05 | critical | fixed | 01-09, re-review (casos citados) |
 | CR-06 | critical | open | - |
 | WR-02 | warning | open | - |
 | WR-03 | warning | open | - |
@@ -157,7 +157,7 @@ recorded: 2026-10-23T11:42:57.017Z
 | IN-05 | info | open | - |
 | IN-06 | info | open | - |
 | IN-07 | info | open | - |
-| IN-08 | info | open | - |
+| IN-08 | info | fixed | 01-09, re-review (casos citados) |
 | IN-09 | info | open | - |
 | IN-10 | info | open | - |
 | IN-11 | info | open | - |
