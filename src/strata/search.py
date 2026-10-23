@@ -62,7 +62,7 @@ async def search_store(store, item: Item, fetch) -> StoreResult:
         detail = (f"0 ofertas mostradas; {found.hidden} escondidas pelo filtro de título" if found.hidden
                   else f"0 ofertas mostradas de {found.raw} resultados da loja")
     elif first_hidden:
-        detail = f"{first_hidden} escondidas pelo filtro de título com '{item.product}'"
+        detail = f"1.ª pesquisa: {first_hidden} escondidas pelo filtro de título com '{item.product}'"  # WR-16
     return StoreResult(store.NAME, "ok", [o for _, o in keyed], detail=detail, hidden=found.hidden,
                        wide_only=wide_only, notes=found.notes, broadened_query=b)
 
