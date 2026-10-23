@@ -20,18 +20,20 @@ def plain(s) -> str:
 
 
 STOP = {"de", "da", "do", "das", "dos", "para", "com", "em", "e", "a", "o"}  # palavras de ligação
+# Ganha o primeiro sufixo que bate. O par -il -> -i não é plural: põe "perfil" igual a "perfis" (e "táxis" igual a "táxi").
+PLURAL = (("oes", "ao"), ("aes", "ao"), ("eis", "el"), ("ais", "al"), ("ois", "ol"), ("uis", "ul"),
+          ("ens", "em"), ("is", "i"), ("il", "i"), ("s", ""))
 
 
 def _stem(w: str) -> str:
-    """Género e plural: branca/branco -> "branc", painéis -> "painel", portões -> "porta", colheres -> "colher"."""
-    if len(w) <= 3 or any(c.isdigit() for c in w):
+    """Género e plural: branca/branco -> "branc", painéis -> "painel", portões -> "porta", colheres -> "colher",
+    perfis/perfil -> "perfi", ferragens -> "ferragem"."""
+    if len(w) <= 2 or any(c.isdigit() for c in w):
         return w
-    if w.endswith("oes"):
-        w = w[:-3] + "ao"
-    elif w.endswith("eis"):
-        w = w[:-3] + "el"
-    elif w.endswith("s"):
-        w = w[:-1]
+    for suf, rep in PLURAL:
+        if w.endswith(suf) and len(w) > len(suf):
+            w = w[: -len(suf)] + rep
+            break
     return w[:-1] if len(w) > 3 and w[-1] in "aoe" else w
 
 
