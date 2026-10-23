@@ -314,3 +314,35 @@ def test_tinta_branca_gravada_mostra_as_tintas_brancas(fake):
     section = text[text.index("  Obras 360: ok"):]
     assert any("Branco" in ln for ln in section.splitlines()[1:])
     assert "+4 ofertas escondidas: título sem 'tinta branca'" in text
+
+
+# --- 01-08: a medida está na variante, não no nome do pai (CR-02) ---
+
+def test_osb_12mm_so_a_variante_de_12mm(fake):
+    import io
+
+    from strata.models import Item, ItemResult
+    from strata.report import print_item
+
+    fake.cache["obras360_widget"] = WIDGET
+    fake.route(LIST_URL + "OSB+12+mm", "obras360_product-list_osb.json")
+    fake.route(DETAIL_URL + PLACA_ID, "obras360_product-details_osb-parent.json")
+    fake.route(DETAIL_URL + COLA_ID, NO_DETAIL)  # a cola SikaBond também tem "OSB" no nome
+    it = Item(row=3, product="OSB 12 mm", qty=Decimal(30), unit="un")
+
+    sr = asyncio.run(strata.search.search_store(obras360, it, fake))
+
+    assert sr.status == "ok"
+    assert len(sr.offers) == 1
+    o = sr.offers[0]
+    assert " — 1 Placa 12 MM" in o.title
+    assert fmt_eur(o.price) == "19,37 €"
+    assert sr.hidden == 6  # as outras 6 espessuras da placa
+    assert sr.broadened_query is None and not o.broadened
+    out = io.StringIO()
+    print_item(ItemResult(it, [sr]), out)
+    text = out.getvalue()
+    assert "19,37 €" in text
+    assert "+6 ofertas escondidas: título sem 'OSB 12 mm'" in text
+    assert "nota: 1 produtos sem detalhe" in text
+    assert "1 Placa 9 MM" not in text
