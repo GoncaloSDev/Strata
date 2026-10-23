@@ -18,7 +18,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Lojas fixas
 
-- [ ] **STORE-01**: Utilizador obtém preços na hora da Bricomarché, com o preço mais barato entre todas as lojas físicas e o nome dessa loja
+- [x] **STORE-01**: Utilizador obtém preços na hora da Bricomarché, com o preço mais barato entre todas as lojas físicas e o nome dessa loja
 - [x] **STORE-02**: Utilizador obtém preços na hora da Allmat, com o preço por caixa convertido usando a área/conteúdo da caixa
 - [ ] **STORE-03**: Utilizador obtém preços na hora da Obras 360, com todas as variantes do produto expandidas e os escalões por quantidade
 - [ ] **STORE-04**: Utilizador obtém preços na hora da Obramat através da pesquisa direta do site, a ritmo lento (um pedido de cada vez)
@@ -103,7 +103,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | LIST-04 | Phase 1 | Complete |
 | LIST-05 | Phase 1 | Complete |
 | LIST-06 | Phase 3 | Pending |
-| STORE-01 | Phase 1 | Pending |
+| STORE-01 | Phase 1 | Complete |
 | STORE-02 | Phase 1 | Complete |
 | STORE-03 | Phase 1 | Pending |
 | STORE-04 | Phase 2 | Pending |
