@@ -3,16 +3,16 @@ gsd_state_version: "1.0"
 current_phase: 01
 current_phase_name: Folha Excel e preços da Allmat, Bricomarché e Obras 360
 status: executing
-stopped_at: Completed 01-09-PLAN.md
-last_updated: "2026-10-23T18:58:42.486Z"
+stopped_at: Completed 01-10-PLAN.md
+last_updated: "2026-10-23T19:02:21.170Z"
 last_activity: 2026-10-23
 last_activity_desc: Phase 01 execution started
-state_head: ebeafc2891e4cfbfe2efd3b5b95d9d87364b24c4
+state_head: e0a944316b3e25c5db6763b87be372e1bbed5450
 progress:
   total_phases: 6
   completed_phases: 0
   total_plans: 11
-  completed_plans: 9
+  completed_plans: 10
   percent: 0
 ---
 
@@ -28,8 +28,8 @@ See: .planning/PROJECT.md (updated 2026-10-22)
 ## Current Position
 
 Phase: 01 (Folha Excel e preços da Allmat, Bricomarché e Obras 360) — EXECUTING
-Plan: 10 of 11
-Status: Executing Phase 01
+Plan: 11 of 11
+Status: Ready to execute
 Last activity: 2026-10-23 — Phase 01 execution started
 
 Progress: [░░░░░░░░░░] 0%
@@ -65,6 +65,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 01 P07 | 4 min | 2 tasks | 9 files |
 | Phase 01 P08 | 3 min | 2 tasks | 5 files |
 | Phase 01 P09 | 3 min | 3 tasks | 5 files |
+| Phase 01 P10 | 2 min | 2 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -106,6 +107,7 @@ Recent decisions affecting current work:
 - [Phase 01]: 01-09: _stem com tabela PLURAL; -is e -il vão para -i (perfis/Perfil, funis/Funil, táxis/Táxi batem); limite de 2 letras (pás/Pá) (CR-05)
 - [Phase 01]: 01-09: Obras 360 corta K=20 primeiro pelos pais que batem na pesquisa completa, depois pelo preço; continua 20 pedidos de detalhe (CR-04)
 - [Phase 01]: 01-09: loja com resultados e zero ofertas sem escondidas: estado 'ok' com detail '0 ofertas mostradas de N resultados da loja' (WR-10); UNIT_TOKENS com lts/litro/litros (IN-08)
+- [Phase 01]: G-01-3: a oferta da Bricomarché é a loja física mais barata com stock; se nenhuma tiver stock, a mais barata com o stock dela; uma loja mais barata sem stock fica na nota 'mais barata sem stock: X em Y' (substitui a decisão do 01-04)
 
 ### Pending Todos
 
@@ -135,6 +137,6 @@ Items acknowledged and deferred at milestone close, most recent first:
 
 ## Session Continuity
 
-Last session: 2026-10-23T11:34:46.269Z
-Stopped at: Completed 01-09-PLAN.md
+Last session: 2026-10-23T19:02:20.922Z
+Stopped at: Completed 01-10-PLAN.md
 Resume file: None

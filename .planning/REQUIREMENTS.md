@@ -18,7 +18,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Lojas fixas
 
-- [ ] **STORE-01**: Utilizador obtém preços na hora da Bricomarché, com o preço mais barato entre todas as lojas físicas e o nome dessa loja
+- [x] **STORE-01**: Utilizador obtém preços na hora da Bricomarché, com o preço mais barato entre todas as lojas físicas e o nome dessa loja
 - [ ] **STORE-02**: Utilizador obtém preços na hora da Allmat, com o preço por caixa convertido usando a área/conteúdo da caixa
 - [x] **STORE-03**: Utilizador obtém preços na hora da Obras 360, com todas as variantes do produto expandidas e os escalões por quantidade
 - [ ] **STORE-04**: Utilizador obtém preços na hora da Obramat através da pesquisa direta do site, a ritmo lento (um pedido de cada vez)
@@ -53,7 +53,7 @@ Requirements for initial release. Each maps to roadmap phases.
 ### Resultados
 
 - [ ] **RES-01**: Utilizador vê, por item, uma tabela ordenada por custo total com loja, título, classe, embalagem, quantidade comprada, €/unidade, custo total com IVA, link e hora da recolha
-- [ ] **RES-02**: Utilizador vê o stock quando a loja o indica (em stock / esgotado / quantidade / desconhecido), sem filtrar
+- [x] **RES-02**: Utilizador vê o stock quando a loja o indica (em stock / esgotado / quantidade / desconhecido), sem filtrar
 - [ ] **RES-03**: Utilizador vê o total da lista (soma do exato mais barato de cada item) com o aviso "portes não incluídos"
 - [ ] **RES-04**: Utilizador vê o progresso por item × loja em tempo real, com os resultados a aparecer à medida que chegam
 - [ ] **RES-05**: Utilizador repete só um item ou só uma loja sem refazer a lista toda
@@ -103,7 +103,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | LIST-04 | Phase 1 | Gaps Found |
 | LIST-05 | Phase 1 | Gaps Found |
 | LIST-06 | Phase 3 | Pending |
-| STORE-01 | Phase 1 | Gaps Found |
+| STORE-01 | Phase 1 | Complete |
 | STORE-02 | Phase 1 | Gaps Found |
 | STORE-03 | Phase 1 | Complete |
 | STORE-04 | Phase 2 | Pending |
@@ -126,7 +126,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | MATCH-05 | Phase 3 | Pending |
 | MATCH-06 | Phase 3 | Pending |
 | RES-01 | Phase 5 | Pending |
-| RES-02 | Phase 1 | Gaps Found |
+| RES-02 | Phase 1 | Complete |
 | RES-03 | Phase 4 | Pending |
 | RES-04 | Phase 5 | Pending |
 | RES-05 | Phase 5 | Pending |
