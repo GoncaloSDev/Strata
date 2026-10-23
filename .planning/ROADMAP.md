@@ -34,7 +34,7 @@ Decimal phases appear between their surrounding integers in numeric order.
   4. Cada oferta mostra o preço com IVA 23%, a origem do IVA (indicado pela loja / regra da loja / assumido), o preço unitário normalizado (€/un, €/m², €/m, €/kg, €/L) e o stock quando a loja o indica, sem filtrar
   5. Cada item mostra o estado das três lojas (ok / sem resultados / bloqueada / erro / tempo esgotado), por exemplo "OSB" na Allmat aparece como "sem resultados", nunca como erro nem omitido; e a verificação das lojas diz, por adaptador, se ainda devolve preços válidos (preço acima de zero, IVA e unidade coerentes)
 
-**Plans:** 11/12 plans executed
+**Plans:** 12/12 plans executed
 
 Plans:
 **Wave 1**
@@ -71,7 +71,7 @@ Plans:
 - [x] 01-11-PLAN.md — Pesquisa alargada volta a comparar com a pergunta completa: "OSB 12 mm" mostra a placa de 12 mm e conta o resto numa linha própria (G-01-5, emenda D-15)
 
 **Wave 12** *(gap closure da verificação; blocked on Wave 11 completion)*
-- [ ] 01-12-PLAN.md — Na pesquisa alargada, o produto da linha escolhe os pais antes dos cortes K nas três lojas ("pavimento 60x120" mostra os pavimentos 60X120 da Bricomarché); medidas em qualquer ordem e com "×", "x" fora da alargada, cabeçalho "1.ª pesquisa:" e corrida ao vivo final (WR-17, WR-14, WR-15, WR-16)
+- [x] 01-12-PLAN.md — Na pesquisa alargada, o produto da linha escolhe os pais antes dos cortes K nas três lojas ("pavimento 60x120" mostra os pavimentos 60X120 da Bricomarché); medidas em qualquer ordem e com "×", "x" fora da alargada, cabeçalho "1.ª pesquisa:" e corrida ao vivo final (WR-17, WR-14, WR-15, WR-16)
 
 **Stack note**: ler a folha do utilizador obriga a usar openpyxl (o XlsxWriter, escolhido no STACK.md, só escreve ficheiros novos e não lê `.xlsx`); gerar o modelo com o mesmo openpyxl evita uma segunda biblioteca Excel
 
@@ -162,7 +162,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Folha Excel e preços da Allmat, Bricomarché e Obras 360 | 11/12 | In Progress | - |
+| 1. Folha Excel e preços da Allmat, Bricomarché e Obras 360 | 12/12 | In Progress | - |
 | 2. Obramat e cadeia de recurso | 0/TBD | Not started | - |
 | 3. Especificações e classificação exato/parecido | 0/TBD | Not started | - |
 | 4. Embalagens, custo total e folha preenchida | 0/TBD | Not started | - |

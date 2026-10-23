@@ -2,17 +2,17 @@
 gsd_state_version: "1.0"
 current_phase: 01
 current_phase_name: Folha Excel e preços da Allmat, Bricomarché e Obras 360
-status: executing
-stopped_at: Completed 01-11-PLAN.md
-last_updated: "2026-10-23T20:20:44.496Z"
+status: verifying
+stopped_at: Completed 01-12-PLAN.md
+last_updated: "2026-10-23T23:01:24.712Z"
 last_activity: 2026-10-23
 last_activity_desc: Phase 01 execution started
-state_head: 701e356ab0b7502cd7e21bab7d0febc5a3a38d2d
+state_head: ebe88e448608872b941c603754c8a01313076988
 progress:
   total_phases: 6
   completed_phases: 0
   total_plans: 12
-  completed_plans: 11
+  completed_plans: 12
   percent: 0
 ---
 
@@ -27,9 +27,9 @@ See: .planning/PROJECT.md (updated 2026-10-22)
 
 ## Current Position
 
-Phase: 01 (Folha Excel e preços da Allmat, Bricomarché e Obras 360) — READY TO EXECUTE
-Plan: 11 of 11
-Status: Ready to execute
+Phase: 01 (Folha Excel e preços da Allmat, Bricomarché e Obras 360) — EXECUTING
+Plan: 12 of 12
+Status: Phase complete — ready for verification
 Last activity: 2026-10-23 — Phase 01 execution started
 
 Progress: [░░░░░░░░░░] 0%
@@ -67,6 +67,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 01 P09 | 3 min | 3 tasks | 5 files |
 | Phase 01 P10 | 2 min | 2 tasks | 4 files |
 | Phase 01 P11 | 3 min | 2 tasks | 7 files |
+| Phase 01 P12 | 6 min | 3 tasks | 8 files |
 
 ## Accumulated Context
 
@@ -110,6 +111,8 @@ Recent decisions affecting current work:
 - [Phase 01]: 01-09: loja com resultados e zero ofertas sem escondidas: estado 'ok' com detail '0 ofertas mostradas de N resultados da loja' (WR-10); UNIT_TOKENS com lts/litro/litros (IN-08)
 - [Phase 01]: G-01-3: a oferta da Bricomarché é a loja física mais barata com stock; se nenhuma tiver stock, a mais barata com o stock dela; uma loja mais barata sem stock fica na nota 'mais barata sem stock: X em Y' (substitui a decisão do 01-04)
 - [Phase 01]: G-01-5 (emenda D-15): na pesquisa alargada, se alguma oferta bate a pergunta completa, só essas se mostram e as outras ficam contadas em '+N ofertas escondidas: título sem '<produto>''; se nenhuma bater, mostram-se as da alargada, marcadas 'pesquisa alargada'
+- [Phase 01]: WR-17: na pesquisa alargada, o produto da linha (rank) ordena os pais da Bricomarché e da Obras 360 e as páginas de caixa da Allmat antes dos cortes K; a pesquisa enviada continua a alargada e o número de pedidos não muda
+- [Phase 01]: WR-14/WR-15: medidas comparadas com as partes ordenadas (troços seguidos e pares), '×' = 'x', e o 'x' solto nunca é palavra de produto (STOP e broadened)
 
 ### Pending Todos
 
@@ -139,6 +142,6 @@ Items acknowledged and deferred at milestone close, most recent first:
 
 ## Session Continuity
 
-Last session: 2026-10-23T19:08:10.687Z
-Stopped at: Completed 01-11-PLAN.md
+Last session: 2026-10-23T23:01:24.650Z
+Stopped at: Completed 01-12-PLAN.md
 Resume file: None
