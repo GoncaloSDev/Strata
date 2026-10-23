@@ -60,6 +60,8 @@ def print_item(result: ItemResult, out) -> None:
         if sr.hidden > 0:
             words = clean(sr.broadened_query or it.product)
             print(f"    +{sr.hidden} ofertas escondidas: título sem '{words}'", file=out)
+        if sr.wide_only > 0:
+            print(f"    +{sr.wide_only} ofertas escondidas: título sem '{clean(it.product)}'", file=out)
         for n in sr.notes:
             print(f"    nota: {clean(n)}", file=out)
     print(file=out)

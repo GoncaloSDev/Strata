@@ -7,7 +7,7 @@ from strata.fetch import StoreBlocked, StoreTimeout
 from strata.models import Item, ItemResult, StoreResult
 from strata.money import fmt_eur, in_unit
 from strata.stores import allmat, bricomarche, obras360
-from strata.words import broadened
+from strata.words import broadened, title_matches
 
 # Módulos com NAME e async search(query, fetch) -> Found, pela ordem de D-01.
 STORES = (allmat, bricomarche, obras360)
@@ -17,6 +17,7 @@ DEADLINE_S = 90
 async def search_store(store, item: Item, fetch) -> StoreResult:
     b = None
     first_hidden = 0  # ofertas que a 1.ª pesquisa escondeu, quando a alargada a substitui
+    wide_only = 0
     try:
         async with asyncio.timeout(DEADLINE_S):
             found = await store.search(item.product, fetch)  # D-13: só o Produto, tal como escrito
@@ -32,6 +33,11 @@ async def search_store(store, item: Item, fetch) -> StoreResult:
                     found = wide
                     for o in found.offers:
                         o.broadened = True
+                    # D-15 emendada (G-01-5): se alguma bate a pergunta completa, só essas; as outras ficam contadas
+                    full = [o for o in found.offers if title_matches(item.product, o.title)]
+                    if full:
+                        wide_only = len(found.offers) - len(full)
+                        found.offers = full
     except TimeoutError:
         return StoreResult(store.NAME, "tempo esgotado", [], detail=f"mais de {DEADLINE_S} s")
     except StoreTimeout as e:
@@ -57,7 +63,7 @@ async def search_store(store, item: Item, fetch) -> StoreResult:
     elif first_hidden:
         detail = f"{first_hidden} escondidas pelo filtro de título com '{item.product}'"
     return StoreResult(store.NAME, "ok", [o for _, o in keyed], detail=detail, hidden=found.hidden,
-                       notes=found.notes, broadened_query=b)
+                       wide_only=wide_only, notes=found.notes, broadened_query=b)
 
 
 async def run(items: list[Item], fetch):

@@ -59,6 +59,7 @@ class StoreResult:
     offers: list[Offer]  # todas, já pela ordem final; o corte a 5 é do report
     detail: str = ""
     hidden: int = 0
+    wide_only: int = 0  # ofertas da pesquisa alargada escondidas por não baterem a pergunta completa
     notes: list[str] = field(default_factory=list)
     broadened_query: str | None = None
 
