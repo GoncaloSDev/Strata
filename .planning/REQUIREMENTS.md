@@ -10,7 +10,7 @@ Requirements for initial release. Each maps to roadmap phases.
 ### Lista e pesquisa
 
 - [ ] **LIST-01**: Utilizador cola uma lista multilinha em que cada linha tem descrição em texto livre, quantidade e unidade (un, m², m, kg, L, saco)
-- [ ] **LIST-02**: Utilizador pesquisa qualquer produto em texto livre (OSB, tijolo, mesa, mobília...) sem escolher categoria
+- [x] **LIST-02**: Utilizador pesquisa qualquer produto em texto livre (OSB, tijolo, mesa, mobília...) sem escolher categoria
 - [ ] **LIST-03**: Uma lista de 10 itens fica resolvida nas 4 lojas fixas em menos de 5 minutos
 - [ ] **LIST-04**: Utilizador obtém da app um modelo Excel de formato fixo com as colunas Produto, Família, Tamanho, Unidade, Qty (obrigatórias: Produto, Unidade, Qty) e as opcionais Referência (EAN/ref. do fabricante) e Notas
 - [ ] **LIST-05**: Utilizador carrega uma folha Excel nesse formato e cada linha passa a ser um item da pesquisa (entrada principal da app); linhas inválidas são assinaladas com o número da linha e o motivo, sem parar as restantes
@@ -20,9 +20,9 @@ Requirements for initial release. Each maps to roadmap phases.
 
 - [ ] **STORE-01**: Utilizador obtém preços na hora da Bricomarché, com o preço mais barato entre todas as lojas físicas e o nome dessa loja
 - [ ] **STORE-02**: Utilizador obtém preços na hora da Allmat, com o preço por caixa convertido usando a área/conteúdo da caixa
-- [ ] **STORE-03**: Utilizador obtém preços na hora da Obras 360, com todas as variantes do produto expandidas e os escalões por quantidade
+- [x] **STORE-03**: Utilizador obtém preços na hora da Obras 360, com todas as variantes do produto expandidas e os escalões por quantidade
 - [ ] **STORE-04**: Utilizador obtém preços na hora da Obramat através da pesquisa direta do site, a ritmo lento (um pedido de cada vez)
-- [ ] **STORE-05**: Utilizador vê, por item, o estado de cada loja fixa (ok / sem resultados / bloqueada / erro / tempo esgotado); nenhuma loja fixa é omitida
+- [x] **STORE-05**: Utilizador vê, por item, o estado de cada loja fixa (ok / sem resultados / bloqueada / erro / tempo esgotado); nenhuma loja fixa é omitida
 - [ ] **STORE-06**: Quando o método principal de uma loja falha, a app tenta JSON-LD, browser automático e IA antes de marcar a falha, e mostra que método funcionou
 - [ ] **STORE-07**: Utilizador corre uma verificação das lojas que diz se cada adaptador ainda devolve preços válidos
 
@@ -98,16 +98,16 @@ Which phases cover which requirements. Updated during roadmap creation.
 | Requirement | Phase | Status |
 |-------------|-------|--------|
 | LIST-01 | Phase 1 | Gaps Found |
-| LIST-02 | Phase 1 | Gaps Found |
+| LIST-02 | Phase 1 | Complete |
 | LIST-03 | Phase 2 | Pending |
 | LIST-04 | Phase 1 | Gaps Found |
 | LIST-05 | Phase 1 | Gaps Found |
 | LIST-06 | Phase 3 | Pending |
 | STORE-01 | Phase 1 | Gaps Found |
 | STORE-02 | Phase 1 | Gaps Found |
-| STORE-03 | Phase 1 | Gaps Found |
+| STORE-03 | Phase 1 | Complete |
 | STORE-04 | Phase 2 | Pending |
-| STORE-05 | Phase 1 | Gaps Found |
+| STORE-05 | Phase 1 | Complete |
 | STORE-06 | Phase 2 | Pending |
 | STORE-07 | Phase 1 | Gaps Found |
 | DISC-01 | Phase 6 | Pending |

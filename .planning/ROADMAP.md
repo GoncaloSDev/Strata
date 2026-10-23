@@ -34,7 +34,7 @@ Decimal phases appear between their surrounding integers in numeric order.
   4. Cada oferta mostra o preço com IVA 23%, a origem do IVA (indicado pela loja / regra da loja / assumido), o preço unitário normalizado (€/un, €/m², €/m, €/kg, €/L) e o stock quando a loja o indica, sem filtrar
   5. Cada item mostra o estado das três lojas (ok / sem resultados / bloqueada / erro / tempo esgotado), por exemplo "OSB" na Allmat aparece como "sem resultados", nunca como erro nem omitido; e a verificação das lojas diz, por adaptador, se ainda devolve preços válidos (preço acima de zero, IVA e unidade coerentes)
 
-**Plans:** 8/9 plans executed
+**Plans:** 9/9 plans executed
 
 Plans:
 **Wave 1**
@@ -62,7 +62,7 @@ Plans:
 - [x] 01-08-PLAN.md — Medidas: variantes da Obras 360 filtradas pela pesquisa completa ("OSB 12 mm" com o pai "Placa OSB 9-30MM") e medidas "LxCxE", "15 Lt" e "OSB3" no filtro
 
 **Wave 9** *(gap closure; blocked on Wave 8 completion)*
-- [ ] 01-09-PLAN.md — Plurais no filtro de título ("perfis" mostra os perfis da Obras 360), pai com a pesquisa completa à frente do corte K=20, "ok" com zero ofertas explicado e "litros" na pesquisa alargada
+- [x] 01-09-PLAN.md — Plurais no filtro de título ("perfis" mostra os perfis da Obras 360), pai com a pesquisa completa à frente do corte K=20, "ok" com zero ofertas explicado e "litros" na pesquisa alargada
 
 **Stack note**: ler a folha do utilizador obriga a usar openpyxl (o XlsxWriter, escolhido no STACK.md, só escreve ficheiros novos e não lê `.xlsx`); gerar o modelo com o mesmo openpyxl evita uma segunda biblioteca Excel
 
@@ -153,7 +153,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Folha Excel e preços da Allmat, Bricomarché e Obras 360 | 8/9 | In Progress | - |
+| 1. Folha Excel e preços da Allmat, Bricomarché e Obras 360 | 9/9 | In Progress | - |
 | 2. Obramat e cadeia de recurso | 0/TBD | Not started | - |
 | 3. Especificações e classificação exato/parecido | 0/TBD | Not started | - |
 | 4. Embalagens, custo total e folha preenchida | 0/TBD | Not started | - |

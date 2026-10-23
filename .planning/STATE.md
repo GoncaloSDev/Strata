@@ -2,17 +2,17 @@
 gsd_state_version: "1.0"
 current_phase: 01
 current_phase_name: Folha Excel e preços da Allmat, Bricomarché e Obras 360
-status: executing
-stopped_at: Completed 01-08-PLAN.md
-last_updated: "2026-10-23T11:27:23.722Z"
+status: verifying
+stopped_at: Completed 01-09-PLAN.md
+last_updated: "2026-10-23T11:34:46.313Z"
 last_activity: 2026-10-23
 last_activity_desc: Phase 01 execution started
-state_head: 22071efee5af3e9675d6fb381f508312a6a76f97
+state_head: 9a33385f75d6b4643f71783dc14979b49336e278
 progress:
   total_phases: 6
   completed_phases: 0
   total_plans: 9
-  completed_plans: 8
+  completed_plans: 9
   percent: 0
 ---
 
@@ -27,9 +27,9 @@ See: .planning/PROJECT.md (updated 2026-10-22)
 
 ## Current Position
 
-Phase: 01 (Folha Excel e preços da Allmat, Bricomarché e Obras 360) — READY TO EXECUTE
-Plan: 8 of 8
-Status: Ready to execute
+Phase: 01 (Folha Excel e preços da Allmat, Bricomarché e Obras 360) — EXECUTING
+Plan: 9 of 9
+Status: Phase complete — ready for verification
 Last activity: 2026-10-23 — Phase 01 execution started
 
 Progress: [░░░░░░░░░░] 0%
@@ -64,6 +64,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 01 P06 | 98 min | 2 tasks | 5 files |
 | Phase 01 P07 | 4 min | 2 tasks | 9 files |
 | Phase 01 P08 | 3 min | 2 tasks | 5 files |
+| Phase 01 P09 | 3 min | 3 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -102,6 +103,9 @@ Recent decisions affecting current work:
 - [Phase 01]: CR-01: words() ignora palavras de ligação (STOP) e normaliza género e plurais com _stem (só biblioteca padrão)
 - [Phase 01]: Obras 360: pais escolhidos com broadened(query) or query; variantes filtradas pela pesquisa completa no título pai + designação; variantes cortadas somam a hidden (CR-02)
 - [Phase 01]: words(): DIMS (LxCxE), LITRE (Lt/litros = l) e CLASS (OSB3 = osb 3) antes do JOIN (CR-03)
+- [Phase 01]: 01-09: _stem com tabela PLURAL; -is e -il vão para -i (perfis/Perfil, funis/Funil, táxis/Táxi batem); limite de 2 letras (pás/Pá) (CR-05)
+- [Phase 01]: 01-09: Obras 360 corta K=20 primeiro pelos pais que batem na pesquisa completa, depois pelo preço; continua 20 pedidos de detalhe (CR-04)
+- [Phase 01]: 01-09: loja com resultados e zero ofertas sem escondidas: estado 'ok' com detail '0 ofertas mostradas de N resultados da loja' (WR-10); UNIT_TOKENS com lts/litro/litros (IN-08)
 
 ### Pending Todos
 
@@ -125,6 +129,6 @@ Items acknowledged and deferred at milestone close, most recent first:
 
 ## Session Continuity
 
-Last session: 2026-10-23T10:49:04.738Z
-Stopped at: Completed 01-08-PLAN.md
+Last session: 2026-10-23T11:34:46.269Z
+Stopped at: Completed 01-09-PLAN.md
 Resume file: None
