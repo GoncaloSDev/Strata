@@ -96,6 +96,7 @@ def test_title_matches(query, title, expected):
     ("cimento 25kg", "cimento"),
     ("osb", None),
     ("12mm", None),
+    ("tinta 15 litros", "tinta"),  # IN-08
 ])
 def test_broadened(query, expected):
     assert broadened(query) == expected
@@ -357,6 +358,18 @@ def test_verificar_todos_a_zero_sem_ofertas(fake, monkeypatch):
     route_canaries(fake, allmat_cimento=rows)
     only(monkeypatch, allmat, "cimento")
     assert check(fake) == [("Allmat (cimento)", False, "sem ofertas")]
+
+
+def test_zero_ofertas_sem_escondidas_nao_diz_so_ok(fake):
+    rows = load("allmat_products_search-cimento.json")
+    for r in rows:
+        r["prices"]["price"] = "0"
+    fake.route(SEARCH + "cimento", rows)
+    sr = asyncio.run(search_store(allmat, item(), fake))
+    assert sr.status == "ok" and sr.offers == [] and sr.hidden == 0
+    assert sr.detail == "0 ofertas mostradas de 3 resultados da loja"
+    assert "3 produtos sem preço ignorados" in sr.notes
+    assert heading(sr, "cimento") == "  Allmat: ok — 0 ofertas mostradas de 3 resultados da loja"
 
 
 def test_verificar_obras360_iva_da_loja_nao_e_23(fake, monkeypatch, capsys):
