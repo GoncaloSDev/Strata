@@ -104,6 +104,7 @@ def fake_store(name, *answers):
     ("azulejo 30x30", "Azulejo 30 x 30 cm", True),
     ("tubo 20x20", "Tubo Quadrado 20x20x1,5", True),
     ("parafuso m8x40", "Parafuso Sextavado M8 — 40", True),
+    ("parafuso m12x40", "Parafuso Sextavado M12 — 40", True),  # rosca de 2 dígitos não lê "2x40"
     ("parafuso 4x40", "Parafuso 4x40mm", False),  # WR-09 (fora do âmbito): "40" sem unidade não bate em "40mm"
 ])
 def test_title_matches(query, title, expected):

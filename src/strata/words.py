@@ -6,6 +6,8 @@ import unicodedata
 from strata.text import norm
 
 DIMS = re.compile(r"(?<=\d)x(?=\d)")  # "2440x590x18mm" -> "2440 590 18mm"
+# Medida com várias partes, só números ("30x30", "30 x 30", "2440x590x18"); não lê "m8x40" (rosca e comprimento)
+SIZE = re.compile(r"(?<![a-z\d.,])\d+(?:[.,]\d+)?(?:\s*x\s*\d+(?:[.,]\d+)?)+")
 UNIT_WORDS = {"lt": "l", "lts": "l", "litro": "l", "litros": "l", "metro": "m", "metros": "m",
               "quilo": "kg", "quilos": "kg", "quilograma": "kg", "quilogramas": "kg", "grama": "g", "gramas": "g"}
 SPELLED = re.compile(r"(\d)\s*(" + "|".join(UNIT_WORDS) + r")\b")  # "3 metros" -> "3m", "25 quilos" -> "25kg"
@@ -43,11 +45,15 @@ def _stem(w: str) -> str:
 
 
 def words(s) -> set[str]:
-    """Sem acentos, minúsculas, medidas LxCxE partidas, "15 Lt" = "15l", "3 metros" = "3m", "OSB3" = "osb 3",
-    "12 mm" = "12mm", sem palavras de ligação, género e plural via _stem."""
-    s = SPELLED.sub(lambda m: m[1] + UNIT_WORDS[m[2]], DIMS.sub(" ", plain(s)))
+    """Sem acentos, minúsculas, medidas LxCxE partidas e também inteiras (cada troço seguido: "20x20x1,5" dá
+    "20x20", "20x1,5" e "20x20x1,5"), "15 Lt" = "15l", "3 metros" = "3m", "OSB3" = "osb 3", "12 mm" = "12mm",
+    sem palavras de ligação, género e plural via _stem."""
+    s = plain(s)
+    parts = ["".join(m.split()).split("x") for m in SIZE.findall(s)]
+    sizes = {"x".join(p[i:j]) for p in parts for i in range(len(p)) for j in range(i + 2, len(p) + 1)}
+    s = SPELLED.sub(lambda m: m[1] + UNIT_WORDS[m[2]], DIMS.sub(" ", s))
     s = JOIN.sub(r"\1\2", CLASS.sub(r"\1 \2", s))
-    return {_stem(w) for w in TOKEN.findall(s) if w not in STOP}
+    return sizes | {_stem(w) for w in TOKEN.findall(s) if w not in STOP}
 
 
 def title_matches(query: str, title: str) -> bool:
