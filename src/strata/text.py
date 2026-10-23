@@ -36,3 +36,11 @@ def to_decimal(v) -> Decimal | None:
     except InvalidOperation:
         return None
     return d if d.is_finite() else None  # "nan", "inf" não são quantidades
+
+
+def parse_line(line, row):
+    return None, None  # RED: por implementar
+
+
+def read_pasted(stream):
+    return [], []  # RED: por implementar
