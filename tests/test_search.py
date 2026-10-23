@@ -194,3 +194,139 @@ def test_tres_lojas_pela_ordem_de_stores(monkeypatch):
     for h in heads:
         assert h in text, h
     assert text.index(heads[0]) < text.index(heads[1]) < text.index(heads[2])
+
+
+# --- 01-06: verificar (STORE-07) ---
+
+from strata.__main__ import main  # noqa: E402
+from strata.fetch import StoreBlocked  # noqa: E402
+from strata.stores import bricomarche, obras360  # noqa: E402
+
+BRICO = "bricomarche.pt/wp-json/wc/store/v1/products?search="
+SPLENDOR = "allmat.pt/produto/splendor/"
+BOX_PAGE = (FIXTURES / "allmat_product-page_39233_box.html").read_text(encoding="utf-8")
+WIDGET = "f1f5fb06-09e7-4519-8f44-9b3cd0093460"
+O360_LIST = f"product-list/{WIDGET}?search="
+O360_DETAIL = "product-details/27?_beevo_decoded_params[0][product_id]="
+PLACA_ID = "f807c893-c3eb-4630-a409-8a0a7bbc88c1"
+NO_DETAIL = {"success": False, "meta_data": {"protected": {"attribute_values_prices": []}}}
+
+
+def load(name):
+    return json.loads((FIXTURES / name).read_bytes(), parse_float=Decimal)
+
+
+def m2_row(cents="1374"):
+    return {
+        "id": 39233, "name": "SPLENDOR PAVIMENTO", "permalink": "https://allmat.pt/produto/splendor/",
+        "prices": {"price": cents, "currency_minor_unit": 2},
+        "price_html": '<span class="amount">13,74 €</span>\t<span class="wd-price-unit">M2</span>',
+        "stock_availability": {"text": "12 em stock"},
+    }
+
+
+def brico_variation(variation="Loja: Coina - Barreiro"):
+    return {
+        "id": 2, "parent": 1, "variation": variation,
+        "permalink": "https://www.bricomarche.pt/produto/cimento-cola/?attribute_pa_loja=coina-barreiro",
+        "prices": {"price": "500", "currency_minor_unit": 2},
+        "stock_availability": {"text": "12 em stock", "class": "in-stock"},
+    }
+
+
+def route_canaries(fake, *, allmat_cimento="allmat_products_search-cimento.json", box_page=BOX_PAGE,
+                   pavimento=None, brico_variations=None, o360_detail="obras360_product-details_osb-parent.json"):
+    fake.route(SEARCH + "cimento", allmat_cimento)
+    fake.route(SEARCH + "pavimento", pavimento or [m2_row()])
+    fake.route(SPLENDOR, box_page.encode("utf-8"))
+    fake.route(BRICO + "cimento", [{"id": 1, "name": "Cimento cola",
+                                    "prices": {"price": "500", "price_range": None, "currency_minor_unit": 2}}])
+    fake.route("parent=1&", brico_variations or [brico_variation()])
+    fake.cache["obras360_widget"] = WIDGET
+    fake.route(O360_LIST + "osb", "obras360_product-list_osb.json")
+    fake.route(O360_DETAIL + PLACA_ID, o360_detail)
+    fake.route(O360_DETAIL, NO_DETAIL)  # a cola SikaBond: vai para a nota, não falha o verificar
+
+
+def only(monkeypatch, store, term):
+    monkeypatch.setattr(strata.search, "CANARIES", ((store, term),))
+
+
+def check(fake):
+    return asyncio.run(strata.search.verificar(fake))
+
+
+def test_verificar_quatro_lojas_ok(fake):
+    route_canaries(fake)
+    rows = check(fake)
+    assert [label for label, _, _ in rows] == [
+        "Allmat (cimento)", "Allmat (pavimento)", "Bricomarché (cimento)", "Obras 360 (osb)"]
+    assert all(ok for _, ok, _ in rows), rows
+
+
+def test_verificar_comando_imprime_ok_e_sai_com_0(fake, capsys):
+    route_canaries(fake)
+    assert main(["verificar"], fetch=fake) == 0
+    lines = capsys.readouterr().out.splitlines()
+    assert len([ln for ln in lines if ": OK — " in ln]) == 4
+    assert "Allmat (cimento): OK — 3 ofertas, mais barata 4,22 €" in lines
+    assert "Obras 360 (osb): OK — 7 ofertas, mais barata 15,02 €" in lines
+
+
+def test_verificar_preco_zero_fica_na_nota(fake, monkeypatch):
+    rows = load("allmat_products_search-cimento.json")
+    rows[0]["prices"]["price"] = "0"
+    route_canaries(fake, allmat_cimento=rows)
+    only(monkeypatch, allmat, "cimento")
+    ((_, ok, msg),) = check(fake)
+    assert ok, msg
+    assert msg.startswith("2 ofertas")
+
+
+def test_verificar_todos_a_zero_sem_ofertas(fake, monkeypatch):
+    rows = load("allmat_products_search-cimento.json")
+    for r in rows:
+        r["prices"]["price"] = "0"
+    route_canaries(fake, allmat_cimento=rows)
+    only(monkeypatch, allmat, "cimento")
+    assert check(fake) == [("Allmat (cimento)", False, "sem ofertas")]
+
+
+def test_verificar_obras360_iva_da_loja_nao_e_23(fake, monkeypatch, capsys):
+    detail = load("obras360_product-details_osb-parent.json")
+    for v in detail["meta_data"]["protected"]["attribute_values_prices"].values():
+        v["prices"]["tax_percentage"] = 6
+        item_prices = v["prices_with_convertion_factor"]
+        item_prices["final_price_with_tax_unformatted"] = Decimal(item_prices["final_price_unformatted"]) * Decimal("1.06")
+    route_canaries(fake, o360_detail=detail)
+    only(monkeypatch, obras360, "osb")
+    assert main(["verificar"], fetch=fake) == 1
+    assert "Obras 360 (osb): FALHOU — IVA da loja não é 23%" in capsys.readouterr().out.splitlines()
+
+
+def test_verificar_bricomarche_sem_nome_de_loja(fake, monkeypatch):
+    route_canaries(fake, brico_variations=[brico_variation(variation="")])
+    only(monkeypatch, bricomarche, "cimento")
+    assert check(fake) == [("Bricomarché (cimento)", False, "sem nome de loja")]
+
+
+def test_verificar_allmat_caixa_incoerente(fake, monkeypatch):
+    route_canaries(fake, box_page=BOX_PAGE.replace(">9,99<", ">5,00<"))
+    only(monkeypatch, allmat, "pavimento")
+    assert check(fake) == [("Allmat (pavimento)", False, "caixa incoerente em SPLENDOR PAVIMENTO")]
+
+
+def test_verificar_allmat_nenhuma_area_de_caixa_lida(fake, monkeypatch):
+    route_canaries(fake, pavimento=[m2_row(cents="999")])  # preço da API sem bloco na página
+    only(monkeypatch, allmat, "pavimento")
+    assert check(fake) == [("Allmat (pavimento)", False, "nenhuma área de caixa lida")]
+
+
+@pytest.mark.parametrize("answer, expected", [
+    (StoreBlocked("HTTP 403"), "estado bloqueada: HTTP 403"),
+    ({"não": "é lista"}, "estado erro: ValueError: resposta da Allmat não é uma lista de produtos"),
+])
+def test_verificar_loja_bloqueada_ou_em_erro(fake, monkeypatch, answer, expected):
+    route_canaries(fake, allmat_cimento=answer)
+    only(monkeypatch, allmat, "cimento")
+    assert check(fake) == [("Allmat (cimento)", False, expected)]

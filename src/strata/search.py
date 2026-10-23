@@ -49,3 +49,10 @@ async def run(items: list[Item], fetch):
     for item in items:
         stores = await asyncio.gather(*(search_store(s, item, fetch) for s in STORES))
         yield ItemResult(item, list(stores))
+
+
+CANARIES = ()
+
+
+async def verificar(fetch) -> list[tuple[str, bool, str]]:
+    return []
