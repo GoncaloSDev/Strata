@@ -105,6 +105,41 @@ def test_sem_pesquisa_alargada_quando_nada_muda():
     assert store.calls == ["osb"]
 
 
+def heading(sr, product):
+    out = io.StringIO()
+    print_item(ItemResult(item(product, "un"), [sr]), out)
+    return out.getvalue().splitlines()[1]
+
+
+def test_tudo_escondido_diz_quantas_no_cabecalho():
+    store = fake_store("Falsa", Found([], 8, hidden=8))
+    sr = asyncio.run(search_store(store, item("tinta branca", "L"), None))
+    assert (sr.status, sr.offers) == ("ok", [])
+    assert sr.detail == "0 ofertas mostradas; 8 escondidas pelo filtro de título"
+    assert store.calls == ["tinta branca"]  # sem números: broadened dá None
+    assert heading(sr, "tinta branca") == "  Falsa: ok — 0 ofertas mostradas; 8 escondidas pelo filtro de título"
+
+
+def test_tudo_escondido_com_medidas_tenta_a_alargada():
+    store = fake_store("Falsa", Found([], 5, hidden=5), Found([offer("PLACA OSB 9 MM")], 1))
+    sr = asyncio.run(search_store(store, item("OSB 12mm", "un"), None))
+    assert store.calls == ["OSB 12mm", "OSB"]
+    assert sr.broadened_query == "OSB"
+    assert [o.broadened for o in sr.offers] == [True]
+    assert sr.detail == "5 escondidas pelo filtro de título com 'OSB 12mm'"
+    assert heading(sr, "OSB 12mm") == "  Falsa: ok — 5 escondidas pelo filtro de título com 'OSB 12mm' (pesquisa alargada: 'OSB')"
+
+
+@pytest.mark.parametrize("second", [Found([], 3, hidden=3), Found([], 0)])
+def test_tudo_escondido_alargada_sem_ofertas_fica_a_primeira(second):
+    store = fake_store("Falsa", Found([], 5, hidden=5), second)
+    sr = asyncio.run(search_store(store, item("OSB 12mm", "un"), None))
+    assert store.calls == ["OSB 12mm", "OSB"]
+    assert (sr.status, sr.broadened_query, sr.hidden) == ("ok", None, 5)
+    assert sr.detail == "0 ofertas mostradas; 5 escondidas pelo filtro de título"
+    assert "também sem ofertas com 'OSB'" in sr.notes
+
+
 def test_allmat_esconde_titulos_sem_as_palavras(fake):
     rows = json.loads((FIXTURES / "allmat_products_search-cimento.json").read_bytes(), parse_float=Decimal)
     rows.append({**rows[0], "id": 99999, "name": "PAINEL AQUECIMENTO", "permalink": "https://allmat.pt/produto/painel/"})
