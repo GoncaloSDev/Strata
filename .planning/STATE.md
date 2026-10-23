@@ -4,10 +4,10 @@ current_phase: 01
 current_phase_name: Folha Excel e preços da Allmat, Bricomarché e Obras 360
 status: verifying
 stopped_at: Completed 01-09-PLAN.md
-last_updated: "2026-10-23T11:34:46.313Z"
+last_updated: "2026-10-23T14:44:13.360Z"
 last_activity: 2026-10-23
 last_activity_desc: Phase 01 execution started
-state_head: 9a33385f75d6b4643f71783dc14979b49336e278
+state_head: 9511c8181697eef1cb8cbf1aaa6f7dc175ff4ffa
 progress:
   total_phases: 6
   completed_phases: 0
@@ -30,7 +30,7 @@ See: .planning/PROJECT.md (updated 2026-10-22)
 Phase: 01 (Folha Excel e preços da Allmat, Bricomarché e Obras 360) — EXECUTING
 Plan: 9 of 9
 Status: Phase complete — ready for verification
-Last activity: 2026-10-23 — Phase 01 execution started
+Last activity: 2026-10-23 - Completed quick task 261023-lee: Corrigir avisos CR-06, WR-12, WR-13 e WR-07 do filtro de título
 
 Progress: [░░░░░░░░░░] 0%
 
@@ -118,6 +118,12 @@ None yet.
 - [Phase 1]: Bricomarché demora cerca de 12 s por página; `orderby=price` não ordena com `type=variation` (confirmado na pesquisa) — os planos usam pais → top 10 → variações
 - [Phase 5]: Correr o `ui-ux-pro-max` (design system com `--persist`) antes do primeiro ecrã
 - [Phase 1 verify]: filtro de palavras esconde produtos certos na Obras 360: 'tinta branca' escondeu as 8 (Dyrup 15L Branco Mate e Mapei BRANCO são o produto); género Branco/branca e 'OSB3' não batem. Decidir se é lacuna da fase ou Phase 3
+
+### Quick Tasks Completed
+
+| # | Description | Date | Commit | Directory |
+|---|-------------|------|--------|-----------|
+| 261023-lee | Corrigir avisos CR-06, WR-12, WR-13 e WR-07 do filtro de título | 2026-10-23 | 9511c81 | [261023-lee-corrigir-avisos-cr-06-wr-12-wr-13-wr-07-](./quick/261023-lee-corrigir-avisos-cr-06-wr-12-wr-13-wr-07-/) |
 
 ## Deferred Items
 
