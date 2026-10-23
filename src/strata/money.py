@@ -63,4 +63,5 @@ def fmt_qty(d: Decimal) -> str:
 
 
 def add_vat(net, rate) -> Decimal:
-    return None
+    """Preço sem IVA + taxa em %: 12.214688 a 23 -> 15.02406624 (sem arredondar)."""
+    return Decimal(net) * (1 + Decimal(rate) / 100)
