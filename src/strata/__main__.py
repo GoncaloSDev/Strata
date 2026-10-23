@@ -1,4 +1,4 @@
-"""Linha de comandos: uv run python -m strata {pesquisar,modelo}."""
+"""Linha de comandos: uv run python -m strata {pesquisar,modelo,verificar}."""
 
 import argparse
 import asyncio
@@ -21,19 +21,36 @@ def build_parser() -> argparse.ArgumentParser:
         help="(desenvolvimento) grava o corpo de cada resposta das lojas em DIR, para fixtures de teste",
     )
     sub.add_parser("modelo", help="gravar modelo.xlsx na pasta atual (nunca sobrescreve)")
+    check = "Confirma, com um termo de teste por loja, que cada adaptador ainda devolve preços válidos."
+    pv = sub.add_parser("verificar", help=check, description=check)
+    pv.add_argument("--record", metavar="DIR", type=Path, help="(desenvolvimento) grava as respostas em DIR")
     return p
 
 
-async def _search(items, fetch, record, out) -> None:
-    if fetch is None:
-        from curl_cffi.requests import AsyncSession
+async def _with_fetch(work, fetch, record):
+    """Corre work(fetch); sem fetch (fora dos testes), abre a sessão curl_cffi da execução."""
+    if fetch is not None:
+        return await work(fetch)
+    from curl_cffi.requests import AsyncSession
 
-        async with AsyncSession(impersonate="chrome", timeout=(10, 30)) as session:
-            await _search(items, Fetcher(session, record), record, out)
-        return
-    async for result in search.run(items, fetch):
-        report.print_item(result, out)
-        out.flush()
+    async with AsyncSession(impersonate="chrome", timeout=(10, 30)) as session:
+        return await work(Fetcher(session, record))
+
+
+async def _search(items, fetch, record, out) -> None:
+    async def work(f):
+        async for result in search.run(items, f):
+            report.print_item(result, out)
+            out.flush()
+
+    await _with_fetch(work, fetch, record)
+
+
+def cmd_verificar(args, fetch, out) -> int:
+    rows = asyncio.run(_with_fetch(search.verificar, fetch, args.record))
+    for label, ok, msg in rows:
+        print(f"{report.clean(label)}: {'OK' if ok else 'FALHOU'} — {report.clean(msg)}", file=out)
+    return 0 if all(ok for _, ok, _ in rows) else 1
 
 
 def cmd_pesquisar(args, fetch, out) -> int:
@@ -87,6 +104,8 @@ def main(argv=None, fetch=None) -> int:
     out = sys.stdout
     if args.cmd == "modelo":
         return cmd_modelo(out)
+    if args.cmd == "verificar":
+        return cmd_verificar(args, fetch, out)
     return cmd_pesquisar(args, fetch, out)
 
 
