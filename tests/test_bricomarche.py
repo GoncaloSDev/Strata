@@ -96,6 +96,29 @@ def test_offer_from_sem_dica_quando_a_mais_barata_tem_stock():
     assert o.note == ""
 
 
+def test_offer_from_prefere_a_loja_com_stock():
+    o = bm.offer_from(parent(47412), [row(1500, text="3 em stock"), row(1400, loja="x", nome="X", text="Esgotado",
+                                                                         cls="out-of-stock")])
+    assert (o.price, o.location, o.stock) == (Decimal("15.00"), "Coina - Barreiro", "3 em stock")
+    assert o.url == "https://www.bricomarche.pt/coina-barreiro/produto/plc-osb-lisa-2-50x1-25-12mm/"
+    assert o.note == "mais barata sem stock: 14,00 € em X"
+
+
+def test_offer_from_nenhuma_loja_com_stock():
+    o = bm.offer_from(parent(47412), [row(1500, text="0 em stock"), row(1400, loja="x", nome="X", text="Esgotado",
+                                                                         cls="out-of-stock")])
+    assert (o.price, o.location, o.stock) == (Decimal("14.00"), "X", "Esgotado")
+    assert o.note == ""  # a oferta já é a mais barata
+
+
+def test_offer_from_empate_prefere_a_loja_com_stock():
+    # a sem stock primeiro: ganhava o empate quando a escolha ignorava o stock
+    o = bm.offer_from(parent(47412), [row(1400, loja="x", nome="X", text="Esgotado", cls="out-of-stock"),
+                                      row(1400, text="3 em stock")])
+    assert (o.price, o.location, o.stock) == (Decimal("14.00"), "Coina - Barreiro", "3 em stock")
+    assert o.note == ""  # a sem stock não é mais barata
+
+
 def test_preco_do_pai_nunca_e_mostrado():
     # pai a 18,49 €, única variação válida a 25,00 €: mostra-se 25,00 €
     o = bm.offer_from(parent(47412), [row(2500), row(0, loja="y"), row(100, loja="master", nome="master")])

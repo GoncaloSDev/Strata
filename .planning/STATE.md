@@ -4,10 +4,10 @@ current_phase: 01
 current_phase_name: Folha Excel e preços da Allmat, Bricomarché e Obras 360
 status: executing
 stopped_at: Completed 01-09-PLAN.md
-last_updated: "2026-10-23T18:53:30.987Z"
+last_updated: "2026-10-23T18:58:42.486Z"
 last_activity: 2026-10-23
 last_activity_desc: Phase 01 execution started
-state_head: e11850df5c7e1e50b8d906c83a4d7717b0d9ea0f
+state_head: ebeafc2891e4cfbfe2efd3b5b95d9d87364b24c4
 progress:
   total_phases: 6
   completed_phases: 0
@@ -27,10 +27,10 @@ See: .planning/PROJECT.md (updated 2026-10-22)
 
 ## Current Position
 
-Phase: 01 (Folha Excel e preços da Allmat, Bricomarché e Obras 360) — READY TO EXECUTE
-Plan: 9 of 9
-Status: Ready to execute
-Last activity: 2026-10-23 - Completed quick task 261023-lee: Corrigir avisos CR-06, WR-12, WR-13 e WR-07 do filtro de título
+Phase: 01 (Folha Excel e preços da Allmat, Bricomarché e Obras 360) — EXECUTING
+Plan: 10 of 11
+Status: Executing Phase 01
+Last activity: 2026-10-23 — Phase 01 execution started
 
 Progress: [░░░░░░░░░░] 0%
 
@@ -91,7 +91,7 @@ Recent decisions affecting current work:
 - [Phase 01]: 01-03: pesquisa alargada a zero dá 'sem resultados' com "também sem resultados com '<b>'"; broadened_query só quando há ofertas
 - [Phase 01]: 01-03: caixas M2 da Allmat começam com a nota do limite de 10 páginas; só a leitura da página a troca (nenhuma caixa sem motivo)
 - [Phase 01]: 01-03: preço da página Allmat lido no formato da loja (vírgula decimal); formato diferente -> 'área da caixa não encontrada', nunca um €/m² errado
-- [Phase 01]: 01-04: Bricomarché mostra a variação mais barata entre lojas físicas com o stock dela, sem filtrar; sem stock -> nota 'com stock: X em Y'
+- [Phase 01]: 01-04: Bricomarché mostra a variação mais barata entre lojas físicas com o stock dela, sem filtrar; sem stock -> nota 'com stock: X em Y' (substituída pelo 01-10, G-01-3: loja mais barata com stock; a mais barata sem stock fica na nota)
 - [Phase 01]: 01-04: sem stock = classe out-of-stock ou 'N em stock' com N = 0; variação master fora da escolha (shortcut)
 - [Phase 01]: 01-04: variações paginadas com o mesmo limite de 3 páginas dos pais, com nota se cortar
 - [Phase 01]: 01-05: Obras 360 paginada por ceil(total_products/48), no máximo 3 páginas; contar produtos lidos pedia páginas inexistentes
