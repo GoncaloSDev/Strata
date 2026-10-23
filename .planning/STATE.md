@@ -2,17 +2,17 @@
 gsd_state_version: "1.0"
 current_phase: 01
 current_phase_name: Folha Excel e preços da Allmat, Bricomarché e Obras 360
-status: executing
-stopped_at: Completed 01-10-PLAN.md
-last_updated: "2026-10-23T19:02:21.170Z"
+status: verifying
+stopped_at: Completed 01-11-PLAN.md
+last_updated: "2026-10-23T19:08:10.933Z"
 last_activity: 2026-10-23
 last_activity_desc: Phase 01 execution started
-state_head: e0a944316b3e25c5db6763b87be372e1bbed5450
+state_head: 6f887e670d8b6cc4cd7682363540c52347ff89ed
 progress:
   total_phases: 6
   completed_phases: 0
   total_plans: 11
-  completed_plans: 10
+  completed_plans: 11
   percent: 0
 ---
 
@@ -29,7 +29,7 @@ See: .planning/PROJECT.md (updated 2026-10-22)
 
 Phase: 01 (Folha Excel e preços da Allmat, Bricomarché e Obras 360) — EXECUTING
 Plan: 11 of 11
-Status: Ready to execute
+Status: Phase complete — ready for verification
 Last activity: 2026-10-23 — Phase 01 execution started
 
 Progress: [░░░░░░░░░░] 0%
@@ -66,6 +66,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 01 P08 | 3 min | 2 tasks | 5 files |
 | Phase 01 P09 | 3 min | 3 tasks | 5 files |
 | Phase 01 P10 | 2 min | 2 tasks | 4 files |
+| Phase 01 P11 | 3 min | 2 tasks | 7 files |
 
 ## Accumulated Context
 
@@ -108,6 +109,7 @@ Recent decisions affecting current work:
 - [Phase 01]: 01-09: Obras 360 corta K=20 primeiro pelos pais que batem na pesquisa completa, depois pelo preço; continua 20 pedidos de detalhe (CR-04)
 - [Phase 01]: 01-09: loja com resultados e zero ofertas sem escondidas: estado 'ok' com detail '0 ofertas mostradas de N resultados da loja' (WR-10); UNIT_TOKENS com lts/litro/litros (IN-08)
 - [Phase 01]: G-01-3: a oferta da Bricomarché é a loja física mais barata com stock; se nenhuma tiver stock, a mais barata com o stock dela; uma loja mais barata sem stock fica na nota 'mais barata sem stock: X em Y' (substitui a decisão do 01-04)
+- [Phase 01]: G-01-5 (emenda D-15): na pesquisa alargada, se alguma oferta bate a pergunta completa, só essas se mostram e as outras ficam contadas em '+N ofertas escondidas: título sem '<produto>''; se nenhuma bater, mostram-se as da alargada, marcadas 'pesquisa alargada'
 
 ### Pending Todos
 
@@ -137,6 +139,6 @@ Items acknowledged and deferred at milestone close, most recent first:
 
 ## Session Continuity
 
-Last session: 2026-10-23T19:02:20.922Z
-Stopped at: Completed 01-10-PLAN.md
+Last session: 2026-10-23T19:08:10.687Z
+Stopped at: Completed 01-11-PLAN.md
 Resume file: None
