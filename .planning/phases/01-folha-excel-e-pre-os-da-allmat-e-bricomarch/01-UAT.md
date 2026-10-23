@@ -1,14 +1,20 @@
 ---
-status: diagnosed
+status: testing
 phase: 01-folha-excel-e-pre-os-da-allmat-e-bricomarch
 source: [01-VERIFICATION.md]
 started: 2026-10-23T14:08:58Z
-updated: 2026-10-23T18:24:01.016Z
+updated: 2026-10-24T00:20:00Z
 ---
 
 ## Current Test
 
-[testing complete]
+number: 9
+name: Re-teste 3: Bricomarché mostra a loja mais barata com stock (G-01-3, plano 01-10)
+expected: |
+  `printf 'placa osb 9mm 1 un\n\n' | uv run python -m strata pesquisar` e abrir o link da 1.ª oferta da Bricomarché:
+  uma loja física com stock (ex.: 15,49 € em Ponte de Sor), preço igual ao do site; se a mais barata não tiver stock,
+  aparece a nota 'mais barata sem stock: X em Y'
+awaiting: user response
 
 ## Tests
 
@@ -49,12 +55,24 @@ result: pass
 expected: em src/strata/fetch.py e nos SUMMARY do 01-07/01-09, sem retentativas, proxies nem troca de identidade (veredicto não autoritativo do verificador: cumpridas)
 result: pass
 
+### 9. Re-teste 3: Bricomarché mostra a loja mais barata com stock (G-01-3, plano 01-10)
+expected: `printf 'placa osb 9mm 1 un\n\n' | uv run python -m strata pesquisar` e abrir o link da 1.ª oferta da Bricomarché: uma loja física com stock (ex.: 15,49 € em Ponte de Sor), preço igual ao do site; se a mais barata não tiver stock, aparece a nota 'mais barata sem stock: X em Y'
+result: [pending]
+
+### 10. Re-teste 5: folha com 4 linhas mostra o produto pedido (G-01-5, planos 01-11 e 01-12)
+expected: folha com OSB 12 mm / un / 30; cimento cola / saco / 10; tinta branca / L / 15; pavimento 60x120 / m² / 10 e `pesquisar`: OSB 12 mm mostra a placa de 12 mm em 1.º na Obras 360, sem cola nem espuma, o resto contado em '+N ofertas escondidas'; pavimento 60x120 mostra na Bricomarché as placas 60X120 a 34,55 € (23,99 €/m²), com preço igual ao do site
+result: [pending]
+
+### 11. Proibições judgment do 01-10 e do 01-12
+expected: offer_from em src/strata/stores/bricomarche.py só usa as linhas já lidas (nenhum pedido novo por causa do stock) e o 01-12 fez uma só corrida ao vivo (veredicto não autoritativo do verificador: cumpridas)
+result: [pending]
+
 ## Summary
 
-total: 8
+total: 11
 passed: 5
 issues: 2
-pending: 0
+pending: 3
 skipped: 1
 blocked: 0
 
