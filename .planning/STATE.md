@@ -3,16 +3,16 @@ gsd_state_version: "1.0"
 current_phase: 01
 current_phase_name: Folha Excel e preços da Allmat, Bricomarché e Obras 360
 status: executing
-stopped_at: Completed 01-04-PLAN.md
-last_updated: "2026-10-23T00:20:09.941Z"
+stopped_at: Completed 01-05-PLAN.md
+last_updated: "2026-10-23T00:28:16.377Z"
 last_activity: 2026-10-23
 last_activity_desc: Phase 01 execution started
-state_head: 25c8e0e219e3d4b2bf2847549fc9efc14196b33b
+state_head: 21481c336defea80c507259715136d3c5881bad0
 progress:
   total_phases: 6
   completed_phases: 0
   total_plans: 6
-  completed_plans: 4
+  completed_plans: 5
   percent: 0
 ---
 
@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-10-22)
 ## Current Position
 
 Phase: 01 (Folha Excel e preços da Allmat, Bricomarché e Obras 360) — EXECUTING
-Plan: 5 of 6
+Plan: 6 of 6
 Status: Ready to execute
 Last activity: 2026-10-23 — Phase 01 execution started
 
@@ -60,6 +60,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 01 P02 | 4 min | 3 tasks | 10 files |
 | Phase 01 P03 | 7 min | 3 tasks | 8 files |
 | Phase 01 P04 | 4 min | 2 tasks | 5 files |
+| Phase 01 P05 | 5 min | 2 tasks | 9 files |
 
 ## Accumulated Context
 
@@ -89,6 +90,9 @@ Recent decisions affecting current work:
 - [Phase 01]: 01-04: Bricomarché mostra a variação mais barata entre lojas físicas com o stock dela, sem filtrar; sem stock -> nota 'com stock: X em Y'
 - [Phase 01]: 01-04: sem stock = classe out-of-stock ou 'N em stock' com N = 0; variação master fora da escolha (shortcut)
 - [Phase 01]: 01-04: variações paginadas com o mesmo limite de 3 páginas dos pais, com nota se cortar
+- [Phase 01]: 01-05: Obras 360 paginada por ceil(total_products/48), no máximo 3 páginas; contar produtos lidos pedia páginas inexistentes
+- [Phase 01]: 01-05: Obras 360 só passa à nota um StoreError de um produto (detalhe vazio, IVA incoerente); KeyError/TypeError põem a loja em erro
+- [Phase 01]: 01-05: variante Obras 360 sem designação fica '<pai> — ref. <sku>'
 
 ### Pending Todos
 
@@ -111,6 +115,6 @@ Items acknowledged and deferred at milestone close, most recent first:
 
 ## Session Continuity
 
-Last session: 2026-10-23T00:20:09.908Z
-Stopped at: Completed 01-04-PLAN.md
+Last session: 2026-10-23T00:28:16.338Z
+Stopped at: Completed 01-05-PLAN.md
 Resume file: None

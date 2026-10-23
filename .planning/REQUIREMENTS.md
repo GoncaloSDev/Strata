@@ -20,7 +20,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 - [x] **STORE-01**: Utilizador obtém preços na hora da Bricomarché, com o preço mais barato entre todas as lojas físicas e o nome dessa loja
 - [x] **STORE-02**: Utilizador obtém preços na hora da Allmat, com o preço por caixa convertido usando a área/conteúdo da caixa
-- [ ] **STORE-03**: Utilizador obtém preços na hora da Obras 360, com todas as variantes do produto expandidas e os escalões por quantidade
+- [x] **STORE-03**: Utilizador obtém preços na hora da Obras 360, com todas as variantes do produto expandidas e os escalões por quantidade
 - [ ] **STORE-04**: Utilizador obtém preços na hora da Obramat através da pesquisa direta do site, a ritmo lento (um pedido de cada vez)
 - [ ] **STORE-05**: Utilizador vê, por item, o estado de cada loja fixa (ok / sem resultados / bloqueada / erro / tempo esgotado); nenhuma loja fixa é omitida
 - [ ] **STORE-06**: Quando o método principal de uma loja falha, a app tenta JSON-LD, browser automático e IA antes de marcar a falha, e mostra que método funcionou
@@ -35,8 +35,8 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Preço
 
-- [ ] **PRICE-01**: Todos os preços aparecem com IVA 23%; preços sem IVA são convertidos e cada linha mostra a origem do IVA (indicado pela loja / regra da loja / assumido)
-- [ ] **PRICE-02**: Cada oferta mostra o preço unitário normalizado (€/un, €/m², €/m, €/kg, €/L), calculado a partir do preço e do conteúdo da embalagem
+- [x] **PRICE-01**: Todos os preços aparecem com IVA 23%; preços sem IVA são convertidos e cada linha mostra a origem do IVA (indicado pela loja / regra da loja / assumido)
+- [x] **PRICE-02**: Cada oferta mostra o preço unitário normalizado (€/un, €/m², €/m, €/kg, €/L), calculado a partir do preço e do conteúdo da embalagem
 - [ ] **PRICE-03**: A quantidade pedida é convertida para a unidade vendida (m² → caixas, m → varas, un → packs); se a conversão for impossível, a linha diz porquê
 - [ ] **PRICE-04**: Utilizador vê o custo total para a quantidade pedida com a combinação de embalagens e escalões mais barata (mesmo que compre a mais), com quantidade comprada vs pedida e sobras
 - [ ] **PRICE-05**: Utilizador vê quanto poupa com o parecido mais barato face ao exato mais barato
@@ -53,7 +53,7 @@ Requirements for initial release. Each maps to roadmap phases.
 ### Resultados
 
 - [ ] **RES-01**: Utilizador vê, por item, uma tabela ordenada por custo total com loja, título, classe, embalagem, quantidade comprada, €/unidade, custo total com IVA, link e hora da recolha
-- [ ] **RES-02**: Utilizador vê o stock quando a loja o indica (em stock / esgotado / quantidade / desconhecido), sem filtrar
+- [x] **RES-02**: Utilizador vê o stock quando a loja o indica (em stock / esgotado / quantidade / desconhecido), sem filtrar
 - [ ] **RES-03**: Utilizador vê o total da lista (soma do exato mais barato de cada item) com o aviso "portes não incluídos"
 - [ ] **RES-04**: Utilizador vê o progresso por item × loja em tempo real, com os resultados a aparecer à medida que chegam
 - [ ] **RES-05**: Utilizador repete só um item ou só uma loja sem refazer a lista toda
@@ -105,7 +105,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | LIST-06 | Phase 3 | Pending |
 | STORE-01 | Phase 1 | Complete |
 | STORE-02 | Phase 1 | Complete |
-| STORE-03 | Phase 1 | Pending |
+| STORE-03 | Phase 1 | Complete |
 | STORE-04 | Phase 2 | Pending |
 | STORE-05 | Phase 1 | Pending |
 | STORE-06 | Phase 2 | Pending |
@@ -114,8 +114,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DISC-02 | Phase 6 | Pending |
 | DISC-03 | Phase 6 | Pending |
 | DISC-04 | Phase 6 | Pending |
-| PRICE-01 | Phase 1 | Pending |
-| PRICE-02 | Phase 1 | Pending |
+| PRICE-01 | Phase 1 | Complete |
+| PRICE-02 | Phase 1 | Complete |
 | PRICE-03 | Phase 4 | Pending |
 | PRICE-04 | Phase 4 | Pending |
 | PRICE-05 | Phase 4 | Pending |
@@ -126,7 +126,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | MATCH-05 | Phase 3 | Pending |
 | MATCH-06 | Phase 3 | Pending |
 | RES-01 | Phase 5 | Pending |
-| RES-02 | Phase 1 | Pending |
+| RES-02 | Phase 1 | Complete |
 | RES-03 | Phase 4 | Pending |
 | RES-04 | Phase 5 | Pending |
 | RES-05 | Phase 5 | Pending |
