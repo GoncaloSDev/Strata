@@ -16,13 +16,22 @@ DEADLINE_S = 90
 
 async def search_store(store, item: Item, fetch) -> StoreResult:
     b = None
+    first_hidden = 0  # ofertas que a 1.ª pesquisa escondeu, quando a alargada a substitui
     try:
         async with asyncio.timeout(DEADLINE_S):
             found = await store.search(item.product, fetch)  # D-13: só o Produto, tal como escrito
-            if found.raw == 0 and (b := broadened(item.product)):  # D-14: uma só tentativa extra
-                found = await store.search(b, fetch)
-                for o in found.offers:
-                    o.broadened = True
+            all_hidden = found.hidden > 0 and not found.offers
+            # D-14: uma só tentativa extra; também quando D-15 esconde tudo (WR-01)
+            if (found.raw == 0 or all_hidden) and (b := broadened(item.product)):
+                wide = await store.search(b, fetch)
+                if found.raw > 0 and not wide.offers:  # fica a 1.ª, com a contagem e as palavras pedidas
+                    found.notes.append(f"também sem ofertas com '{b}'")
+                    b = None
+                else:
+                    first_hidden = found.hidden if all_hidden else 0
+                    found = wide
+                    for o in found.offers:
+                        o.broadened = True
     except TimeoutError:
         return StoreResult(store.NAME, "tempo esgotado", [], detail=f"mais de {DEADLINE_S} s")
     except StoreTimeout as e:
@@ -41,8 +50,13 @@ async def search_store(store, item: Item, fetch) -> StoreResult:
             o.note = f"{o.note}; {reason}" if o.note else reason
         keyed.append((key, o))
     keyed.sort(key=lambda t: (t[0] is None, t[0] or 0))  # estável: empates pela ordem da loja
-    return StoreResult(store.NAME, "ok", [o for _, o in keyed], hidden=found.hidden, notes=found.notes,
-                       broadened_query=b)
+    detail = ""  # STORE-05/D-01: nunca "ok" sozinho quando o filtro escondeu ofertas
+    if not found.offers and found.hidden:
+        detail = f"0 ofertas mostradas; {found.hidden} escondidas pelo filtro de título"
+    elif first_hidden:
+        detail = f"{first_hidden} escondidas pelo filtro de título com '{item.product}'"
+    return StoreResult(store.NAME, "ok", [o for _, o in keyed], detail=detail, hidden=found.hidden,
+                       notes=found.notes, broadened_query=b)
 
 
 async def run(items: list[Item], fetch):
