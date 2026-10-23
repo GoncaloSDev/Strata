@@ -22,9 +22,9 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **STORE-02**: Utilizador obtém preços na hora da Allmat, com o preço por caixa convertido usando a área/conteúdo da caixa
 - [x] **STORE-03**: Utilizador obtém preços na hora da Obras 360, com todas as variantes do produto expandidas e os escalões por quantidade
 - [ ] **STORE-04**: Utilizador obtém preços na hora da Obramat através da pesquisa direta do site, a ritmo lento (um pedido de cada vez)
-- [ ] **STORE-05**: Utilizador vê, por item, o estado de cada loja fixa (ok / sem resultados / bloqueada / erro / tempo esgotado); nenhuma loja fixa é omitida
+- [x] **STORE-05**: Utilizador vê, por item, o estado de cada loja fixa (ok / sem resultados / bloqueada / erro / tempo esgotado); nenhuma loja fixa é omitida
 - [ ] **STORE-06**: Quando o método principal de uma loja falha, a app tenta JSON-LD, browser automático e IA antes de marcar a falha, e mostra que método funcionou
-- [ ] **STORE-07**: Utilizador corre uma verificação das lojas que diz se cada adaptador ainda devolve preços válidos
+- [x] **STORE-07**: Utilizador corre uma verificação das lojas que diz se cada adaptador ainda devolve preços válidos
 
 ### Descoberta de lojas
 
@@ -107,9 +107,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | STORE-02 | Phase 1 | Complete |
 | STORE-03 | Phase 1 | Complete |
 | STORE-04 | Phase 2 | Pending |
-| STORE-05 | Phase 1 | Pending |
+| STORE-05 | Phase 1 | Complete |
 | STORE-06 | Phase 2 | Pending |
-| STORE-07 | Phase 1 | Pending |
+| STORE-07 | Phase 1 | Complete |
 | DISC-01 | Phase 6 | Pending |
 | DISC-02 | Phase 6 | Pending |
 | DISC-03 | Phase 6 | Pending |

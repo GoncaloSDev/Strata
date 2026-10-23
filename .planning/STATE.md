@@ -2,17 +2,17 @@
 gsd_state_version: "1.0"
 current_phase: 01
 current_phase_name: Folha Excel e preços da Allmat, Bricomarché e Obras 360
-status: executing
-stopped_at: Completed 01-05-PLAN.md
-last_updated: "2026-10-23T00:28:16.377Z"
+status: verifying
+stopped_at: Completed 01-06-PLAN.md
+last_updated: "2026-10-23T02:09:43.728Z"
 last_activity: 2026-10-23
 last_activity_desc: Phase 01 execution started
-state_head: 21481c336defea80c507259715136d3c5881bad0
+state_head: 12a77be3cf2113ddfa53b61b0c5c77035877c653
 progress:
   total_phases: 6
   completed_phases: 0
   total_plans: 6
-  completed_plans: 5
+  completed_plans: 6
   percent: 0
 ---
 
@@ -29,7 +29,7 @@ See: .planning/PROJECT.md (updated 2026-10-22)
 
 Phase: 01 (Folha Excel e preços da Allmat, Bricomarché e Obras 360) — EXECUTING
 Plan: 6 of 6
-Status: Ready to execute
+Status: Phase complete — ready for verification
 Last activity: 2026-10-23 — Phase 01 execution started
 
 Progress: [░░░░░░░░░░] 0%
@@ -61,6 +61,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 01 P03 | 7 min | 3 tasks | 8 files |
 | Phase 01 P04 | 4 min | 2 tasks | 5 files |
 | Phase 01 P05 | 5 min | 2 tasks | 9 files |
+| Phase 01 P06 | 98 min | 2 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -93,6 +94,8 @@ Recent decisions affecting current work:
 - [Phase 01]: 01-05: Obras 360 paginada por ceil(total_products/48), no máximo 3 páginas; contar produtos lidos pedia páginas inexistentes
 - [Phase 01]: 01-05: Obras 360 só passa à nota um StoreError de um produto (detalhe vazio, IVA incoerente); KeyError/TypeError põem a loja em erro
 - [Phase 01]: 01-05: variante Obras 360 sem designação fica '<pai> — ref. <sku>'
+- [Phase 01]: 01-06: verificar corre 4 canários (Allmat cimento e pavimento, Bricomarché cimento, Obras 360 osb) pelo search_store do dia a dia e sai com 1 se algum falhar
+- [Phase 01]: 01-06: DEADLINE_S 90 s, K 10/20 e MAX_BOX_PAGES 10 mantidos; corrida ao vivo sem tempo esgotado (verificar 50 s, folha de 3 linhas 26 s)
 
 ### Pending Todos
 
@@ -104,6 +107,7 @@ None yet.
 - [Phase 2]: Resistência ao DataDome da Obramat ao longo de 10 itens não testada; recurso = Chrome dedicado (`.claude-chrome`) a ritmo humano
 - [Phase 1]: Bricomarché demora cerca de 12 s por página; `orderby=price` não ordena com `type=variation` (confirmado na pesquisa) — os planos usam pais → top 10 → variações
 - [Phase 5]: Correr o `ui-ux-pro-max` (design system com `--persist`) antes do primeiro ecrã
+- [Phase 1 verify]: filtro de palavras esconde produtos certos na Obras 360: 'tinta branca' escondeu as 8 (Dyrup 15L Branco Mate e Mapei BRANCO são o produto); género Branco/branca e 'OSB3' não batem. Decidir se é lacuna da fase ou Phase 3
 
 ## Deferred Items
 
@@ -115,6 +119,6 @@ Items acknowledged and deferred at milestone close, most recent first:
 
 ## Session Continuity
 
-Last session: 2026-10-23T00:28:16.338Z
-Stopped at: Completed 01-05-PLAN.md
+Last session: 2026-10-23T02:09:43.693Z
+Stopped at: Completed 01-06-PLAN.md
 Resume file: None
