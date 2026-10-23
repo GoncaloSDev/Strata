@@ -399,3 +399,19 @@ def test_pai_com_a_pesquisa_completa_passa_a_frente_do_corte(fake):
     assert "id-m8" in details and len(details) == 20
     assert found.offers and all(o.title.startswith("Parafuso Sextavado M8") for o in found.offers)
     assert "+6 produtos não expandidos (limite de 20 por pesquisa)" in found.notes
+
+
+# --- quick 261023-lee: o pai com mais palavras da pesquisa passa à frente do corte K=20 (CR-06) ---
+
+def test_pai_com_mais_palavras_da_pesquisa_passa_a_frente_do_corte(fake):
+    baratos = [parent(f"id-{i:02d}", "Parafuso Zincado Cabeça Chata", i + 1) for i in range(25)]
+    m8 = parent("id-m8", "Parafuso Sextavado M8", 99)  # o mais caro; o "40" só está na variante
+    fake.cache["obras360_widget"] = WIDGET
+    fake.route(LIST_URL + "parafuso+m8x40", listing(baratos + [m8], 26))
+    fake.route("product-details/27", "obras360_product-details_osb-parent.json")
+
+    found = run("parafuso m8x40", fake)
+
+    details = [c.rsplit("=", 1)[1] for c in fake.calls if "product-details" in c]
+    assert "id-m8" in details and len(details) == 20
+    assert "+6 produtos não expandidos (limite de 20 por pesquisa)" in found.notes
