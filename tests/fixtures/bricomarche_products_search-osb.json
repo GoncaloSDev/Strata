@@ -1,0 +1,3195 @@
+[
+ {
+  "id": 47412,
+  "name": "PLACA OSB 12 MM",
+  "slug": "plc-osb-lisa-2-50x1-25-12mm",
+  "parent": 0,
+  "type": "variable",
+  "variation": "",
+  "permalink": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/",
+  "sku": "2002421234956",
+  "short_description": "",
+  "description": "<p>2500x125x12 mm<br />\nPlaca: 3,125 m2</p>",
+  "on_sale": false,
+  "prices": {
+   "price": "1849",
+   "regular_price": "1849",
+   "sale_price": "1849",
+   "price_range": {
+    "min_amount": "1849",
+    "max_amount": "2999"
+   },
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "price_html": "<span class=\"woocommerce-Price-amount amount\">18,49<span class=\"woocommerce-Price-currencySymbol\">&euro;</span></span>",
+  "average_rating": "0",
+  "review_count": 0,
+  "categories": [],
+  "tags": [],
+  "brands": [],
+  "attributes": [
+   {
+    "id": 37,
+    "name": "Loja",
+    "taxonomy": "pa_loja",
+    "has_variations": true,
+    "terms": [
+     {
+      "id": 4519,
+      "name": "Abrantes",
+      "slug": "abrantes"
+     },
+     {
+      "id": 4851,
+      "name": "Águeda",
+      "slug": "agueda"
+     },
+     {
+      "id": 4964,
+      "name": "Alcácer do Sal",
+      "slug": "alcacer-do-sal"
+     },
+     {
+      "id": 4588,
+      "name": "Alcobaça",
+      "slug": "alcobaca"
+     },
+     {
+      "id": 4927,
+      "name": "Anadia",
+      "slug": "anadia"
+     },
+     {
+      "id": 4726,
+      "name": "Arco do Cego - Lisboa",
+      "slug": "arco-do-cego"
+     },
+     {
+      "id": 4722,
+      "name": "Arcozelo - V.N. Gaia",
+      "slug": "arcozelo"
+     },
+     {
+      "id": 4593,
+      "name": "Arrifana",
+      "slug": "arrifana"
+     },
+     {
+      "id": 4520,
+      "name": "Barcelos",
+      "slug": "barcelos"
+     },
+     {
+      "id": 3756,
+      "name": "Beja",
+      "slug": "beja"
+     },
+     {
+      "id": 4521,
+      "name": "Benavente",
+      "slug": "benavente"
+     },
+     {
+      "id": 4598,
+      "name": "Caldas da Rainha",
+      "slug": "caldas-da-rainha"
+     },
+     {
+      "id": 4600,
+      "name": "Cantanhede",
+      "slug": "cantanhede"
+     },
+     {
+      "id": 4602,
+      "name": "Carregado",
+      "slug": "carregado"
+     },
+     {
+      "id": 5245,
+      "name": "Cartaxo",
+      "slug": "cartaxo"
+     },
+     {
+      "id": 4712,
+      "name": "Carvalhos",
+      "slug": "carvalhos"
+     },
+     {
+      "id": 4606,
+      "name": "Castelo Branco",
+      "slug": "castelo-branco"
+     },
+     {
+      "id": 5152,
+      "name": "Castro Verde",
+      "slug": "castro-verde"
+     },
+     {
+      "id": 3186,
+      "name": "Charneca da Caparica",
+      "slug": "almada"
+     },
+     {
+      "id": 4522,
+      "name": "Chaves",
+      "slug": "chaves"
+     },
+     {
+      "id": 4908,
+      "name": "Coina - Barreiro",
+      "slug": "coina-barreiro"
+     },
+     {
+      "id": 4523,
+      "name": "Covilhã",
+      "slug": "covilha"
+     },
+     {
+      "id": 4610,
+      "name": "Elvas",
+      "slug": "elvas"
+     },
+     {
+      "id": 4524,
+      "name": "Entroncamento",
+      "slug": "entroncamento"
+     },
+     {
+      "id": 5083,
+      "name": "Estarreja",
+      "slug": "estarreja"
+     },
+     {
+      "id": 4960,
+      "name": "Estremoz",
+      "slug": "estremoz"
+     },
+     {
+      "id": 4525,
+      "name": "Évora",
+      "slug": "evora"
+     },
+     {
+      "id": 4526,
+      "name": "Fafe",
+      "slug": "fafe"
+     },
+     {
+      "id": 4839,
+      "name": "Famões",
+      "slug": "famoes"
+     },
+     {
+      "id": 5092,
+      "name": "Faro",
+      "slug": "faro"
+     },
+     {
+      "id": 5499,
+      "name": "Felgueiras",
+      "slug": "felgueiras"
+     },
+     {
+      "id": 4614,
+      "name": "Figueira da Foz",
+      "slug": "figueira-da-foz"
+     },
+     {
+      "id": 4818,
+      "name": "Fundão",
+      "slug": "fundao"
+     },
+     {
+      "id": 4527,
+      "name": "Guarda",
+      "slug": "guarda"
+     },
+     {
+      "id": 4617,
+      "name": "Guimarães",
+      "slug": "guimaraes"
+     },
+     {
+      "id": 2910,
+      "name": "Lagos",
+      "slug": "lagos"
+     },
+     {
+      "id": 4620,
+      "name": "Malveira",
+      "slug": "malveira"
+     },
+     {
+      "id": 5154,
+      "name": "Mangualde",
+      "slug": "mangualde"
+     },
+     {
+      "id": 4725,
+      "name": "Marinha da Guia",
+      "slug": "marinha-guia"
+     },
+     {
+      "id": 4715,
+      "name": "Marinha Grande",
+      "slug": "marinha-grande"
+     },
+     {
+      "id": 4697,
+      "name": "master",
+      "slug": "master"
+     },
+     {
+      "id": 4622,
+      "name": "Mazarres - Leiria",
+      "slug": "marrazes-leiria"
+     },
+     {
+      "id": 4944,
+      "name": "Monção",
+      "slug": "moncao"
+     },
+     {
+      "id": 4696,
+      "name": "Oliveira de Azeméis",
+      "slug": "oliveira-de-azemeis"
+     },
+     {
+      "id": 4624,
+      "name": "Ourém",
+      "slug": "ourem"
+     },
+     {
+      "id": 4528,
+      "name": "Ovar",
+      "slug": "ovar"
+     },
+     {
+      "id": 4695,
+      "name": "Paços de Ferreira",
+      "slug": "pacos-de-ferreira"
+     },
+     {
+      "id": 4529,
+      "name": "Penafiel",
+      "slug": "penafiel"
+     },
+     {
+      "id": 4530,
+      "name": "Pombal",
+      "slug": "pombal"
+     },
+     {
+      "id": 4531,
+      "name": "Ponte de Lima",
+      "slug": "ponte-de-lima"
+     },
+     {
+      "id": 4938,
+      "name": "Ponte de Sor",
+      "slug": "ponte-de-sor"
+     },
+     {
+      "id": 4630,
+      "name": "Portalegre",
+      "slug": "portalegre"
+     },
+     {
+      "id": 4532,
+      "name": "Santarém",
+      "slug": "santarem"
+     },
+     {
+      "id": 2909,
+      "name": "São Domingos de Rana",
+      "slug": "sao-domingos-de-rana"
+     },
+     {
+      "id": 4718,
+      "name": "Seia",
+      "slug": "seia"
+     },
+     {
+      "id": 4633,
+      "name": "Sines",
+      "slug": "sines"
+     },
+     {
+      "id": 4635,
+      "name": "Taveiro - Coimbra",
+      "slug": "taveiro"
+     },
+     {
+      "id": 4637,
+      "name": "Tomar",
+      "slug": "tomar"
+     },
+     {
+      "id": 4639,
+      "name": "Tondela",
+      "slug": "tondela"
+     },
+     {
+      "id": 4641,
+      "name": "Viana do Castelo",
+      "slug": "viana-do-castelo"
+     },
+     {
+      "id": 4643,
+      "name": "Vila do Conde",
+      "slug": "vila-do-conde"
+     },
+     {
+      "id": 5299,
+      "name": "Vila Nova de Foz Côa",
+      "slug": "vila-nova-de-foz-coa"
+     },
+     {
+      "id": 4533,
+      "name": "Vila Nova de Santo André",
+      "slug": "vila-nova-de-santo-andre"
+     },
+     {
+      "id": 4646,
+      "name": "Vila Real",
+      "slug": "vila-real"
+     },
+     {
+      "id": 4534,
+      "name": "Viseu",
+      "slug": "viseu"
+     }
+    ]
+   }
+  ],
+  "variations": [
+   {
+    "id": 71502,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "beja"
+     }
+    ]
+   },
+   {
+    "id": 337568,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "barcelos"
+     }
+    ]
+   },
+   {
+    "id": 357690,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "tomar"
+     }
+    ]
+   },
+   {
+    "id": 377888,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "lagos"
+     }
+    ]
+   },
+   {
+    "id": 397945,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "sines"
+     }
+    ]
+   },
+   {
+    "id": 417801,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "chaves"
+     }
+    ]
+   },
+   {
+    "id": 456791,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "covilha"
+     }
+    ]
+   },
+   {
+    "id": 476300,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "alcobaca"
+     }
+    ]
+   },
+   {
+    "id": 494597,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "penafiel"
+     }
+    ]
+   },
+   {
+    "id": 511570,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "portalegre"
+     }
+    ]
+   },
+   {
+    "id": 529396,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "arrifana"
+     }
+    ]
+   },
+   {
+    "id": 584884,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "carregado"
+     }
+    ]
+   },
+   {
+    "id": 603149,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "malveira"
+     }
+    ]
+   },
+   {
+    "id": 621708,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "almada"
+     }
+    ]
+   },
+   {
+    "id": 639087,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "abrantes"
+     }
+    ]
+   },
+   {
+    "id": 676004,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "pacos-de-ferreira"
+     }
+    ]
+   },
+   {
+    "id": 694204,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "evora"
+     }
+    ]
+   },
+   {
+    "id": 712901,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "guarda"
+     }
+    ]
+   },
+   {
+    "id": 750502,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "ovar"
+     }
+    ]
+   },
+   {
+    "id": 768289,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "oliveira-de-azemeis"
+     }
+    ]
+   },
+   {
+    "id": 787037,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "viseu"
+     }
+    ]
+   },
+   {
+    "id": 806060,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "ourem"
+     }
+    ]
+   },
+   {
+    "id": 825194,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "pombal"
+     }
+    ]
+   },
+   {
+    "id": 888229,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "guimaraes"
+     }
+    ]
+   },
+   {
+    "id": 906138,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "santarem"
+     }
+    ]
+   },
+   {
+    "id": 923739,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "benavente"
+     }
+    ]
+   },
+   {
+    "id": 941819,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "taveiro"
+     }
+    ]
+   },
+   {
+    "id": 960708,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "cantanhede"
+     }
+    ]
+   },
+   {
+    "id": 998220,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "elvas"
+     }
+    ]
+   },
+   {
+    "id": 1016533,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "entroncamento"
+     }
+    ]
+   },
+   {
+    "id": 1035608,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "fafe"
+     }
+    ]
+   },
+   {
+    "id": 1051967,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "tondela"
+     }
+    ]
+   },
+   {
+    "id": 1203244,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "master"
+     }
+    ]
+   },
+   {
+    "id": 1203245,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "arcozelo"
+     }
+    ]
+   },
+   {
+    "id": 1203246,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "caldas-da-rainha"
+     }
+    ]
+   },
+   {
+    "id": 1203247,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "carvalhos"
+     }
+    ]
+   },
+   {
+    "id": 1203248,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "castelo-branco"
+     }
+    ]
+   },
+   {
+    "id": 1203249,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "figueira-da-foz"
+     }
+    ]
+   },
+   {
+    "id": 1203250,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "marrazes-leiria"
+     }
+    ]
+   },
+   {
+    "id": 1203251,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "marinha-grande"
+     }
+    ]
+   },
+   {
+    "id": 1203252,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "marinha-guia"
+     }
+    ]
+   },
+   {
+    "id": 1203253,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "ponte-de-lima"
+     }
+    ]
+   },
+   {
+    "id": 1203254,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "sao-domingos-de-rana"
+     }
+    ]
+   },
+   {
+    "id": 1203255,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "seia"
+     }
+    ]
+   },
+   {
+    "id": 1203256,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "viana-do-castelo"
+     }
+    ]
+   },
+   {
+    "id": 1203257,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "vila-do-conde"
+     }
+    ]
+   },
+   {
+    "id": 1203258,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "vila-nova-de-santo-andre"
+     }
+    ]
+   },
+   {
+    "id": 1203259,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "vila-real"
+     }
+    ]
+   },
+   {
+    "id": 1662332,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "arco-do-cego"
+     }
+    ]
+   },
+   {
+    "id": 2072045,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "famoes"
+     }
+    ]
+   },
+   {
+    "id": 2072046,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "fundao"
+     }
+    ]
+   },
+   {
+    "id": 2147186,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "agueda"
+     }
+    ]
+   },
+   {
+    "id": 2291700,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "coina-barreiro"
+     }
+    ]
+   },
+   {
+    "id": 2337438,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "anadia"
+     }
+    ]
+   },
+   {
+    "id": 2367378,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "ponte-de-sor"
+     }
+    ]
+   },
+   {
+    "id": 2445174,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "moncao"
+     }
+    ]
+   },
+   {
+    "id": 2445175,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "estremoz"
+     }
+    ]
+   },
+   {
+    "id": 2549576,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "alcacer-do-sal"
+     }
+    ]
+   },
+   {
+    "id": 2728009,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "estarreja"
+     }
+    ]
+   },
+   {
+    "id": 2766988,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "faro"
+     }
+    ]
+   },
+   {
+    "id": 2895341,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "castro-verde"
+     }
+    ]
+   },
+   {
+    "id": 2932461,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "mangualde"
+     }
+    ]
+   },
+   {
+    "id": 3238052,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "cartaxo"
+     }
+    ]
+   },
+   {
+    "id": 3367785,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "vila-nova-de-foz-coa"
+     }
+    ]
+   },
+   {
+    "id": 3447164,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "felgueiras"
+     }
+    ]
+   }
+  ],
+  "grouped_products": [],
+  "has_options": true,
+  "is_purchasable": true,
+  "is_in_stock": true,
+  "is_on_backorder": false,
+  "low_stock_remaining": null,
+  "stock_availability": {
+   "text": "",
+   "class": "in-stock"
+  },
+  "sold_individually": false,
+  "weight": "",
+  "dimensions": {
+   "length": "",
+   "width": "",
+   "height": ""
+  },
+  "formatted_weight": "n.d.",
+  "formatted_dimensions": "n.d.",
+  "add_to_cart": {
+   "text": "Ler mais",
+   "description": "Seleccione as opções para &ldquo;PLACA OSB 12 MM&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/plc-osb-lisa-2-50x1-25-12mm/",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 9999,
+   "multiple_of": 1
+  },
+  "is_password_protected": false,
+  "extensions": {},
+  "_links": {
+   "self": [
+    {
+     "href": "https://www.bricomarche.pt/wp-json/wc/store/v1/products/47412",
+     "targetHints": {
+      "allow": [
+       "GET"
+      ]
+     }
+    }
+   ],
+   "collection": [
+    {
+     "href": "https://www.bricomarche.pt/wp-json/wc/store/v1/products"
+    }
+   ],
+   "related": [
+    {
+     "embeddable": true,
+     "href": "https://www.bricomarche.pt/wp-json/wc/store/v1/products?related=47412&per_page=10"
+    }
+   ]
+  }
+ },
+ {
+  "id": 47411,
+  "name": "Placa Osb Lisa 2.50X1.25 9Mm",
+  "slug": "placa-osb-lisa-2-50x1-25-9mm",
+  "parent": 0,
+  "type": "variable",
+  "variation": "",
+  "permalink": "https://www.bricomarche.pt/produto/placa-osb-lisa-2-50x1-25-9mm/",
+  "sku": "2002421235298",
+  "short_description": "",
+  "description": "<p>9mm<br />\n2.50x1.25 m</p>",
+  "on_sale": false,
+  "prices": {
+   "price": "1449",
+   "regular_price": "1449",
+   "sale_price": "1449",
+   "price_range": {
+    "min_amount": "1449",
+    "max_amount": "2890"
+   },
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "price_html": "<span class=\"woocommerce-Price-amount amount\">14,49<span class=\"woocommerce-Price-currencySymbol\">&euro;</span></span>",
+  "average_rating": "0",
+  "review_count": 0,
+  "categories": [],
+  "tags": [],
+  "brands": [],
+  "attributes": [
+   {
+    "id": 37,
+    "name": "Loja",
+    "taxonomy": "pa_loja",
+    "has_variations": true,
+    "terms": [
+     {
+      "id": 4519,
+      "name": "Abrantes",
+      "slug": "abrantes"
+     },
+     {
+      "id": 4851,
+      "name": "Águeda",
+      "slug": "agueda"
+     },
+     {
+      "id": 4964,
+      "name": "Alcácer do Sal",
+      "slug": "alcacer-do-sal"
+     },
+     {
+      "id": 4588,
+      "name": "Alcobaça",
+      "slug": "alcobaca"
+     },
+     {
+      "id": 4927,
+      "name": "Anadia",
+      "slug": "anadia"
+     },
+     {
+      "id": 4726,
+      "name": "Arco do Cego - Lisboa",
+      "slug": "arco-do-cego"
+     },
+     {
+      "id": 4722,
+      "name": "Arcozelo - V.N. Gaia",
+      "slug": "arcozelo"
+     },
+     {
+      "id": 4593,
+      "name": "Arrifana",
+      "slug": "arrifana"
+     },
+     {
+      "id": 4520,
+      "name": "Barcelos",
+      "slug": "barcelos"
+     },
+     {
+      "id": 3756,
+      "name": "Beja",
+      "slug": "beja"
+     },
+     {
+      "id": 4521,
+      "name": "Benavente",
+      "slug": "benavente"
+     },
+     {
+      "id": 4598,
+      "name": "Caldas da Rainha",
+      "slug": "caldas-da-rainha"
+     },
+     {
+      "id": 4600,
+      "name": "Cantanhede",
+      "slug": "cantanhede"
+     },
+     {
+      "id": 4602,
+      "name": "Carregado",
+      "slug": "carregado"
+     },
+     {
+      "id": 5245,
+      "name": "Cartaxo",
+      "slug": "cartaxo"
+     },
+     {
+      "id": 4712,
+      "name": "Carvalhos",
+      "slug": "carvalhos"
+     },
+     {
+      "id": 4606,
+      "name": "Castelo Branco",
+      "slug": "castelo-branco"
+     },
+     {
+      "id": 5152,
+      "name": "Castro Verde",
+      "slug": "castro-verde"
+     },
+     {
+      "id": 3186,
+      "name": "Charneca da Caparica",
+      "slug": "almada"
+     },
+     {
+      "id": 4522,
+      "name": "Chaves",
+      "slug": "chaves"
+     },
+     {
+      "id": 4908,
+      "name": "Coina - Barreiro",
+      "slug": "coina-barreiro"
+     },
+     {
+      "id": 4523,
+      "name": "Covilhã",
+      "slug": "covilha"
+     },
+     {
+      "id": 4610,
+      "name": "Elvas",
+      "slug": "elvas"
+     },
+     {
+      "id": 4524,
+      "name": "Entroncamento",
+      "slug": "entroncamento"
+     },
+     {
+      "id": 5083,
+      "name": "Estarreja",
+      "slug": "estarreja"
+     },
+     {
+      "id": 4960,
+      "name": "Estremoz",
+      "slug": "estremoz"
+     },
+     {
+      "id": 4525,
+      "name": "Évora",
+      "slug": "evora"
+     },
+     {
+      "id": 4526,
+      "name": "Fafe",
+      "slug": "fafe"
+     },
+     {
+      "id": 4839,
+      "name": "Famões",
+      "slug": "famoes"
+     },
+     {
+      "id": 5092,
+      "name": "Faro",
+      "slug": "faro"
+     },
+     {
+      "id": 5499,
+      "name": "Felgueiras",
+      "slug": "felgueiras"
+     },
+     {
+      "id": 4614,
+      "name": "Figueira da Foz",
+      "slug": "figueira-da-foz"
+     },
+     {
+      "id": 4818,
+      "name": "Fundão",
+      "slug": "fundao"
+     },
+     {
+      "id": 4527,
+      "name": "Guarda",
+      "slug": "guarda"
+     },
+     {
+      "id": 4617,
+      "name": "Guimarães",
+      "slug": "guimaraes"
+     },
+     {
+      "id": 2910,
+      "name": "Lagos",
+      "slug": "lagos"
+     },
+     {
+      "id": 4620,
+      "name": "Malveira",
+      "slug": "malveira"
+     },
+     {
+      "id": 5154,
+      "name": "Mangualde",
+      "slug": "mangualde"
+     },
+     {
+      "id": 4725,
+      "name": "Marinha da Guia",
+      "slug": "marinha-guia"
+     },
+     {
+      "id": 4715,
+      "name": "Marinha Grande",
+      "slug": "marinha-grande"
+     },
+     {
+      "id": 4697,
+      "name": "master",
+      "slug": "master"
+     },
+     {
+      "id": 4622,
+      "name": "Mazarres - Leiria",
+      "slug": "marrazes-leiria"
+     },
+     {
+      "id": 4944,
+      "name": "Monção",
+      "slug": "moncao"
+     },
+     {
+      "id": 4696,
+      "name": "Oliveira de Azeméis",
+      "slug": "oliveira-de-azemeis"
+     },
+     {
+      "id": 4624,
+      "name": "Ourém",
+      "slug": "ourem"
+     },
+     {
+      "id": 4528,
+      "name": "Ovar",
+      "slug": "ovar"
+     },
+     {
+      "id": 4695,
+      "name": "Paços de Ferreira",
+      "slug": "pacos-de-ferreira"
+     },
+     {
+      "id": 4529,
+      "name": "Penafiel",
+      "slug": "penafiel"
+     },
+     {
+      "id": 4530,
+      "name": "Pombal",
+      "slug": "pombal"
+     },
+     {
+      "id": 4531,
+      "name": "Ponte de Lima",
+      "slug": "ponte-de-lima"
+     },
+     {
+      "id": 4938,
+      "name": "Ponte de Sor",
+      "slug": "ponte-de-sor"
+     },
+     {
+      "id": 4630,
+      "name": "Portalegre",
+      "slug": "portalegre"
+     },
+     {
+      "id": 4532,
+      "name": "Santarém",
+      "slug": "santarem"
+     },
+     {
+      "id": 2909,
+      "name": "São Domingos de Rana",
+      "slug": "sao-domingos-de-rana"
+     },
+     {
+      "id": 4718,
+      "name": "Seia",
+      "slug": "seia"
+     },
+     {
+      "id": 4633,
+      "name": "Sines",
+      "slug": "sines"
+     },
+     {
+      "id": 4635,
+      "name": "Taveiro - Coimbra",
+      "slug": "taveiro"
+     },
+     {
+      "id": 4637,
+      "name": "Tomar",
+      "slug": "tomar"
+     },
+     {
+      "id": 4639,
+      "name": "Tondela",
+      "slug": "tondela"
+     },
+     {
+      "id": 4641,
+      "name": "Viana do Castelo",
+      "slug": "viana-do-castelo"
+     },
+     {
+      "id": 4643,
+      "name": "Vila do Conde",
+      "slug": "vila-do-conde"
+     },
+     {
+      "id": 5299,
+      "name": "Vila Nova de Foz Côa",
+      "slug": "vila-nova-de-foz-coa"
+     },
+     {
+      "id": 4533,
+      "name": "Vila Nova de Santo André",
+      "slug": "vila-nova-de-santo-andre"
+     },
+     {
+      "id": 4646,
+      "name": "Vila Real",
+      "slug": "vila-real"
+     },
+     {
+      "id": 4534,
+      "name": "Viseu",
+      "slug": "viseu"
+     }
+    ]
+   }
+  ],
+  "variations": [
+   {
+    "id": 71501,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "beja"
+     }
+    ]
+   },
+   {
+    "id": 337573,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "barcelos"
+     }
+    ]
+   },
+   {
+    "id": 357696,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "tomar"
+     }
+    ]
+   },
+   {
+    "id": 377893,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "lagos"
+     }
+    ]
+   },
+   {
+    "id": 397951,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "sines"
+     }
+    ]
+   },
+   {
+    "id": 417806,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "chaves"
+     }
+    ]
+   },
+   {
+    "id": 456796,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "covilha"
+     }
+    ]
+   },
+   {
+    "id": 476306,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "alcobaca"
+     }
+    ]
+   },
+   {
+    "id": 494602,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "penafiel"
+     }
+    ]
+   },
+   {
+    "id": 511576,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "portalegre"
+     }
+    ]
+   },
+   {
+    "id": 529402,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "arrifana"
+     }
+    ]
+   },
+   {
+    "id": 584890,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "carregado"
+     }
+    ]
+   },
+   {
+    "id": 603155,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "malveira"
+     }
+    ]
+   },
+   {
+    "id": 621713,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "almada"
+     }
+    ]
+   },
+   {
+    "id": 639092,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "abrantes"
+     }
+    ]
+   },
+   {
+    "id": 676010,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "pacos-de-ferreira"
+     }
+    ]
+   },
+   {
+    "id": 694209,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "evora"
+     }
+    ]
+   },
+   {
+    "id": 712906,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "guarda"
+     }
+    ]
+   },
+   {
+    "id": 750507,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "ovar"
+     }
+    ]
+   },
+   {
+    "id": 768295,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "oliveira-de-azemeis"
+     }
+    ]
+   },
+   {
+    "id": 787042,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "viseu"
+     }
+    ]
+   },
+   {
+    "id": 806066,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "ourem"
+     }
+    ]
+   },
+   {
+    "id": 825199,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "pombal"
+     }
+    ]
+   },
+   {
+    "id": 888235,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "guimaraes"
+     }
+    ]
+   },
+   {
+    "id": 906143,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "santarem"
+     }
+    ]
+   },
+   {
+    "id": 923744,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "benavente"
+     }
+    ]
+   },
+   {
+    "id": 941825,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "taveiro"
+     }
+    ]
+   },
+   {
+    "id": 960714,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "cantanhede"
+     }
+    ]
+   },
+   {
+    "id": 998226,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "elvas"
+     }
+    ]
+   },
+   {
+    "id": 1016538,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "entroncamento"
+     }
+    ]
+   },
+   {
+    "id": 1035613,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "fafe"
+     }
+    ]
+   },
+   {
+    "id": 1051973,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "tondela"
+     }
+    ]
+   },
+   {
+    "id": 1203228,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "master"
+     }
+    ]
+   },
+   {
+    "id": 1203229,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "arcozelo"
+     }
+    ]
+   },
+   {
+    "id": 1203230,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "caldas-da-rainha"
+     }
+    ]
+   },
+   {
+    "id": 1203231,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "carvalhos"
+     }
+    ]
+   },
+   {
+    "id": 1203232,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "castelo-branco"
+     }
+    ]
+   },
+   {
+    "id": 1203233,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "figueira-da-foz"
+     }
+    ]
+   },
+   {
+    "id": 1203234,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "marrazes-leiria"
+     }
+    ]
+   },
+   {
+    "id": 1203235,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "marinha-grande"
+     }
+    ]
+   },
+   {
+    "id": 1203236,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "marinha-guia"
+     }
+    ]
+   },
+   {
+    "id": 1203237,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "ponte-de-lima"
+     }
+    ]
+   },
+   {
+    "id": 1203238,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "sao-domingos-de-rana"
+     }
+    ]
+   },
+   {
+    "id": 1203239,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "seia"
+     }
+    ]
+   },
+   {
+    "id": 1203240,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "viana-do-castelo"
+     }
+    ]
+   },
+   {
+    "id": 1203241,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "vila-do-conde"
+     }
+    ]
+   },
+   {
+    "id": 1203242,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "vila-nova-de-santo-andre"
+     }
+    ]
+   },
+   {
+    "id": 1203243,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "vila-real"
+     }
+    ]
+   },
+   {
+    "id": 1662331,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "arco-do-cego"
+     }
+    ]
+   },
+   {
+    "id": 2072043,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "famoes"
+     }
+    ]
+   },
+   {
+    "id": 2072044,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "fundao"
+     }
+    ]
+   },
+   {
+    "id": 2147185,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "agueda"
+     }
+    ]
+   },
+   {
+    "id": 2291699,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "coina-barreiro"
+     }
+    ]
+   },
+   {
+    "id": 2337437,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "anadia"
+     }
+    ]
+   },
+   {
+    "id": 2367377,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "ponte-de-sor"
+     }
+    ]
+   },
+   {
+    "id": 2445172,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "moncao"
+     }
+    ]
+   },
+   {
+    "id": 2445173,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "estremoz"
+     }
+    ]
+   },
+   {
+    "id": 2549575,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "alcacer-do-sal"
+     }
+    ]
+   },
+   {
+    "id": 2728008,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "estarreja"
+     }
+    ]
+   },
+   {
+    "id": 2766987,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "faro"
+     }
+    ]
+   },
+   {
+    "id": 2895340,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "castro-verde"
+     }
+    ]
+   },
+   {
+    "id": 2932460,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "mangualde"
+     }
+    ]
+   },
+   {
+    "id": 3238051,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "cartaxo"
+     }
+    ]
+   },
+   {
+    "id": 3367784,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "vila-nova-de-foz-coa"
+     }
+    ]
+   },
+   {
+    "id": 3447163,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "felgueiras"
+     }
+    ]
+   }
+  ],
+  "grouped_products": [],
+  "has_options": true,
+  "is_purchasable": true,
+  "is_in_stock": true,
+  "is_on_backorder": false,
+  "low_stock_remaining": null,
+  "stock_availability": {
+   "text": "",
+   "class": "in-stock"
+  },
+  "sold_individually": false,
+  "weight": "",
+  "dimensions": {
+   "length": "",
+   "width": "",
+   "height": ""
+  },
+  "formatted_weight": "n.d.",
+  "formatted_dimensions": "n.d.",
+  "add_to_cart": {
+   "text": "Ler mais",
+   "description": "Seleccione as opções para &ldquo;Placa Osb Lisa 2.50X1.25 9Mm&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/placa-osb-lisa-2-50x1-25-9mm/",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 9999,
+   "multiple_of": 1
+  },
+  "is_password_protected": false,
+  "extensions": {},
+  "_links": {
+   "self": [
+    {
+     "href": "https://www.bricomarche.pt/wp-json/wc/store/v1/products/47411",
+     "targetHints": {
+      "allow": [
+       "GET"
+      ]
+     }
+    }
+   ],
+   "collection": [
+    {
+     "href": "https://www.bricomarche.pt/wp-json/wc/store/v1/products"
+    }
+   ],
+   "related": [
+    {
+     "embeddable": true,
+     "href": "https://www.bricomarche.pt/wp-json/wc/store/v1/products?related=47411&per_page=10"
+    }
+   ]
+  }
+ },
+ {
+  "id": 37387,
+  "name": "Chapa Osb 2440X590X18Mm",
+  "slug": "chapa-osb-2440x590x18mm",
+  "parent": 0,
+  "type": "variable",
+  "variation": "",
+  "permalink": "https://www.bricomarche.pt/produto/chapa-osb-2440x590x18mm/",
+  "sku": "4752011003643",
+  "short_description": "",
+  "description": "",
+  "on_sale": false,
+  "prices": {
+   "price": "0",
+   "regular_price": "1999",
+   "sale_price": "1999",
+   "price_range": {
+    "min_amount": "1999",
+    "max_amount": "2749"
+   },
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "price_html": "<span class=\"woocommerce-Price-amount amount\">19,99<span class=\"woocommerce-Price-currencySymbol\">&euro;</span></span>",
+  "average_rating": "0",
+  "review_count": 0,
+  "categories": [],
+  "tags": [],
+  "brands": [],
+  "attributes": [
+   {
+    "id": 37,
+    "name": "Loja",
+    "taxonomy": "pa_loja",
+    "has_variations": true,
+    "terms": [
+     {
+      "id": 4851,
+      "name": "Águeda",
+      "slug": "agueda"
+     },
+     {
+      "id": 4964,
+      "name": "Alcácer do Sal",
+      "slug": "alcacer-do-sal"
+     },
+     {
+      "id": 4588,
+      "name": "Alcobaça",
+      "slug": "alcobaca"
+     },
+     {
+      "id": 4927,
+      "name": "Anadia",
+      "slug": "anadia"
+     },
+     {
+      "id": 4726,
+      "name": "Arco do Cego - Lisboa",
+      "slug": "arco-do-cego"
+     },
+     {
+      "id": 4722,
+      "name": "Arcozelo - V.N. Gaia",
+      "slug": "arcozelo"
+     },
+     {
+      "id": 4593,
+      "name": "Arrifana",
+      "slug": "arrifana"
+     },
+     {
+      "id": 4520,
+      "name": "Barcelos",
+      "slug": "barcelos"
+     },
+     {
+      "id": 3756,
+      "name": "Beja",
+      "slug": "beja"
+     },
+     {
+      "id": 4521,
+      "name": "Benavente",
+      "slug": "benavente"
+     },
+     {
+      "id": 4598,
+      "name": "Caldas da Rainha",
+      "slug": "caldas-da-rainha"
+     },
+     {
+      "id": 4600,
+      "name": "Cantanhede",
+      "slug": "cantanhede"
+     },
+     {
+      "id": 4602,
+      "name": "Carregado",
+      "slug": "carregado"
+     },
+     {
+      "id": 5245,
+      "name": "Cartaxo",
+      "slug": "cartaxo"
+     },
+     {
+      "id": 4712,
+      "name": "Carvalhos",
+      "slug": "carvalhos"
+     },
+     {
+      "id": 4606,
+      "name": "Castelo Branco",
+      "slug": "castelo-branco"
+     },
+     {
+      "id": 5152,
+      "name": "Castro Verde",
+      "slug": "castro-verde"
+     },
+     {
+      "id": 3186,
+      "name": "Charneca da Caparica",
+      "slug": "almada"
+     },
+     {
+      "id": 4522,
+      "name": "Chaves",
+      "slug": "chaves"
+     },
+     {
+      "id": 4908,
+      "name": "Coina - Barreiro",
+      "slug": "coina-barreiro"
+     },
+     {
+      "id": 4523,
+      "name": "Covilhã",
+      "slug": "covilha"
+     },
+     {
+      "id": 4610,
+      "name": "Elvas",
+      "slug": "elvas"
+     },
+     {
+      "id": 4524,
+      "name": "Entroncamento",
+      "slug": "entroncamento"
+     },
+     {
+      "id": 5083,
+      "name": "Estarreja",
+      "slug": "estarreja"
+     },
+     {
+      "id": 4960,
+      "name": "Estremoz",
+      "slug": "estremoz"
+     },
+     {
+      "id": 4525,
+      "name": "Évora",
+      "slug": "evora"
+     },
+     {
+      "id": 4526,
+      "name": "Fafe",
+      "slug": "fafe"
+     },
+     {
+      "id": 4839,
+      "name": "Famões",
+      "slug": "famoes"
+     },
+     {
+      "id": 5092,
+      "name": "Faro",
+      "slug": "faro"
+     },
+     {
+      "id": 5499,
+      "name": "Felgueiras",
+      "slug": "felgueiras"
+     },
+     {
+      "id": 4614,
+      "name": "Figueira da Foz",
+      "slug": "figueira-da-foz"
+     },
+     {
+      "id": 4818,
+      "name": "Fundão",
+      "slug": "fundao"
+     },
+     {
+      "id": 4527,
+      "name": "Guarda",
+      "slug": "guarda"
+     },
+     {
+      "id": 4617,
+      "name": "Guimarães",
+      "slug": "guimaraes"
+     },
+     {
+      "id": 2910,
+      "name": "Lagos",
+      "slug": "lagos"
+     },
+     {
+      "id": 4620,
+      "name": "Malveira",
+      "slug": "malveira"
+     },
+     {
+      "id": 5154,
+      "name": "Mangualde",
+      "slug": "mangualde"
+     },
+     {
+      "id": 4725,
+      "name": "Marinha da Guia",
+      "slug": "marinha-guia"
+     },
+     {
+      "id": 4715,
+      "name": "Marinha Grande",
+      "slug": "marinha-grande"
+     },
+     {
+      "id": 4697,
+      "name": "master",
+      "slug": "master"
+     },
+     {
+      "id": 4622,
+      "name": "Mazarres - Leiria",
+      "slug": "marrazes-leiria"
+     },
+     {
+      "id": 4944,
+      "name": "Monção",
+      "slug": "moncao"
+     },
+     {
+      "id": 4696,
+      "name": "Oliveira de Azeméis",
+      "slug": "oliveira-de-azemeis"
+     },
+     {
+      "id": 4624,
+      "name": "Ourém",
+      "slug": "ourem"
+     },
+     {
+      "id": 4528,
+      "name": "Ovar",
+      "slug": "ovar"
+     },
+     {
+      "id": 4695,
+      "name": "Paços de Ferreira",
+      "slug": "pacos-de-ferreira"
+     },
+     {
+      "id": 4529,
+      "name": "Penafiel",
+      "slug": "penafiel"
+     },
+     {
+      "id": 4530,
+      "name": "Pombal",
+      "slug": "pombal"
+     },
+     {
+      "id": 4531,
+      "name": "Ponte de Lima",
+      "slug": "ponte-de-lima"
+     },
+     {
+      "id": 4938,
+      "name": "Ponte de Sor",
+      "slug": "ponte-de-sor"
+     },
+     {
+      "id": 4630,
+      "name": "Portalegre",
+      "slug": "portalegre"
+     },
+     {
+      "id": 4532,
+      "name": "Santarém",
+      "slug": "santarem"
+     },
+     {
+      "id": 2909,
+      "name": "São Domingos de Rana",
+      "slug": "sao-domingos-de-rana"
+     },
+     {
+      "id": 4718,
+      "name": "Seia",
+      "slug": "seia"
+     },
+     {
+      "id": 4633,
+      "name": "Sines",
+      "slug": "sines"
+     },
+     {
+      "id": 4635,
+      "name": "Taveiro - Coimbra",
+      "slug": "taveiro"
+     },
+     {
+      "id": 4637,
+      "name": "Tomar",
+      "slug": "tomar"
+     },
+     {
+      "id": 4639,
+      "name": "Tondela",
+      "slug": "tondela"
+     },
+     {
+      "id": 4641,
+      "name": "Viana do Castelo",
+      "slug": "viana-do-castelo"
+     },
+     {
+      "id": 4643,
+      "name": "Vila do Conde",
+      "slug": "vila-do-conde"
+     },
+     {
+      "id": 5299,
+      "name": "Vila Nova de Foz Côa",
+      "slug": "vila-nova-de-foz-coa"
+     },
+     {
+      "id": 4533,
+      "name": "Vila Nova de Santo André",
+      "slug": "vila-nova-de-santo-andre"
+     },
+     {
+      "id": 4646,
+      "name": "Vila Real",
+      "slug": "vila-real"
+     },
+     {
+      "id": 4534,
+      "name": "Viseu",
+      "slug": "viseu"
+     }
+    ]
+   }
+  ],
+  "variations": [
+   {
+    "id": 344651,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "barcelos"
+     }
+    ]
+   },
+   {
+    "id": 405269,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "sines"
+     }
+    ]
+   },
+   {
+    "id": 832447,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "pombal"
+     }
+    ]
+   },
+   {
+    "id": 1023836,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "entroncamento"
+     }
+    ]
+   },
+   {
+    "id": 1058610,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "tondela"
+     }
+    ]
+   },
+   {
+    "id": 1385370,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "ponte-de-lima"
+     }
+    ]
+   },
+   {
+    "id": 1385377,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "viana-do-castelo"
+     }
+    ]
+   },
+   {
+    "id": 1385380,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "vila-real"
+     }
+    ]
+   },
+   {
+    "id": 2301697,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "coina-barreiro"
+     }
+    ]
+   },
+   {
+    "id": 2465001,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "moncao"
+     }
+    ]
+   },
+   {
+    "id": 2776971,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "faro"
+     }
+    ]
+   }
+  ],
+  "grouped_products": [],
+  "has_options": true,
+  "is_purchasable": true,
+  "is_in_stock": true,
+  "is_on_backorder": false,
+  "low_stock_remaining": null,
+  "stock_availability": {
+   "text": "",
+   "class": "in-stock"
+  },
+  "sold_individually": false,
+  "weight": "",
+  "dimensions": {
+   "length": "",
+   "width": "",
+   "height": ""
+  },
+  "formatted_weight": "n.d.",
+  "formatted_dimensions": "n.d.",
+  "add_to_cart": {
+   "text": "Ler mais",
+   "description": "Seleccione as opções para &ldquo;Chapa Osb 2440X590X18Mm&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/chapa-osb-2440x590x18mm/",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 9999,
+   "multiple_of": 1
+  },
+  "is_password_protected": false,
+  "extensions": {},
+  "_links": {
+   "self": [
+    {
+     "href": "https://www.bricomarche.pt/wp-json/wc/store/v1/products/37387",
+     "targetHints": {
+      "allow": [
+       "GET"
+      ]
+     }
+    }
+   ],
+   "collection": [
+    {
+     "href": "https://www.bricomarche.pt/wp-json/wc/store/v1/products"
+    }
+   ],
+   "related": [
+    {
+     "embeddable": true,
+     "href": "https://www.bricomarche.pt/wp-json/wc/store/v1/products?related=37387&per_page=10"
+    }
+   ]
+  }
+ },
+ {
+  "id": 37386,
+  "name": "Chapa Osb 1220X610X9Mm",
+  "slug": "chapa-osb-1220x610x9mm",
+  "parent": 0,
+  "type": "variable",
+  "variation": "",
+  "permalink": "https://www.bricomarche.pt/produto/chapa-osb-1220x610x9mm/",
+  "sku": "5600437702772",
+  "short_description": "",
+  "description": "",
+  "on_sale": false,
+  "prices": {
+   "price": "0",
+   "regular_price": "589",
+   "sale_price": "589",
+   "price_range": {
+    "min_amount": "589",
+    "max_amount": "1763"
+   },
+   "currency_code": "EUR",
+   "currency_symbol": "€",
+   "currency_minor_unit": 2,
+   "currency_decimal_separator": ",",
+   "currency_thousand_separator": " ",
+   "currency_prefix": "",
+   "currency_suffix": "€"
+  },
+  "price_html": "<span class=\"woocommerce-Price-amount amount\">5,89<span class=\"woocommerce-Price-currencySymbol\">&euro;</span></span>",
+  "average_rating": "0",
+  "review_count": 0,
+  "categories": [],
+  "tags": [],
+  "brands": [],
+  "attributes": [
+   {
+    "id": 37,
+    "name": "Loja",
+    "taxonomy": "pa_loja",
+    "has_variations": true,
+    "terms": [
+     {
+      "id": 4851,
+      "name": "Águeda",
+      "slug": "agueda"
+     },
+     {
+      "id": 4964,
+      "name": "Alcácer do Sal",
+      "slug": "alcacer-do-sal"
+     },
+     {
+      "id": 4588,
+      "name": "Alcobaça",
+      "slug": "alcobaca"
+     },
+     {
+      "id": 4927,
+      "name": "Anadia",
+      "slug": "anadia"
+     },
+     {
+      "id": 4726,
+      "name": "Arco do Cego - Lisboa",
+      "slug": "arco-do-cego"
+     },
+     {
+      "id": 4722,
+      "name": "Arcozelo - V.N. Gaia",
+      "slug": "arcozelo"
+     },
+     {
+      "id": 4593,
+      "name": "Arrifana",
+      "slug": "arrifana"
+     },
+     {
+      "id": 4520,
+      "name": "Barcelos",
+      "slug": "barcelos"
+     },
+     {
+      "id": 3756,
+      "name": "Beja",
+      "slug": "beja"
+     },
+     {
+      "id": 4521,
+      "name": "Benavente",
+      "slug": "benavente"
+     },
+     {
+      "id": 4598,
+      "name": "Caldas da Rainha",
+      "slug": "caldas-da-rainha"
+     },
+     {
+      "id": 4600,
+      "name": "Cantanhede",
+      "slug": "cantanhede"
+     },
+     {
+      "id": 4602,
+      "name": "Carregado",
+      "slug": "carregado"
+     },
+     {
+      "id": 5245,
+      "name": "Cartaxo",
+      "slug": "cartaxo"
+     },
+     {
+      "id": 4712,
+      "name": "Carvalhos",
+      "slug": "carvalhos"
+     },
+     {
+      "id": 4606,
+      "name": "Castelo Branco",
+      "slug": "castelo-branco"
+     },
+     {
+      "id": 5152,
+      "name": "Castro Verde",
+      "slug": "castro-verde"
+     },
+     {
+      "id": 3186,
+      "name": "Charneca da Caparica",
+      "slug": "almada"
+     },
+     {
+      "id": 4522,
+      "name": "Chaves",
+      "slug": "chaves"
+     },
+     {
+      "id": 4908,
+      "name": "Coina - Barreiro",
+      "slug": "coina-barreiro"
+     },
+     {
+      "id": 4523,
+      "name": "Covilhã",
+      "slug": "covilha"
+     },
+     {
+      "id": 4610,
+      "name": "Elvas",
+      "slug": "elvas"
+     },
+     {
+      "id": 4524,
+      "name": "Entroncamento",
+      "slug": "entroncamento"
+     },
+     {
+      "id": 5083,
+      "name": "Estarreja",
+      "slug": "estarreja"
+     },
+     {
+      "id": 4960,
+      "name": "Estremoz",
+      "slug": "estremoz"
+     },
+     {
+      "id": 4525,
+      "name": "Évora",
+      "slug": "evora"
+     },
+     {
+      "id": 4526,
+      "name": "Fafe",
+      "slug": "fafe"
+     },
+     {
+      "id": 4839,
+      "name": "Famões",
+      "slug": "famoes"
+     },
+     {
+      "id": 5092,
+      "name": "Faro",
+      "slug": "faro"
+     },
+     {
+      "id": 5499,
+      "name": "Felgueiras",
+      "slug": "felgueiras"
+     },
+     {
+      "id": 4614,
+      "name": "Figueira da Foz",
+      "slug": "figueira-da-foz"
+     },
+     {
+      "id": 4818,
+      "name": "Fundão",
+      "slug": "fundao"
+     },
+     {
+      "id": 4527,
+      "name": "Guarda",
+      "slug": "guarda"
+     },
+     {
+      "id": 4617,
+      "name": "Guimarães",
+      "slug": "guimaraes"
+     },
+     {
+      "id": 2910,
+      "name": "Lagos",
+      "slug": "lagos"
+     },
+     {
+      "id": 4620,
+      "name": "Malveira",
+      "slug": "malveira"
+     },
+     {
+      "id": 5154,
+      "name": "Mangualde",
+      "slug": "mangualde"
+     },
+     {
+      "id": 4725,
+      "name": "Marinha da Guia",
+      "slug": "marinha-guia"
+     },
+     {
+      "id": 4715,
+      "name": "Marinha Grande",
+      "slug": "marinha-grande"
+     },
+     {
+      "id": 4697,
+      "name": "master",
+      "slug": "master"
+     },
+     {
+      "id": 4622,
+      "name": "Mazarres - Leiria",
+      "slug": "marrazes-leiria"
+     },
+     {
+      "id": 4944,
+      "name": "Monção",
+      "slug": "moncao"
+     },
+     {
+      "id": 4696,
+      "name": "Oliveira de Azeméis",
+      "slug": "oliveira-de-azemeis"
+     },
+     {
+      "id": 4624,
+      "name": "Ourém",
+      "slug": "ourem"
+     },
+     {
+      "id": 4528,
+      "name": "Ovar",
+      "slug": "ovar"
+     },
+     {
+      "id": 4695,
+      "name": "Paços de Ferreira",
+      "slug": "pacos-de-ferreira"
+     },
+     {
+      "id": 4529,
+      "name": "Penafiel",
+      "slug": "penafiel"
+     },
+     {
+      "id": 4530,
+      "name": "Pombal",
+      "slug": "pombal"
+     },
+     {
+      "id": 4531,
+      "name": "Ponte de Lima",
+      "slug": "ponte-de-lima"
+     },
+     {
+      "id": 4938,
+      "name": "Ponte de Sor",
+      "slug": "ponte-de-sor"
+     },
+     {
+      "id": 4630,
+      "name": "Portalegre",
+      "slug": "portalegre"
+     },
+     {
+      "id": 4532,
+      "name": "Santarém",
+      "slug": "santarem"
+     },
+     {
+      "id": 2909,
+      "name": "São Domingos de Rana",
+      "slug": "sao-domingos-de-rana"
+     },
+     {
+      "id": 4718,
+      "name": "Seia",
+      "slug": "seia"
+     },
+     {
+      "id": 4633,
+      "name": "Sines",
+      "slug": "sines"
+     },
+     {
+      "id": 4635,
+      "name": "Taveiro - Coimbra",
+      "slug": "taveiro"
+     },
+     {
+      "id": 4637,
+      "name": "Tomar",
+      "slug": "tomar"
+     },
+     {
+      "id": 4639,
+      "name": "Tondela",
+      "slug": "tondela"
+     },
+     {
+      "id": 4641,
+      "name": "Viana do Castelo",
+      "slug": "viana-do-castelo"
+     },
+     {
+      "id": 4643,
+      "name": "Vila do Conde",
+      "slug": "vila-do-conde"
+     },
+     {
+      "id": 5299,
+      "name": "Vila Nova de Foz Côa",
+      "slug": "vila-nova-de-foz-coa"
+     },
+     {
+      "id": 4533,
+      "name": "Vila Nova de Santo André",
+      "slug": "vila-nova-de-santo-andre"
+     },
+     {
+      "id": 4646,
+      "name": "Vila Real",
+      "slug": "vila-real"
+     },
+     {
+      "id": 4534,
+      "name": "Viseu",
+      "slug": "viseu"
+     }
+    ]
+   }
+  ],
+  "variations": [
+   {
+    "id": 77212,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "beja"
+     }
+    ]
+   },
+   {
+    "id": 345757,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "barcelos"
+     }
+    ]
+   },
+   {
+    "id": 386426,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "lagos"
+     }
+    ]
+   },
+   {
+    "id": 406448,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "sines"
+     }
+    ]
+   },
+   {
+    "id": 465289,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "covilha"
+     }
+    ]
+   },
+   {
+    "id": 519397,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "portalegre"
+     }
+    ]
+   },
+   {
+    "id": 758586,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "ovar"
+     }
+    ]
+   },
+   {
+    "id": 776565,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "oliveira-de-azemeis"
+     }
+    ]
+   },
+   {
+    "id": 795329,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "viseu"
+     }
+    ]
+   },
+   {
+    "id": 833567,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "pombal"
+     }
+    ]
+   },
+   {
+    "id": 1006265,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "elvas"
+     }
+    ]
+   },
+   {
+    "id": 1024924,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "entroncamento"
+     }
+    ]
+   },
+   {
+    "id": 1059669,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "tondela"
+     }
+    ]
+   },
+   {
+    "id": 1385317,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "arcozelo"
+     }
+    ]
+   },
+   {
+    "id": 1385324,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "castelo-branco"
+     }
+    ]
+   },
+   {
+    "id": 1385328,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "marrazes-leiria"
+     }
+    ]
+   },
+   {
+    "id": 1385329,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "marinha-grande"
+     }
+    ]
+   },
+   {
+    "id": 1385330,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "marinha-guia"
+     }
+    ]
+   },
+   {
+    "id": 1385334,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "ponte-de-lima"
+     }
+    ]
+   },
+   {
+    "id": 1385339,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "viana-do-castelo"
+     }
+    ]
+   },
+   {
+    "id": 1385340,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "vila-do-conde"
+     }
+    ]
+   },
+   {
+    "id": 1672336,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "arco-do-cego"
+     }
+    ]
+   },
+   {
+    "id": 2092035,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "famoes"
+     }
+    ]
+   },
+   {
+    "id": 2092036,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "fundao"
+     }
+    ]
+   },
+   {
+    "id": 2301696,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "coina-barreiro"
+     }
+    ]
+   },
+   {
+    "id": 2464999,
+    "attributes": [
+     {
+      "name": "Loja",
+      "value": "moncao"
+     }
+    ]
+   }
+  ],
+  "grouped_products": [],
+  "has_options": true,
+  "is_purchasable": true,
+  "is_in_stock": true,
+  "is_on_backorder": false,
+  "low_stock_remaining": null,
+  "stock_availability": {
+   "text": "",
+   "class": "in-stock"
+  },
+  "sold_individually": false,
+  "weight": "",
+  "dimensions": {
+   "length": "",
+   "width": "",
+   "height": ""
+  },
+  "formatted_weight": "n.d.",
+  "formatted_dimensions": "n.d.",
+  "add_to_cart": {
+   "text": "Ler mais",
+   "description": "Seleccione as opções para &ldquo;Chapa Osb 1220X610X9Mm&rdquo;",
+   "url": "https://www.bricomarche.pt/produto/chapa-osb-1220x610x9mm/",
+   "single_text": "Adicionar",
+   "minimum": 1,
+   "maximum": 9999,
+   "multiple_of": 1
+  },
+  "is_password_protected": false,
+  "extensions": {},
+  "_links": {
+   "self": [
+    {
+     "href": "https://www.bricomarche.pt/wp-json/wc/store/v1/products/37386",
+     "targetHints": {
+      "allow": [
+       "GET"
+      ]
+     }
+    }
+   ],
+   "collection": [
+    {
+     "href": "https://www.bricomarche.pt/wp-json/wc/store/v1/products"
+    }
+   ],
+   "related": [
+    {
+     "embeddable": true,
+     "href": "https://www.bricomarche.pt/wp-json/wc/store/v1/products?related=37386&per_page=10"
+    }
+   ]
+  }
+ }
+]
