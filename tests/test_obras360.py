@@ -382,3 +382,20 @@ def test_perfis_mostra_o_pai_perfil(fake):
     assert "  Obras 360: ok\n" in text
     assert "Perfil Montante 48mm" in text
     assert "+1 ofertas escondidas: título sem 'perfis'" in text
+
+
+# --- 01-09: o pai que bate na pesquisa completa passa à frente do corte K=20 (CR-04) ---
+
+def test_pai_com_a_pesquisa_completa_passa_a_frente_do_corte(fake):
+    baratos = [parent(f"id-{i:02d}", "Parafuso Zincado Cabeça Chata", i + 1) for i in range(25)]
+    m8 = parent("id-m8", "Parafuso Sextavado M8", 99)  # o mais caro
+    fake.cache["obras360_widget"] = WIDGET
+    fake.route(LIST_URL + "parafuso+m8", listing(baratos + [m8], 26))
+    fake.route("product-details/27", "obras360_product-details_osb-parent.json")
+
+    found = run("parafuso m8", fake)
+
+    details = [c.rsplit("=", 1)[1] for c in fake.calls if "product-details" in c]
+    assert "id-m8" in details and len(details) == 20
+    assert found.offers and all(o.title.startswith("Parafuso Sextavado M8") for o in found.offers)
+    assert "+6 produtos não expandidos (limite de 20 por pesquisa)" in found.notes
