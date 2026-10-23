@@ -5,15 +5,15 @@ titles: json
 findings:
   - id: CR-01
     severity: critical
-    disposition: open
+    disposition: fixed
     title: "O filtro de título ignora o género e as palavras de ligação — CORRIGIDO"
   - id: CR-02
     severity: critical
-    disposition: open
+    disposition: fixed
     title: "Obras 360 filtrava pelo nome do pai, e a medida está na variante — CORRIGIDO"
   - id: CR-03
     severity: critical
-    disposition: open
+    disposition: fixed
     title: "Medidas coladas por \"x\", sinónimos de unidade e sufixos de classe — CORRIGIDO (resto no IN-07)"
   - id: CR-04
     severity: critical
@@ -25,7 +25,7 @@ findings:
     title: "`_stem` não trata os plurais -ais, -is, -ens, -óis nem palavras de 3 letras: o produto fica escondido (resto do CR-01)"
   - id: WR-01
     severity: warning
-    disposition: open
+    disposition: fixed
     title: "Estado \"ok\" com zero ofertas mostradas, e sem nova tentativa — CORRIGIDO (resto no WR-10)"
   - id: WR-02
     severity: warning
@@ -116,12 +116,12 @@ recorded: 2026-10-23T10:57:53.469Z
 
 | Finding | Severity | Disposition | Source |
 |---------|----------|-------------|--------|
-| CR-01 | critical | open | - |
-| CR-02 | critical | open | - |
-| CR-03 | critical | open | - |
+| CR-01 | critical | fixed | 01-07/01-08, re-review cc4fb5c |
+| CR-02 | critical | fixed | 01-07/01-08, re-review cc4fb5c |
+| CR-03 | critical | fixed | 01-07/01-08, re-review cc4fb5c |
 | CR-04 | critical | open | - |
 | CR-05 | critical | open | - |
-| WR-01 | warning | open | - |
+| WR-01 | warning | fixed | 01-07/01-08, re-review cc4fb5c |
 | WR-02 | warning | open | - |
 | WR-03 | warning | open | - |
 | WR-04 | warning | open | - |
