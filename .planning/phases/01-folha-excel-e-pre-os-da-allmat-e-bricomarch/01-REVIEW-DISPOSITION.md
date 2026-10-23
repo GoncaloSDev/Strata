@@ -5,7 +5,7 @@ titles: json
 findings:
   - id: CR-06
     severity: critical
-    disposition: open
+    disposition: fixed
     title: "A correção do CR-04 falhava quando a pesquisa juntava o código do pai e a medida da variante (\"parafuso m8x40\") — CORRIGIDO"
   - id: WR-02
     severity: warning
@@ -29,7 +29,7 @@ findings:
     title: "Obras 360 usa `total_products` como `raw`: se o campo faltar, os produtos lidos passam a \"sem resultados\" — ABERTO"
   - id: WR-07
     severity: warning
-    disposition: open
+    disposition: fixed
     title: "DIMS partia \"30x30\" em dois \"30\" iguais: \"azulejo 30x30\" batia em \"30x60\" — CORRIGIDO (regressão nova no WR-14)"
   - id: WR-08
     severity: warning
@@ -45,11 +45,11 @@ findings:
     title: "Uma gama no nome do pai (\"9-30MM\") faz \"osb 30mm\" mostrar as 7 espessuras, com a de 9 mm em 1.º — ABERTO, adiado para a Phase 3"
   - id: WR-12
     severity: warning
-    disposition: open
+    disposition: fixed
     title: "Plurais que a tabela `PLURAL` não cobria: geotêxteis, coxins, jardins — CORRIGIDO"
   - id: WR-13
     severity: warning
-    disposition: open
+    disposition: fixed
     title: "Unidades por extenso além de litros escondiam o produto mesmo depois da alargada — CORRIGIDO no essencial (regressão no WR-15, resto no IN-13)"
   - id: WR-14
     severity: warning
@@ -164,18 +164,18 @@ recorded: 2026-10-23T19:16:00.245Z
 
 | Finding | Severity | Disposition | Source |
 |---------|----------|-------------|--------|
-| CR-06 | critical | open | - |
+| CR-06 | critical | fixed | quick 261023-lee, re-review (casos citados) |
 | WR-02 | warning | open | - |
 | WR-03 | warning | open | - |
 | WR-04 | warning | open | - |
 | WR-05 | warning | open | - |
 | WR-06 | warning | open | - |
-| WR-07 | warning | open | - |
+| WR-07 | warning | fixed | quick 261023-lee, re-review (casos citados) |
 | WR-08 | warning | open | - |
 | WR-09 | warning | open | - |
 | WR-11 | warning | open | - |
-| WR-12 | warning | open | - |
-| WR-13 | warning | open | - |
+| WR-12 | warning | fixed | quick 261023-lee, re-review (casos citados) |
+| WR-13 | warning | fixed | quick 261023-lee, re-review (casos citados) |
 | WR-14 | warning | open | - |
 | WR-15 | warning | open | - |
 | WR-16 | warning | open | - |
