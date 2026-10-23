@@ -122,7 +122,7 @@ async def _read_box(product_id: int, o: Offer, fetch) -> None:
     o.content, o.content_unit = (area, "m²") if area else (None, None)
 
 
-async def search(query: str, fetch) -> Found:
+async def search(query: str, fetch, rank: str | None = None) -> Found:
     rows, notes = [], []
     for page in range(1, MAX_PAGES + 1):
         data = await fetch.get_json(SEARCH_URL, {"search": query, "per_page": PER_PAGE, "page": page})

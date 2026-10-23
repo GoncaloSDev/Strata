@@ -9,7 +9,7 @@ from strata.money import fmt_eur, in_unit
 from strata.stores import allmat, bricomarche, obras360
 from strata.words import broadened, title_matches
 
-# Módulos com NAME e async search(query, fetch) -> Found, pela ordem de D-01.
+# Módulos com NAME e async search(query, fetch, rank=None) -> Found, pela ordem de D-01.
 STORES = (allmat, bricomarche, obras360)
 DEADLINE_S = 90
 
@@ -24,7 +24,8 @@ async def search_store(store, item: Item, fetch) -> StoreResult:
             all_hidden = found.hidden > 0 and not found.offers
             # D-14: uma só tentativa extra; também quando D-15 esconde tudo (WR-01)
             if (found.raw == 0 or all_hidden) and (b := broadened(item.product)):
-                wide = await store.search(b, fetch)
+                # WR-17: o produto da linha só ordena os pais antes do corte K; a pesquisa enviada é b
+                wide = await store.search(b, fetch, rank=item.product)
                 if found.raw > 0 and not wide.offers:  # fica a 1.ª, com a contagem e as palavras pedidas
                     found.notes.append(f"também sem ofertas com '{b}'")
                     b = None

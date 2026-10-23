@@ -8,14 +8,14 @@ from urllib.parse import parse_qs, urlsplit
 
 from strata.models import Found, Offer
 from strata.money import content_from_title, fmt_eur, from_minor
-from strata.words import title_matches
+from strata.words import title_matches, words
 
 NAME = "Bricomarché"
 BASE = "https://www.bricomarche.pt"
 SEARCH_URL = BASE + "/wp-json/wc/store/v1/products"
 PER_PAGE = 100
 MAX_PAGES = 3
-# shortcut: só os 10 pais mais baratos pelo preço do pai (A2) pedem variações; subir se o `verificar` mostrar baratos de fora
+# shortcut: só 10 pais pedem variações (mais palavras do produto da linha, depois o preço do pai, A2); subir se o `verificar` mostrar baratos de fora
 K = 10
 VAT_EVIDENCE = "loja B2C: preço final com IVA (DL 138/90); o site não mostra o IVA"
 STOCK_N = re.compile(r"^(\d+) em stock")
@@ -116,14 +116,17 @@ async def _variations(parent_id: int, fetch) -> tuple[list, bool]:
     return await _pages(fetch, {"type": "variation", "parent": parent_id})
 
 
-async def search(query: str, fetch) -> Found:
+async def search(query: str, fetch, rank: str | None = None) -> Found:
     parents, truncated = await _pages(fetch, {"search": query})
     notes = [f"mais produtos na loja não lidos (limite de {PER_PAGE * MAX_PAGES})"] if truncated else []
     raw = len(parents)
     parents = [p for p in parents if title_matches(query, html.unescape(p.get("name") or ""))]  # D-15
     keyed = [(k, p) for p in parents if (k := parent_key(p)) is not None]
     no_price = len(parents) - len(keyed)
-    keyed.sort(key=lambda t: t[0])  # o preço do pai só escolhe quem expandir; nunca é mostrado
+    # Primeiro os pais com mais palavras do produto da linha (rank, na alargada), depois o preço do pai, que só
+    # escolhe quem expandir e nunca é mostrado; sem rank todos empatam e fica a ordem pelo preço (WR-17).
+    need = words(rank or query)
+    keyed.sort(key=lambda t: (-len(need & words(html.unescape(t[1].get("name") or ""))), t[0]))
     chosen = [p for _, p in keyed[:K]]
     # Em paralelo; o limite por host do Fetcher dá o ritmo. Esperar por todas antes de relançar a 1.ª falha.
     results = await asyncio.gather(*(_variations(p["id"], fetch) for p in chosen), return_exceptions=True)

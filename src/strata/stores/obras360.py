@@ -102,7 +102,7 @@ def _list_price(p) -> Decimal | None:
     return None if v is None else Decimal(v)
 
 
-async def search(query: str, fetch) -> Found:
+async def search(query: str, fetch, rank: str | None = None) -> Found:
     widget = fetch.cache.get("obras360_widget")
     if widget is None:  # uma vez por execução: a página tem ~700 KB
         widget = widget_id(await fetch.get_html(BASE + "/pesquisa", {"search": query}))
