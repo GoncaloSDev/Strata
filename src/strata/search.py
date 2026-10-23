@@ -5,11 +5,11 @@ import asyncio
 from strata.fetch import StoreBlocked, StoreTimeout
 from strata.models import Item, ItemResult, StoreResult
 from strata.money import in_unit
-from strata.stores import allmat
+from strata.stores import allmat, bricomarche
 from strata.words import broadened
 
 # Módulos com NAME e async search(query, fetch) -> Found, pela ordem de D-01.
-STORES = (allmat,)
+STORES = (allmat, bricomarche)
 DEADLINE_S = 90
 
 

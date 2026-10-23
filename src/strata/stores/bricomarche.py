@@ -1,5 +1,6 @@
 """Bricomarché (bricomarche.pt): WooCommerce Store API, um preço por loja física (variações)."""
 
+import asyncio
 import html
 import re
 from decimal import Decimal
@@ -7,10 +8,15 @@ from urllib.parse import parse_qs, urlsplit
 
 from strata.models import Found, Offer
 from strata.money import content_from_title, fmt_eur, from_minor
+from strata.words import title_matches
 
 NAME = "Bricomarché"
 BASE = "https://www.bricomarche.pt"
 SEARCH_URL = BASE + "/wp-json/wc/store/v1/products"
+PER_PAGE = 100
+MAX_PAGES = 3
+# shortcut: só os 10 pais mais baratos pelo preço do pai (A2) pedem variações; subir se o `verificar` mostrar baratos de fora
+K = 10
 VAT_EVIDENCE = "loja B2C: preço final com IVA (DL 138/90); o site não mostra o IVA"
 STOCK_N = re.compile(r"^(\d+) em stock")
 
@@ -92,5 +98,48 @@ def offer_from(parent, rows) -> Offer | None:
     )
 
 
+async def _pages(fetch, params: dict) -> tuple[list, bool]:
+    """Todas as páginas até uma com menos de PER_PAGE linhas; True se parou no limite de MAX_PAGES."""
+    rows = []
+    for page in range(1, MAX_PAGES + 1):
+        data = await fetch.get_json(SEARCH_URL, {**params, "per_page": PER_PAGE, "page": page})
+        if not isinstance(data, list):
+            raise ValueError("resposta da Bricomarché não é uma lista de produtos")
+        rows.extend(data)
+        if len(data) < PER_PAGE:
+            return rows, False
+    return rows, True
+
+
+async def _variations(parent_id: int, fetch) -> tuple[list, bool]:
+    # Nunca search + type=variation (~10 s por página); a API não ordena variações por preço, lê-se tudo.
+    return await _pages(fetch, {"type": "variation", "parent": parent_id})
+
+
 async def search(query: str, fetch) -> Found:
-    return Found(offers=[], raw=0)
+    parents, truncated = await _pages(fetch, {"search": query})
+    notes = [f"mais produtos na loja não lidos (limite de {PER_PAGE * MAX_PAGES})"] if truncated else []
+    raw = len(parents)
+    parents = [p for p in parents if title_matches(query, html.unescape(p.get("name") or ""))]  # D-15
+    keyed = [(k, p) for p in parents if (k := parent_key(p)) is not None]
+    no_price = len(parents) - len(keyed)
+    keyed.sort(key=lambda t: t[0])  # o preço do pai só escolhe quem expandir; nunca é mostrado
+    chosen = [p for _, p in keyed[:K]]
+    # Em paralelo; o limite por host do Fetcher dá o ritmo. Esperar por todas antes de relançar a 1.ª falha.
+    results = await asyncio.gather(*(_variations(p["id"], fetch) for p in chosen), return_exceptions=True)
+    offers = []
+    for p, r in zip(chosen, results):
+        if isinstance(r, BaseException):
+            raise r
+        rows, cut = r
+        if cut:
+            notes.append(f"variações de '{html.unescape(p['name'])}' além de {PER_PAGE * MAX_PAGES} não lidas")
+        if (o := offer_from(p, rows)) is None:
+            no_price += 1
+        else:
+            offers.append(o)
+    if no_price:
+        notes.append(f"{no_price} produtos sem preço")
+    if len(keyed) > K:
+        notes.append(f"+{len(keyed) - K} produtos não expandidos (limite de {K} por pesquisa)")
+    return Found(offers=offers, raw=raw, hidden=raw - len(parents), notes=notes)
