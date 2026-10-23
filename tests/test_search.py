@@ -32,10 +32,11 @@ def item(product="cimento", unit="saco") -> Item:
 
 def fake_store(name, *answers):
     """Loja falsa: cada chamada devolve a resposta seguinte (Found, Exception ou corrotina)."""
-    calls = []
+    calls, ranks = [], []
 
-    async def search(query, fetch):
+    async def search(query, fetch, rank=None):
         calls.append(query)
+        ranks.append(rank)
         a = answers[min(len(calls), len(answers)) - 1]
         if isinstance(a, BaseException):
             raise a
@@ -43,7 +44,7 @@ def fake_store(name, *answers):
             return await a()
         return a
 
-    return SimpleNamespace(NAME=name, search=search, calls=calls)
+    return SimpleNamespace(NAME=name, search=search, calls=calls, ranks=ranks)
 
 
 @pytest.mark.parametrize("query, title, expected", [
@@ -135,6 +136,7 @@ def test_pesquisa_alargada_quando_a_loja_da_zero():
     assert sr.broadened_query == "OSB"
     assert [o.broadened for o in sr.offers] == [True]
     assert store.calls == ["OSB 12mm", "OSB"]
+    assert store.ranks == [None, "OSB 12mm"]  # WR-17: a pesquisa enviada fica "OSB"; o produto só ordena
 
 
 def test_pesquisa_alargada_tambem_a_zero():
@@ -479,3 +481,30 @@ def test_verificar_loja_bloqueada_ou_em_erro(fake, monkeypatch, answer, expected
     route_canaries(fake, allmat_cimento=answer)
     only(monkeypatch, allmat, "cimento")
     assert check(fake) == [("Allmat (cimento)", False, expected)]
+
+
+# --- WR-17: na alargada, o produto da linha escolhe os pais antes do corte K ---
+
+def test_alargada_expande_o_pai_com_o_produto_da_linha(fake):
+    def brico_parent(pid, name, cents):
+        return {"id": pid, "name": name, "prices": {"price": cents, "price_range": None, "currency_minor_unit": 2}}
+
+    baratos = [brico_parent(100 + i, f"Pavimento Betão Cinza modelo {i}", str(20 + i)) for i in range(12)]
+    placa = brico_parent(200, "PAVIMENTO CERÂMICO SIENA HEKLA 60X120 1.44M2", "3455")  # o mais caro dos 13
+    fake.route(BRICO + "pavimento+60x120", [])  # a loja não junta as duas palavras: dispara D-14
+    fake.route(BRICO + "pavimento&", baratos + [placa])
+    fake.route("parent=200&", [{**brico_variation(), "parent": 200,
+                                "prices": {"price": "3455", "currency_minor_unit": 2}}])
+    fake.route("type=variation", [{**brico_variation(), "prices": {"price": "50", "currency_minor_unit": 2}}])
+    sr = asyncio.run(search_store(bricomarche, item("pavimento 60x120", "m²"), fake))
+    variations = [c for c in fake.calls if "type=variation" in c]
+    assert len(variations) == 10  # o corte K=10 não cresce
+    assert len([c for c in variations if "parent=200&" in c]) == 1
+    assert [(o.title, o.price) for o in sr.offers] == [("PAVIMENTO CERÂMICO SIENA HEKLA 60X120 1.44M2", Decimal("34.55"))]
+    assert (sr.status, sr.broadened_query, sr.wide_only) == ("ok", "pavimento", 9)
+    text = report(sr, "pavimento 60x120")
+    assert "  Bricomarché: ok (pesquisa alargada: 'pavimento')\n" in text
+    assert "    34,55 €  PAVIMENTO CERÂMICO SIENA HEKLA 60X120 1.44M2\n" in text
+    assert "    +9 ofertas escondidas: título sem 'pavimento 60x120'\n" in text
+    assert "    nota: +3 produtos não expandidos (limite de 10 por pesquisa)\n" in text
+    assert "0,50 €" not in text
