@@ -167,6 +167,16 @@ def test_pais_sem_as_palavras_ficam_escondidos(fake):
     assert not any("parent=2&" in c for c in fake.calls)
 
 
+def test_medidas_coladas_por_x_batem_no_filtro(fake):
+    # CR-03: "osb 18mm" tem de bater em "Chapa Osb 2440X590X18Mm" (pai 37387)
+    route_osb(fake, "osb+18mm")
+    found = asyncio.run(bm.search("osb 18mm", fake))
+    assert found.raw == 4 and found.hidden == 3
+    var_calls = [c for c in fake.calls if "type=variation" in c]
+    assert len(var_calls) == 1 and "parent=37387&" in var_calls[0]
+    assert "1 produtos sem preço" in found.notes
+
+
 def test_ponta_a_ponta_allmat_e_bricomarche(tmp_path, fake, monkeypatch, capsys):
     path = tmp_path / "lista.xlsx"
     wb = Workbook()

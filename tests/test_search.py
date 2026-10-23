@@ -65,6 +65,13 @@ def fake_store(name, *answers):
     ("tinta branca", "Fita Pintura Branca", False),
     ("tinta branca", "Tinta Preta", False),
     ("porta", "Portão seccionado", False),
+    # CR-03: medidas coladas por "x", "Lt"/"litros" e sufixos de classe
+    ("osb 18mm", "Chapa Osb 2440X590X18Mm", True),
+    ("12mm", "Placa 2440x1220x12 mm", True),
+    ("tinta 15L", "Tinta 15 Lt", True),
+    ("tinta 15 litros", "Tinta 15L", True),
+    ("OSB 12mm", "Placa OSB3 12 mm", True),
+    ("osb 12mm", "Chapa Osb 2440X590X18Mm", False),
 ])
 def test_title_matches(query, title, expected):
     assert title_matches(query, title) is expected
