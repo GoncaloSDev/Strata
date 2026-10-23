@@ -1,8 +1,10 @@
 """Dinheiro em Decimal: conversão de cêntimos, preço por unidade e formatação (arredonda só ao mostrar)."""
 
+import re
 from decimal import ROUND_HALF_UP, Decimal
 
 from strata.models import Offer
+from strata.words import plain
 
 
 def from_minor(value, minor_unit) -> Decimal:
@@ -16,12 +18,29 @@ def per_unit(offer: Offer) -> Decimal | None:
     return offer.price / offer.content
 
 
+# Primeiro número (vírgula ou ponto) seguido de unidade de conteúdo; medidas e espessuras ficam para a Phase 3.
+CONTENT = re.compile(r"(?<![\d.,])(\d+(?:[.,]\d+)?)\s*(kg|g|lt|l|ml|m2)\b")
+CONTENT_UNITS = {"kg": (0, "kg"), "g": (-3, "kg"), "l": (0, "L"), "lt": (0, "L"), "ml": (-3, "L"), "m2": (0, "m²")}
+
+
 def content_from_title(title: str) -> tuple[Decimal, str] | None:
-    return None
+    """"SACO 25 KG" -> (25, "kg"); "600ML" -> (0.6, "L"); "1,44 m2" -> (1.44, "m²")."""
+    m = CONTENT.search(plain(title))
+    if not m:
+        return None
+    exp, unit = CONTENT_UNITS[m[2]]
+    return Decimal(m[1].replace(",", ".")).scaleb(exp), unit
 
 
 def in_unit(offer: Offer, unit: str) -> tuple[Decimal | None, str]:
-    return None, ""
+    """Preço na unidade pedida pela linha (chave de ordenação D-03), ou None e o motivo."""
+    if unit in ("un", "saco"):  # A5: um artigo vendido
+        return offer.price, ""
+    if offer.content_unit == unit and offer.content and offer.content > 0:
+        return offer.price / offer.content, ""
+    if offer.content_unit is None or offer.content_unit == unit:
+        return None, f"não convertível para {unit}: conteúdo da embalagem desconhecido"
+    return None, f"não convertível para {unit}: vendido em {offer.content_unit}"
 
 
 def _fmt(d: Decimal, places: int) -> str:

@@ -4,6 +4,7 @@ import asyncio
 
 from strata.fetch import StoreBlocked, StoreTimeout
 from strata.models import Item, ItemResult, StoreResult
+from strata.money import in_unit
 from strata.stores import allmat
 from strata.words import broadened
 
@@ -32,7 +33,14 @@ async def search_store(store, item: Item, fetch) -> StoreResult:
     if found.raw == 0:
         detail = f"também sem resultados com '{b}'" if b else ""
         return StoreResult(store.NAME, "sem resultados", [], detail=detail, notes=found.notes)
-    return StoreResult(store.NAME, "ok", found.offers, hidden=found.hidden, notes=found.notes,
+    keyed = []
+    for o in found.offers:  # D-03: mais barato primeiro na unidade pedida; não convertíveis no fim
+        key, reason = in_unit(o, item.unit)
+        if reason:
+            o.note = f"{o.note}; {reason}" if o.note else reason
+        keyed.append((key, o))
+    keyed.sort(key=lambda t: (t[0] is None, t[0] or 0))  # estável: empates pela ordem da loja
+    return StoreResult(store.NAME, "ok", [o for _, o in keyed], hidden=found.hidden, notes=found.notes,
                        broadened_query=b)
 
 

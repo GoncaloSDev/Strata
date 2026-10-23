@@ -5,7 +5,7 @@ import re
 from decimal import Decimal
 
 from strata.models import Found, Offer
-from strata.money import from_minor
+from strata.money import content_from_title, from_minor
 from strata.text import norm
 from strata.words import title_matches
 
@@ -30,7 +30,7 @@ def parse_products(rows) -> tuple[list[Offer], int]:
         label = m[1] if m else ""
         content, content_unit, note = None, None, ""
         if norm(label) == "unid":
-            content, content_unit = Decimal(1), "un"
+            content, content_unit = content_from_title(html.unescape(p["name"])) or (Decimal(1), "un")
         elif norm(label) == "m2":
             note = "rótulo M2 da loja: área da caixa não lida"
         elif label:

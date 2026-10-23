@@ -10,11 +10,15 @@ TOKEN = re.compile(r"[a-z0-9]+(?:[.,][0-9]+)*")  # hífen e ponto final separam 
 UNIT_TOKENS = {"mm", "cm", "m", "m2", "kg", "g", "l", "lt", "ml", "un", "x"}
 
 
+def plain(s) -> str:
+    """Como text.norm, mas mantém os espaços: "Placa 1,44 m²" -> "placa 1,44 m2"."""
+    s = unicodedata.normalize("NFKD", str(s))
+    return "".join(c for c in s if not unicodedata.combining(c)).casefold()
+
+
 def words(s) -> set[str]:
     """Sem acentos, minúsculas, "12 mm" = "12mm", plural simples ("placas" -> "placa")."""
-    s = unicodedata.normalize("NFKD", str(s))
-    s = "".join(c for c in s if not unicodedata.combining(c)).casefold()
-    s = JOIN.sub(r"\1\2", s)
+    s = JOIN.sub(r"\1\2", plain(s))
     return {w[:-1] if len(w) > 3 and w.endswith("s") else w for w in TOKEN.findall(s)}
 
 
