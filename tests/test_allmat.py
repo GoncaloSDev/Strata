@@ -102,3 +102,15 @@ def test_amostras_cimento_e_osb(fake):
     assert found.offers[0].stock == "186 em stock"
     assert {o.vat_origin for o in found.offers} == {"regra da loja"}
     assert asyncio.run(allmat.search("osb", fake)).raw == 0
+
+
+def test_rank_le_primeiro_as_caixas_do_produto_da_linha(fake):
+    # WR-17: 12 caixas baratas e a de 60x120 mais cara; o limite de 10 páginas não cresce
+    rows = [m2_row(pid=i, cents=str(i * 100), name=f"PAVIMENTO {i}", slug=f"p{i}") for i in range(1, 13)]
+    rows.append(m2_row(pid=99, cents="3455", name="PAVIMENTO 60X120 RETIFICADO", slug="p60x120"))
+    fake.route("allmat.pt/produto/", PAGE.encode("utf-8"))
+    fake.route(SEARCH + "pavimento", rows)
+    asyncio.run(allmat.search("pavimento", fake, rank="pavimento 60x120"))
+    pages = [c for c in fake.calls if "/produto/" in c]
+    assert len(pages) == 10
+    assert "https://allmat.pt/produto/p60x120/" in pages

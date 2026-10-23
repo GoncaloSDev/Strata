@@ -455,3 +455,20 @@ def test_osb_12mm_alargada_mostra_so_a_placa_de_12mm(fake):
     assert "+7 ofertas escondidas: título sem 'OSB 12 mm'" in text
     assert "SikaBond" not in text
     assert "1 Placa 9 MM" not in text
+
+
+# --- WR-17: na alargada, o produto da linha (rank) escolhe os pais antes do corte K=20 ---
+
+def test_rank_poe_o_pai_do_produto_da_linha_a_frente_do_corte(fake):
+    baratos = [parent(f"id-{i:02d}", "Pavê Bloco Pavimento Betão Cinza", i + 1) for i in range(25)]
+    placa = parent("id-60x120", "Pavimento Cerâmico Retificado 60x120", 99)  # o mais caro
+    fake.cache["obras360_widget"] = WIDGET
+    fake.route(LIST_URL + "pavimento&", listing(baratos + [placa], 26))
+    fake.route("product-details/27", "obras360_product-details_osb-parent.json")
+
+    found = asyncio.run(obras360.search("pavimento", fake, rank="pavimento 60x120"))
+
+    details = [c.rsplit("=", 1)[1] for c in fake.calls if "product-details" in c]
+    assert "id-60x120" in details and len(details) == 20  # o corte K=20 não cresce
+    assert all("search=pavimento&" in c for c in fake.calls if "product-list" in c)  # a pesquisa enviada não muda
+    assert "+6 produtos não expandidos (limite de 20 por pesquisa)" in found.notes
