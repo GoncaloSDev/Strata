@@ -50,9 +50,10 @@ async def search_store(store, item: Item, fetch) -> StoreResult:
             o.note = f"{o.note}; {reason}" if o.note else reason
         keyed.append((key, o))
     keyed.sort(key=lambda t: (t[0] is None, t[0] or 0))  # estável: empates pela ordem da loja
-    detail = ""  # STORE-05/D-01: nunca "ok" sozinho quando o filtro escondeu ofertas
-    if not found.offers and found.hidden:
-        detail = f"0 ofertas mostradas; {found.hidden} escondidas pelo filtro de título"
+    detail = ""  # STORE-05/D-01: nunca "ok" sozinho com zero ofertas; o motivo fica nas notas
+    if not found.offers:
+        detail = (f"0 ofertas mostradas; {found.hidden} escondidas pelo filtro de título" if found.hidden
+                  else f"0 ofertas mostradas de {found.raw} resultados da loja")
     elif first_hidden:
         detail = f"{first_hidden} escondidas pelo filtro de título com '{item.product}'"
     return StoreResult(store.NAME, "ok", [o for _, o in keyed], detail=detail, hidden=found.hidden,

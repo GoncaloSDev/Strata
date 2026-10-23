@@ -10,7 +10,7 @@ LITRE = re.compile(r"(\d)\s*(?:lts?|litros?)\b")  # "15 lt", "15lts", "15 litros
 CLASS = re.compile(r"([a-z]{2,})(\d)\b")  # "osb3" -> "osb 3"; sem \b à esquerda: "2,5mm2" = "2,5 mm2"; "m2" não parte
 JOIN = re.compile(r"(\d)\s+(mm|cm|m|m2|kg|g|l|ml)\b")  # "12 mm" -> "12mm"
 TOKEN = re.compile(r"[a-z0-9]+(?:[.,][0-9]+)*")  # hífen e ponto final separam palavras
-UNIT_TOKENS = {"mm", "cm", "m", "m2", "kg", "g", "l", "lt", "ml", "un", "x"}
+UNIT_TOKENS = {"mm", "cm", "m", "m2", "kg", "g", "l", "lt", "lts", "litro", "litros", "ml", "un", "x"}
 
 
 def plain(s) -> str:
