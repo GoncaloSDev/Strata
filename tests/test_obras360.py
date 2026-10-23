@@ -415,3 +415,43 @@ def test_pai_com_mais_palavras_da_pesquisa_passa_a_frente_do_corte(fake):
     details = [c.rsplit("=", 1)[1] for c in fake.calls if "product-details" in c]
     assert "id-m8" in details and len(details) == 20
     assert "+6 produtos não expandidos (limite de 20 por pesquisa)" in found.notes
+
+
+# --- G-01-5: na pesquisa alargada, só as ofertas que batem a pergunta completa (D-15 emendada) ---
+
+def test_osb_12mm_alargada_mostra_so_a_placa_de_12mm(fake):
+    import io
+
+    from strata.models import Item, ItemResult
+    from strata.report import print_item
+
+    cola = copy.deepcopy(DETAIL)  # detalhe sintético da cola SikaBond: uma variante a 8,36 € com IVA
+    k, v = next(iter(variants(cola).items()))
+    for p in (v["prices"], v["prices_with_convertion_factor"]):
+        p.update(final_price_unformatted="6.7967", final_price_with_tax_unformatted="8.359941",
+                 conversion_factor="1", discounts=[])
+    v["segment"], v["sku"] = "cola-sikabond-52", "0070120005"
+    cola["meta_data"]["protected"]["attribute_values_prices"] = {k: v}
+    fake.cache["obras360_widget"] = WIDGET
+    fake.route(LIST_URL + "OSB+12+mm", "obras360_product-list_no-results.json")  # dispara D-14
+    fake.route(LIST_URL + "OSB&", "obras360_product-list_osb.json")
+    fake.route(DETAIL_URL + PLACA_ID, "obras360_product-details_osb-parent.json")
+    fake.route(DETAIL_URL + COLA_ID, cola)
+    it = Item(row=2, product="OSB 12 mm", qty=Decimal(30), unit="un")
+
+    sr = asyncio.run(strata.search.search_store(obras360, it, fake))
+
+    assert (sr.status, sr.broadened_query, sr.hidden) == ("ok", "OSB", 0)
+    assert len(sr.offers) == 1
+    o = sr.offers[0]
+    assert " — 1 Placa 12 MM" in o.title
+    assert fmt_eur(o.price) == "19,37 €"
+    assert o.broadened
+    assert sr.wide_only == 7  # a cola e as outras 6 espessuras
+    out = io.StringIO()
+    print_item(ItemResult(it, [sr]), out)
+    text = out.getvalue()
+    assert "  Obras 360: ok (pesquisa alargada: 'OSB')\n" in text
+    assert "+7 ofertas escondidas: título sem 'OSB 12 mm'" in text
+    assert "SikaBond" not in text
+    assert "1 Placa 9 MM" not in text

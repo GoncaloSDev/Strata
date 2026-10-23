@@ -217,9 +217,13 @@ def test_ponta_a_ponta_allmat_e_bricomarche(tmp_path, fake, monkeypatch, capsys)
     out = capsys.readouterr().out
     assert "Allmat: sem resultados" in out
     assert "Bricomarché: ok (pesquisa alargada: 'OSB')" in out
-    assert "loja: Coina - Barreiro" in out
     assert out.index("Allmat: sem resultados") < out.index("Bricomarché: ok")
-    assert "14,49 €" in out and "https://www.bricomarche.pt/coina-barreiro/produto/" in out
+    # D-15 emendada (G-01-5): só a placa de 12 mm; a de 9 mm (14,49 € em Coina) fica contada
+    assert "19,99 €  PLACA OSB 12 MM" in out
+    assert "loja: Monção" in out
+    assert "https://www.bricomarche.pt/moncao/produto/" in out
+    assert "+1 ofertas escondidas: título sem 'OSB 12mm'" in out
+    assert "14,49 €" not in out
 
 
 def test_stores_tem_bricomarche_a_seguir_a_allmat():
