@@ -7,6 +7,7 @@ from decimal import Decimal
 from strata.models import Found, Offer
 from strata.money import from_minor
 from strata.text import norm
+from strata.words import title_matches
 
 NAME = "Allmat"
 SEARCH_URL = "https://allmat.pt/wp-json/wc/store/v1/products"
@@ -63,7 +64,9 @@ async def search(query: str, fetch) -> Found:
             break
     else:
         notes.append(f"mais produtos na loja não lidos (limite de {PER_PAGE * MAX_PAGES})")
+    raw = len(rows)
+    rows = [p for p in rows if title_matches(query, html.unescape(p.get("name") or ""))]  # D-15
     offers, no_price = parse_products(rows)
     if no_price:
         notes.append(f"{no_price} produtos sem preço ignorados")
-    return Found(offers=offers, raw=len(rows), notes=notes)
+    return Found(offers=offers, raw=raw, hidden=raw - len(rows), notes=notes)
