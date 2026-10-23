@@ -77,21 +77,21 @@ def test_offer_from_amostra_47412():
     o = bm.offer_from(parent(47412), ROWS)
     assert o.store == "Bricomarché"
     assert o.title == "PLACA OSB 12 MM"
-    assert o.price == Decimal("18.49")  # da variação de Coina, nunca o do pai
-    assert o.location == "Coina - Barreiro"
-    assert o.stock == "0 em stock"
-    assert o.url == "https://www.bricomarche.pt/coina-barreiro/produto/plc-osb-lisa-2-50x1-25-12mm/"
+    assert o.price == Decimal("19.99")  # a loja física mais barata com stock, nunca o preço do pai
+    assert o.location == "Monção"
+    assert o.stock == "118 em stock"
+    assert o.url == "https://www.bricomarche.pt/moncao/produto/plc-osb-lisa-2-50x1-25-12mm/"
     assert o.vat_origin == "regra da loja"
     assert "B2C" in o.vat_evidence
     assert (o.content, o.content_unit) == (Decimal(1), "un")
-    assert o.note == "com stock: 19,99 € em Monção"  # master (19,99 €, 989 em stock) fica de fora
+    assert o.note == "mais barata sem stock: 18,49 € em Coina - Barreiro"  # master (19,99 €) fica de fora
 
 
 def test_offer_from_sem_dica_quando_a_mais_barata_tem_stock():
-    o = bm.offer_from(parent(47412), [row(1500, text="3 em stock"), row(1400, loja="x", nome="X", text="Esgotado",
+    o = bm.offer_from(parent(47412), [row(1500, text="3 em stock"), row(1600, loja="x", nome="X", text="Esgotado",
                                                                          cls="out-of-stock")])
-    assert o.price == Decimal("14.00") and o.location == "X"
-    assert o.note == "com stock: 15,00 € em Coina - Barreiro"
+    assert o.price == Decimal("15.00") and o.location == "Coina - Barreiro"
+    assert o.note == ""
     o = bm.offer_from(parent(47412), [row(1500, text="3 em stock")])
     assert o.note == ""
 
@@ -124,8 +124,8 @@ def test_search_osb(fake):
     route_osb(fake)
     found = asyncio.run(bm.search("osb", fake))
     assert found.raw == 4 and found.hidden == 0
-    assert sorted(o.price for o in found.offers) == [Decimal("14.49"), Decimal("18.49")]
-    assert all(o.location == "Coina - Barreiro" for o in found.offers)
+    assert sorted((o.price, o.location) for o in found.offers) == [
+        (Decimal("14.49"), "Coina - Barreiro"), (Decimal("19.99"), "Monção")]
     assert "2 produtos sem preço" in found.notes
 
 

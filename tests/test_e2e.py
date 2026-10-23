@@ -49,6 +49,7 @@ def test_tres_itens_tres_lojas_pela_ordem(fake, monkeypatch, capsys):
         assert f"  {name} sem resultados" in by_item["xyzqwkk"], name
     osb = by_item["placa osb"]
     assert "  Allmat: sem resultados" in osb
-    assert "  Bricomarché: ok" in osb and "loja: Coina - Barreiro" in osb
+    assert "  Bricomarché: ok" in osb and "loja: Monção" in osb
+    assert "mais barata sem stock: 18,49 € em Coina - Barreiro" in osb
     assert "  Obras 360: ok" in osb and "IVA: indicado pela loja (tax_percentage=23)" in osb
     assert "  Allmat: ok" in by_item["cimento"] and "4,22 €" in by_item["cimento"]
