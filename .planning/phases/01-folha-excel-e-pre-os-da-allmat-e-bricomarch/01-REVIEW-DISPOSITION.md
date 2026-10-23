@@ -37,19 +37,19 @@ findings:
     title: "Uma gama no nome do pai (\"9-30MM\") faz \"osb 30mm\" mostrar as 7 espessuras, com a de 9 mm em 1.º — ABERTO, adiado para a Phase 3"
   - id: WR-14
     severity: warning
-    disposition: open
+    disposition: fixed
     title: "A medida inteira contava a ordem e ignorava o \"×\" — CORRIGIDO (alargamento novo no WR-18)"
   - id: WR-15
     severity: warning
-    disposition: open
+    disposition: fixed
     title: "A alargada guardava o \"x\" depois de uma unidade — CORRIGIDO"
   - id: WR-16
     severity: warning
-    disposition: open
+    disposition: fixed
     title: "No ramo \"tudo escondido\", as duas contagens não diziam a que pesquisa pertenciam — CORRIGIDO"
   - id: WR-17
     severity: warning
-    disposition: open
+    disposition: fixed
     title: "Os cortes K escolhiam os pais pela pesquisa alargada — CORRIGIDO (efeito lateral novo no WR-19)"
   - id: WR-18
     severity: warning
@@ -188,10 +188,10 @@ recorded: 2026-10-23T23:09:39.357Z
 | WR-08 | warning | open | - |
 | WR-09 | warning | open | - |
 | WR-11 | warning | open | - |
-| WR-14 | warning | open | - |
-| WR-15 | warning | open | - |
-| WR-16 | warning | open | - |
-| WR-17 | warning | open | - |
+| WR-14 | warning | fixed | 01-12, re-review |
+| WR-15 | warning | fixed | 01-12, re-review |
+| WR-16 | warning | fixed | 01-12, re-review |
+| WR-17 | warning | fixed | 01-12, re-review |
 | WR-18 | warning | open | - |
 | WR-19 | warning | open | - |
 | WR-20 | warning | open | - |
