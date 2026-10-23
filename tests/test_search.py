@@ -97,6 +97,14 @@ def fake_store(name, *answers):
     # WR-13: unidades por extenso
     ("tubo 3 metros", "Tubo 3m", True),
     ("cimento 25 quilos", "Cimento 25kg", True),
+    # WR-07: medida com várias partes na pesquisa tem de estar seguida no título
+    ("azulejo 30x30", "Azulejo 30x60", False),
+    ("tubo 20x20", "Tubo Quadrado 20x40x1,5", False),
+    ("azulejo 30x30", "Azulejo 30X30 cm", True),
+    ("azulejo 30x30", "Azulejo 30 x 30 cm", True),
+    ("tubo 20x20", "Tubo Quadrado 20x20x1,5", True),
+    ("parafuso m8x40", "Parafuso Sextavado M8 — 40", True),
+    ("parafuso 4x40", "Parafuso 4x40mm", False),  # WR-09 (fora do âmbito): "40" sem unidade não bate em "40mm"
 ])
 def test_title_matches(query, title, expected):
     assert title_matches(query, title) is expected
