@@ -55,3 +55,9 @@ def test_money_nunca_usa_float():
     assert isinstance(key, Decimal)
     c = content_from_title("SACO 25KG")
     assert c is not None and isinstance(c[0], Decimal)
+
+
+def test_add_vat_sem_arredondar():
+    from strata.money import add_vat
+
+    assert add_vat(Decimal("12.214688"), Decimal("23")) == Decimal("15.02406624")

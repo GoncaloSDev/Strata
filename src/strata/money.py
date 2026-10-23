@@ -60,3 +60,7 @@ def fmt_qty(d: Decimal) -> str:
     """10 -> "10", 2.50 -> "2,5"."""
     s = f"{d.normalize():f}"
     return s.replace(".", ",")
+
+
+def add_vat(net, rate) -> Decimal:
+    return None
