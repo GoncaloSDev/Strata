@@ -3,18 +3,10 @@ phase: 01
 review: 01-REVIEW.md
 titles: json
 findings:
-  - id: CR-04
-    severity: critical
-    disposition: fixed
-    title: "Obras 360 escolhe os pais sem os números e o corte K=20 por preço deita fora o produto pedido — CORRIGIDO no caso citado (resto no CR-06)"
-  - id: CR-05
-    severity: critical
-    disposition: fixed
-    title: "`_stem` não tratava os plurais -ais, -is, -ens, -óis nem palavras de 3 letras — CORRIGIDO nos casos citados (resto no WR-12)"
   - id: CR-06
     severity: critical
     disposition: open
-    title: "A correção do CR-04 falha quando a pesquisa junta o código do pai e a medida da variante: \"parafuso m8x40\" volta a esconder o M8 (novo, 01-09)"
+    title: "A correção do CR-04 falhava quando a pesquisa juntava o código do pai e a medida da variante (\"parafuso m8x40\") — CORRIGIDO"
   - id: WR-02
     severity: warning
     disposition: open
@@ -38,7 +30,7 @@ findings:
   - id: WR-07
     severity: warning
     disposition: open
-    title: "DIMS parte \"30x30\" em dois \"30\" iguais: \"azulejo 30x30\" bate em \"30x60\" — ABERTO, adiado para a Phase 3"
+    title: "DIMS partia \"30x30\" em dois \"30\" iguais: \"azulejo 30x30\" batia em \"30x60\" — CORRIGIDO (regressão nova no WR-14)"
   - id: WR-08
     severity: warning
     disposition: open
@@ -54,11 +46,27 @@ findings:
   - id: WR-12
     severity: warning
     disposition: open
-    title: "Plurais que a tabela `PLURAL` não cobre: geotêxteis, coxins, jardins (resto do CR-05, novo no 01-09)"
+    title: "Plurais que a tabela `PLURAL` não cobria: geotêxteis, coxins, jardins — CORRIGIDO"
   - id: WR-13
     severity: warning
     disposition: open
-    title: "Unidades por extenso além de litros (\"metros\", \"quilos\", \"unidades\") escondem o produto mesmo depois da alargada (resto do IN-08, novo no 01-09)"
+    title: "Unidades por extenso além de litros escondiam o produto mesmo depois da alargada — CORRIGIDO no essencial (regressão no WR-15, resto no IN-13)"
+  - id: WR-14
+    severity: warning
+    disposition: open
+    title: "A medida inteira passou a contar a ordem e ignora o \"×\": \"pavimento 120x60\" já não bate em \"Pavimento 60x120\" (novo, regressão do WR-07)"
+  - id: WR-15
+    severity: warning
+    disposition: open
+    title: "A alargada guarda o \"x\" quando ele vem depois de uma unidade: \"tela 1 m x 25 m\" → \"tela x\", que esconde tudo (novo, regressão do WR-13)"
+  - id: WR-16
+    severity: warning
+    disposition: open
+    title: "No ramo \"tudo escondido\", os mesmos produtos contam no cabeçalho e outra vez em `wide_only`, com o mesmo motivo (novo, 01-11)"
+  - id: WR-17
+    severity: warning
+    disposition: open
+    title: "O passo final do 01-11 corre depois dos cortes K, que escolhem os pais pela pesquisa alargada (novo, 01-11; limitação registada)"
   - id: IN-01
     severity: info
     disposition: open
@@ -87,10 +95,6 @@ findings:
     severity: info
     disposition: open
     title: "\"12,0 mm\" não bate em \"12mm\" (resto do CR-03, adiado pelo 01-08) — ABERTO"
-  - id: IN-08
-    severity: info
-    disposition: fixed
-    title: "`broadened` não conhecia os sinónimos do LITRE: \"tinta 15 litros\" alargava para \"tinta litros\" — CORRIGIDO (resto no WR-13)"
   - id: IN-09
     severity: info
     disposition: open
@@ -102,11 +106,35 @@ findings:
   - id: IN-11
     severity: info
     disposition: open
-    title: "A tabela `PLURAL` e o limite de 2 letras trazem colisões novas: cais/cal, mais/mal, dois/dol, abs/ab, eps/ep (novo, 01-09)"
+    title: "A tabela `PLURAL` e o limite de 2 letras trazem colisões: cais/cal, mais/mal, dois/dol, abs/ab, eps/ep — ABERTO, adiado para a Phase 3"
   - id: IN-12
     severity: info
     disposition: open
-    title: "Obras 360 diz \"0 ofertas mostradas de N resultados da loja\" sem nota quando a lista vem vazia com `total_products > 0` (novo, 01-09)"
+    title: "Obras 360 diz \"0 ofertas mostradas de N resultados da loja\" sem nota quando a lista vem vazia com `total_products > 0` — ABERTO"
+  - id: IN-13
+    severity: info
+    disposition: open
+    title: "Abreviaturas de unidade ainda fora: \"mts\", \"mt\", \"kgs\"; \"unidades\" só é tratado na alargada (resto do WR-13, novo)"
+  - id: IN-14
+    severity: info
+    disposition: open
+    title: "A regra \"-m final = -n\" junta pares novos: tom/tona, som/sono, sim/sino, bom/bono, fim/fino (novo)"
+  - id: IN-15
+    severity: info
+    disposition: open
+    title: "O 01-10 chama \"sem stock\" ao que é stock desconhecido ou por encomenda, e não olha para a quantidade pedida (novo)"
+  - id: CR-04
+    severity: critical
+    disposition: fixed
+    title: "Obras 360 escolhe os pais sem os números e o corte K=20 por preço deita fora o produto pedido — CORRIGIDO no caso citado (resto no CR-06)"
+  - id: CR-05
+    severity: critical
+    disposition: fixed
+    title: "`_stem` não tratava os plurais -ais, -is, -ens, -óis nem palavras de 3 letras — CORRIGIDO nos casos citados (resto no WR-12)"
+  - id: IN-08
+    severity: info
+    disposition: fixed
+    title: "`broadened` não conhecia os sinónimos do LITRE: \"tinta 15 litros\" alargava para \"tinta litros\" — CORRIGIDO (resto no WR-13)"
   - id: CR-01
     severity: critical
     disposition: fixed
@@ -127,17 +155,15 @@ findings:
     severity: warning
     disposition: fixed
     title: "\"ok\" sozinho com zero ofertas quando nada foi escondido pelo filtro (resto do WR-01)"
-open: 27
-total: 31
-recorded: 2026-10-23T11:42:57.017Z
+open: 30
+total: 38
+recorded: 2026-10-23T19:16:00.245Z
 ---
 
 # Phase 01: Code Review Disposition
 
 | Finding | Severity | Disposition | Source |
 |---------|----------|-------------|--------|
-| CR-04 | critical | fixed | 01-09, re-review (casos citados) |
-| CR-05 | critical | fixed | 01-09, re-review (casos citados) |
 | CR-06 | critical | open | - |
 | WR-02 | warning | open | - |
 | WR-03 | warning | open | - |
@@ -150,6 +176,10 @@ recorded: 2026-10-23T11:42:57.017Z
 | WR-11 | warning | open | - |
 | WR-12 | warning | open | - |
 | WR-13 | warning | open | - |
+| WR-14 | warning | open | - |
+| WR-15 | warning | open | - |
+| WR-16 | warning | open | - |
+| WR-17 | warning | open | - |
 | IN-01 | info | open | - |
 | IN-02 | info | open | - |
 | IN-03 | info | open | - |
@@ -157,11 +187,16 @@ recorded: 2026-10-23T11:42:57.017Z
 | IN-05 | info | open | - |
 | IN-06 | info | open | - |
 | IN-07 | info | open | - |
-| IN-08 | info | fixed | 01-09, re-review (casos citados) |
 | IN-09 | info | open | - |
 | IN-10 | info | open | - |
 | IN-11 | info | open | - |
 | IN-12 | info | open | - |
+| IN-13 | info | open | - |
+| IN-14 | info | open | - |
+| IN-15 | info | open | - |
+| CR-04 | critical | fixed | 01-09, re-review (casos citados) (not in the current review) |
+| CR-05 | critical | fixed | 01-09, re-review (casos citados) (not in the current review) |
+| IN-08 | info | fixed | 01-09, re-review (casos citados) (not in the current review) |
 | CR-01 | critical | fixed | 01-07/01-08, re-review cc4fb5c (not in the current review) |
 | CR-02 | critical | fixed | 01-07/01-08, re-review cc4fb5c (not in the current review) |
 | CR-03 | critical | fixed | 01-07/01-08, re-review cc4fb5c (not in the current review) |
