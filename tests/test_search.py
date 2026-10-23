@@ -107,6 +107,12 @@ def fake_store(name, *answers):
     ("parafuso m8x40", "Parafuso Sextavado M8 — 40", True),
     ("parafuso m12x40", "Parafuso Sextavado M12 — 40", True),  # rosca de 2 dígitos não lê "2x40"
     ("parafuso 4x40", "Parafuso 4x40mm", False),  # WR-09 (fora do âmbito): "40" sem unidade não bate em "40mm"
+    # WR-14: a medida não depende da ordem das partes; "×" e "60 x 120" contam como "60x120"
+    ("pavimento 120x60", "Pavimento 60x120", True),
+    ("azulejo 30x30", "Azulejo 30×30 cm", True),
+    ("placa 1250x2500x12mm", "Placa OSB 2500x1250x12mm", True),
+    ("azulejo 30 x 30", "Azulejo 30x30", True),
+    ("pavimento 60 x 120", "PAVIMENTO 60X120", True),
 ])
 def test_title_matches(query, title, expected):
     assert title_matches(query, title) is expected
@@ -124,6 +130,12 @@ def test_title_matches(query, title, expected):
     ("tinta 15 l.", "tinta"),
     ("parafuso 10 unidades", "parafuso"),
     ("metro articulado 2m", "metro articulado"),  # unidade só a seguir a um número
+    # WR-15: o "x" (ou "×") solto nunca fica na alargada
+    ("tela 1 m x 25 m", "tela"),
+    ("osb 12 mm x 2500 x 1250", "osb"),
+    ("tela 1 m × 25 m", "tela"),
+    ("tela 1m x 25m", "tela"),
+    ("tela 1 x 25 m", "tela"),
 ])
 def test_broadened(query, expected):
     assert broadened(query) == expected
@@ -181,8 +193,9 @@ def test_tudo_escondido_com_medidas_tenta_a_alargada():
     assert store.calls == ["OSB 12mm", "OSB"]
     assert sr.broadened_query == "OSB"
     assert [o.broadened for o in sr.offers] == [True]
-    assert sr.detail == "5 escondidas pelo filtro de título com 'OSB 12mm'"
-    assert heading(sr, "OSB 12mm") == "  Falsa: ok — 5 escondidas pelo filtro de título com 'OSB 12mm' (pesquisa alargada: 'OSB')"
+    assert sr.detail == "1.ª pesquisa: 5 escondidas pelo filtro de título com 'OSB 12mm'"
+    assert heading(sr, "OSB 12mm") == ("  Falsa: ok — 1.ª pesquisa: 5 escondidas pelo filtro de título com 'OSB 12mm'"
+                                       " (pesquisa alargada: 'OSB')")
 
 
 @pytest.mark.parametrize("second", [Found([], 3, hidden=3), Found([], 0)])
@@ -229,8 +242,11 @@ def test_tudo_escondido_alargada_com_ofertas_que_batem():
     assert store.calls == ["OSB 12mm", "OSB"]  # D-14: uma só tentativa extra, nenhum pedido novo
     assert [o.title for o in sr.offers] == ["PLACA OSB 12 MM"]
     assert sr.wide_only == 1
-    assert sr.detail == "5 escondidas pelo filtro de título com 'OSB 12mm'"
-    assert "    +1 ofertas escondidas: título sem 'OSB 12mm'\n" in report(sr, "OSB 12mm")
+    assert sr.detail == "1.ª pesquisa: 5 escondidas pelo filtro de título com 'OSB 12mm'"  # WR-16
+    text = report(sr, "OSB 12mm")
+    assert ("  Falsa: ok — 1.ª pesquisa: 5 escondidas pelo filtro de título com 'OSB 12mm'"
+            " (pesquisa alargada: 'OSB')\n") in text
+    assert "    +1 ofertas escondidas: título sem 'OSB 12mm'\n" in text
 
 def test_allmat_esconde_titulos_sem_as_palavras(fake):
     rows = json.loads((FIXTURES / "allmat_products_search-cimento.json").read_bytes(), parse_float=Decimal)
