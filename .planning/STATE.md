@@ -2,17 +2,17 @@
 gsd_state_version: "1.0"
 current_phase: 01
 current_phase_name: Folha Excel e preços da Allmat, Bricomarché e Obras 360
-status: executing
-stopped_at: Completed 01-07-PLAN.md
-last_updated: "2026-10-23T10:42:29.651Z"
+status: verifying
+stopped_at: Completed 01-08-PLAN.md
+last_updated: "2026-10-23T10:49:04.781Z"
 last_activity: 2026-10-23
 last_activity_desc: Phase 01 execution started
-state_head: cc9601d96c8d46f09272a2338e5e24639e0c98e7
+state_head: 344027d0ccd1eeaded07faa23eff7daca31d7d69
 progress:
   total_phases: 6
   completed_phases: 0
   total_plans: 8
-  completed_plans: 7
+  completed_plans: 8
   percent: 0
 ---
 
@@ -29,7 +29,7 @@ See: .planning/PROJECT.md (updated 2026-10-22)
 
 Phase: 01 (Folha Excel e preços da Allmat, Bricomarché e Obras 360) — EXECUTING
 Plan: 8 of 8
-Status: Ready to execute
+Status: Phase complete — ready for verification
 Last activity: 2026-10-23 — Phase 01 execution started
 
 Progress: [░░░░░░░░░░] 0%
@@ -63,6 +63,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 01 P05 | 5 min | 2 tasks | 9 files |
 | Phase 01 P06 | 98 min | 2 tasks | 5 files |
 | Phase 01 P07 | 4 min | 2 tasks | 9 files |
+| Phase 01 P08 | 3 min | 2 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -99,6 +100,8 @@ Recent decisions affecting current work:
 - [Phase 01]: 01-06: DEADLINE_S 90 s, K 10/20 e MAX_BOX_PAGES 10 mantidos; corrida ao vivo sem tempo esgotado (verificar 50 s, folha de 3 linhas 26 s)
 - [Phase 01]: WR-01: com tudo escondido pelo filtro de título, o cabeçalho diz '0 ofertas mostradas; N escondidas pelo filtro de título' e D-14 tenta a pesquisa alargada uma vez (só com números/medidas); substitui a resolução n.º 2 das Open Questions do 01-RESEARCH.md
 - [Phase 01]: CR-01: words() ignora palavras de ligação (STOP) e normaliza género e plurais com _stem (só biblioteca padrão)
+- [Phase 01]: Obras 360: pais escolhidos com broadened(query) or query; variantes filtradas pela pesquisa completa no título pai + designação; variantes cortadas somam a hidden (CR-02)
+- [Phase 01]: words(): DIMS (LxCxE), LITRE (Lt/litros = l) e CLASS (OSB3 = osb 3) antes do JOIN (CR-03)
 
 ### Pending Todos
 
@@ -122,6 +125,6 @@ Items acknowledged and deferred at milestone close, most recent first:
 
 ## Session Continuity
 
-Last session: 2026-10-23T10:42:29.612Z
-Stopped at: Completed 01-07-PLAN.md
+Last session: 2026-10-23T10:49:04.738Z
+Stopped at: Completed 01-08-PLAN.md
 Resume file: None
