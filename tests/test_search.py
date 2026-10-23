@@ -158,6 +158,12 @@ def heading(sr, product):
     return out.getvalue().splitlines()[1]
 
 
+def report(sr, product):
+    out = io.StringIO()
+    print_item(ItemResult(item(product, "un"), [sr]), out)
+    return out.getvalue()
+
+
 def test_tudo_escondido_diz_quantas_no_cabecalho():
     store = fake_store("Falsa", Found([], 8, hidden=8))
     sr = asyncio.run(search_store(store, item("tinta branca", "L"), None))
@@ -186,6 +192,43 @@ def test_tudo_escondido_alargada_sem_ofertas_fica_a_primeira(second):
     assert sr.detail == "0 ofertas mostradas; 5 escondidas pelo filtro de título"
     assert "também sem ofertas com 'OSB'" in sr.notes
 
+
+
+# --- G-01-5: na pesquisa alargada, só as que batem a pergunta completa (D-15 emendada) ---
+
+def test_alargada_mostra_so_as_que_batem_a_pergunta_completa():
+    wide = Found([offer("COLA PARA OSB", "8"), offer("PLACA OSB 12 MM X", "25"), offer("PLACA OSB 9 MM", "15"),
+                  offer("PLACA OSB3 12mm", "19")], 4, hidden=3)
+    store = fake_store("Falsa", Found([], 0), wide)
+    sr = asyncio.run(search_store(store, item("OSB 12mm", "un"), None))
+    assert [o.title for o in sr.offers] == ["PLACA OSB3 12mm", "PLACA OSB 12 MM X"]  # mais baratas primeiro
+    assert all(o.broadened for o in sr.offers)
+    assert (sr.status, sr.broadened_query, sr.hidden, sr.wide_only) == ("ok", "OSB", 3, 2)
+    text = report(sr, "OSB 12mm")
+    assert "  Falsa: ok (pesquisa alargada: 'OSB')\n" in text
+    assert "    +3 ofertas escondidas: título sem 'OSB'\n" in text
+    assert "    +2 ofertas escondidas: título sem 'OSB 12mm'\n" in text
+
+
+@pytest.mark.parametrize("title", ["PLACA OSB 12 MM", "PLACA OSB 9 MM"])  # todas batem / nenhuma bate
+def test_alargada_sem_mistura_fica_como_antes(title):
+    store = fake_store("Falsa", Found([], 0), Found([offer(title)], 1))
+    sr = asyncio.run(search_store(store, item("OSB 12mm", "un"), None))
+    assert [o.title for o in sr.offers] == [title]
+    assert sr.offers[0].broadened
+    assert (sr.broadened_query, sr.hidden, sr.wide_only) == ("OSB", 0, 0)
+    assert "ofertas escondidas" not in report(sr, "OSB 12mm")
+
+
+def test_tudo_escondido_alargada_com_ofertas_que_batem():
+    store = fake_store("Falsa", Found([], 5, hidden=5),
+                       Found([offer("PLACA OSB 9 MM", "15"), offer("PLACA OSB 12 MM", "19")], 2))
+    sr = asyncio.run(search_store(store, item("OSB 12mm", "un"), None))
+    assert store.calls == ["OSB 12mm", "OSB"]  # D-14: uma só tentativa extra, nenhum pedido novo
+    assert [o.title for o in sr.offers] == ["PLACA OSB 12 MM"]
+    assert sr.wide_only == 1
+    assert sr.detail == "5 escondidas pelo filtro de título com 'OSB 12mm'"
+    assert "    +1 ofertas escondidas: título sem 'OSB 12mm'\n" in report(sr, "OSB 12mm")
 
 def test_allmat_esconde_titulos_sem_as_palavras(fake):
     rows = json.loads((FIXTURES / "allmat_products_search-cimento.json").read_bytes(), parse_float=Decimal)
