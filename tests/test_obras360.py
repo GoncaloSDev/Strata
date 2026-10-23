@@ -277,3 +277,40 @@ def test_ponta_a_ponta_tres_lojas(tmp_path, fake, monkeypatch, capsys):
     assert "+2 ofertas não mostradas" in section
     assert "+1 ofertas escondidas" in section
     assert "escalões: −2,5% a partir de 108" in section
+
+
+# --- 01-07: "tinta branca" sobre respostas reais gravadas com --record (CR-01) ---
+
+TINTAS = {"Dyrustar": "obras360_product-details_tinta-dyrustar.json",
+          "Dyrup Super": "obras360_product-details_tinta-dyrup-super.json",
+          "Dycrilforce": "obras360_product-details_tinta-dycrilforce.json",
+          "Colorite": "obras360_product-details_tinta-colorite.json"}
+
+
+def test_tinta_branca_gravada_mostra_as_tintas_brancas(fake):
+    import io
+
+    from strata.models import Item, ItemResult
+    from strata.report import print_item
+
+    fake.cache["obras360_widget"] = WIDGET
+    fake.route(LIST_URL + "tinta+branca", "obras360_product-list_tinta-branca.json")
+    for p in load("obras360_product-list_tinta-branca.json")["meta_data"]["protected"]["products"]:
+        key = next((k for k in TINTAS if k in p["product"]["name"]), None)
+        if key:  # os outros pais ficam sem rota: se o filtro os deixar passar, `fake` falha
+            fake.route(DETAIL_URL + p["product"]["product"]["product_id"], TINTAS[key])
+    it = Item(row=4, product="tinta branca", qty=Decimal(15), unit="L")
+
+    sr = asyncio.run(strata.search.search_store(obras360, it, fake))
+
+    assert sr.status == "ok" and sr.detail == ""
+    assert sr.hidden == 4  # Primário Dyprolite, SecilTek Isovit e as duas fitas de pintura
+    assert {k for k in TINTAS if any(k in o.title for o in sr.offers)} == set(TINTAS)
+    assert all(o.vat_origin == "indicado pela loja" for o in sr.offers)
+    out = io.StringIO()
+    print_item(ItemResult(it, [sr]), out)
+    text = out.getvalue()
+    assert "  Obras 360: ok\n" in text
+    section = text[text.index("  Obras 360: ok"):]
+    assert any("Branco" in ln for ln in section.splitlines()[1:])
+    assert "+4 ofertas escondidas: título sem 'tinta branca'" in text

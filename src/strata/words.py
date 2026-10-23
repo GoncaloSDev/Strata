@@ -16,10 +16,26 @@ def plain(s) -> str:
     return "".join(c for c in s if not unicodedata.combining(c)).casefold()
 
 
+STOP = {"de", "da", "do", "das", "dos", "para", "com", "em", "e", "a", "o"}  # palavras de ligação
+
+
+def _stem(w: str) -> str:
+    """Género e plural: branca/branco -> "branc", painéis -> "painel", portões -> "porta", colheres -> "colher"."""
+    if len(w) <= 3 or any(c.isdigit() for c in w):
+        return w
+    if w.endswith("oes"):
+        w = w[:-3] + "ao"
+    elif w.endswith("eis"):
+        w = w[:-3] + "el"
+    elif w.endswith("s"):
+        w = w[:-1]
+    return w[:-1] if len(w) > 3 and w[-1] in "aoe" else w
+
+
 def words(s) -> set[str]:
-    """Sem acentos, minúsculas, "12 mm" = "12mm", plural simples ("placas" -> "placa")."""
+    """Sem acentos, minúsculas, "12 mm" = "12mm", sem palavras de ligação, género e plural via _stem."""
     s = JOIN.sub(r"\1\2", plain(s))
-    return {w[:-1] if len(w) > 3 and w.endswith("s") else w for w in TOKEN.findall(s)}
+    return {_stem(w) for w in TOKEN.findall(s) if w not in STOP}
 
 
 def title_matches(query: str, title: str) -> bool:
