@@ -166,7 +166,7 @@ recorded: 2026-10-23T11:42:57.017Z
 | CR-02 | critical | fixed | 01-07/01-08, re-review cc4fb5c (not in the current review) |
 | CR-03 | critical | fixed | 01-07/01-08, re-review cc4fb5c (not in the current review) |
 | WR-01 | warning | fixed | 01-07/01-08, re-review cc4fb5c (not in the current review) |
-| WR-10 | warning | open | - (not in the current review) |
+| WR-10 | warning | fixed | 01-09, re-review 04334c5 (not in the current review) |
 
 Dispositions: `open` (recorded, not yet triaged), `fixed`, `skipped`, `deferred`.
 Set `deferred` by hand and put the reason in the Source cell; both are preserved. A `|` in the reason is kept as prose and escaped on the next run.
