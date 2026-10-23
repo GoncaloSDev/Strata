@@ -34,7 +34,7 @@ Decimal phases appear between their surrounding integers in numeric order.
   4. Cada oferta mostra o preço com IVA 23%, a origem do IVA (indicado pela loja / regra da loja / assumido), o preço unitário normalizado (€/un, €/m², €/m, €/kg, €/L) e o stock quando a loja o indica, sem filtrar
   5. Cada item mostra o estado das três lojas (ok / sem resultados / bloqueada / erro / tempo esgotado), por exemplo "OSB" na Allmat aparece como "sem resultados", nunca como erro nem omitido; e a verificação das lojas diz, por adaptador, se ainda devolve preços válidos (preço acima de zero, IVA e unidade coerentes)
 
-**Plans:** 6/8 plans executed
+**Plans:** 7/8 plans executed
 
 Plans:
 **Wave 1**
@@ -56,7 +56,7 @@ Plans:
 - [x] 01-06-PLAN.md — Comando verificar e corrida completa das três lojas
 
 **Wave 7** *(gap closure)*
-- [ ] 01-07-PLAN.md — Filtro de título com género, palavras de ligação e plurais ("tinta branca" gravada ao vivo na Obras 360) e estado que nunca diz só "ok" quando o filtro esconde tudo
+- [x] 01-07-PLAN.md — Filtro de título com género, palavras de ligação e plurais ("tinta branca" gravada ao vivo na Obras 360) e estado que nunca diz só "ok" quando o filtro esconde tudo
 
 **Wave 8** *(gap closure; blocked on Wave 7 completion)*
 - [ ] 01-08-PLAN.md — Medidas: variantes da Obras 360 filtradas pela pesquisa completa ("OSB 12 mm" com o pai "Placa OSB 9-30MM") e medidas "LxCxE", "15 Lt" e "OSB3" no filtro
@@ -150,7 +150,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Folha Excel e preços da Allmat, Bricomarché e Obras 360 | 6/6 | In Progress | - |
+| 1. Folha Excel e preços da Allmat, Bricomarché e Obras 360 | 7/8 | In Progress | - |
 | 2. Obramat e cadeia de recurso | 0/TBD | Not started | - |
 | 3. Especificações e classificação exato/parecido | 0/TBD | Not started | - |
 | 4. Embalagens, custo total e folha preenchida | 0/TBD | Not started | - |
