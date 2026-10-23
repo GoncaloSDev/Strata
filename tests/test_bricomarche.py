@@ -1,10 +1,16 @@
 """Bricomarché: pais -> top 10 -> variações por loja física (amostras reais em tests/fixtures/)."""
 
+import asyncio
 import copy
 import json
 from decimal import Decimal
 from pathlib import Path
 
+from openpyxl import Workbook
+
+import strata.search
+from strata.__main__ import main
+from strata.stores import allmat
 from strata.stores import bricomarche as bm
 
 FIXTURES = Path(__file__).parent / "fixtures"
@@ -99,3 +105,89 @@ def test_preco_do_pai_nunca_e_mostrado():
 def test_pai_sem_variacoes_com_preco_nao_da_oferta():
     assert bm.offer_from(parent(37387), []) is None
     assert bm.offer_from(parent(37387), [row(0), row(999, loja="master", nome="master")]) is None
+
+
+# --- Tarefa 2: pesquisa (pais -> top 10 -> variações) ---
+
+PARENTS_URL = "bricomarche.pt/wp-json/wc/store/v1/products?search="
+
+
+def route_osb(fake, query="osb"):
+    fake.route(PARENTS_URL + query, "bricomarche_products_search-osb.json")
+    fake.route("parent=47412&", "bricomarche_variations_parent-47412.json")
+    fake.route("parent=47411&", [row(1449, text="12 em stock", parent=47411)])
+    fake.route("parent=37387&", [])
+    fake.route("parent=37386&", [])
+
+
+def test_search_osb(fake):
+    route_osb(fake)
+    found = asyncio.run(bm.search("osb", fake))
+    assert found.raw == 4 and found.hidden == 0
+    assert sorted(o.price for o in found.offers) == [Decimal("14.49"), Decimal("18.49")]
+    assert all(o.location == "Coina - Barreiro" for o in found.offers)
+    assert "2 produtos sem preço" in found.notes
+
+
+def test_variacoes_pedidas_por_pai(fake):
+    route_osb(fake)
+    asyncio.run(bm.search("osb", fake))
+    var_calls = [c for c in fake.calls if "type=variation" in c]
+    assert len(var_calls) == 4
+    for pid in (47412, 47411, 37387, 37386):
+        assert any(f"parent={pid}&" in c for c in var_calls), pid
+    assert not any("search=" in c for c in var_calls)  # nunca search + type=variation (~10 s por página)
+
+
+def test_so_os_10_pais_mais_baratos_sao_expandidos(fake):
+    parents = [
+        {"id": 100 + i, "name": f"Placa OSB modelo {i}",
+         "prices": {"price": str(1000 + i * 100), "price_range": None, "currency_minor_unit": 2}}
+        for i in range(12)
+    ]
+    fake.route(PARENTS_URL + "osb", parents)
+    fake.route("type=variation", [row(5000)])
+    found = asyncio.run(bm.search("osb", fake))
+    var_calls = [c for c in fake.calls if "type=variation" in c]
+    assert len(var_calls) == 10
+    assert not any("parent=110&" in c or "parent=111&" in c for c in var_calls)  # os 2 mais caros
+    assert len(found.offers) == 10
+    assert "+2 produtos não expandidos (limite de 10 por pesquisa)" in found.notes
+
+
+def test_pais_sem_as_palavras_ficam_escondidos(fake):
+    fake.route(PARENTS_URL + "cimento", [
+        {"id": 1, "name": "Cimento cola", "prices": {"price": "500", "price_range": None, "currency_minor_unit": 2}},
+        {"id": 2, "name": "Painel aquecimento", "prices": {"price": "100", "price_range": None,
+                                                           "currency_minor_unit": 2}},
+    ])
+    fake.route("parent=1&", [row(500, parent=1)])
+    found = asyncio.run(bm.search("cimento", fake))
+    assert found.raw == 2 and found.hidden == 1 and len(found.offers) == 1
+    assert not any("parent=2&" in c for c in fake.calls)
+
+
+def test_ponta_a_ponta_allmat_e_bricomarche(tmp_path, fake, monkeypatch, capsys):
+    path = tmp_path / "lista.xlsx"
+    wb = Workbook()
+    ws = wb.active
+    ws.append(["Produto", "Família", "Tamanho", "Unidade", "Qty", "Referência", "Notas"])
+    ws.append(["OSB 12mm", None, None, "un", 3])
+    wb.save(path)
+    fake.route("allmat.pt/wp-json/wc/store/v1/products?search=OSB", "allmat_products_search-osb_no-results.json")
+    fake.route(PARENTS_URL + "OSB+12mm", [])  # mais específica primeiro
+    route_osb(fake, "OSB&")
+    monkeypatch.setattr(strata.search, "STORES", (allmat, bm))
+
+    assert main(["pesquisar", str(path)], fetch=fake) == 0
+
+    out = capsys.readouterr().out
+    assert "Allmat: sem resultados" in out
+    assert "Bricomarché: ok (pesquisa alargada: 'OSB')" in out
+    assert "loja: Coina - Barreiro" in out
+    assert out.index("Allmat: sem resultados") < out.index("Bricomarché: ok")
+    assert "14,49 €" in out and "https://www.bricomarche.pt/coina-barreiro/produto/" in out
+
+
+def test_stores_tem_bricomarche_a_seguir_a_allmat():
+    assert strata.search.STORES[:2] == (allmat, bm)
