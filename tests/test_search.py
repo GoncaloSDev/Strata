@@ -53,6 +53,18 @@ def fake_store(name, *answers):
     ("OSB 12mm", "PLACA OSB 12 MM", True),
     ("placas osb", "Placa OSB 9-30MM", True),
     ("OSB.", "Placa OSB", True),
+    # CR-01: género, palavras de ligação e plurais em -eis/-ões/-res
+    ("tinta branca", "Tinta Plástica 15L Branco Mate", True),
+    ("cola de contacto", "Cola Contacto 1L", True),
+    ("painéis", "Painel sandwich", True),
+    ("luzes", "Luz LED", True),
+    ("colheres", "Colher de pedreiro", True),
+    ("portões", "Portão seccionado", True),
+    ("lustres", "Lustre de cristal", True),
+    ("aquecimento", "Cimento cola", False),
+    ("tinta branca", "Fita Pintura Branca", False),
+    ("tinta branca", "Tinta Preta", False),
+    ("porta", "Portão seccionado", False),
 ])
 def test_title_matches(query, title, expected):
     assert title_matches(query, title) is expected
