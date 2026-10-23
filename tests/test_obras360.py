@@ -1,15 +1,20 @@
 """Obras 360 (Beevo): uma oferta por variante, IVA da loja confirmado, escalões e stock (amostras reais em tests/fixtures/)."""
 
+import asyncio
 import copy
 import json
 from decimal import Decimal
 from pathlib import Path
 
 import pytest
+from openpyxl import Workbook
 
-from strata.fetch import StoreError
+import strata.search
+from strata.__main__ import main
+from strata.fetch import StoreBlocked, StoreError
 from strata.money import fmt_eur, fmt_unit_price, per_unit
-from strata.stores import obras360
+from strata.stores import allmat, obras360
+from strata.stores import bricomarche as bm
 
 FIXTURES = Path(__file__).parent / "fixtures"
 
@@ -132,3 +137,143 @@ def test_parse_list():
 def test_parse_list_success_false_e_erro():
     with pytest.raises(StoreError):
         obras360.parse_list({"success": False})
+
+
+# --- Tarefa 2: pesquisa (widget, lista, top 20, detalhes) e registo em STORES ---
+
+LIST_URL = f"product-list/{WIDGET}?search="
+DETAIL_URL = "product-details/27?_beevo_decoded_params[0][product_id]="
+PLACA_ID = "f807c893-c3eb-4630-a409-8a0a7bbc88c1"
+COLA_ID = COLA["product"]["product"]["product_id"]
+NO_DETAIL = {"success": False, "meta_data": {"protected": {"attribute_values_prices": []}}}
+
+
+def listing(products, total):
+    d = copy.deepcopy(LIST_NONE)
+    d["meta_data"]["protected"]["products"] = products
+    d["meta_data"]["protected"]["total_products"] = total
+    return d
+
+
+def run(query, fetch):
+    return asyncio.run(obras360.search(query, fetch))
+
+
+def test_search_placa_osb_le_o_widget_uma_vez(fake):
+    fake.route("/pesquisa?search=placa+osb", "obras360_pesquisa-widget.html")
+    fake.route(LIST_URL + "placa+osb&items_per_page=48&page=1", "obras360_product-list_osb.json")
+    fake.route(DETAIL_URL + PLACA_ID, "obras360_product-details_osb-parent.json")
+
+    found = run("placa osb", fake)
+
+    assert len(found.offers) == 7
+    assert found.raw == 13 and found.hidden == 1  # a cola não tem "placa" no título
+    assert fake.cache["obras360_widget"] == WIDGET
+    assert sum("/pesquisa?" in c for c in fake.calls) == 1
+    assert sum("product-details" in c for c in fake.calls) == 1  # a cola filtrada não é expandida
+
+
+def test_widget_em_cache_nao_pede_a_pagina(fake):
+    fake.cache["obras360_widget"] = WIDGET
+    fake.route(LIST_URL + "placa+osb", "obras360_product-list_osb.json")
+    fake.route(DETAIL_URL + PLACA_ID, "obras360_product-details_osb-parent.json")
+
+    run("placa osb", fake)
+
+    assert not any("/pesquisa?" in c for c in fake.calls)
+
+
+def test_produto_sem_detalhe_vai_para_a_nota(fake):
+    fake.cache["obras360_widget"] = WIDGET
+    fake.route(LIST_URL + "osb", "obras360_product-list_osb.json")
+    fake.route(DETAIL_URL + PLACA_ID, "obras360_product-details_osb-parent.json")
+    fake.route(DETAIL_URL + COLA_ID, NO_DETAIL)
+
+    found = run("osb", fake)
+
+    assert len(found.offers) == 7
+    assert found.hidden == 0
+    assert any(n.startswith("1 produtos sem detalhe: ") and "sem variantes" in n for n in found.notes)
+
+
+def test_todos_os_detalhes_falham_e_erro(fake):
+    fake.cache["obras360_widget"] = WIDGET
+    fake.route(LIST_URL + "osb", listing([COLA], 1))
+    fake.route(DETAIL_URL + COLA_ID, NO_DETAIL)
+
+    with pytest.raises(StoreError, match="sem variantes"):
+        run("osb", fake)
+
+
+def test_bloqueio_num_detalhe_sobe(fake):
+    fake.cache["obras360_widget"] = WIDGET
+    fake.route(LIST_URL + "osb", "obras360_product-list_osb.json")
+    fake.route(DETAIL_URL + PLACA_ID, "obras360_product-details_osb-parent.json")
+    fake.route(DETAIL_URL + COLA_ID, StoreBlocked("HTTP 403"))
+
+    with pytest.raises(StoreBlocked):
+        run("osb", fake)
+
+
+def test_paginas_por_total_e_so_20_detalhes_dos_mais_baratos(fake):
+    products = []
+    for i in range(25):
+        p = copy.deepcopy(PLACA)
+        p["product"]["product"]["product_id"] = f"id-{i:02d}"
+        p["product"]["prices_with_conversion_factor"]["final_price_unformatted"] = Decimal(100 - i)
+        products.append(p)
+    fake.cache["obras360_widget"] = WIDGET
+    fake.route("page=1", listing(products[:10], 120))
+    fake.route("page=2", listing(products[10:20], 120))
+    fake.route("page=3", listing(products[20:], 120))
+    fake.route("product-details/27", "obras360_product-details_osb-parent.json")
+
+    found = run("placa osb", fake)
+
+    pages = [c for c in fake.calls if "product-list" in c]
+    assert [c[-6:] for c in pages] == ["page=1", "page=2", "page=3"]
+    details = [c.rsplit("=", 1)[1] for c in fake.calls if "product-details" in c]
+    assert sorted(details) == [f"id-{i:02d}" for i in range(5, 25)]  # os 20 mais baratos
+    assert "+5 produtos não expandidos (limite de 20 por pesquisa)" in found.notes
+    assert found.raw == 120
+
+
+def test_sem_resultados(fake):
+    fake.cache["obras360_widget"] = WIDGET
+    fake.route(LIST_URL + "xyz", "obras360_product-list_no-results.json")
+
+    found = run("xyz", fake)
+
+    assert found.raw == 0 and found.offers == []
+    assert not any("product-details" in c for c in fake.calls)
+
+
+def test_stores_tem_obras360_a_seguir_a_bricomarche():
+    assert strata.search.STORES == (allmat, bm, obras360)
+
+
+def test_ponta_a_ponta_tres_lojas(tmp_path, fake, monkeypatch, capsys):
+    path = tmp_path / "lista.xlsx"
+    wb = Workbook()
+    ws = wb.active
+    ws.append(["Produto", "Família", "Tamanho", "Unidade", "Qty", "Referência", "Notas"])
+    ws.append(["placa osb", None, None, "un", 3])
+    wb.save(path)
+    fake.route("allmat.pt/wp-json/wc/store/v1/products?search=placa", "allmat_products_search-osb_no-results.json")
+    fake.route("bricomarche.pt/wp-json/wc/store/v1/products?search=placa", [])
+    fake.cache["obras360_widget"] = WIDGET
+    fake.route(LIST_URL + "placa+osb", "obras360_product-list_osb.json")
+    fake.route(DETAIL_URL + PLACA_ID, "obras360_product-details_osb-parent.json")
+    monkeypatch.setattr(strata.search, "STORES", (allmat, bm, obras360))
+
+    assert main(["pesquisar", str(path)], fetch=fake) == 0
+
+    out = capsys.readouterr().out
+    assert out.index("Allmat:") < out.index("Bricomarché:") < out.index("Obras 360: ok")
+    section = out[out.index("Obras 360: ok"):]
+    first = section.splitlines()[1]
+    assert first.strip().startswith("15,02 €") and "1 Placa 9 MM" in first
+    assert section.count("IVA: indicado pela loja (tax_percentage=23)") == 5
+    assert "+2 ofertas não mostradas" in section
+    assert "+1 ofertas escondidas" in section
+    assert "escalões: −2,5% a partir de 108" in section

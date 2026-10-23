@@ -87,3 +87,7 @@ def offers_from_details(d, parent) -> list[Offer]:
             note="; ".join(notes),
         ))
     return offers
+
+
+async def search(query: str, fetch) -> Found:  # stub do RED da tarefa 2
+    return Found(offers=[], raw=0)
