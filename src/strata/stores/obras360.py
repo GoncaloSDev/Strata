@@ -1,5 +1,6 @@
 """Obras 360 (obras360.pt, plataforma Beevo): lista de produtos-pai, depois uma oferta por variante do detalhe."""
 
+import asyncio
 import html
 import re
 from decimal import Decimal
@@ -7,10 +8,17 @@ from decimal import Decimal
 from strata.fetch import StoreError
 from strata.models import Found, Offer
 from strata.money import add_vat, fmt_qty
+from strata.words import title_matches
 
 NAME = "Obras 360"
 BASE = "https://www.obras360.pt"  # domínio com "s" (Pitfall 14)
 VAT_PT = Decimal(23)
+PER_PAGE = 48
+MAX_PAGES = 3
+# shortcut: só os 20 pais mais baratos por artigo (A3) pedem o detalhe; subir se o `verificar` mostrar baratos de fora
+K = 20
+# shortcut: 27 é o ID numérico do widget de detalhe (A4), lido à mão; o `verificar` (01-06) apanha uma mudança
+DETAILS_PATH = "/api/latest/dot/shop/product-details/27"
 WIDGET = re.compile(r'"widget_slug":"product-list","widget_instance_id":"([0-9a-f-]+)"')
 TAG = re.compile(r"<[^>]+>")
 # visible_sell_unit.description -> unidade-base; "ML" fica de fora (metro linear ou mililitro?)
@@ -89,5 +97,48 @@ def offers_from_details(d, parent) -> list[Offer]:
     return offers
 
 
-async def search(query: str, fetch) -> Found:  # stub do RED da tarefa 2
-    return Found(offers=[], raw=0)
+def _list_price(p) -> Decimal | None:
+    v = ((p.get("product") or {}).get("prices_with_conversion_factor") or {}).get("final_price_unformatted")
+    return None if v is None else Decimal(v)
+
+
+async def search(query: str, fetch) -> Found:
+    widget = fetch.cache.get("obras360_widget")
+    if widget is None:  # uma vez por execução: a página tem ~700 KB
+        widget = widget_id(await fetch.get_html(BASE + "/pesquisa", {"search": query}))
+        fetch.cache["obras360_widget"] = widget
+    # has_more e page_count da loja não servem: pagina-se por total_products
+    products, total, page = [], 0, 0
+    while page < MAX_PAGES and (page == 0 or page * PER_PAGE < total):
+        page += 1
+        rows, total = parse_list(await fetch.get_json(
+            f"{BASE}/api/latest/dot/shop/product-list/{widget}",
+            {"search": query, "items_per_page": PER_PAGE, "page": page}))
+        products += rows
+        if not rows:
+            break
+    notes = []
+    if page * PER_PAGE < total and products:
+        notes.append(f"mais produtos na loja não lidos (limite de {PER_PAGE * MAX_PAGES})")
+    kept = [p for p in products if title_matches(query, p["product"]["name"])]  # D-15
+    # Nenhum preço da lista é mostrado (só traz a variante mais barata); só escolhe quem expandir.
+    kept.sort(key=lambda p: (_list_price(p) is None, _list_price(p) or 0))
+    chosen = kept[:K]
+    results = await asyncio.gather(*(fetch.get_json(BASE + DETAILS_PATH, {
+        "_beevo_decoded_params[0][product_id]": p["product"]["product"]["product_id"]}) for p in chosen),
+        return_exceptions=True)
+    offers, failed = [], []
+    for p, r in zip(chosen, results):
+        try:
+            if isinstance(r, BaseException):
+                raise r
+            offers += offers_from_details(r, p)
+        except StoreError as e:  # StoreBlocked/StoreTimeout e o resto sobem: a loja fica bloqueada ou erro
+            failed.append(e)
+    if failed and len(failed) == len(chosen):
+        raise failed[0]
+    if failed:
+        notes.append(f"{len(failed)} produtos sem detalhe: {failed[0]}")
+    if len(kept) > K:
+        notes.append(f"+{len(kept) - K} produtos não expandidos (limite de {K} por pesquisa)")
+    return Found(offers=offers, raw=total, hidden=len(products) - len(kept), notes=notes)
