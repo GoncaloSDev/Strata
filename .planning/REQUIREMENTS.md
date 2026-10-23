@@ -9,22 +9,22 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Lista e pesquisa
 
-- [x] **LIST-01**: Utilizador cola uma lista multilinha em que cada linha tem descrição em texto livre, quantidade e unidade (un, m², m, kg, L, saco)
-- [x] **LIST-02**: Utilizador pesquisa qualquer produto em texto livre (OSB, tijolo, mesa, mobília...) sem escolher categoria
+- [ ] **LIST-01**: Utilizador cola uma lista multilinha em que cada linha tem descrição em texto livre, quantidade e unidade (un, m², m, kg, L, saco)
+- [ ] **LIST-02**: Utilizador pesquisa qualquer produto em texto livre (OSB, tijolo, mesa, mobília...) sem escolher categoria
 - [ ] **LIST-03**: Uma lista de 10 itens fica resolvida nas 4 lojas fixas em menos de 5 minutos
-- [x] **LIST-04**: Utilizador obtém da app um modelo Excel de formato fixo com as colunas Produto, Família, Tamanho, Unidade, Qty (obrigatórias: Produto, Unidade, Qty) e as opcionais Referência (EAN/ref. do fabricante) e Notas
-- [x] **LIST-05**: Utilizador carrega uma folha Excel nesse formato e cada linha passa a ser um item da pesquisa (entrada principal da app); linhas inválidas são assinaladas com o número da linha e o motivo, sem parar as restantes
+- [ ] **LIST-04**: Utilizador obtém da app um modelo Excel de formato fixo com as colunas Produto, Família, Tamanho, Unidade, Qty (obrigatórias: Produto, Unidade, Qty) e as opcionais Referência (EAN/ref. do fabricante) e Notas
+- [ ] **LIST-05**: Utilizador carrega uma folha Excel nesse formato e cada linha passa a ser um item da pesquisa (entrada principal da app); linhas inválidas são assinaladas com o número da linha e o motivo, sem parar as restantes
 - [ ] **LIST-06**: Família, Tamanho e Referência da folha são usados como contexto na pesquisa e na classificação exato/parecido, sem categorias fixas no código
 
 ### Lojas fixas
 
-- [x] **STORE-01**: Utilizador obtém preços na hora da Bricomarché, com o preço mais barato entre todas as lojas físicas e o nome dessa loja
-- [x] **STORE-02**: Utilizador obtém preços na hora da Allmat, com o preço por caixa convertido usando a área/conteúdo da caixa
-- [x] **STORE-03**: Utilizador obtém preços na hora da Obras 360, com todas as variantes do produto expandidas e os escalões por quantidade
+- [ ] **STORE-01**: Utilizador obtém preços na hora da Bricomarché, com o preço mais barato entre todas as lojas físicas e o nome dessa loja
+- [ ] **STORE-02**: Utilizador obtém preços na hora da Allmat, com o preço por caixa convertido usando a área/conteúdo da caixa
+- [ ] **STORE-03**: Utilizador obtém preços na hora da Obras 360, com todas as variantes do produto expandidas e os escalões por quantidade
 - [ ] **STORE-04**: Utilizador obtém preços na hora da Obramat através da pesquisa direta do site, a ritmo lento (um pedido de cada vez)
-- [x] **STORE-05**: Utilizador vê, por item, o estado de cada loja fixa (ok / sem resultados / bloqueada / erro / tempo esgotado); nenhuma loja fixa é omitida
+- [ ] **STORE-05**: Utilizador vê, por item, o estado de cada loja fixa (ok / sem resultados / bloqueada / erro / tempo esgotado); nenhuma loja fixa é omitida
 - [ ] **STORE-06**: Quando o método principal de uma loja falha, a app tenta JSON-LD, browser automático e IA antes de marcar a falha, e mostra que método funcionou
-- [x] **STORE-07**: Utilizador corre uma verificação das lojas que diz se cada adaptador ainda devolve preços válidos
+- [ ] **STORE-07**: Utilizador corre uma verificação das lojas que diz se cada adaptador ainda devolve preços válidos
 
 ### Descoberta de lojas
 
@@ -35,8 +35,8 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Preço
 
-- [x] **PRICE-01**: Todos os preços aparecem com IVA 23%; preços sem IVA são convertidos e cada linha mostra a origem do IVA (indicado pela loja / regra da loja / assumido)
-- [x] **PRICE-02**: Cada oferta mostra o preço unitário normalizado (€/un, €/m², €/m, €/kg, €/L), calculado a partir do preço e do conteúdo da embalagem
+- [ ] **PRICE-01**: Todos os preços aparecem com IVA 23%; preços sem IVA são convertidos e cada linha mostra a origem do IVA (indicado pela loja / regra da loja / assumido)
+- [ ] **PRICE-02**: Cada oferta mostra o preço unitário normalizado (€/un, €/m², €/m, €/kg, €/L), calculado a partir do preço e do conteúdo da embalagem
 - [ ] **PRICE-03**: A quantidade pedida é convertida para a unidade vendida (m² → caixas, m → varas, un → packs); se a conversão for impossível, a linha diz porquê
 - [ ] **PRICE-04**: Utilizador vê o custo total para a quantidade pedida com a combinação de embalagens e escalões mais barata (mesmo que compre a mais), com quantidade comprada vs pedida e sobras
 - [ ] **PRICE-05**: Utilizador vê quanto poupa com o parecido mais barato face ao exato mais barato
@@ -53,7 +53,7 @@ Requirements for initial release. Each maps to roadmap phases.
 ### Resultados
 
 - [ ] **RES-01**: Utilizador vê, por item, uma tabela ordenada por custo total com loja, título, classe, embalagem, quantidade comprada, €/unidade, custo total com IVA, link e hora da recolha
-- [x] **RES-02**: Utilizador vê o stock quando a loja o indica (em stock / esgotado / quantidade / desconhecido), sem filtrar
+- [ ] **RES-02**: Utilizador vê o stock quando a loja o indica (em stock / esgotado / quantidade / desconhecido), sem filtrar
 - [ ] **RES-03**: Utilizador vê o total da lista (soma do exato mais barato de cada item) com o aviso "portes não incluídos"
 - [ ] **RES-04**: Utilizador vê o progresso por item × loja em tempo real, com os resultados a aparecer à medida que chegam
 - [ ] **RES-05**: Utilizador repete só um item ou só uma loja sem refazer a lista toda
@@ -97,25 +97,25 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| LIST-01 | Phase 1 | Complete |
-| LIST-02 | Phase 1 | Complete |
+| LIST-01 | Phase 1 | Gaps Found |
+| LIST-02 | Phase 1 | Gaps Found |
 | LIST-03 | Phase 2 | Pending |
-| LIST-04 | Phase 1 | Complete |
-| LIST-05 | Phase 1 | Complete |
+| LIST-04 | Phase 1 | Gaps Found |
+| LIST-05 | Phase 1 | Gaps Found |
 | LIST-06 | Phase 3 | Pending |
-| STORE-01 | Phase 1 | Complete |
-| STORE-02 | Phase 1 | Complete |
-| STORE-03 | Phase 1 | Complete |
+| STORE-01 | Phase 1 | Gaps Found |
+| STORE-02 | Phase 1 | Gaps Found |
+| STORE-03 | Phase 1 | Gaps Found |
 | STORE-04 | Phase 2 | Pending |
-| STORE-05 | Phase 1 | Complete |
+| STORE-05 | Phase 1 | Gaps Found |
 | STORE-06 | Phase 2 | Pending |
-| STORE-07 | Phase 1 | Complete |
+| STORE-07 | Phase 1 | Gaps Found |
 | DISC-01 | Phase 6 | Pending |
 | DISC-02 | Phase 6 | Pending |
 | DISC-03 | Phase 6 | Pending |
 | DISC-04 | Phase 6 | Pending |
-| PRICE-01 | Phase 1 | Complete |
-| PRICE-02 | Phase 1 | Complete |
+| PRICE-01 | Phase 1 | Gaps Found |
+| PRICE-02 | Phase 1 | Gaps Found |
 | PRICE-03 | Phase 4 | Pending |
 | PRICE-04 | Phase 4 | Pending |
 | PRICE-05 | Phase 4 | Pending |
@@ -126,7 +126,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | MATCH-05 | Phase 3 | Pending |
 | MATCH-06 | Phase 3 | Pending |
 | RES-01 | Phase 5 | Pending |
-| RES-02 | Phase 1 | Complete |
+| RES-02 | Phase 1 | Gaps Found |
 | RES-03 | Phase 4 | Pending |
 | RES-04 | Phase 5 | Pending |
 | RES-05 | Phase 5 | Pending |
