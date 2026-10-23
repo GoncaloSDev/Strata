@@ -5,6 +5,9 @@ import unicodedata
 
 from strata.text import norm
 
+DIMS = re.compile(r"(?<=\d)x(?=\d)")  # "2440x590x18mm" -> "2440 590 18mm"
+LITRE = re.compile(r"(\d)\s*(?:lts?|litros?)\b")  # "15 lt", "15lts", "15 litros" -> "15l"
+CLASS = re.compile(r"([a-z]{2,})(\d)\b")  # "osb3" -> "osb 3"; sem \b à esquerda: "2,5mm2" = "2,5 mm2"; "m2" não parte
 JOIN = re.compile(r"(\d)\s+(mm|cm|m|m2|kg|g|l|ml)\b")  # "12 mm" -> "12mm"
 TOKEN = re.compile(r"[a-z0-9]+(?:[.,][0-9]+)*")  # hífen e ponto final separam palavras
 UNIT_TOKENS = {"mm", "cm", "m", "m2", "kg", "g", "l", "lt", "ml", "un", "x"}
@@ -33,8 +36,10 @@ def _stem(w: str) -> str:
 
 
 def words(s) -> set[str]:
-    """Sem acentos, minúsculas, "12 mm" = "12mm", sem palavras de ligação, género e plural via _stem."""
-    s = JOIN.sub(r"\1\2", plain(s))
+    """Sem acentos, minúsculas, medidas LxCxE partidas, "15 Lt" = "15l", "OSB3" = "osb 3", "12 mm" = "12mm",
+    sem palavras de ligação, género e plural via _stem."""
+    s = CLASS.sub(r"\1 \2", LITRE.sub(r"\1l", DIMS.sub(" ", plain(s))))
+    s = JOIN.sub(r"\1\2", s)
     return {_stem(w) for w in TOKEN.findall(s) if w not in STOP}
 
 
