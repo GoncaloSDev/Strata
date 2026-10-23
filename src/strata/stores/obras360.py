@@ -126,7 +126,7 @@ async def search(query: str, fetch, rank: str | None = None) -> Found:
     # Nenhum preço da lista é mostrado (só traz a variante mais barata); só escolhe quem expandir.
     # Primeiro os pais com mais palavras da pesquisa ("M8" em "parafuso m8x40", onde o "40" só está na
     # variante): a solta só serve para não perder os pais cuja medida está na variante (CR-04, CR-06).
-    need = words(query)
+    need = words(rank or query)  # na alargada, o produto da linha (WR-17)
     kept.sort(key=lambda p: (-len(need & words(p["product"]["name"])), _list_price(p) is None,
                              _list_price(p) or 0))
     chosen = kept[:K]

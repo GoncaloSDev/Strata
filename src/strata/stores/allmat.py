@@ -11,13 +11,13 @@ from strata.fetch import StoreError
 from strata.models import Found, Offer
 from strata.money import content_from_title, from_minor
 from strata.text import norm
-from strata.words import title_matches
+from strata.words import title_matches, words
 
 NAME = "Allmat"
 SEARCH_URL = "https://allmat.pt/wp-json/wc/store/v1/products"
 PER_PAGE = 100
 MAX_PAGES = 3
-# shortcut: limite de 10 páginas por pesquisa (as caixas mais baratas), subir se o `verificar` mostrar caixas baratas por ler
+# shortcut: limite de 10 páginas por pesquisa (mais palavras do produto da linha, depois as caixas mais baratas), subir se o `verificar` mostrar caixas baratas por ler
 MAX_BOX_PAGES = 10
 VAT_EVIDENCE = "páginas de produto da Allmat: IVA incluído"
 UNIT_LABEL = re.compile(r'class="wd-price-unit"[^>]*>\s*([^<]*?)\s*<')
@@ -138,7 +138,8 @@ async def search(query: str, fetch, rank: str | None = None) -> Found:
     offers, no_price, boxes = parse_products(rows)
     if no_price:
         notes.append(f"{no_price} produtos sem preço ignorados")
-    boxes.sort(key=lambda b: b[1].price)
+    need = words(rank or query)  # na alargada, as caixas com o produto da linha leem-se primeiro (WR-17)
+    boxes.sort(key=lambda b: (-len(need & words(b[1].title)), b[1].price))
     # Em paralelo; o limite por host do Fetcher dá o ritmo. Esperar por todas antes de relançar a 1.ª falha.
     results = await asyncio.gather(*(_read_box(pid, o, fetch) for pid, o in boxes[:MAX_BOX_PAGES]),
                                    return_exceptions=True)
