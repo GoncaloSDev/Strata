@@ -8,7 +8,7 @@ from decimal import Decimal
 from strata.fetch import StoreError
 from strata.models import Found, Offer
 from strata.money import add_vat, fmt_qty
-from strata.words import title_matches
+from strata.words import broadened, title_matches
 
 NAME = "Obras 360"
 BASE = "https://www.obras360.pt"  # domínio com "s" (Pitfall 14)
@@ -120,7 +120,9 @@ async def search(query: str, fetch) -> Found:
     notes = []
     if page * PER_PAGE < total and products:
         notes.append(f"mais produtos na loja não lidos (limite de {PER_PAGE * MAX_PAGES})")
-    kept = [p for p in products if title_matches(query, p["product"]["name"])]  # D-15
+    # D-15 em dois níveis: a medida só existe na designação da variante, por isso o pai escolhe-se sem medidas
+    loose = broadened(query) or query
+    kept = [p for p in products if title_matches(loose, p["product"]["name"])]
     # Nenhum preço da lista é mostrado (só traz a variante mais barata); só escolhe quem expandir.
     kept.sort(key=lambda p: (_list_price(p) is None, _list_price(p) or 0))
     chosen = kept[:K]
@@ -141,4 +143,7 @@ async def search(query: str, fetch) -> Found:
         notes.append(f"{len(failed)} produtos sem detalhe: {failed[0]}")
     if len(kept) > K:
         notes.append(f"+{len(kept) - K} produtos não expandidos (limite de {K} por pesquisa)")
-    return Found(offers=offers, raw=total, hidden=len(products) - len(kept), notes=notes)
+    # shortcut: uma gama no nome do pai ("9-30MM") faz "30mm" bater em todas as variantes; o exato/parecido da Phase 3 separa
+    shown = [o for o in offers if title_matches(query, o.title)]  # o.title = pai + " — " + designação
+    hidden = len(products) - len(kept) + len(offers) - len(shown)  # variantes cortadas também contam (D-02)
+    return Found(offers=shown, raw=total, hidden=hidden, notes=notes)
