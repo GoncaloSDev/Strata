@@ -145,6 +145,36 @@ def test_prazo_esgotado(monkeypatch):
     assert sr.status == "tempo esgotado"
 
 
+def test_allmat_conteudo_pelo_titulo(fake):
+    fake.route(SEARCH + "cimento", "allmat_products_search-cimento.json")
+    found = asyncio.run(allmat.search("cimento", fake))
+    by_title = {o.title: o for o in found.offers}
+    liz = by_title["LIZ CIMENTO COLA CINZA SACO 25 KG REF 01.001"]
+    assert (liz.content, liz.content_unit) == (Decimal("25"), "kg")
+    fischer = by_title["FISCHER CIMENTO BARBACOAS"]
+    assert (fischer.content, fischer.content_unit) == (Decimal("1"), "un")
+
+
+def test_ordem_estavel_pelo_preco_na_unidade_pedida():
+    offers = [
+        offer("a", "5", content=Decimal(1), content_unit="kg"),   # 5 €/kg
+        offer("b", "6", content=Decimal(2), content_unit="kg"),   # 3 €/kg
+        offer("c", "1"),                                          # não convertível
+        offer("d", "9", content=Decimal(3), content_unit="kg"),   # 3 €/kg
+    ]
+    store = fake_store("Falsa", Found(offers, 4))
+    sr = asyncio.run(search_store(store, item("cola", "kg"), None))
+    assert [o.title for o in sr.offers] == ["b", "d", "a", "c"]
+    assert sr.offers[-1].note == "não convertível para kg: conteúdo da embalagem desconhecido"
+    assert sr.offers[0].note == ""
+
+
+def test_allmat_cimento_saco_mais_barato_primeiro(fake):
+    fake.route(SEARCH + "cimento", "allmat_products_search-cimento.json")
+    sr = asyncio.run(search_store(allmat, item("cimento", "saco"), fake))
+    assert [o.price for o in sr.offers] == [Decimal("4.22"), Decimal("4.72"), Decimal("6.60")]
+
+
 def test_tres_lojas_pela_ordem_de_stores(monkeypatch):
     stores = (
         fake_store("Primeira", Found([offer("CIMENTO COLA")], 1)),

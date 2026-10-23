@@ -16,6 +16,14 @@ def per_unit(offer: Offer) -> Decimal | None:
     return offer.price / offer.content
 
 
+def content_from_title(title: str) -> tuple[Decimal, str] | None:
+    return None
+
+
+def in_unit(offer: Offer, unit: str) -> tuple[Decimal | None, str]:
+    return None, ""
+
+
 def _fmt(d: Decimal, places: int) -> str:
     q = Decimal(1).scaleb(-places)
     return f"{d.quantize(q, rounding=ROUND_HALF_UP):f}".replace(".", ",")
