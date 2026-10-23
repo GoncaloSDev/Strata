@@ -155,6 +155,14 @@ def listing(products, total):
     return d
 
 
+def parent(pid, name, price):
+    p = copy.deepcopy(PLACA)
+    p["product"]["product"]["product_id"] = pid
+    p["product"]["name"] = name
+    p["product"]["prices_with_conversion_factor"]["final_price_unformatted"] = Decimal(price)
+    return p
+
+
 def run(query, fetch):
     return asyncio.run(obras360.search(query, fetch))
 
@@ -346,3 +354,31 @@ def test_osb_12mm_so_a_variante_de_12mm(fake):
     assert "+6 ofertas escondidas: título sem 'OSB 12 mm'" in text
     assert "nota: 1 produtos sem detalhe" in text
     assert "1 Placa 9 MM" not in text
+
+
+# --- 01-09: plurais -is/-il no filtro de título (CR-05) ---
+
+def test_perfis_mostra_o_pai_perfil(fake):
+    import io
+
+    from strata.models import Item, ItemResult
+    from strata.report import print_item
+
+    fake.cache["obras360_widget"] = WIDGET
+    fake.route(LIST_URL + "perfis", listing([parent("id-perfil", "Perfil Montante 48mm Gesso Cartonado", 3),
+                                             parent("id-calha", "Calha Gesso Cartonado", 2)], 2))
+    fake.route(DETAIL_URL + "id-perfil", "obras360_product-details_osb-parent.json")  # a calha fica sem rota
+    it = Item(row=5, product="perfis", qty=Decimal(10), unit="un")
+
+    sr = asyncio.run(strata.search.search_store(obras360, it, fake))
+
+    assert sr.status == "ok" and sr.detail == ""
+    assert sr.offers and all(o.title.startswith("Perfil Montante 48mm") for o in sr.offers)
+    assert sr.hidden == 1  # a calha
+    assert not any("id-calha" in c for c in fake.calls)
+    out = io.StringIO()
+    print_item(ItemResult(it, [sr]), out)
+    text = out.getvalue()
+    assert "  Obras 360: ok\n" in text
+    assert "Perfil Montante 48mm" in text
+    assert "+1 ofertas escondidas: título sem 'perfis'" in text

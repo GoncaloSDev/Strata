@@ -72,6 +72,19 @@ def fake_store(name, *answers):
     ("tinta 15 litros", "Tinta 15L", True),
     ("OSB 12mm", "Placa OSB3 12 mm", True),
     ("osb 12mm", "Chapa Osb 2440X590X18Mm", False),
+    # CR-05: plurais -ais/-is/-ens/-óis e palavras de 3 letras
+    ("perfis", "Perfil alumínio", True),
+    ("funis", "Funil", True),
+    ("canais", "Canal", True),
+    ("ferragens", "Ferragem", True),
+    ("lençóis", "Lençol", True),
+    ("pás", "Pá", True),
+    ("lápis", "Lápis", True),
+    ("jacuzzis", "Jacuzzi", True),
+    ("táxis", "Táxi", True),
+    ("projetor ip65", "Projetor LED IP65", True),
+    ("azulejo 2,5 m²", "Azulejo 2,5 m2", True),
+    ("projetor ip65", "Projetor LED IP44", False),
 ])
 def test_title_matches(query, title, expected):
     assert title_matches(query, title) is expected
