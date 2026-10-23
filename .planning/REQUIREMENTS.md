@@ -9,11 +9,11 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Lista e pesquisa
 
-- [ ] **LIST-01**: Utilizador cola uma lista multilinha em que cada linha tem descrição em texto livre, quantidade e unidade (un, m², m, kg, L, saco)
+- [x] **LIST-01**: Utilizador cola uma lista multilinha em que cada linha tem descrição em texto livre, quantidade e unidade (un, m², m, kg, L, saco)
 - [ ] **LIST-02**: Utilizador pesquisa qualquer produto em texto livre (OSB, tijolo, mesa, mobília...) sem escolher categoria
 - [ ] **LIST-03**: Uma lista de 10 itens fica resolvida nas 4 lojas fixas em menos de 5 minutos
-- [ ] **LIST-04**: Utilizador obtém da app um modelo Excel de formato fixo com as colunas Produto, Família, Tamanho, Unidade, Qty (obrigatórias: Produto, Unidade, Qty) e as opcionais Referência (EAN/ref. do fabricante) e Notas
-- [ ] **LIST-05**: Utilizador carrega uma folha Excel nesse formato e cada linha passa a ser um item da pesquisa (entrada principal da app); linhas inválidas são assinaladas com o número da linha e o motivo, sem parar as restantes
+- [x] **LIST-04**: Utilizador obtém da app um modelo Excel de formato fixo com as colunas Produto, Família, Tamanho, Unidade, Qty (obrigatórias: Produto, Unidade, Qty) e as opcionais Referência (EAN/ref. do fabricante) e Notas
+- [x] **LIST-05**: Utilizador carrega uma folha Excel nesse formato e cada linha passa a ser um item da pesquisa (entrada principal da app); linhas inválidas são assinaladas com o número da linha e o motivo, sem parar as restantes
 - [ ] **LIST-06**: Família, Tamanho e Referência da folha são usados como contexto na pesquisa e na classificação exato/parecido, sem categorias fixas no código
 
 ### Lojas fixas
@@ -97,11 +97,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| LIST-01 | Phase 1 | Pending |
+| LIST-01 | Phase 1 | Complete |
 | LIST-02 | Phase 1 | Pending |
 | LIST-03 | Phase 2 | Pending |
-| LIST-04 | Phase 1 | Pending |
-| LIST-05 | Phase 1 | Pending |
+| LIST-04 | Phase 1 | Complete |
+| LIST-05 | Phase 1 | Complete |
 | LIST-06 | Phase 3 | Pending |
 | STORE-01 | Phase 1 | Pending |
 | STORE-02 | Phase 1 | Pending |

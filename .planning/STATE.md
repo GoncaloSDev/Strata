@@ -3,16 +3,16 @@ gsd_state_version: "1.0"
 current_phase: 01
 current_phase_name: Folha Excel e preços da Allmat, Bricomarché e Obras 360
 status: executing
-stopped_at: Completed 01-01-PLAN.md
-last_updated: "2026-10-22T23:55:13.547Z"
+stopped_at: Completed 01-02-PLAN.md
+last_updated: "2026-10-23T00:02:41.712Z"
 last_activity: 2026-10-23
 last_activity_desc: Phase 01 execution started
-state_head: 6e1cff6028842b7295233bdb3156bf577bb553d7
+state_head: 232f71469aa4a804f3577c31897280c4318f251d
 progress:
   total_phases: 6
   completed_phases: 0
   total_plans: 6
-  completed_plans: 1
+  completed_plans: 2
   percent: 0
 ---
 
@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-10-22)
 ## Current Position
 
 Phase: 01 (Folha Excel e preços da Allmat, Bricomarché e Obras 360) — EXECUTING
-Plan: 2 of 6
+Plan: 3 of 6
 Status: Ready to execute
 Last activity: 2026-10-23 — Phase 01 execution started
 
@@ -57,6 +57,7 @@ Progress: [░░░░░░░░░░] 0%
 | Plan | Duration | Tasks | Files |
 |------|----------|-------|-------|
 | Phase 01 P01 | 4 min | 2 tasks | 14 files |
+| Phase 01 P02 | 4 min | 3 tasks | 10 files |
 
 ## Accumulated Context
 
@@ -77,6 +78,9 @@ Recent decisions affecting current work:
 - [Phase 1 plan]: O utilizador aceitou o aviso do verificador sobre o 01-01 (14 ficheiros, zona de aviso 10–14): é o custo do tracer ponta a ponta; 4 dos ficheiros são gerados pelo uv ou vazios
 - [Phase 01]: selectolax fixado em >=1.0,<1.1 (aprovado pelo utilizador; resolveu para 1.0.2)
 - [Phase 01]: Allmat: rótulo Unid -> 1 un; M2 ou outro rótulo -> €/unidade desconhecido com nota visível até ao 01-03
+- [Phase 01]: Linha colada só com número ('30 un') dá 'linha sem descrição'
+- [Phase 01]: Erros de abertura da folha (.xls, zip corrompido) com uma só mensagem: 'não consegui abrir <nome>: é .xls ou não é um .xlsx válido'
+- [Phase 01]: Texto colado só com linhas inválidas: 'Nenhuma linha válida para pesquisar.' e código 2
 
 ### Pending Todos
 
@@ -99,6 +103,6 @@ Items acknowledged and deferred at milestone close, most recent first:
 
 ## Session Continuity
 
-Last session: 2026-10-22T23:55:13.514Z
-Stopped at: Completed 01-01-PLAN.md
+Last session: 2026-10-23T00:02:41.678Z
+Stopped at: Completed 01-02-PLAN.md
 Resume file: None
