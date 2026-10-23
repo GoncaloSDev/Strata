@@ -71,16 +71,16 @@ def store_link(row) -> tuple[str, str]:
 
 
 def offer_from(parent, rows) -> Offer | None:
-    best = cheapest(rows)
-    if best is None:
+    """A loja física mais barata com stock; se nenhuma tiver, a mais barata com o stock dela."""
+    low = cheapest(rows)
+    if low is None:
         return None
+    best = cheapest([r for r in rows if has_stock(r)]) or low
     title = html.unescape(parent["name"])
     url, location = store_link(best)
     note = ""
-    if not has_stock(best):
-        with_stock = cheapest([r for r in rows if has_stock(r)])
-        if with_stock is not None:
-            note = f"com stock: {fmt_eur(_price(with_stock))} em {store_link(with_stock)[1]}"
+    if _price(low) < _price(best):  # RES-02: a mais barata sem stock nunca some
+        note = f"mais barata sem stock: {fmt_eur(_price(low))} em {store_link(low)[1]}"
     content, content_unit = content_from_title(title) or (Decimal(1), "un")
     stock = ((best.get("stock_availability") or {}).get("text") or "").strip()
     return Offer(
