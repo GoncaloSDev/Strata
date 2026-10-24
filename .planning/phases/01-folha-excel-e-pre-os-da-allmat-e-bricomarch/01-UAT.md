@@ -1,20 +1,14 @@
 ---
-status: testing
+status: complete
 phase: 01-folha-excel-e-pre-os-da-allmat-e-bricomarch
 source: [01-VERIFICATION.md]
 started: 2026-10-23T14:08:58Z
-updated: 2026-10-24T00:20:00Z
+updated: 2026-10-24T00:31:10.908Z
 ---
 
 ## Current Test
 
-number: 9
-name: Re-teste 3: Bricomarché mostra a loja mais barata com stock (G-01-3, plano 01-10)
-expected: |
-  `printf 'placa osb 9mm 1 un\n\n' | uv run python -m strata pesquisar` e abrir o link da 1.ª oferta da Bricomarché:
-  uma loja física com stock (ex.: 15,49 € em Ponte de Sor), preço igual ao do site; se a mais barata não tiver stock,
-  aparece a nota 'mais barata sem stock: X em Y'
-awaiting: user response
+[testing complete]
 
 ## Tests
 
@@ -57,22 +51,23 @@ result: pass
 
 ### 9. Re-teste 3: Bricomarché mostra a loja mais barata com stock (G-01-3, plano 01-10)
 expected: `printf 'placa osb 9mm 1 un\n\n' | uv run python -m strata pesquisar` e abrir o link da 1.ª oferta da Bricomarché: uma loja física com stock (ex.: 15,49 € em Ponte de Sor), preço igual ao do site; se a mais barata não tiver stock, aparece a nota 'mais barata sem stock: X em Y'
-result: [pending]
+result: pass
 
 ### 10. Re-teste 5: folha com 4 linhas mostra o produto pedido (G-01-5, planos 01-11 e 01-12)
 expected: folha com OSB 12 mm / un / 30; cimento cola / saco / 10; tinta branca / L / 15; pavimento 60x120 / m² / 10 e `pesquisar`: OSB 12 mm mostra a placa de 12 mm em 1.º na Obras 360, sem cola nem espuma, o resto contado em '+N ofertas escondidas'; pavimento 60x120 mostra na Bricomarché as placas 60X120 a 34,55 € (23,99 €/m²), com preço igual ao do site
-result: [pending]
+result: pass
 
 ### 11. Proibições judgment do 01-10 e do 01-12
 expected: offer_from em src/strata/stores/bricomarche.py só usa as linhas já lidas (nenhum pedido novo por causa do stock) e o 01-12 fez uma só corrida ao vivo (veredicto não autoritativo do verificador: cumpridas)
-result: [pending]
+result: pass
+reason: offer_from (bricomarche.py:74-102) só usa as linhas recebidas, sem fetch; 01-12 fez uma só corrida ao vivo
 
 ## Summary
 
 total: 11
-passed: 5
+passed: 8
 issues: 2
-pending: 3
+pending: 0
 skipped: 1
 blocked: 0
 
@@ -80,7 +75,9 @@ blocked: 0
 
 - gap_id: G-01-3
   truth: "O link da 1.ª oferta de OSB da Bricomarché abre a página do produto na loja da oferta, com o preço mostrado (14,49 € / 18,49 €) e IVA incluído"
-  status: failed
+  status: resolved
+  resolved_by: 01-10-PLAN
+  resolved_at: 2026-10-24
   reason: "User reported: A oferta principal da Bricomarché não devia ser uma loja com 0 em stock: devia mostrar primeiro a mais barata que tem stock (15,49 € em Ponte de Sor)"
   severity: major
   test: 3
@@ -101,7 +98,9 @@ blocked: 0
 
 - gap_id: G-01-5
   truth: "Para cada linha da folha, as ofertas mostradas são o produto pedido (ex.: 'OSB 12 mm' mostra a placa de 12 mm), mais baratas primeiro, e não outros produtos que só mencionam a palavra (cola/espuma 'para OSB')"
-  status: failed
+  status: resolved
+  resolved_by: 01-12-PLAN
+  resolved_at: 2026-10-24
   reason: "User reported: Confirmo os preços, mas admito que o facto da cola aparecer antes da placa de 12mm é um problema, o objetivo desta aplicação é encontrar o que eu procuro e com o preço mais barato se procurar algo e aparecer outra coisa a aplicaão nao esta a cumprir o proposito, arranja isto para garantir que a aplicação cumpri o objetivo, o metodo como fara isto deixo a sua decisão, mas talvez fazer uma filtragem no fim possa ser uma solução nao sei."
   severity: major
   test: 5
