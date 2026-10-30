@@ -15,7 +15,7 @@ updated: 2026-10-24T00:31:10.908Z
 ### 1. Lista "m²" da coluna Unidade no Excel
 expected: `uv run python -m strata modelo`, abrir no Excel, clicar na coluna Unidade e escrever 'caixa': lista un, m², m, kg, L, saco com o '²' certo e o aviso 'Escolha da lista: …'
 result: skipped
-reason: "não tenho Excel nesta máquina"
+reason: "Deferred follow-up: não tenho Excel nesta máquina; aceite sem teste"
 
 ### 2. Colar texto numa consola normal do Windows
 expected: `uv run python -m strata pesquisar` numa consola normal, colar 'azulejo 2,5 m²' e Enter duas vezes: "Linha 1 — azulejo (2,5 m²)"
@@ -76,7 +76,7 @@ blocked: 0
 - gap_id: G-01-3
   truth: "O link da 1.ª oferta de OSB da Bricomarché abre a página do produto na loja da oferta, com o preço mostrado (14,49 € / 18,49 €) e IVA incluído"
   status: resolved
-  resolved_by: 01-10-PLAN
+  resolved_by: 01-10-PLAN.md
   resolved_at: 2026-10-24
   reason: "User reported: A oferta principal da Bricomarché não devia ser uma loja com 0 em stock: devia mostrar primeiro a mais barata que tem stock (15,49 € em Ponte de Sor)"
   severity: major
@@ -99,7 +99,7 @@ blocked: 0
 - gap_id: G-01-5
   truth: "Para cada linha da folha, as ofertas mostradas são o produto pedido (ex.: 'OSB 12 mm' mostra a placa de 12 mm), mais baratas primeiro, e não outros produtos que só mencionam a palavra (cola/espuma 'para OSB')"
   status: resolved
-  resolved_by: 01-12-PLAN
+  resolved_by: 01-12-PLAN.md
   resolved_at: 2026-10-24
   reason: "User reported: Confirmo os preços, mas admito que o facto da cola aparecer antes da placa de 12mm é um problema, o objetivo desta aplicação é encontrar o que eu procuro e com o preço mais barato se procurar algo e aparecer outra coisa a aplicaão nao esta a cumprir o proposito, arranja isto para garantir que a aplicação cumpri o objetivo, o metodo como fara isto deixo a sua decisão, mas talvez fazer uma filtragem no fim possa ser uma solução nao sei."
   severity: major
@@ -121,3 +121,9 @@ blocked: 0
     - "Teste de regressão a partir de scratchpad/repro_g01_5.py (lista osb + detalhe da placa + cola sintética): a placa de 12 MM (19,37 €) é a 1.ª oferta da Obras 360; casos vizinhos: nenhuma bate, todas batem, ramo 'tudo escondido'"
     - "Phase 3 (fora deste fecho): produto vs menção quando todas as palavras estão no título; Tamanho em unidades diferentes; gamas no nome do pai ('9-30MM')"
   debug_session: ".planning/debug/ofertas-que-so-mencionam.md"
+
+## Deferred Follow-Ups
+
+- test: 1
+  idea: "Testar a lista m² da coluna Unidade quando houver Excel"
+  deferred_at: 2026-10-30
