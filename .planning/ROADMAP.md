@@ -12,7 +12,7 @@ O Strata começa pela folha Excel, que é a base da aplicação: a app dá um mo
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Folha Excel e preços da Allmat, Bricomarché e Obras 360** - Modelo Excel e leitura da folha na linha de comandos (texto colado como pesquisa rápida), preços na hora das duas lojas Woo e da Obras 360, com IVA 23%, preço unitário e estado por loja
+- [x] **Phase 1: Folha Excel e preços da Allmat, Bricomarché e Obras 360** - Modelo Excel e leitura da folha na linha de comandos (texto colado como pesquisa rápida), preços na hora das duas lojas Woo e da Obras 360, com IVA 23%, preço unitário e estado por loja (completed 2026-10-30)
 - [ ] **Phase 2: Obramat e cadeia de recurso** - As 4 lojas fixas respondem para uma folha de 10 itens em menos de 5 minutos, com recurso a JSON-LD, browser e IA
 - [ ] **Phase 3: Especificações e classificação exato/parecido** - Exatos primeiro, parecidos à parte com a diferença escrita, sem falsos exatos; Família, Tamanho e Referência da folha como contexto; teste Haiku vs Jev
 - [ ] **Phase 4: Embalagens, custo total e folha preenchida** - Custo total mais baixo para a quantidade pedida, com embalagens e escalões, poupança do parecido, total da lista e a folha original devolvida preenchida
@@ -34,7 +34,7 @@ Decimal phases appear between their surrounding integers in numeric order.
   4. Cada oferta mostra o preço com IVA 23%, a origem do IVA (indicado pela loja / regra da loja / assumido), o preço unitário normalizado (€/un, €/m², €/m, €/kg, €/L) e o stock quando a loja o indica, sem filtrar
   5. Cada item mostra o estado das três lojas (ok / sem resultados / bloqueada / erro / tempo esgotado), por exemplo "OSB" na Allmat aparece como "sem resultados", nunca como erro nem omitido; e a verificação das lojas diz, por adaptador, se ainda devolve preços válidos (preço acima de zero, IVA e unidade coerentes)
 
-**Plans:** 12/12 plans executed
+**Plans:** 12/12 plans complete
 
 Plans:
 **Wave 1**
@@ -162,7 +162,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Folha Excel e preços da Allmat, Bricomarché e Obras 360 | 12/12 | In Progress | - |
+| 1. Folha Excel e preços da Allmat, Bricomarché e Obras 360 | 12/12 | Complete    | 2026-10-30 |
 | 2. Obramat e cadeia de recurso | 0/TBD | Not started | - |
 | 3. Especificações e classificação exato/parecido | 0/TBD | Not started | - |
 | 4. Embalagens, custo total e folha preenchida | 0/TBD | Not started | - |

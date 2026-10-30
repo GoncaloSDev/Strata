@@ -12,25 +12,24 @@ Para cada produto da lista, mostrar o custo total mais baixo real (com IVA, para
 
 ### Validated
 
-(None yet — ship to validate)
+- ✓ Entrada principal: folha Excel de formato fixo (Produto, Família, Tamanho, Unidade, Qty, Referência, Notas), com modelo fornecido pela app — Phase 1 (LIST-04, LIST-05)
+- ✓ Introduzir também uma lista de compras colada como texto, para pesquisas rápidas — Phase 1 (LIST-01)
+- ✓ Pesquisa em texto livre para qualquer produto (OSB, tijolo, mesa, mobília...), sem categorias fixas no código — Phase 1 (LIST-02)
+- ✓ Recolher preços na hora da pesquisa (não de uma base de dados pré-recolhida) — Phase 1
+- ✓ Normalizar todos os preços para "com IVA 23%", detetando se cada loja mostra o preço com ou sem IVA — Phase 1 (PRICE-01)
+- ✓ Calcular preço por unidade normalizado (€/un, €/m², €/m, €/kg, €/L) — Phase 1 (PRICE-02)
+- ✓ Mostrar o stock quando o site o indica (sem filtrar) — Phase 1 (RES-02)
 
 ### Active
 
-- [ ] Entrada principal: folha Excel de formato fixo (Produto, Família, Tamanho, Unidade, Qty, Referência, Notas), com modelo fornecido pela app
 - [ ] Devolver a folha original preenchida com o melhor preço, loja e link, além do Excel detalhado
-- [ ] Introduzir também uma lista de compras colada como texto, para pesquisas rápidas
-- [ ] Pesquisa em texto livre para qualquer produto (OSB, tijolo, mesa, mobília...), sem categorias fixas no código
-- [ ] Obter preços das lojas fixas: Obras 360, Obramat, Allmat, Bricomarché
+- [ ] Obter preços das lojas fixas: falta a Obramat (Allmat, Bricomarché e Obras 360 feitas na Phase 1: STORE-01/02/03)
 - [ ] Descobrir automaticamente outras lojas online portuguesas que vendem o produto
-- [ ] Recolher preços na hora da pesquisa (não de uma base de dados pré-recolhida)
-- [ ] Normalizar todos os preços para "com IVA 23%", detetando se cada loja mostra o preço com ou sem IVA
-- [ ] Calcular preço por unidade normalizado (unidade, m², pack, palete)
 - [ ] Escolher a combinação de embalagens (avulso, pack, palete) com menor custo total para a quantidade pedida, mesmo que implique comprar a mais
 - [ ] Mostrar primeiro os produtos exatos e, à parte, os parecidos, marcados com a diferença (ex.: 2,44×1,22 m em vez de 2,5×1,25 m)
-- [ ] Mostrar o stock quando o site o indica (sem filtrar)
 - [ ] Tabela por produto ordenada por custo total, com link para a página da loja
 - [ ] Exportar a lista com os resultados para Excel/PDF
-- [ ] Quando uma loja falha ou bloqueia, tentar outra via (browser automático, IA) antes de desistir; se mesmo assim falhar, marcar a falha de forma visível
+- [ ] Quando uma loja falha ou bloqueia, tentar outra via (browser automático, IA) antes de desistir; se mesmo assim falhar, marcar a falha de forma visível (a marcação visível do estado de cada loja já existe desde a Phase 1, STORE-05; falta a cadeia de recurso)
 - [ ] Sugerir passar para a lista fixa as lojas descobertas que funcionam bem
 
 ### Out of Scope
@@ -74,18 +73,19 @@ Para cada produto da lista, mostrar o custo total mais baixo real (com IVA, para
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
 | Ferramenta pessoal, não produto público | Uso próprio nas obras do utilizador | — Pending |
-| Preços na hora em vez de base de dados | O preço tem de estar atualizado no momento da compra | — Pending |
+| Preços na hora em vez de base de dados | O preço tem de estar atualizado no momento da compra | ✓ Good — Phase 1: folha de 3 linhas em 26 s, 3 lojas |
 | Lista fixa de 4 lojas + descoberta automática | Lojas de confiança garantidas + cobertura nacional | — Pending |
-| Normalizar tudo para preço com IVA 23% | As lojas misturam preços com e sem IVA | — Pending |
+| Normalizar tudo para preço com IVA 23% | As lojas misturam preços com e sem IVA | ✓ Good — Phase 1: Obras 360 convertida e confirmada (±0,01 €) contra o preço com IVA da loja |
 | Exatos e parecidos separados | Não perder alternativas mais baratas com medidas próximas, sem as confundir com o pedido | — Pending |
 | Otimizar a embalagem pela quantidade pedida | Uma palete pode sair mais barata do que unidades avulsas | — Pending |
 | Em falha, tentar outra via antes de desistir | Uma loja em falta pode esconder o preço mais baixo | — Pending |
 | Jev (TypeSafe AI) como candidato para classificar anúncios | Sugestão do utilizador; barato e feito para decisões tipadas | — Pending |
 | Sem categorias fixas no código | Tem de encontrar tijolos, OSB e também mobília | — Pending |
-| Bricomarché: preço mais barato entre todas as lojas físicas, com o nome da loja | O preço varia por loja; o utilizador quer o mínimo | — Pending |
+| Bricomarché: preço mais barato entre todas as lojas físicas, com o nome da loja | O preço varia por loja; o utilizador quer o mínimo | ⚠️ Revisit — Phase 1 UAT (G-01-3): passa a ser a loja mais barata **com stock**; a mais barata sem stock fica numa nota |
+| Mostrar só ofertas que batem o produto pedido; as outras contadas como escondidas | Na UAT apareceu cola "para OSB" antes da placa de 12 mm; nada se esconde em silêncio | ✓ Good — Phase 1 (G-01-5, emenda D-15); produto vs menção fica para a Phase 3 (IA) |
 | Obramat: usar a pesquisa direta do site (`/search?q=`) apesar do robots.txt | Escolha do utilizador: mais simples e rápido; uso pessoal, baixo volume, um pedido de cada vez | — Pending |
 | Claude Haiku 5.5 para extração e classificação na v1; Jev só num teste comparativo | O Jev não extrai valores (só escolha/pontuação/sim-não) | — Pending |
-| Excel de formato fixo como entrada principal; texto colado como secundária | É a base do uso real; formato fixo evita adivinhar colunas | — Pending |
+| Excel de formato fixo como entrada principal; texto colado como secundária | É a base do uso real; formato fixo evita adivinhar colunas | ✓ Good — Phase 1 (lista m² no Excel por testar: sem Excel na máquina) |
 | Resultados na folha original preenchida + Excel detalhado | O utilizador continua a trabalhar na sua folha e tem o detalhe à parte | — Pending |
 | Folha preenchida gravada como cópia, nunca por cima do original | O openpyxl apaga imagens e gráficos ao gravar; não perder dados do utilizador | — Pending |
 
@@ -107,4 +107,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-10-22 after initialization*
+*Last updated: 2026-10-30 after Phase 1*

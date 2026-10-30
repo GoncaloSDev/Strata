@@ -1,43 +1,43 @@
 ---
 gsd_state_version: "1.0"
-current_phase: 01
-current_phase_name: Folha Excel e preços da Allmat, Bricomarché e Obras 360
-status: verifying
-stopped_at: Completed 01-12-PLAN.md
-last_updated: "2026-10-23T23:01:24.712Z"
-last_activity: 2026-10-23
-last_activity_desc: Phase 01 execution started
-state_head: ebe88e448608872b941c603754c8a01313076988
+current_phase: 2
+current_phase_name: Obramat e cadeia de recurso
+status: planning
+stopped_at: Phase 1 complete, ready to plan Phase 2
+last_updated: "2026-10-30T16:40:43.245Z"
+last_activity: 2026-10-30
+last_activity_desc: Phase 1 complete, transitioned to Phase 2
+state_head: 9b5cb7cd74d49bcbccd92a75a48b4891a6cb9b21
 progress:
   total_phases: 6
-  completed_phases: 0
+  completed_phases: 1
   total_plans: 12
   completed_plans: 12
-  percent: 0
+  percent: 17
 ---
 
 # Project State
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-10-22)
+See: .planning/PROJECT.md (updated 2026-10-30)
 
 **Core value:** Para cada produto da lista, mostrar o custo total mais baixo real (com IVA, para a quantidade pedida) entre as lojas portuguesas, com link para comprar: igual ou mais barato do que uma pesquisa feita à mão, e em minutos em vez de horas.
-**Current focus:** Phase 01 — Folha Excel e preços da Allmat, Bricomarché e Obras 360
+**Current focus:** Phase 2 — Obramat e cadeia de recurso
 
 ## Current Position
 
-Phase: 01 (Folha Excel e preços da Allmat, Bricomarché e Obras 360) — EXECUTING
-Plan: 12 of 12
-Status: Phase complete — ready for verification
-Last activity: 2026-10-23 — Phase 01 execution started
+Phase: 2 — Obramat e cadeia de recurso
+Plan: Not started
+Status: Ready to plan
+Last activity: 2026-10-30 — Phase 1 complete, transitioned to Phase 2
 
-Progress: [░░░░░░░░░░] 0%
+Progress: [██░░░░░░░░] 17%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 0
+- Total plans completed: 12
 - Average duration: -
 - Total execution time: 0 hours
 
@@ -45,7 +45,7 @@ Progress: [░░░░░░░░░░] 0%
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| - | - | - | - |
+| 1 | 12 | - | - |
 
 **Recent Trend:**
 - Last 5 plans: -
@@ -122,9 +122,11 @@ None yet.
 
 - [Phase 2]: Escrever uma nota curta de âmbito legal antes de começar (uso pessoal, ritmo humano, sem CAPTCHA, proxies nem sessões iniciadas)
 - [Phase 2]: Resistência ao DataDome da Obramat ao longo de 10 itens não testada; recurso = Chrome dedicado (`.claude-chrome`) a ritmo humano
-- [Phase 1]: Bricomarché demora cerca de 12 s por página; `orderby=price` não ordena com `type=variation` (confirmado na pesquisa) — os planos usam pais → top 10 → variações
+- [Phase 1]: Bricomarché demora cerca de 12 s por página; `orderby=price` não ordena com `type=variation` (confirmado na pesquisa) — os planos usam pais → top 10 → variações. Pesa no limite de 5 min da Phase 2
+- [Phase 1]: 01-VALIDATION.md ainda em draft (auditoria Nyquist por fazer: `/gsd-validate-phase 1`)
+- [Phase 1]: lista m² da coluna Unidade no Excel por testar (sem Excel na máquina; follow-up no 01-UAT.md)
+- [Phase 3]: produto vs menção ("cola para OSB" com todas as palavras no título), gamas no nome do pai ("9-30MM") e Tamanho em unidades diferentes ficam para a classificação exato/parecido
 - [Phase 5]: Correr o `ui-ux-pro-max` (design system com `--persist`) antes do primeiro ecrã
-- [Phase 1 verify]: filtro de palavras esconde produtos certos na Obras 360: 'tinta branca' escondeu as 8 (Dyrup 15L Branco Mate e Mapei BRANCO são o produto); género Branco/branca e 'OSB3' não batem. Decidir se é lacuna da fase ou Phase 3
 
 ### Quick Tasks Completed
 
@@ -142,6 +144,6 @@ Items acknowledged and deferred at milestone close, most recent first:
 
 ## Session Continuity
 
-Last session: 2026-10-23T23:01:24.650Z
-Stopped at: Completed 01-12-PLAN.md
+Last session: 2026-10-30
+Stopped at: Phase 1 complete, ready to plan Phase 2
 Resume file: None
