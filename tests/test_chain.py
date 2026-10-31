@@ -46,10 +46,14 @@ def fake_store(name, *answers):
                            search_page=lambda q: f"https://x.pt/?s={q}")
 
 
+async def empty_page(url, params=None, idle=False):
+    return "<html><body></body></html>"
+
+
 def transports():
-    """API e browser falsos com a mesma cache, como o Fetcher e o BrowserFetcher."""
+    """API e browser falsos com a mesma cache, como o Fetcher e o BrowserFetcher (o browser dá ao degrau IA uma página)."""
     cache = {}  # "kind" distingue os dois: SimpleNamespace compara por atributos
-    return SimpleNamespace(kind="API", cache=cache), SimpleNamespace(kind="browser", cache=cache)
+    return SimpleNamespace(kind="API", cache=cache), SimpleNamespace(kind="browser", cache=cache, get_html=empty_page)
 
 
 def go(store, fetch, browser, product="osb"):
@@ -105,7 +109,7 @@ def test_todos_falham_bloqueada_com_o_motivo_de_cada_degrau():
     api, browser = transports()
     sr = go(fake_store("Falsa", StoreBlocked("HTTP 403"), StoreError("x")), api, browser)
     assert sr.status == "bloqueada"
-    assert sr.detail == f"API: HTTP 403; JSON-LD: {JS_PAGE}; browser: x"
+    assert sr.detail == f"API: HTTP 403; JSON-LD: {JS_PAGE}; browser: x; IA: IA desligada nos testes"
     assert "browser_only" not in api.cache
 
 
@@ -118,7 +122,7 @@ def test_todos_falham_estado_pela_prioridade(first, status):
     sr = go(fake_store("Falsa", first, StoreError("x")), api, browser)
     assert sr.status == status
     assert sr.detail.startswith("API: ")
-    assert sr.detail.endswith(f"; JSON-LD: {JS_PAGE}; browser: x")
+    assert sr.detail.endswith(f"; JSON-LD: {JS_PAGE}; browser: x; IA: IA desligada nos testes")
 
 
 def test_prazo_partilhado_acaba_no_browser(monkeypatch):
