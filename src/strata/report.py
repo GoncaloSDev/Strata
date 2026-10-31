@@ -19,6 +19,8 @@ def _offer_lines(o: Offer) -> list[str]:
     info = [f"IVA: {o.vat_origin} ({clean(o.vat_evidence)})", unit_price, clean(o.stock)]
     if o.location:
         info.append(f"loja: {clean(o.location)}")
+    if o.method:
+        info.append(f"método: {o.method}")
     info += [f"escalões: −{fmt_qty(p)}% a partir de {fmt_qty(n)}" for n, p in o.tiers]
     if o.broadened:
         info.append("pesquisa alargada")

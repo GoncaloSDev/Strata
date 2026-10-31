@@ -27,33 +27,40 @@ def build_parser() -> argparse.ArgumentParser:
     return p
 
 
-async def _with_fetch(work, fetch, record):
-    """Corre work(fetch); sem fetch (fora dos testes), abre a sessão curl_cffi da execução."""
+async def _with_fetch(work, fetch, record, browser=None):
+    """Corre work(fetch, browser); sem fetch (fora dos testes), abre a sessão curl_cffi e o browser da execução."""
     if fetch is not None:
-        return await work(fetch)
+        return await work(fetch, browser)
     from curl_cffi.requests import AsyncSession
 
+    from strata.browser import BrowserFetcher
+
     async with AsyncSession(impersonate="chrome", timeout=(10, 30)) as session:
-        return await work(Fetcher(session, record))
+        f = Fetcher(session, record)
+        b = BrowserFetcher(f)
+        try:
+            return await work(f, b)
+        finally:
+            await b.close()  # D-06: fecha o Chrome dedicado só se foi a app a abri-lo
 
 
-async def _search(items, fetch, record, out) -> None:
-    async def work(f):
-        async for result in search.run(items, f):
+async def _search(items, fetch, record, out, browser=None) -> None:
+    async def work(f, b):
+        async for result in search.run(items, f, b):
             report.print_item(result, out)
             out.flush()
 
-    await _with_fetch(work, fetch, record)
+    await _with_fetch(work, fetch, record, browser)
 
 
-def cmd_verificar(args, fetch, out) -> int:
-    rows = asyncio.run(_with_fetch(search.verificar, fetch, args.record))
+def cmd_verificar(args, fetch, out, browser=None) -> int:
+    rows = asyncio.run(_with_fetch(search.verificar, fetch, args.record, browser))
     for label, ok, msg in rows:
         print(f"{report.clean(label)}: {'OK' if ok else 'FALHOU'} — {report.clean(msg)}", file=out)
     return 0 if all(ok for _, ok, _ in rows) else 1
 
 
-def cmd_pesquisar(args, fetch, out) -> int:
+def cmd_pesquisar(args, fetch, out, browser=None) -> int:
     if args.ficheiro:
         try:
             items, invalid = sheet.read_sheet(args.ficheiro)
@@ -77,7 +84,7 @@ def cmd_pesquisar(args, fetch, out) -> int:
         return 2
     n = len(search.STORES)
     print(f"A pesquisar {len(items)} itens em {n} {'loja' if n == 1 else 'lojas'}…", file=sys.stderr)
-    asyncio.run(_search(items, fetch, args.record, out))
+    asyncio.run(_search(items, fetch, args.record, out, browser))
     return 0
 
 
@@ -96,7 +103,7 @@ def cmd_modelo(out) -> int:
     return 0
 
 
-def main(argv=None, fetch=None) -> int:
+def main(argv=None, fetch=None, browser=None) -> int:
     for stream in (sys.stdout, sys.stderr):
         if hasattr(stream, "reconfigure"):
             stream.reconfigure(encoding="utf-8")  # "m²" e acentos certos em pipe no Windows (Pitfall 8)
@@ -105,8 +112,8 @@ def main(argv=None, fetch=None) -> int:
     if args.cmd == "modelo":
         return cmd_modelo(out)
     if args.cmd == "verificar":
-        return cmd_verificar(args, fetch, out)
-    return cmd_pesquisar(args, fetch, out)
+        return cmd_verificar(args, fetch, out, browser)
+    return cmd_pesquisar(args, fetch, out, browser)
 
 
 if __name__ == "__main__":

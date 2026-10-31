@@ -42,6 +42,7 @@ class Offer:
     tiers: list[tuple[Decimal, Decimal]] = field(default_factory=list)  # (a partir de N, -%)
     broadened: bool = False
     note: str = ""
+    method: str = ""  # degrau que produziu a oferta: API / JSON-LD / browser / IA (D-16)
 
 
 @dataclass
