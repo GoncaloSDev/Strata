@@ -4,7 +4,9 @@ import io
 import re
 
 import strata.search
+from conftest import FakeFetcher
 from strata.__main__ import main
+from strata.fetch import StoreBlocked
 from strata.stores import allmat, bricomarche, obramat, obras360
 
 ALLMAT = "allmat.pt/wp-json/wc/store/v1/products?search="
@@ -22,9 +24,8 @@ def blocks(out: str) -> dict[str, str]:
     return {p.split(" (", 1)[0]: p for p in parts}
 
 
-def test_tres_itens_tres_lojas_pela_ordem(fake, monkeypatch, capsys):
-    assert strata.search.STORES == (allmat, bricomarche, obras360, obramat)  # as lojas reais, sem monkeypatch
-    monkeypatch.setattr("sys.stdin", io.StringIO("placa osb 3 un\ncimento 10 saco\nxyzqwkk 1 un\n\n"))
+def route_api_stores(fake):
+    """Rotas das 3 lojas de API para 'placa osb', 'cimento' e 'xyzqwkk'."""
     fake.route(ALLMAT + "placa+osb", "allmat_products_search-osb_no-results.json")
     fake.route(ALLMAT + "cimento", "allmat_products_search-cimento.json")
     fake.route(ALLMAT + "xyzqwkk", [])
@@ -37,9 +38,19 @@ def test_tres_itens_tres_lojas_pela_ordem(fake, monkeypatch, capsys):
     fake.route(O360_LIST + "placa+osb", "obras360_product-list_osb.json")
     fake.route(O360_DETAIL + PLACA_ID, "obras360_product-details_osb-parent.json")
     fake.route(O360_LIST, "obras360_product-list_no-results.json")  # cimento e xyzqwkk
+
+
+def route_obramat(fake):
     fake.route("obramat.pt/search?q=placa+osb", "obramat_search-osb_browser.html")
     fake.route("obramat.pt/produtos/", "obramat_product-osb-18_ctx201_tiers.html")  # as 3 primeiras placas
     fake.route("obramat.pt/search?q=", "obramat_search-no-results_browser.html")  # cimento e xyzqwkk
+
+
+def test_tres_itens_tres_lojas_pela_ordem(fake, monkeypatch, capsys):
+    assert strata.search.STORES == (allmat, bricomarche, obras360, obramat)  # as lojas reais, sem monkeypatch
+    monkeypatch.setattr("sys.stdin", io.StringIO("placa osb 3 un\ncimento 10 saco\nxyzqwkk 1 un\n\n"))
+    route_api_stores(fake)
+    route_obramat(fake)
 
     assert main(["pesquisar"], fetch=fake) == 0
 
@@ -56,7 +67,30 @@ def test_tres_itens_tres_lojas_pela_ordem(fake, monkeypatch, capsys):
     assert "mais barata sem stock: 18,49 € em Coina - Barreiro" in osb
     assert "  Obras 360: ok" in osb and "IVA: indicado pela loja (tax_percentage=23)" in osb
     assert "  Obramat: ok" in osb and "loja: OBRAMAT Lisboa - Alfragide" in osb
+    assert "método: API" in osb and "método: browser" not in osb
     assert "+1 ofertas escondidas: título sem 'placa osb'" in osb  # a tinta para piscinas
     assert "+1 ofertas não mostradas" in osb  # 6 placas, 5 mostradas
     assert "  Allmat: ok" in by_item["cimento"] and "4,22 €" in by_item["cimento"]
     assert "  Obramat: sem resultados" in by_item["cimento"]
+
+
+def test_obramat_bloqueada_vai_ao_browser_e_fica_la(fake, monkeypatch, capsys):
+    monkeypatch.setattr("sys.stdin", io.StringIO("placa osb 3 un\ncimento 10 saco\n\n"))
+    route_api_stores(fake)
+    fake.route("obramat.pt", StoreBlocked("HTTP 403"))  # o DataDome no pedido simples
+    browser = FakeFetcher()
+    browser.cache = fake.cache  # o mesmo estado da execução, como o BrowserFetcher
+    route_obramat(browser)
+
+    assert main(["pesquisar"], fetch=fake, browser=browser) == 0
+
+    by_item = blocks(capsys.readouterr().out)
+    osb = by_item["placa osb"]
+    assert "  Obramat: ok" in osb
+    assert "método: browser" in osb
+    assert "nota: antes do browser: API: HTTP 403" in osb
+    assert "  Obramat: sem resultados" in by_item["cimento"]
+    # D-08: o 2.º item vai logo ao browser, sem o pedido simples
+    assert not [c for c in fake.calls if "obramat" in c and "cimento" in c]
+    assert [c for c in fake.calls if "obramat" in c]  # o 1.º item tentou mesmo o pedido simples
+    assert not browser.missing

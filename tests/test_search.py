@@ -30,6 +30,11 @@ def item(product="cimento", unit="saco") -> Item:
     return Item(row=2, product=product, qty=Decimal(10), unit=unit)
 
 
+def nofetch():
+    """Transporte sem pedidos: só a cache da execução, que a cadeia lê (D-08)."""
+    return SimpleNamespace(cache={})
+
+
 def fake_store(name, *answers):
     """Loja falsa: cada chamada devolve a resposta seguinte (Found, Exception ou corrotina)."""
     calls, ranks = [], []
@@ -143,7 +148,7 @@ def test_broadened(query, expected):
 
 def test_pesquisa_alargada_quando_a_loja_da_zero():
     store = fake_store("Falsa", Found([], 0), Found([offer("PLACA OSB")], 1))
-    sr = asyncio.run(search_store(store, item("OSB 12mm", "un"), None))
+    sr = asyncio.run(search_store(store, item("OSB 12mm", "un"), nofetch()))
     assert sr.status == "ok"
     assert sr.broadened_query == "OSB"
     assert [o.broadened for o in sr.offers] == [True]
@@ -153,7 +158,7 @@ def test_pesquisa_alargada_quando_a_loja_da_zero():
 
 def test_pesquisa_alargada_tambem_a_zero():
     store = fake_store("Falsa", Found([], 0))
-    sr = asyncio.run(search_store(store, item("OSB 12mm", "un"), None))
+    sr = asyncio.run(search_store(store, item("OSB 12mm", "un"), nofetch()))
     assert sr.status == "sem resultados"
     assert sr.detail == "também sem resultados com 'OSB'"
     assert store.calls == ["OSB 12mm", "OSB"]
@@ -161,7 +166,7 @@ def test_pesquisa_alargada_tambem_a_zero():
 
 def test_sem_pesquisa_alargada_quando_nada_muda():
     store = fake_store("Falsa", Found([], 0))
-    sr = asyncio.run(search_store(store, item("osb", "un"), None))
+    sr = asyncio.run(search_store(store, item("osb", "un"), nofetch()))
     assert sr.status == "sem resultados"
     assert store.calls == ["osb"]
 
@@ -180,7 +185,7 @@ def report(sr, product):
 
 def test_tudo_escondido_diz_quantas_no_cabecalho():
     store = fake_store("Falsa", Found([], 8, hidden=8))
-    sr = asyncio.run(search_store(store, item("tinta branca", "L"), None))
+    sr = asyncio.run(search_store(store, item("tinta branca", "L"), nofetch()))
     assert (sr.status, sr.offers) == ("ok", [])
     assert sr.detail == "0 ofertas mostradas; 8 escondidas pelo filtro de título"
     assert store.calls == ["tinta branca"]  # sem números: broadened dá None
@@ -189,7 +194,7 @@ def test_tudo_escondido_diz_quantas_no_cabecalho():
 
 def test_tudo_escondido_com_medidas_tenta_a_alargada():
     store = fake_store("Falsa", Found([], 5, hidden=5), Found([offer("PLACA OSB 9 MM")], 1))
-    sr = asyncio.run(search_store(store, item("OSB 12mm", "un"), None))
+    sr = asyncio.run(search_store(store, item("OSB 12mm", "un"), nofetch()))
     assert store.calls == ["OSB 12mm", "OSB"]
     assert sr.broadened_query == "OSB"
     assert [o.broadened for o in sr.offers] == [True]
@@ -201,7 +206,7 @@ def test_tudo_escondido_com_medidas_tenta_a_alargada():
 @pytest.mark.parametrize("second", [Found([], 3, hidden=3), Found([], 0)])
 def test_tudo_escondido_alargada_sem_ofertas_fica_a_primeira(second):
     store = fake_store("Falsa", Found([], 5, hidden=5), second)
-    sr = asyncio.run(search_store(store, item("OSB 12mm", "un"), None))
+    sr = asyncio.run(search_store(store, item("OSB 12mm", "un"), nofetch()))
     assert store.calls == ["OSB 12mm", "OSB"]
     assert (sr.status, sr.broadened_query, sr.hidden) == ("ok", None, 5)
     assert sr.detail == "0 ofertas mostradas; 5 escondidas pelo filtro de título"
@@ -215,7 +220,7 @@ def test_alargada_mostra_so_as_que_batem_a_pergunta_completa():
     wide = Found([offer("COLA PARA OSB", "8"), offer("PLACA OSB 12 MM X", "25"), offer("PLACA OSB 9 MM", "15"),
                   offer("PLACA OSB3 12mm", "19")], 4, hidden=3)
     store = fake_store("Falsa", Found([], 0), wide)
-    sr = asyncio.run(search_store(store, item("OSB 12mm", "un"), None))
+    sr = asyncio.run(search_store(store, item("OSB 12mm", "un"), nofetch()))
     assert [o.title for o in sr.offers] == ["PLACA OSB3 12mm", "PLACA OSB 12 MM X"]  # mais baratas primeiro
     assert all(o.broadened for o in sr.offers)
     assert (sr.status, sr.broadened_query, sr.hidden, sr.wide_only) == ("ok", "OSB", 3, 2)
@@ -228,7 +233,7 @@ def test_alargada_mostra_so_as_que_batem_a_pergunta_completa():
 @pytest.mark.parametrize("title", ["PLACA OSB 12 MM", "PLACA OSB 9 MM"])  # todas batem / nenhuma bate
 def test_alargada_sem_mistura_fica_como_antes(title):
     store = fake_store("Falsa", Found([], 0), Found([offer(title)], 1))
-    sr = asyncio.run(search_store(store, item("OSB 12mm", "un"), None))
+    sr = asyncio.run(search_store(store, item("OSB 12mm", "un"), nofetch()))
     assert [o.title for o in sr.offers] == [title]
     assert sr.offers[0].broadened
     assert (sr.broadened_query, sr.hidden, sr.wide_only) == ("OSB", 0, 0)
@@ -238,7 +243,7 @@ def test_alargada_sem_mistura_fica_como_antes(title):
 def test_tudo_escondido_alargada_com_ofertas_que_batem():
     store = fake_store("Falsa", Found([], 5, hidden=5),
                        Found([offer("PLACA OSB 9 MM", "15"), offer("PLACA OSB 12 MM", "19")], 2))
-    sr = asyncio.run(search_store(store, item("OSB 12mm", "un"), None))
+    sr = asyncio.run(search_store(store, item("OSB 12mm", "un"), nofetch()))
     assert store.calls == ["OSB 12mm", "OSB"]  # D-14: uma só tentativa extra, nenhum pedido novo
     assert [o.title for o in sr.offers] == ["PLACA OSB 12 MM"]
     assert sr.wide_only == 1
@@ -274,10 +279,10 @@ class FakeSession:
 
 
 @pytest.mark.parametrize("session, expected", [
-    (FakeSession(403), "bloqueada — HTTP 403"),
+    (FakeSession(403), "bloqueada — API: HTTP 403"),
     (FakeSession(200, {"cf-mitigated": "challenge"}), "bloqueada"),
-    (FakeSession(500), "erro — StoreError: HTTP 500"),
-    (FakeSession(200, body=b"<html><title>Just a moment...</title></html>"), "bloqueada — página de desafio"),
+    (FakeSession(500), "erro — API: StoreError: HTTP 500"),
+    (FakeSession(200, body=b"<html><title>Just a moment...</title></html>"), "bloqueada — API: página de desafio"),
     (FakeSession(200, body=b"<html><p>outra coisa</p></html>"), "resposta não é JSON"),
     (FakeSession(exc=Timeout("demorou")), "tempo esgotado"),
 ])
@@ -296,7 +301,7 @@ def test_prazo_esgotado(monkeypatch):
         return Found([], 0)
 
     monkeypatch.setattr(strata.search, "DEADLINE_S", 0.05)
-    sr = asyncio.run(search_store(fake_store("Lenta", slow), item(), None))
+    sr = asyncio.run(search_store(fake_store("Lenta", slow), item(), nofetch()))
     assert sr.status == "tempo esgotado"
 
 
@@ -318,7 +323,7 @@ def test_ordem_estavel_pelo_preco_na_unidade_pedida():
         offer("d", "9", content=Decimal(3), content_unit="kg"),   # 3 €/kg
     ]
     store = fake_store("Falsa", Found(offers, 4))
-    sr = asyncio.run(search_store(store, item("cola", "kg"), None))
+    sr = asyncio.run(search_store(store, item("cola", "kg"), nofetch()))
     assert [o.title for o in sr.offers] == ["b", "d", "a", "c"]
     assert sr.offers[-1].note == "não convertível para kg: conteúdo da embalagem desconhecido"
     assert sr.offers[0].note == ""
@@ -339,13 +344,13 @@ def test_tres_lojas_pela_ordem_de_stores(monkeypatch):
     monkeypatch.setattr(strata.search, "STORES", stores)
 
     async def go():
-        return [r async for r in strata.search.run([item()], None)]
+        return [r async for r in strata.search.run([item()], nofetch())]
 
     (result,) = asyncio.run(go())
     out = io.StringIO()
     print_item(result, out)
     text = out.getvalue()
-    heads = ["Primeira: ok", "Segunda: erro — ValueError: campo em falta", "Terceira: sem resultados"]
+    heads = ["Primeira: ok", "Segunda: erro — API: ValueError: campo em falta", "Terceira: sem resultados"]
     for h in heads:
         assert h in text, h
     assert text.index(heads[0]) < text.index(heads[1]) < text.index(heads[2])
@@ -490,13 +495,15 @@ def test_verificar_allmat_nenhuma_area_de_caixa_lida(fake, monkeypatch):
 
 
 @pytest.mark.parametrize("answer, expected", [
-    (StoreBlocked("HTTP 403"), "estado bloqueada: HTTP 403"),
-    ({"não": "é lista"}, "estado erro: ValueError: resposta da Allmat não é uma lista de produtos"),
+    (StoreBlocked("HTTP 403"), "estado bloqueada: API: HTTP 403"),
+    ({"não": "é lista"}, "estado erro: API: ValueError: resposta da Allmat não é uma lista de produtos"),
 ])
 def test_verificar_loja_bloqueada_ou_em_erro(fake, monkeypatch, answer, expected):
     route_canaries(fake, allmat_cimento=answer)
     only(monkeypatch, allmat, "cimento")
-    assert check(fake) == [("Allmat (cimento)", False, expected)]
+    ((label, ok, msg),) = check(fake)
+    assert (label, ok) == ("Allmat (cimento)", False)
+    assert msg.startswith(expected), msg
 
 
 # --- WR-17: na alargada, o produto da linha escolhe os pais antes do corte K ---
