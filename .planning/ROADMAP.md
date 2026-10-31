@@ -86,7 +86,27 @@ Plans:
   2. Quando o método principal de uma loja falha (ex.: desativado à força num teste), a app tenta JSON-LD, browser automático e IA, por esta ordem, e cada oferta mostra o método que funcionou; se todos falharem, a loja aparece como falhada com o motivo
   3. Uma folha Excel de 10 itens fica resolvida nas 4 lojas fixas em menos de 5 minutos, cada item mostra o estado das 4 lojas e a verificação das lojas cobre as 4
 
-**Plans**: TBD
+**Plans:** 6 plans
+
+Plans:
+**Wave 1**
+- [ ] 02-01-PLAN.md — Obramat como 4.ª loja: pesquisa direta, armazém de Alfragide, IVA conferido, escalões e stock nas 3 primeiras ofertas; nota de âmbito legal no README
+
+**Wave 2** *(blocked on Wave 1 completion)*
+- [ ] 02-02-PLAN.md — Checkpoint de pacotes; cadeia API → browser no Chrome dedicado (método por oferta, D-08) e `--sem-principal LOJA`
+
+**Wave 3** *(blocked on Wave 2 completion)*
+- [ ] 02-03-PLAN.md — CAPTCHA: "abrir à mão" com o link e sem mais pedidos à loja; verificação do DataDome no browser
+
+**Wave 4** *(blocked on Wave 3 completion)*
+- [ ] 02-04-PLAN.md — Degrau JSON-LD (Allmat e Obramat) e falha rápida nas lojas montadas com JavaScript
+
+**Wave 5** *(blocked on Wave 4 completion)*
+- [ ] 02-05-PLAN.md — Degrau IA: até 5 ofertas validadas e marcadas "lido por IA", pela API ou pelo `claude -p`
+
+**Wave 6** *(blocked on Wave 5 completion)*
+- [ ] 02-06-PLAN.md — `verificar` com as 4 lojas, README e folha de 10 itens ao vivo em menos de 5 minutos
+
 **Research flag**: yes — tolerância do DataDome da Obramat ao longo de uma lista de 10 itens; onde está a tabela de escalões da Obramat; se `contextCode=000` dá o preço certo
 
 ### Phase 3: Especificações e classificação exato/parecido
@@ -163,7 +183,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Folha Excel e preços da Allmat, Bricomarché e Obras 360 | 12/12 | Complete    | 2026-10-30 |
-| 2. Obramat e cadeia de recurso | 0/TBD | Not started | - |
+| 2. Obramat e cadeia de recurso | 0/6 | Not started | - |
 | 3. Especificações e classificação exato/parecido | 0/TBD | Not started | - |
 | 4. Embalagens, custo total e folha preenchida | 0/TBD | Not started | - |
 | 5. App no browser e exportação | 0/TBD | Not started | - |
