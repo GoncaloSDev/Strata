@@ -6,7 +6,7 @@ import os
 import re
 import shutil
 import tempfile
-from decimal import Decimal, InvalidOperation
+from decimal import Decimal
 from urllib.parse import urljoin, urlsplit
 
 from selectolax.lexbor import LexborHTMLParser
@@ -46,7 +46,12 @@ PROMPT = (
 )
 
 DROP = ["script", "style", "noscript", "svg", "template"]
-DOT_DECIMAL = re.compile(r"\d+\.\d{2}")
+# Formatos de preço aceites: "1.299,60"/"1.299", "28,50"/"62"/"1299,60" e "28.50" (este lido tal como está).
+PRICE_FORMAT = re.compile(r"\d{1,3}(?:\.\d{3})+(?:,\d{1,2})?|\d+(?:,\d{1,2})?|(?P<dot>\d+\.\d{2})")
+# shortcut: só preços com o € depois do número (formato das páginas gravadas da Obramat e da Allmat); se uma loja escrever "€ 28,50", as ofertas IA dela ficam rejeitadas com nota: gravar a página e alargar
+TEXT_PRICE = re.compile(r"(?<![\d.,])(\d{1,3}(?:[ .]\d{3})+(?:,\d{1,2})?|\d+(?:,\d{1,2})?) ?€")
+# shortcut: o preço tem de estar nos 300 caracteres depois do link (medido: 102–240 nas páginas gravadas; o do produto seguinte a ≥ 419); se uma loja mostrar o preço antes do link, as ofertas IA dela ficam rejeitadas com nota: gravar a página e afinar
+PRICE_WINDOW = 300
 
 
 def page_text(html: str, url: str) -> str:
@@ -61,36 +66,40 @@ def page_text(html: str, url: str) -> str:
 
 
 def parse_price(s: str) -> Decimal | None:
-    """"28,50 €" → 28.50; "1.299,60" → 1299.60; "28.50" → 28.50; inválido ou ≤ 0 → None."""
+    """"28,50 €" → 28.50; "1.299,60" → 1299.60; "28.50" → 28.50; "62 €" → 62; "12.5", "1e3", inválido ou ≤ 0 → None."""
     s = "".join(str(s).replace("€", "").split())  # split() também tira o espaço não separável
-    if "," in s:
-        s = s.replace(".", "").replace(",", ".")
-    elif not DOT_DECIMAL.fullmatch(s):
-        s = s.replace(".", "")
-    try:
-        d = Decimal(s)
-    except InvalidOperation:
+    m = PRICE_FORMAT.fullmatch(s)
+    if m is None:
         return None
-    return d if d.is_finite() and d > 0 else None
+    d = Decimal(s if m["dot"] else s.replace(".", "").replace(",", "."))
+    return d if d > 0 else None
 
 
 def offers_from(rows, text: str, store, query: str, page_url: str) -> Found:
-    """Ofertas da IA validadas contra o texto enviado e o host da loja (T-02-18); as outras ficam contadas.
+    """Ofertas da IA validadas contra o texto enviado (T-02-18, T-02-25, T-02-26); as outras ficam contadas.
+
+    Cada linha só entra com: título; link https no host da página e com outro caminho que não o da pesquisa
+    (fora o url vazio, a própria página e a paginação); o link no texto como "<URL>"; e o preço, por valor,
+    igual a um dos preços em € escritos nos PRICE_WINDOW caracteres a seguir à 1.ª ocorrência desse link.
 
     valid == 0 (a IA devolveu [] ou só ofertas rejeitadas) é falha do degrau (StoreError), nunca "sem resultados",
     como no jsonld.py. Ofertas válidas todas escondidas pelo filtro de título continuam a dar Found (D-14).
     """
-    host = urlsplit(page_url).hostname
+    host, page_path = urlsplit(page_url).hostname, urlsplit(page_url).path
     without_vat = getattr(store, "PAGE_PRICES_WITHOUT_VAT", False)
     evidence = f"{MARK}; página da loja sem IVA, +23%" if without_vat else f"{MARK}; preço com IVA na página da loja"
     offers, valid, rejected = [], 0, 0
     for r in rows[:MAX_OFFERS]:  # D-11
-        title = " ".join(str(r.get("title") or "").split()) if isinstance(r, dict) else ""
-        price_s = " ".join(str(r.get("price") or "").split()) if isinstance(r, dict) else ""
-        url = urljoin(page_url, str(r.get("url") or "")) if isinstance(r, dict) else ""
-        price = parse_price(price_s) if price_s and price_s in text else None
+        r = r if isinstance(r, dict) else {}
+        title = " ".join(str(r.get("title") or "").split())
+        url = urljoin(page_url, str(r.get("url") or ""))
         parts = urlsplit(url)
-        if not title or price is None or parts.scheme != "https" or parts.hostname != host:
+        # só a 1.ª ocorrência: na Allmat o mesmo link volta em "Vista rápida", mesmo antes do produto seguinte
+        at = text.find(f"<{url}>")
+        window = text[at + len(url) + 2:][:PRICE_WINDOW] if at >= 0 else ""
+        price = parse_price(r.get("price") or "")
+        if (not title or parts.scheme != "https" or parts.hostname != host or parts.path == page_path
+                or price is None or price not in {parse_price(m[1]) for m in TEXT_PRICE.finditer(window)}):
             rejected += 1
             continue
         valid += 1
@@ -105,7 +114,7 @@ def offers_from(rows, text: str, store, query: str, page_url: str) -> Found:
                             location=getattr(store, "LOCATION", None), method="IA", note=MARK))
     notes = []
     if rejected:
-        notes.append(f"{rejected} ofertas da IA rejeitadas (preço fora da página ou link fora da loja)")
+        notes.append(f"{rejected} ofertas da IA rejeitadas (link fora da página da loja ou preço longe do link)")
     if valid == 0:  # a IA devolveu [] ou só ofertas rejeitadas: falha do degrau, nunca "sem resultados" (D-16)
         raise StoreError("; ".join(["IA não leu nenhuma oferta válida na página", *notes]))
     return Found(offers, raw=valid, hidden=valid - len(offers), notes=notes)
