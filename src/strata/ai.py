@@ -2,6 +2,7 @@
 
 import asyncio
 import json
+import os
 import re
 import shutil
 import tempfile
@@ -12,7 +13,7 @@ from selectolax.lexbor import LexborHTMLParser
 
 from strata.fetch import StoreError
 from strata.models import Found, Offer
-from strata.money import content_from_title
+from strata.money import add_vat, content_from_title
 from strata.words import title_matches
 
 MODEL = "claude-haiku-5-5"
@@ -76,6 +77,8 @@ def parse_price(s: str) -> Decimal | None:
 def offers_from(rows, text: str, store, query: str, page_url: str) -> Found:
     """Ofertas da IA validadas contra o texto enviado e o host da loja (T-02-18); as outras ficam contadas."""
     host = urlsplit(page_url).hostname
+    without_vat = getattr(store, "PAGE_PRICES_WITHOUT_VAT", False)
+    evidence = f"{MARK}; página da loja sem IVA, +23%" if without_vat else f"{MARK}; preço com IVA na página da loja"
     offers, valid, rejected = [], 0, 0
     for r in rows[:MAX_OFFERS]:  # D-11
         title = " ".join(str(r.get("title") or "").split()) if isinstance(r, dict) else ""
@@ -89,9 +92,11 @@ def offers_from(rows, text: str, store, query: str, page_url: str) -> Found:
         valid += 1
         if not title_matches(query, title):  # D-15 da fase 1
             continue
+        if without_vat:
+            price = add_vat(price, 23)
         content, content_unit = content_from_title(title) or (None, None)
         offers.append(Offer(store=store.NAME, title=title, url=url, price=price, vat_origin="regra da loja",
-                            vat_evidence=f"{MARK}; preço com IVA na página da loja", content=content,
+                            vat_evidence=evidence, content=content,
                             content_unit=content_unit, stock="desconhecido",
                             location=getattr(store, "LOCATION", None), method="IA", note=MARK))
     notes = []
@@ -101,11 +106,35 @@ def offers_from(rows, text: str, store, query: str, page_url: str) -> Found:
 
 
 async def ask(text: str) -> list[dict]:
-    """Único ponto do motor (D-12): devolve as linhas {title, price, url} que a IA leu do texto."""
+    """Único ponto do motor (D-12): API com ANTHROPIC_API_KEY, senão o claude -p; linhas {title, price, url}."""
+    if os.environ.get("ANTHROPIC_API_KEY"):
+        return await _ask_api(text)
     claude = shutil.which("claude")
     if claude is None:
         raise StoreError(NOT_CONFIGURED)
     return await _ask_claude(claude, text)
+
+
+async def _ask_api(text: str) -> list[dict]:
+    """API Anthropic com saída estruturada (o mesmo SCHEMA do claude -p), sem ferramentas (T-02-17)."""
+    import anthropic
+
+    client = anthropic.AsyncAnthropic()  # a chave vem do ambiente; nunca escrita nem impressa (T-02-20)
+    try:
+        r = await client.messages.create(
+            model=MODEL, max_tokens=4096, system=PROMPT, messages=[{"role": "user", "content": text}],
+            output_config={"format": {"type": "json_schema", "schema": SCHEMA}, "effort": "low"})
+    except anthropic.APIError as e:
+        raise StoreError(f"IA (API): {e}") from None
+    if r.stop_reason == "refusal":
+        raise StoreError("IA (API): o modelo recusou ler a página")
+    if r.stop_reason == "max_tokens":
+        raise StoreError("IA (API): resposta cortada (max_tokens)")
+    try:
+        data = json.loads(next(b.text for b in r.content if b.type == "text"))
+        return data["offers"]
+    except (StopIteration, ValueError, KeyError, TypeError):
+        raise StoreError("IA (API): resposta sem JSON") from None
 
 
 async def _ask_claude(path: str, text: str) -> list[dict]:
