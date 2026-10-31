@@ -44,6 +44,10 @@ As decisões D-01 a D-16 da fase 1 (`.planning/phases/01-folha-excel-e-pre-os-da
 - **D-16:** Cada oferta mostra o método que a produziu (API / JSON-LD / browser / IA). Se todos os degraus falharem, a loja aparece falhada com o motivo de cada degrau tentado.
 - **D-17:** Uma opção de desenvolvimento no comando força a falha do método principal de uma loja (ex.: `--sem-principal obramat`), para ver o recurso ao vivo, como o `--record` da fase 1. Os testes com fixtures provam o mesmo sem rede.
 
+### Resposta ao D-03 (2026-10-31, depois da pesquisa)
+- **D-18:** A Obramat lê-se pelo browser (curl 3/3 a 403 do DataDome; Chrome dedicado 21/21 sem CAPTCHA). Com um só armazém (Alfragide, contexto `201`) o preço nacional é o do armazém, por isso não há escolha entre os dois. Escalões e stock exato vêm da página de produto **só para as 3 primeiras ofertas por item (K = 3)**; as restantes ficam com o preço da pesquisa.
+- **D-19:** Na Bricomarché e na Obras 360 (pesquisa montada com JavaScript) o degrau JSON-LD corre e falha logo com o motivo visível ("página montada com JavaScript, sem links de produto"), e a cadeia segue para o browser.
+
 ### Claude's Discretion
 - Quantos produtos da Obramat são vistos loja física a loja física (corte K): o utilizador deixou para depois de medir tempo e bloqueios ao vivo na pesquisa da fase. Ponto de partida: o mesmo padrão K da Bricomarché.
 - Ritmo da Obramat (intervalo entre pedidos, com jitter) dentro de "um pedido de cada vez"; entrada em `LIMITS` do `fetch.py`.
