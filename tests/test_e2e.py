@@ -38,6 +38,7 @@ def test_tres_itens_tres_lojas_pela_ordem(fake, monkeypatch, capsys):
     fake.route(O360_DETAIL + PLACA_ID, "obras360_product-details_osb-parent.json")
     fake.route(O360_LIST, "obras360_product-list_no-results.json")  # cimento e xyzqwkk
     fake.route("obramat.pt/search?q=placa+osb", "obramat_search-osb_browser.html")
+    fake.route("obramat.pt/produtos/", "obramat_product-osb-18_ctx201_tiers.html")  # as 3 primeiras placas
     fake.route("obramat.pt/search?q=", "obramat_search-no-results_browser.html")  # cimento e xyzqwkk
 
     assert main(["pesquisar"], fetch=fake) == 0
