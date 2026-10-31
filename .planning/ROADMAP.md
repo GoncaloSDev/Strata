@@ -86,7 +86,7 @@ Plans:
   2. Quando o método principal de uma loja falha (ex.: desativado à força num teste), a app tenta JSON-LD, browser automático e IA, por esta ordem, e cada oferta mostra o método que funcionou; se todos falharem, a loja aparece como falhada com o motivo
   3. Uma folha Excel de 10 itens fica resolvida nas 4 lojas fixas em menos de 5 minutos, cada item mostra o estado das 4 lojas e a verificação das lojas cobre as 4
 
-**Plans:** 5/6 plans executed
+**Plans:** 6/6 plans executed
 
 Plans:
 **Wave 1**
@@ -105,7 +105,7 @@ Plans:
 - [x] 02-05-PLAN.md — Degrau IA: até 5 ofertas validadas e marcadas "lido por IA", pela API ou pelo `claude -p`
 
 **Wave 6** *(blocked on Wave 5 completion)*
-- [ ] 02-06-PLAN.md — `verificar` com as 4 lojas, README e folha de 10 itens ao vivo em menos de 5 minutos
+- [x] 02-06-PLAN.md — `verificar` com as 4 lojas, README e folha de 10 itens ao vivo em menos de 5 minutos
 
 **Research flag**: yes — tolerância do DataDome da Obramat ao longo de uma lista de 10 itens; onde está a tabela de escalões da Obramat; se `contextCode=000` dá o preço certo
 
@@ -183,7 +183,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Folha Excel e preços da Allmat, Bricomarché e Obras 360 | 12/12 | Complete    | 2026-10-30 |
-| 2. Obramat e cadeia de recurso | 5/6 | In Progress | - |
+| 2. Obramat e cadeia de recurso | 6/6 | In Progress | - |
 | 3. Especificações e classificação exato/parecido | 0/TBD | Not started | - |
 | 4. Embalagens, custo total e folha preenchida | 0/TBD | Not started | - |
 | 5. App no browser e exportação | 0/TBD | Not started | - |
