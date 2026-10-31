@@ -10,11 +10,12 @@ import pytest
 
 import strata.ai
 import strata.search
-from conftest import FakeFetcher
+from conftest import FIXTURES, FakeFetcher
 from strata.__main__ import main
 from strata.ai import MARK, MAX_CHARS, offers_from, page_text, parse_price
 from strata.fetch import StoreBlocked, StoreError
-from strata.stores import obramat
+from strata.money import fmt_eur, from_minor
+from strata.stores import allmat, obramat
 from test_e2e import blocks
 
 OSB_URL = "https://www.obramat.pt/produtos/placa-osb-3-250x125x1-8cm-25134518.html"
@@ -57,6 +58,29 @@ def test_ponta_a_ponta_todos_os_degraus_falham_e_a_ia_le_a_pagina(fake, monkeypa
     assert not browser.missing
 
 
+@pytest.mark.parametrize("rows", [[], [dict(OSB_ROW, price="19,99 €")]])  # nada, ou preço que não está na página
+def test_ponta_a_ponta_ia_sem_ofertas_validas_loja_falha_com_o_motivo(fake, monkeypatch, capsys, rows):
+    monkeypatch.setattr(strata.search, "STORES", (obramat,))
+    monkeypatch.setattr("sys.stdin", io.StringIO("placa osb 3 un\n\n"))
+    monkeypatch.setattr(strata.ai, "ask", answer(*rows))
+    fake.route("obramat.pt", StoreBlocked("HTTP 403"))
+    browser = FakeFetcher().route("obramat.pt/search", OSB_PAGE.encode("utf-8"))
+    browser.cache = fake.cache
+
+    assert main(["pesquisar"], fetch=fake, browser=browser) == 0
+
+    osb = blocks(capsys.readouterr().out)["placa osb"]
+    line = ("  Obramat: bloqueada — API: HTTP 403; JSON-LD: HTTP 403; browser: página da Obramat sem lista "
+            "de resultados (layout mudou?); IA: IA não leu nenhuma oferta válida na página")
+    assert any(row.startswith(line) for row in osb.splitlines())
+    if not rows:
+        assert line in osb.splitlines()
+    else:
+        assert "1 ofertas da IA rejeitadas" in osb
+    assert "sem resultados" not in osb
+    assert not browser.missing
+
+
 def test_page_text_links_absolutos_sem_script_e_cortado():
     text = page_text(OSB_PAGE, PAGE_URL)
     assert f"PLACA OSB 3 250X125X1,8CM <{OSB_URL}>" in text
@@ -68,6 +92,8 @@ def test_page_text_links_absolutos_sem_script_e_cortado():
 @pytest.mark.parametrize("s, value", [
     ("28,50 €", Decimal("28.50")), ("1 299,60 €", Decimal("1299.60")), ("1\xa0299,60 €", Decimal("1299.60")),
     ("1.299,60", Decimal("1299.60")), ("28.50", Decimal("28.50")), ("1.299", Decimal(1299)), ("1299", Decimal(1299)),
+    ("62 €", Decimal(62)), ("23 ,50 €", Decimal("23.50")),
+    ("12.5", None), ("1e3", None), ("NaN", None), ("1.299.00", None), ("12,345", None),
     ("abc", None), ("0,00", None), ("", None),
 ])
 def test_parse_price(s, value):
@@ -96,12 +122,77 @@ def test_offers_from_rejeita_e_conta(bad):
     text = page_text(OSB_PAGE, PAGE_URL) + " 0,00 €"
     found = found_for(dict(OSB_ROW, **bad), OSB_ROW, text=text)
     assert len(found.offers) == 1
-    assert found.notes == ["1 ofertas da IA rejeitadas (preço fora da página ou link fora da loja)"]
+    assert found.notes == [REJECTED_1]
+
+
+REJECTED_1 = "1 ofertas da IA rejeitadas (link fora da página da loja ou preço longe do link)"
 
 
 def test_offers_from_titulo_que_nao_bate_fica_escondido():
-    found = offers_from([dict(OSB_ROW, title="TINTA BRANCA")], "TINTA BRANCA 28,50 €", obramat, "placa osb", PAGE_URL)
+    text = f"TINTA BRANCA <{OSB_URL}> 28,50 €"
+    found = offers_from([dict(OSB_ROW, title="TINTA BRANCA")], text, obramat, "placa osb", PAGE_URL)
     assert found.offers == [] and (found.raw, found.hidden) == (1, 1)
+
+
+def fixture_text(name: str) -> str:
+    return (FIXTURES / name).read_text(encoding="utf-8")
+
+
+@pytest.mark.parametrize("name, query, count", [
+    ("obramat_search-osb_browser.html", "osb", 7),
+    ("obramat_search-cimento-cola_endcap_browser.html", "cimento cola", 18),
+])
+def test_offers_from_aceita_as_ofertas_reais_das_paginas_gravadas(name, query, count):
+    page = fixture_text(name)
+    page_url = obramat.search_page(query)
+    text = page_text(page, page_url)
+    products, _ = obramat.parse_search(page)
+    assert len(products) == count
+    for p in products:  # uma a uma: MAX_OFFERS corta a 5
+        row = {"title": p["name"], "price": fmt_eur(Decimal(str(p["offer"]["unitprice_ati"]))),
+               "url": obramat.BASE + p["url"]}
+        found = offers_from([row], text, obramat, query, page_url)
+        assert (found.raw, found.notes) == (1, []), row
+
+
+def test_offers_from_aceita_as_ofertas_reais_da_allmat(monkeypatch):
+    monkeypatch.setattr(strata.ai, "MAX_CHARS", 100_000)  # na página gravada o 1.º produto vem depois dos 20 000
+    page_url = allmat.search_page("cimento")
+    text = page_text(fixture_text("allmat_search-page_cimento.html"), page_url)
+    products = json.loads(fixture_text("allmat_products_search-cimento.json"))
+    assert len(products) == 3
+    for p in products:
+        row = {"title": p["name"], "price": fmt_eur(from_minor(p["prices"]["price"], 2)), "url": p["permalink"]}
+        found = offers_from([row], text, allmat, "cimento", page_url)
+        assert (found.raw, found.notes) == (1, []), row
+
+
+OSB3 = {"title": "PLACA OSB 3 250X125X1,8CM", "price": "28,50 €", "url": OSB_URL}
+
+
+@pytest.mark.parametrize("bad", [
+    {"price": "23,50 €"},  # preço do produto anterior
+    {"price": "14,50 €"},  # preço do produto seguinte
+    {"price": "8,50 €"},  # dentro de 28,50
+    {"price": "2"},  # de "Recolha 2 horas"
+    {"url": "https://www.obramat.pt/produtos/inventado.html"},
+    {"url": ""},
+    {"url": obramat.search_page("osb")},
+])
+def test_offers_from_rejeita_o_que_nao_esta_junto_do_link(bad):
+    page_url = obramat.search_page("osb")
+    text = page_text(fixture_text("obramat_search-osb_browser.html"), page_url)
+    found = offers_from([dict(OSB3, **bad), OSB3], text, obramat, "osb", page_url)
+    assert len(found.offers) == 1
+    assert found.notes == [REJECTED_1]
+
+
+def test_offers_from_caso_da_verificacao_falha_o_degrau():
+    text = page_text(OSB_PAGE, PAGE_URL) + " 1 resultado pagina 2 12.5"
+    rows = [{"title": "PLACA OSB inventada", "price": "2", "url": "https://www.obramat.pt/produtos/inventado.html"},
+            {"title": "PLACA OSB X", "price": "12.5", "url": ""}]
+    with pytest.raises(StoreError, match="IA não leu nenhuma oferta válida na página; 2 ofertas da IA rejeitadas"):
+        offers_from(rows, text, obramat, "placa osb", PAGE_URL)
 
 
 class FakeProc:
@@ -277,8 +368,9 @@ def test_ask_api_resposta_inutil_vira_motivo(monkeypatch, result, reason):
 
 
 def test_offers_from_no_maximo_5():
-    rows = [dict(OSB_ROW, title=f"PLACA OSB {n}", price=f"{n},00 €") for n in range(1, 8)]
-    text = " ".join(f"PLACA OSB {n} {n},00 €" for n in range(1, 8))
+    link = "https://www.obramat.pt/produtos/placa-osb-{}.html".format
+    rows = [dict(OSB_ROW, title=f"PLACA OSB {n}", price=f"{n},00 €", url=link(n)) for n in range(1, 8)]
+    text = " ".join(f"PLACA OSB {n} <{link(n)}> {n},00 €" for n in range(1, 8))
     found = offers_from(rows, text, obramat, "placa osb", PAGE_URL)
     assert [o.title for o in found.offers] == [f"PLACA OSB {n}" for n in range(1, 6)]
 
@@ -289,6 +381,6 @@ def test_offers_from_obras360_soma_o_iva_da_pagina():
 
     page = obras360.search_page("placa osb")
     row = {"title": "PLACA OSB 3 12MM", "price": "12,21 €", "url": "https://www.obras360.pt/placa-osb-3-12mm"}
-    [o] = offers_from([row], "PLACA OSB 3 12MM 12,21 € s/IVA", obras360, "placa osb", page).offers
+    [o] = offers_from([row], f"PLACA OSB 3 12MM <{row['url']}> 12,21 € s/IVA", obras360, "placa osb", page).offers
     assert o.price == add_vat(Decimal("12.21"), 23)
     assert "+23%" in o.vat_evidence and MARK in o.vat_evidence
