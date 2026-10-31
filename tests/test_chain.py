@@ -206,6 +206,38 @@ def test_obramat_bloqueada_no_api_e_no_json_ld_vai_ao_browser(fake):
             in sr.notes)
 
 
+NO_CTX = (FIXTURES / "obramat_product-osb-18_ctx201_tiers.html").read_text(encoding="utf-8").replace(
+    '"cdl_user_context_main_store","value":"201"', '"cdl_user_context_main_store","value":"no cookie here"')
+
+
+def test_obramat_sem_armazem_no_pedido_simples_vai_ao_browser(fake):
+    """D-18: o pedido simples passa o DataDome mas não tem o armazém 201; o Chrome dedicado tem."""
+    fake.route("obramat.pt/search?q=", "obramat_search-osb_browser.html")
+    fake.route("obramat.pt/produtos/", NO_CTX.encode("utf-8"))
+    browser = FakeFetcher()
+    browser.cache = fake.cache
+    route_obramat(browser)
+    sr = asyncio.run(search_store(obramat, item("placa osb"), fake, browser))
+    assert {o.method for o in sr.offers} == {"browser"}
+    assert obramat.NO_STORE not in sr.notes
+    assert f"antes do browser: API: sem o armazém {obramat.LOCATION} na sessão" in sr.notes
+    assert "Obramat" in fake.cache["browser_only"]
+
+
+def test_obramat_sem_armazem_e_browser_falha_ficam_os_precos_do_pedido_simples(fake):
+    fake.route("obramat.pt/search?q=", "obramat_search-osb_browser.html")
+    fake.route("obramat.pt/produtos/", NO_CTX.encode("utf-8"))
+    browser = FakeFetcher()
+    browser.cache = fake.cache
+    browser.route("obramat.pt", StoreError("Chrome não abriu"))
+    sr = asyncio.run(search_store(obramat, item("placa osb"), fake, browser))
+    assert sr.status == "ok"
+    assert {o.method for o in sr.offers} == {"API"}  # nem JSON-LD nem IA: já havia preços estruturados
+    assert obramat.NO_STORE in sr.notes
+    assert f"API: sem o armazém {obramat.LOCATION} na sessão; browser: Chrome não abriu" in sr.notes
+    assert "browser_only" not in fake.cache
+
+
 def test_bricomarche_sem_principal_salta_o_json_ld_sem_pedidos(fake):
     fake.cache["sem_principal"] = {"Bricomarché"}
     browser = FakeFetcher()
