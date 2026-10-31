@@ -341,14 +341,28 @@ def test_degrau_ia_uma_so_chamada_sem_pesquisa_alargada(monkeypatch):
 
     async def ask(text):
         calls.append(text)
-        return []  # a IA não viu nada: raw 0
+        return []  # a IA não viu nada: o degrau falha
 
     monkeypatch.setattr(strata.ai, "ask", ask)
     api, browser = transports()
     store = fake_store("Falsa", StoreBlocked("HTTP 403"), StoreError("x"))
     sr = go(store, api, browser, "placa osb 12mm")  # tem pesquisa alargada nos outros degraus
     assert len(calls) == 1
-    assert sr.status == "sem resultados"
+    assert sr.status == "bloqueada"
+    assert sr.detail.endswith("; IA: IA não leu nenhuma oferta válida na página")
+
+
+def test_ia_so_com_ofertas_rejeitadas_loja_falha_com_o_motivo_de_cada_degrau(monkeypatch):
+    async def ask(text):  # a página do browser falso é vazia: preço e link não estão lá
+        return [{"title": "PLACA OSB inventada", "price": "2", "url": "https://x.pt/produtos/inventado.html"}]
+
+    monkeypatch.setattr(strata.ai, "ask", ask)
+    api, browser = transports()
+    sr = go(fake_store("Falsa", StoreBlocked("HTTP 403"), StoreError("x")), api, browser)
+    assert sr.status == "bloqueada"
+    assert sr.detail.startswith(f"API: HTTP 403; JSON-LD: {JS_PAGE}; browser: x; "
+                                "IA: IA não leu nenhuma oferta válida na página; 1 ofertas da IA rejeitadas")
+    assert "browser_only" not in api.cache
 
 
 def test_oferta_ia_fica_depois_da_estruturada_mesmo_mais_barata():

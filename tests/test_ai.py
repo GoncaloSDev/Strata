@@ -57,6 +57,29 @@ def test_ponta_a_ponta_todos_os_degraus_falham_e_a_ia_le_a_pagina(fake, monkeypa
     assert not browser.missing
 
 
+@pytest.mark.parametrize("rows", [[], [dict(OSB_ROW, price="19,99 €")]])  # nada, ou preço que não está na página
+def test_ponta_a_ponta_ia_sem_ofertas_validas_loja_falha_com_o_motivo(fake, monkeypatch, capsys, rows):
+    monkeypatch.setattr(strata.search, "STORES", (obramat,))
+    monkeypatch.setattr("sys.stdin", io.StringIO("placa osb 3 un\n\n"))
+    monkeypatch.setattr(strata.ai, "ask", answer(*rows))
+    fake.route("obramat.pt", StoreBlocked("HTTP 403"))
+    browser = FakeFetcher().route("obramat.pt/search", OSB_PAGE.encode("utf-8"))
+    browser.cache = fake.cache
+
+    assert main(["pesquisar"], fetch=fake, browser=browser) == 0
+
+    osb = blocks(capsys.readouterr().out)["placa osb"]
+    line = ("  Obramat: bloqueada — API: HTTP 403; JSON-LD: HTTP 403; browser: página da Obramat sem lista "
+            "de resultados (layout mudou?); IA: IA não leu nenhuma oferta válida na página")
+    assert any(row.startswith(line) for row in osb.splitlines())
+    if not rows:
+        assert line in osb.splitlines()
+    else:
+        assert "1 ofertas da IA rejeitadas" in osb
+    assert "sem resultados" not in osb
+    assert not browser.missing
+
+
 def test_page_text_links_absolutos_sem_script_e_cortado():
     text = page_text(OSB_PAGE, PAGE_URL)
     assert f"PLACA OSB 3 250X125X1,8CM <{OSB_URL}>" in text

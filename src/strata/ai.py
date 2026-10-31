@@ -75,7 +75,11 @@ def parse_price(s: str) -> Decimal | None:
 
 
 def offers_from(rows, text: str, store, query: str, page_url: str) -> Found:
-    """Ofertas da IA validadas contra o texto enviado e o host da loja (T-02-18); as outras ficam contadas."""
+    """Ofertas da IA validadas contra o texto enviado e o host da loja (T-02-18); as outras ficam contadas.
+
+    valid == 0 (a IA devolveu [] ou só ofertas rejeitadas) é falha do degrau (StoreError), nunca "sem resultados",
+    como no jsonld.py. Ofertas válidas todas escondidas pelo filtro de título continuam a dar Found (D-14).
+    """
     host = urlsplit(page_url).hostname
     without_vat = getattr(store, "PAGE_PRICES_WITHOUT_VAT", False)
     evidence = f"{MARK}; página da loja sem IVA, +23%" if without_vat else f"{MARK}; preço com IVA na página da loja"
@@ -102,6 +106,8 @@ def offers_from(rows, text: str, store, query: str, page_url: str) -> Found:
     notes = []
     if rejected:
         notes.append(f"{rejected} ofertas da IA rejeitadas (preço fora da página ou link fora da loja)")
+    if valid == 0:  # a IA devolveu [] ou só ofertas rejeitadas: falha do degrau, nunca "sem resultados" (D-16)
+        raise StoreError("; ".join(["IA não leu nenhuma oferta válida na página", *notes]))
     return Found(offers, raw=valid, hidden=valid - len(offers), notes=notes)
 
 
