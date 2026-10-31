@@ -8,6 +8,8 @@ from pathlib import Path
 from strata import report, search, sheet, text
 from strata.fetch import Fetcher
 
+STORE_KEYS = {m.__name__.rsplit(".", 1)[1]: m.NAME for m in search.STORES}  # "obramat" -> "Obramat"
+
 
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(
@@ -24,12 +26,18 @@ def build_parser() -> argparse.ArgumentParser:
     check = "Confirma, com um termo de teste por loja, que cada adaptador ainda devolve preços válidos."
     pv = sub.add_parser("verificar", help=check, description=check)
     pv.add_argument("--record", metavar="DIR", type=Path, help="(desenvolvimento) grava as respostas em DIR")
+    for sp in (ps, pv):
+        sp.add_argument(
+            "--sem-principal", metavar="LOJA", action="append", choices=list(STORE_KEYS), default=[],
+            help="(desenvolvimento) força a falha do método principal da LOJA, para ver o recurso ao vivo",
+        )
     return p
 
 
-async def _with_fetch(work, fetch, record, browser=None):
+async def _with_fetch(work, fetch, record, browser=None, sem_principal=()):
     """Corre work(fetch, browser); sem fetch (fora dos testes), abre a sessão curl_cffi e o browser da execução."""
     if fetch is not None:
+        fetch.cache["sem_principal"] = {STORE_KEYS[k] for k in sem_principal}
         return await work(fetch, browser)
     from curl_cffi.requests import AsyncSession
 
@@ -37,6 +45,7 @@ async def _with_fetch(work, fetch, record, browser=None):
 
     async with AsyncSession(impersonate="chrome", timeout=(10, 30)) as session:
         f = Fetcher(session, record)
+        f.cache["sem_principal"] = {STORE_KEYS[k] for k in sem_principal}  # D-17
         b = BrowserFetcher(f)
         try:
             return await work(f, b)
@@ -44,17 +53,17 @@ async def _with_fetch(work, fetch, record, browser=None):
             await b.close()  # D-06: fecha o Chrome dedicado só se foi a app a abri-lo
 
 
-async def _search(items, fetch, record, out, browser=None) -> None:
+async def _search(items, fetch, record, out, browser=None, sem_principal=()) -> None:
     async def work(f, b):
         async for result in search.run(items, f, b):
             report.print_item(result, out)
             out.flush()
 
-    await _with_fetch(work, fetch, record, browser)
+    await _with_fetch(work, fetch, record, browser, sem_principal)
 
 
 def cmd_verificar(args, fetch, out, browser=None) -> int:
-    rows = asyncio.run(_with_fetch(search.verificar, fetch, args.record, browser))
+    rows = asyncio.run(_with_fetch(search.verificar, fetch, args.record, browser, args.sem_principal))
     for label, ok, msg in rows:
         print(f"{report.clean(label)}: {'OK' if ok else 'FALHOU'} — {report.clean(msg)}", file=out)
     return 0 if all(ok for _, ok, _ in rows) else 1
@@ -84,7 +93,7 @@ def cmd_pesquisar(args, fetch, out, browser=None) -> int:
         return 2
     n = len(search.STORES)
     print(f"A pesquisar {len(items)} itens em {n} {'loja' if n == 1 else 'lojas'}…", file=sys.stderr)
-    asyncio.run(_search(items, fetch, args.record, out, browser))
+    asyncio.run(_search(items, fetch, args.record, out, browser, args.sem_principal))
     return 0
 
 

@@ -60,6 +60,10 @@ async def search_store(store, item: Item, fetch, browser=None) -> StoreResult:
                     tried.append(f"{stage}: sem browser nesta execução")
                     kinds.add("erro")
                     continue
+                if stage == "API" and store.NAME in fetch.cache.get("sem_principal", ()):  # D-17
+                    tried.append("API: desativado com --sem-principal")
+                    kinds.add("erro")
+                    continue
                 try:
                     found, b, first_hidden, wide_only = await _attempt(search, f, item)
                 except StoreBlocked as e:
