@@ -11,10 +11,10 @@ import strata.fetch
 import strata.search
 from conftest import FIXTURES, FakeFetcher
 from strata.__main__ import main
-from strata.fetch import Fetcher, StoreBlocked, StoreError, StoreTimeout
+from strata.fetch import Fetcher, StoreBlocked, StoreCaptcha, StoreError, StoreTimeout
 from strata.models import Found, Item, Offer
 from strata.search import search_store
-from strata.stores import allmat, obramat
+from strata.stores import allmat, bricomarche, obramat, obras360
 from test_e2e import blocks, route_api_stores, route_obramat
 
 
@@ -230,3 +230,24 @@ def test_verificacao_do_dispositivo_nao_e_captcha(monkeypatch):
     assert sr.status == "bloqueada"
     assert "API: HTTP 403 (verificação DataDome)" in sr.detail
     assert sr.link is None and not fetcher.cache["captcha"]
+
+
+@pytest.mark.parametrize("store, link", [
+    (allmat, "https://allmat.pt/?s=placa+osb&post_type=product"),
+    (bricomarche, "https://www.bricomarche.pt/?s=placa+osb&post_type=product"),
+    (obras360, "https://www.obras360.pt/pesquisa?search=placa+osb"),
+    (obramat, "https://www.obramat.pt/search?q=placa+osb"),
+])
+def test_search_page_das_4_lojas(store, link):
+    assert store.search_page("placa osb") == link
+
+
+def test_captcha_no_browser_da_allmat(fake):
+    fake.route("allmat.pt", StoreBlocked("HTTP 403"))
+    browser = FakeFetcher().route("allmat.pt", StoreCaptcha("CAPTCHA da DataDome no browser"))
+    browser.cache = fake.cache
+    sr = asyncio.run(search_store(allmat, item("placa osb"), fake, browser))
+    assert sr.status == "abrir à mão"
+    assert sr.detail == "CAPTCHA em browser: CAPTCHA da DataDome no browser; antes: API: HTTP 403"
+    assert sr.link == "https://allmat.pt/?s=placa+osb&post_type=product"
+    assert "Allmat" in fake.cache["captcha"]
