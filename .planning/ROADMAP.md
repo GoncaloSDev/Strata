@@ -86,7 +86,7 @@ Plans:
   2. Quando o método principal de uma loja falha (ex.: desativado à força num teste), a app tenta JSON-LD, browser automático e IA, por esta ordem, e cada oferta mostra o método que funcionou; se todos falharem, a loja aparece como falhada com o motivo
   3. Uma folha Excel de 10 itens fica resolvida nas 4 lojas fixas em menos de 5 minutos, cada item mostra o estado das 4 lojas e a verificação das lojas cobre as 4
 
-**Plans:** 6/6 plans executed
+**Plans:** 6/7 plans executed
 
 Plans:
 **Wave 1**
@@ -106,6 +106,9 @@ Plans:
 
 **Wave 6** *(blocked on Wave 5 completion)*
 - [x] 02-06-PLAN.md — `verificar` com as 4 lojas, README e folha de 10 itens ao vivo em menos de 5 minutos
+
+**Wave 7** *(gap closure da verificação; blocked on Wave 6 completion)*
+- [ ] 02-07-PLAN.md — Degrau IA: loja falhada com o motivo quando a IA não lê nenhuma oferta válida (CR-01); oferta da IA só com o link no texto e o preço em € logo a seguir, e `parse_price` só com formatos reais (CR-02, WR-07)
 
 **Research flag**: yes — tolerância do DataDome da Obramat ao longo de uma lista de 10 itens; onde está a tabela de escalões da Obramat; se `contextCode=000` dá o preço certo
 
