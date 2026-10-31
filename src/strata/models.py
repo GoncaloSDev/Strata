@@ -4,7 +4,7 @@ from dataclasses import dataclass, field
 from decimal import Decimal
 from typing import Literal
 
-Status = Literal["ok", "sem resultados", "bloqueada", "erro", "tempo esgotado"]
+Status = Literal["ok", "sem resultados", "bloqueada", "erro", "tempo esgotado", "abrir à mão"]
 VatOrigin = Literal["indicado pela loja", "regra da loja", "assumido"]
 
 
@@ -63,6 +63,7 @@ class StoreResult:
     wide_only: int = 0  # ofertas da pesquisa alargada escondidas por não baterem a pergunta completa
     notes: list[str] = field(default_factory=list)
     broadened_query: str | None = None
+    link: str | None = None  # página de pesquisa na loja, para continuar à mão (D-07)
 
 
 @dataclass

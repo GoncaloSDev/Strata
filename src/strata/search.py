@@ -3,7 +3,7 @@
 import asyncio
 from decimal import Decimal
 
-from strata.fetch import StoreBlocked, StoreTimeout
+from strata.fetch import StoreBlocked, StoreCaptcha, StoreTimeout
 from strata.models import Found, Item, ItemResult, StoreResult
 from strata.money import fmt_eur, in_unit
 from strata.stores import allmat, bricomarche, obramat, obras360
@@ -49,6 +49,10 @@ def _rungs(store, fetch, browser) -> list[tuple[str, object, object]]:
 
 
 async def search_store(store, item: Item, fetch, browser=None) -> StoreResult:
+    captcha = fetch.cache.setdefault("captcha", set())
+    if store.NAME in captcha:  # D-07: depois de um CAPTCHA, nenhum pedido a esta loja até ao fim
+        return StoreResult(store.NAME, "abrir à mão", [], detail="CAPTCHA antes nesta execução: nenhum pedido a esta loja",
+                           link=store.search_page(item.product))
     tried: list[str] = []  # "degrau: motivo", pela ordem (D-16)
     kinds: set[str] = set()
     stage = None
@@ -66,6 +70,12 @@ async def search_store(store, item: Item, fetch, browser=None) -> StoreResult:
                     continue
                 try:
                     found, b, first_hidden, wide_only = await _attempt(search, f, item)
+                except StoreCaptcha as e:  # D-07: acaba a cadeia desta loja; nenhum degrau seguinte corre
+                    captcha.add(store.NAME)
+                    detail = f"CAPTCHA em {stage}: {e}"
+                    if tried:
+                        detail += f"; antes: {'; '.join(tried)}"
+                    return StoreResult(store.NAME, "abrir à mão", [], detail=detail, link=store.search_page(item.product))
                 except StoreBlocked as e:
                     tried.append(f"{stage}: {e}")
                     kinds.add("bloqueada")

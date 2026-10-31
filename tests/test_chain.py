@@ -7,12 +7,14 @@ from types import SimpleNamespace
 
 import pytest
 
+import strata.fetch
 import strata.search
-from conftest import FakeFetcher
+from conftest import FIXTURES, FakeFetcher
 from strata.__main__ import main
-from strata.fetch import StoreBlocked, StoreError, StoreTimeout
+from strata.fetch import Fetcher, StoreBlocked, StoreError, StoreTimeout
 from strata.models import Found, Item, Offer
 from strata.search import search_store
+from strata.stores import allmat, obramat
 from test_e2e import blocks, route_api_stores, route_obramat
 
 
@@ -39,7 +41,8 @@ def fake_store(name, *answers):
             return await a()
         return a
 
-    return SimpleNamespace(NAME=name, search=search, calls=calls, fetches=fetches)
+    return SimpleNamespace(NAME=name, search=search, calls=calls, fetches=fetches,
+                           search_page=lambda q: f"https://x.pt/?s={q}")
 
 
 def transports():
@@ -169,3 +172,61 @@ def test_sem_principal_loja_desconhecida(cmd):
     with pytest.raises(SystemExit) as e:
         main([cmd, "--sem-principal", "xpto"])
     assert e.value.code == 2
+
+
+DD_403 = (FIXTURES / "obramat_curl-403-datadome.html").read_bytes()  # corpo real, 'rt':'i'
+DD_CAPTCHA = DD_403.replace(b"'rt':'i'", b"'rt':'c'")
+
+
+class RouteSession:
+    """Sessão curl_cffi falsa: (substring do URL, estado, corpo); regista cada URL pedido."""
+
+    def __init__(self, *routes):
+        self.routes = routes
+        self.urls: list[str] = []
+
+    async def get(self, url):
+        self.urls.append(url)
+        status, body = next((st, b) for sub, st, b in self.routes if sub in url)
+        return SimpleNamespace(status_code=status, headers={}, content=body, text=body.decode("utf-8"))
+
+
+def no_wait(monkeypatch):
+    """Sem os 3–5 s da Obramat nem os 0,5 s da Allmat: os Host leem LIMITS ao criar o Fetcher."""
+    monkeypatch.setitem(strata.fetch.LIMITS, "www.obramat.pt", (1, 0.0, 0.0))
+    monkeypatch.setitem(strata.fetch.LIMITS, "allmat.pt", (2, 0.0))
+
+
+def test_captcha_obramat_abrir_a_mao_e_lista_continua(monkeypatch, capsys):
+    no_wait(monkeypatch)
+    monkeypatch.setattr(strata.search, "STORES", (allmat, obramat))
+    session = RouteSession(
+        ("obramat.pt", 403, DD_CAPTCHA),
+        ("search=cimento", 200, (FIXTURES / "allmat_products_search-cimento.json").read_bytes()),
+        ("allmat.pt", 200, b"[]"),
+    )
+    fetcher = Fetcher(session)
+    browser = FakeFetcher()  # sem rotas: um pedido ao browser falharia o teste
+    browser.cache = fetcher.cache
+    monkeypatch.setattr("sys.stdin", io.StringIO("cimento cola 1 un\nplaca osb 2 un\n\n"))
+
+    assert main(["pesquisar"], fetch=fetcher, browser=browser) == 0
+
+    out = blocks(capsys.readouterr().out)
+    first, second = out["cimento cola"], out["placa osb"]
+    assert "  Obramat: abrir à mão — CAPTCHA em API: CAPTCHA da DataDome (HTTP 403)\n" in first
+    assert "    abrir à mão: https://www.obramat.pt/search?q=cimento+cola\n" in first
+    assert ("  Obramat: abrir à mão — CAPTCHA antes nesta execução: nenhum pedido a esta loja\n"
+            "    abrir à mão: https://www.obramat.pt/search?q=placa+osb\n") in second
+    assert "  Allmat: " in first and "  Allmat: " in second  # a outra loja continua (STORE-05)
+    assert len([u for u in session.urls if "obramat" in u]) == 1
+    assert browser.calls == []
+
+
+def test_verificacao_do_dispositivo_nao_e_captcha(monkeypatch):
+    no_wait(monkeypatch)
+    fetcher = Fetcher(RouteSession(("obramat.pt", 403, DD_403)))
+    sr = asyncio.run(search_store(obramat, item("placa osb"), fetcher, None))
+    assert sr.status == "bloqueada"
+    assert "API: HTTP 403 (verificação DataDome)" in sr.detail
+    assert sr.link is None and not fetcher.cache["captcha"]
