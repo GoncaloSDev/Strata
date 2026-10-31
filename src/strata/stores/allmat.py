@@ -7,7 +7,7 @@ from decimal import Decimal, InvalidOperation
 
 from selectolax.lexbor import LexborHTMLParser
 
-from strata.fetch import StoreError
+from strata.fetch import StoreError, full_url
 from strata.models import Found, Offer
 from strata.money import content_from_title, from_minor
 from strata.text import norm
@@ -147,3 +147,8 @@ async def search(query: str, fetch, rank: str | None = None) -> Found:
         if isinstance(r, BaseException):
             raise r
     return Found(offers=offers, raw=raw, hidden=raw - len(rows), notes=notes)
+
+
+def search_page(query: str) -> str:
+    """Página de pesquisa para pessoas, para continuar à mão (D-07)."""
+    return full_url("https://allmat.pt/", {"s": query, "post_type": "product"})

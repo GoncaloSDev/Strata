@@ -6,6 +6,7 @@ from types import SimpleNamespace
 import pytest
 from playwright.async_api import Error
 
+import strata.fetch
 from conftest import FIXTURES
 from strata.browser import past_challenge
 from strata.fetch import Fetcher, StoreBlocked, StoreCaptcha, challenge_kind
@@ -43,7 +44,8 @@ def test_verificacao_do_dispositivo_e_bloqueio_e_nao_captcha():
     assert not isinstance(e.value, StoreCaptcha)
 
 
-def test_captcha_no_pedido_simples_e_depois_nenhum_pedido():
+def test_captcha_no_pedido_simples_e_depois_nenhum_pedido(monkeypatch):
+    monkeypatch.setitem(strata.fetch.LIMITS, "www.obramat.pt", (1, 0.0, 0.0))  # sem os 3–5 s da loja
     assert issubclass(StoreCaptcha, StoreBlocked)
     session = FakeSession(403, DD_CAPTCHA.encode())
     f = Fetcher(session)

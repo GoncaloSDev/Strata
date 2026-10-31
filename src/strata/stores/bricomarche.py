@@ -6,6 +6,7 @@ import re
 from decimal import Decimal
 from urllib.parse import parse_qs, urlsplit
 
+from strata.fetch import full_url
 from strata.models import Found, Offer
 from strata.money import content_from_title, fmt_eur, from_minor
 from strata.words import title_matches, words
@@ -146,3 +147,8 @@ async def search(query: str, fetch, rank: str | None = None) -> Found:
     if len(keyed) > K:
         notes.append(f"+{len(keyed) - K} produtos não expandidos (limite de {K} por pesquisa)")
     return Found(offers=offers, raw=raw, hidden=raw - len(parents), notes=notes)
+
+
+def search_page(query: str) -> str:
+    """Página de pesquisa para pessoas, para continuar à mão (D-07)."""
+    return full_url(BASE + "/", {"s": query, "post_type": "product"})

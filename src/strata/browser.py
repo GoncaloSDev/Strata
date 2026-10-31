@@ -4,11 +4,13 @@ import asyncio
 import json
 import subprocess
 import sys
+import time
 from decimal import Decimal
 from pathlib import Path
 from urllib.parse import urlsplit
 
-from strata.fetch import CHALLENGE, StoreBlocked, StoreError, StoreTimeout, fixture_name, full_url
+from strata.fetch import (CHALLENGE, StoreBlocked, StoreCaptcha, StoreError, StoreTimeout, challenge_kind,
+                          fixture_name, full_url)
 
 CDP = "http://127.0.0.1:9222"
 # shortcut: caminho fixo do .claude/claude-chrome.cmd; ler o caminho do registo se o Chrome estiver noutro sítio
@@ -16,6 +18,31 @@ CHROME = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
 PROFILE = Path.home() / ".claude-chrome"
 START_S = 10
 NAV_MS = 30_000
+
+
+async def past_challenge(read, wait_s: float = 10.0, step: float = 0.5) -> tuple[str, bool]:
+    """(html, viu_desafio): espera a verificação do dispositivo do DataDome passar sozinha (D-05).
+
+    Só lê a página, nunca clica nem escreve. CAPTCHA -> StoreCaptcha (D-07); verificação presa -> StoreBlocked.
+    """
+    from playwright.async_api import Error
+
+    seen = False
+    end = time.monotonic() + wait_s
+    while True:
+        try:
+            html = await read()
+        except Error:  # a página recarrega sozinha a meio da leitura: ainda a carregar
+            html = None
+        kind = "interstitial" if html is None else challenge_kind(html)
+        if kind == "captcha":
+            raise StoreCaptcha("CAPTCHA da DataDome no browser")
+        if kind is None:
+            return html, seen
+        seen = True
+        if time.monotonic() >= end:
+            raise StoreBlocked(f"verificação DataDome não passou em {wait_s:g} s")
+        await asyncio.sleep(step)
 
 
 class BrowserFetcher:
@@ -67,17 +94,24 @@ class BrowserFetcher:
             raise ValueError(f"host sem limites definidos: {host}")
         full = full_url(url, params)
         ctx = await self._context()
+        captcha = self.cache.setdefault("captcha_hosts", set())  # partilhado com o Fetcher (D-07)
         async with self.hosts[host]:
+            if host in captcha:
+                raise StoreCaptcha("CAPTCHA antes nesta execução")
             page = await ctx.new_page()  # um separador por pedido: navegações em paralelo nunca o partilham
             try:
                 resp = await page.goto(full, wait_until="load", timeout=NAV_MS)
                 if resp is None:
                     raise StoreError("navegação sem resposta")
-                if resp.status in (403, 429, 503):
-                    raise StoreBlocked(f"HTTP {resp.status} (browser)")
-                if resp.status >= 400:
-                    raise StoreError(f"HTTP {resp.status} (browser)")
-                body = await read(page, resp)
+                body, passed = await read(page, resp)
+                if not passed:  # depois de a verificação passar, o 403 da 1.ª resposta já não vale
+                    if resp.status in (403, 429, 503):
+                        raise StoreBlocked(f"HTTP {resp.status} (browser)")
+                    if resp.status >= 400:
+                        raise StoreError(f"HTTP {resp.status} (browser)")
+            except StoreCaptcha:
+                captcha.add(host)
+                raise
             except PwTimeout as e:
                 raise StoreTimeout(str(e)) from e
             except Error as e:
@@ -92,7 +126,10 @@ class BrowserFetcher:
 
     async def get_json(self, url: str, params: dict | None = None):
         async def read(page, resp):
-            return await resp.body()
+            body = await resp.body()
+            if challenge_kind(body[:4000].decode("utf-8", "replace")) == "captcha":
+                raise StoreCaptcha("CAPTCHA da DataDome no browser")
+            return body, False
 
         body = await self._open(url, params, read)
         try:
@@ -104,7 +141,7 @@ class BrowserFetcher:
 
     async def get_html(self, url: str, params: dict | None = None) -> str:
         async def read(page, resp):
-            return await page.content()
+            return await past_challenge(page.content)
 
         return await self._open(url, params, read)
 
