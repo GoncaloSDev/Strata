@@ -3,7 +3,8 @@
 import asyncio
 from decimal import Decimal
 
-from strata.fetch import StoreBlocked, StoreCaptcha, StoreTimeout
+from strata import jsonld
+from strata.fetch import StoreBlocked, StoreCaptcha, StoreError, StoreTimeout
 from strata.models import Found, Item, ItemResult, StoreResult
 from strata.money import fmt_eur, in_unit
 from strata.stores import allmat, bricomarche, obramat, obras360
@@ -45,7 +46,8 @@ def _rungs(store, fetch, browser) -> list[tuple[str, object, object]]:
     """Degraus (nome, search, transporte); a loja que o browser resolveu fica no browser (D-08)."""
     if store.NAME in fetch.cache.get("browser_only", set()):
         return [("browser", store.search, browser)]
-    return [("API", store.search, fetch), ("browser", store.search, browser)]
+    # D-13: principal → JSON-LD (pedido simples) → browser
+    return [("API", store.search, fetch), ("JSON-LD", jsonld.rung(store), fetch), ("browser", store.search, browser)]
 
 
 async def search_store(store, item: Item, fetch, browser=None) -> StoreResult:
@@ -83,6 +85,10 @@ async def search_store(store, item: Item, fetch, browser=None) -> StoreResult:
                 except StoreTimeout as e:
                     tried.append(f"{stage}: {e}")
                     kinds.add("tempo esgotado")
+                    continue
+                except StoreError as e:  # mensagem já legível, sem o nome da classe
+                    tried.append(f"{stage}: {e}")
+                    kinds.add("erro")
                     continue
                 except Exception as e:  # o único sítio onde uma falha de loja vira motivo; nunca some em silêncio
                     tried.append(f"{stage}: {type(e).__name__}: {e}")

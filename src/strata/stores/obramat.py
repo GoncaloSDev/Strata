@@ -20,6 +20,8 @@ SEARCH_URL = BASE + "/search"
 # shortcut: Portugal tem um só armazém (contexto 201, D-18/A8); rever se a janela "Escolha o seu Armazém" do site mostrar outro
 LOCATION = "OBRAMAT Lisboa - Alfragide"
 VAT_EVIDENCE = "unitprice_ati (com IVA) conferido com unitprice_tf + 23%"
+# No degrau JSON-LD não há unitprice_tf para conferir: só se diz de onde vem o preço
+JSONLD_VAT_EVIDENCE = "price do ld+json = unitprice_ati, com IVA"
 VAT_TOLERANCE = Decimal("0.02")  # em euros, nunca o rácio: preços pequenos arredondados dão 1,214 (Pitfall 4)
 # shortcut: escalões e stock exato só nas 3 primeiras ofertas (D-18, uma navegação cada); subir se a lista de 10 itens sobrar tempo nos 5 min
 K = 3
@@ -51,6 +53,17 @@ def parse_search(page: str) -> tuple[list[dict], int]:
     if total > 0 and not products:
         raise StoreError(f"a Obramat diz {total} resultados mas a página não tem a lista (layout mudou?)")
     return products, total
+
+
+PRODUCT_LINK = re.compile(r"https://www\.obramat\.pt/produtos/[^/?#]+\.html")
+
+
+def product_links(page: str) -> list[str]:
+    """Links de produto da lista principal (degrau JSON-LD; o preço do ld+json é o unitprice_ati, com IVA)."""
+    root = LexborHTMLParser(page)
+    urls = (urljoin(BASE, a.attributes.get("href") or "")
+            for a in root.css("ol#guidance-product-list > li[data-reflm] a[href]"))
+    return list(dict.fromkeys(u for u in urls if PRODUCT_LINK.fullmatch(u)))
 
 
 def _title(p: dict) -> str:

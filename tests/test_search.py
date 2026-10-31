@@ -281,7 +281,7 @@ class FakeSession:
 @pytest.mark.parametrize("session, expected", [
     (FakeSession(403), "bloqueada — API: HTTP 403"),
     (FakeSession(200, {"cf-mitigated": "challenge"}), "bloqueada"),
-    (FakeSession(500), "erro — API: StoreError: HTTP 500"),
+    (FakeSession(500), "erro — API: HTTP 500"),
     (FakeSession(200, body=b"<html><title>Just a moment...</title></html>"), "bloqueada — API: página de desafio"),
     (FakeSession(200, body=b"<html><p>outra coisa</p></html>"), "resposta não é JSON"),
     (FakeSession(exc=Timeout("demorou")), "tempo esgotado"),
@@ -499,6 +499,7 @@ def test_verificar_allmat_nenhuma_area_de_caixa_lida(fake, monkeypatch):
     ({"não": "é lista"}, "estado erro: API: ValueError: resposta da Allmat não é uma lista de produtos"),
 ])
 def test_verificar_loja_bloqueada_ou_em_erro(fake, monkeypatch, answer, expected):
+    fake.route("allmat.pt/?s=", b"<html></html>")  # o degrau JSON-LD também falha: sem links de produto
     route_canaries(fake, allmat_cimento=answer)
     only(monkeypatch, allmat, "cimento")
     ((label, ok, msg),) = check(fake)

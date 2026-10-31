@@ -26,6 +26,7 @@ INCOHERENT = "área da caixa incoerente com o preço por m²"
 DERIVED = "área derivada do preço por m²"
 NOT_FOUND = "área da caixa não encontrada na página (rótulo M2 da loja)"
 NOT_READ = f"área da caixa não lida (limite de {MAX_BOX_PAGES} páginas por pesquisa)"
+PRODUCT_LINK = re.compile(r"https://allmat\.pt/produto/[^\"'#?<>\s]+/")
 
 
 def _eur(text: str) -> Decimal | None:
@@ -152,3 +153,8 @@ async def search(query: str, fetch, rank: str | None = None) -> Found:
 def search_page(query: str) -> str:
     """Página de pesquisa para pessoas, para continuar à mão (D-07)."""
     return full_url("https://allmat.pt/", {"s": query, "post_type": "product"})
+
+
+def product_links(page: str) -> list[str]:
+    """Links de produto da página de pesquisa, pela ordem da página e sem repetidos (degrau JSON-LD)."""
+    return list(dict.fromkeys(PRODUCT_LINK.findall(page)))

@@ -1,4 +1,4 @@
-"""Regras da cadeia de recurso API → browser, sem rede (D-08, D-14, D-15, D-16, D-17)."""
+"""Regras da cadeia de recurso API → JSON-LD → browser, sem rede (D-08, D-13, D-14, D-15, D-16, D-17, D-19)."""
 
 import asyncio
 import io
@@ -12,6 +12,7 @@ import strata.search
 from conftest import FIXTURES, FakeFetcher
 from strata.__main__ import main
 from strata.fetch import Fetcher, StoreBlocked, StoreCaptcha, StoreError, StoreTimeout
+from strata.jsonld import JS_PAGE
 from strata.models import Found, Item, Offer
 from strata.search import search_store
 from strata.stores import allmat, bricomarche, obramat, obras360
@@ -80,7 +81,7 @@ def test_bloqueada_na_api_vai_ao_browser():
     assert sr.status == "ok"
     assert store.fetches == [api, browser]
     assert [o.method for o in sr.offers] == ["browser"]
-    assert "antes do browser: API: HTTP 403" in sr.notes
+    assert f"antes do browser: API: HTTP 403; JSON-LD: {JS_PAGE}" in sr.notes
     assert "Falsa" in api.cache["browser_only"]
 
 
@@ -104,7 +105,7 @@ def test_todos_falham_bloqueada_com_o_motivo_de_cada_degrau():
     api, browser = transports()
     sr = go(fake_store("Falsa", StoreBlocked("HTTP 403"), StoreError("x")), api, browser)
     assert sr.status == "bloqueada"
-    assert sr.detail.index("API: HTTP 403") < sr.detail.index("browser: StoreError: x")
+    assert sr.detail == f"API: HTTP 403; JSON-LD: {JS_PAGE}; browser: x"
     assert "browser_only" not in api.cache
 
 
@@ -117,7 +118,7 @@ def test_todos_falham_estado_pela_prioridade(first, status):
     sr = go(fake_store("Falsa", first, StoreError("x")), api, browser)
     assert sr.status == status
     assert sr.detail.startswith("API: ")
-    assert "browser: StoreError: x" in sr.detail
+    assert sr.detail.endswith(f"; JSON-LD: {JS_PAGE}; browser: x")
 
 
 def test_prazo_partilhado_acaba_no_browser(monkeypatch):
@@ -146,13 +147,13 @@ def test_sem_principal_salta_a_api():
     sr = go(store, api, browser)
     assert store.fetches == [browser]
     assert [o.method for o in sr.offers] == ["browser"]
-    assert "antes do browser: API: desativado com --sem-principal" in sr.notes
+    assert f"antes do browser: API: desativado com --sem-principal; JSON-LD: {JS_PAGE}" in sr.notes
 
 
 def test_sem_principal_na_linha_de_comandos(fake, monkeypatch, capsys):
     monkeypatch.setattr("sys.stdin", io.StringIO("placa osb 3 un\n\n"))
     route_api_stores(fake)
-    route_obramat(fake)  # o pedido simples responderia bem
+    fake.route("obramat.pt", StoreBlocked("HTTP 403"))  # senão o JSON-LD respondia pelo pedido simples
     browser = FakeFetcher()
     browser.cache = fake.cache
     route_obramat(browser)
@@ -160,11 +161,56 @@ def test_sem_principal_na_linha_de_comandos(fake, monkeypatch, capsys):
     assert main(["pesquisar", "--sem-principal", "obramat"], fetch=fake, browser=browser) == 0
 
     osb = blocks(capsys.readouterr().out)["placa osb"]
-    assert not [c for c in fake.calls if "obramat" in c]
+    # o API desligado não pede nada; o JSON-LD pede a mesma página de pesquisa e leva o 403
+    assert [c for c in fake.calls if "obramat" in c] == ["https://www.obramat.pt/search?q=placa+osb"]
     assert "  Obramat: ok" in osb and "método: browser" in osb
-    assert "nota: antes do browser: API: desativado com --sem-principal" in osb
+    assert "nota: antes do browser: API: desativado com --sem-principal; JSON-LD: HTTP 403" in osb
     assert "  Allmat: sem resultados" in osb and "  Bricomarché: ok" in osb  # as outras lojas ficam na API
     assert not browser.missing
+
+
+def test_ordem_api_json_ld_browser():
+    api, browser = transports()
+    sr = go(fake_store("Falsa", StoreBlocked("HTTP 403"), StoreTimeout("demorou")), api, browser)
+    assert sr.status == "bloqueada"
+    assert sr.detail.index("API: ") < sr.detail.index("JSON-LD: ") < sr.detail.index("browser: ")
+
+
+def test_allmat_sem_principal_responde_pelo_json_ld(fake):
+    fake.cache["sem_principal"] = {"Allmat"}
+    fake.route("allmat.pt/?s=cimento", "allmat_search-page_cimento.html")
+    fake.route("liz-cimento-cola-branco", "allmat_product-page_liz-branco_jsonld.html")
+    fake.route("allmat.pt/produto/", b"<html></html>")
+    sr = asyncio.run(search_store(allmat, Item(row=2, product="cimento", qty=Decimal(1), unit="saco"), fake))
+    assert sr.status == "ok"
+    assert [o.method for o in sr.offers] == ["JSON-LD"]
+    assert "antes do JSON-LD: API: desativado com --sem-principal" in sr.notes
+    assert not [c for c in fake.calls if "wp-json" in c]
+
+
+def test_obramat_bloqueada_no_api_e_no_json_ld_vai_ao_browser(fake):
+    dd = StoreBlocked("HTTP 403 (verificação DataDome)")
+    fake.route("obramat.pt", dd)
+    browser = FakeFetcher()
+    browser.cache = fake.cache
+    route_obramat(browser)
+    sr = asyncio.run(search_store(obramat, item("placa osb"), fake, browser))
+    assert sr.status == "ok"
+    assert {o.method for o in sr.offers} == {"browser"}
+    assert ("antes do browser: API: HTTP 403 (verificação DataDome); JSON-LD: HTTP 403 (verificação DataDome)"
+            in sr.notes)
+
+
+def test_bricomarche_sem_principal_salta_o_json_ld_sem_pedidos(fake):
+    fake.cache["sem_principal"] = {"Bricomarché"}
+    browser = FakeFetcher()
+    browser.cache = fake.cache
+    route_api_stores(browser)
+    sr = asyncio.run(search_store(bricomarche, item("placa osb"), fake, browser))
+    assert sr.status == "ok"
+    assert {o.method for o in sr.offers} == {"browser"}
+    assert f"antes do browser: API: desativado com --sem-principal; JSON-LD: {JS_PAGE}" in sr.notes
+    assert fake.calls == []
 
 
 @pytest.mark.parametrize("cmd", ["pesquisar", "verificar"])
@@ -248,6 +294,6 @@ def test_captcha_no_browser_da_allmat(fake):
     browser.cache = fake.cache
     sr = asyncio.run(search_store(allmat, item("placa osb"), fake, browser))
     assert sr.status == "abrir à mão"
-    assert sr.detail == "CAPTCHA em browser: CAPTCHA da DataDome no browser; antes: API: HTTP 403"
+    assert sr.detail == "CAPTCHA em browser: CAPTCHA da DataDome no browser; antes: API: HTTP 403; JSON-LD: HTTP 403"
     assert sr.link == "https://allmat.pt/?s=placa+osb&post_type=product"
     assert "Allmat" in fake.cache["captcha"]
