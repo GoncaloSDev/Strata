@@ -64,9 +64,12 @@ async def search_store(store, item: Item, fetch, browser=None) -> StoreResult:
     kinds: set[str] = set()
     stage = None
     found = None
+    held = False  # D-18: o pedido simples respondeu sem o armazém; só o Chrome dedicado lê escalões e stock
     try:
         async with asyncio.timeout(DEADLINE_S):  # D-15: um prazo para todos os degraus
             for stage, search, f in _rungs(store, fetch, browser):
+                if held and stage != "browser":  # já há preços estruturados: nem JSON-LD nem IA
+                    continue
                 if f is None:
                     tried.append(f"{stage}: sem browser nesta execução")
                     kinds.add("erro")
@@ -101,16 +104,25 @@ async def search_store(store, item: Item, fetch, browser=None) -> StoreResult:
                     continue
                 for o in found.offers:
                     o.method = o.method or stage
+                if stage != "browser" and browser is not None and obramat.NO_STORE in found.notes:
+                    held = True
+                    tried.append(f"{stage}: sem o armazém {obramat.LOCATION} na sessão")
+                    continue
+                held = False
                 if stage == "browser":
                     fetch.cache.setdefault("browser_only", set()).add(store.NAME)  # D-08
                 if tried:
                     found.notes.append(f"antes {'da' if stage == 'IA' else 'do'} {stage}: {'; '.join(tried)}")
                 break
     except TimeoutError:
-        detail = f"mais de {DEADLINE_S} s durante {stage}"
-        if tried:
-            detail += f"; antes: {'; '.join(tried)}"
-        return StoreResult(store.NAME, "tempo esgotado", [], detail=detail)
+        if not held:
+            detail = f"mais de {DEADLINE_S} s durante {stage}"
+            if tried:
+                detail += f"; antes: {'; '.join(tried)}"
+            return StoreResult(store.NAME, "tempo esgotado", [], detail=detail)
+        tried.append(f"{stage}: mais de {DEADLINE_S} s")
+    if held:  # o browser falhou: ficam os preços do pedido simples, com o motivo
+        found.notes.append("; ".join(tried))
     if found is None:  # nenhum degrau respondeu (D-16)
         status = next(k for k in ("bloqueada", "tempo esgotado", "erro") if k in kinds)
         return StoreResult(store.NAME, status, [], detail="; ".join(tried))
@@ -141,8 +153,8 @@ async def run(items: list[Item], fetch, browser=None):
         yield ItemResult(item, list(stores))
 
 
-# Um termo de teste por loja (STORE-07); "pavimento" exercita as caixas M2 da Allmat.
-CANARIES = ((allmat, "cimento"), (allmat, "pavimento"), (bricomarche, "cimento"), (obras360, "osb"))
+# Um termo de teste por loja (STORE-07); "pavimento" exercita as caixas M2 da Allmat; "osb" na Obramat tem escalões.
+CANARIES = ((allmat, "cimento"), (allmat, "pavimento"), (bricomarche, "cimento"), (obras360, "osb"), (obramat, "osb"))
 VAT_ORIGINS = ("indicado pela loja", "regra da loja", "assumido")
 CONTENT_UNITS = (None, "un", "m²", "m", "kg", "L")
 
@@ -153,6 +165,8 @@ def _problem(store, term: str, sr: StoreResult) -> str:
         return f"estado {sr.status}: {sr.detail}"
     if not sr.offers:
         return "sem ofertas"
+    if any(o.method == "IA" for o in sr.offers):  # D-09: o adaptador não está bem se precisou da IA
+        return "preços lidos por IA: os degraus estruturados falharam"
     for o in sr.offers:
         if o.price <= 0:
             return f"preço ≤ 0 em {o.title}"
@@ -164,6 +178,11 @@ def _problem(store, term: str, sr: StoreResult) -> str:
         return "IVA da loja não é 23%"
     if store is bricomarche and any(not o.location for o in sr.offers):
         return "sem nome de loja"
+    if store is obramat:
+        if any(o.location != obramat.LOCATION for o in sr.offers):
+            return "sem nome do armazém"
+        if obramat.NO_STORE in sr.notes:
+            return "armazém por escolher no Chrome dedicado (escalões e stock por ler)"
     if store is allmat:
         if bad := next((o for o in sr.offers if allmat.INCOHERENT in o.note), None):
             return f"caixa incoerente em {bad.title}"
@@ -178,6 +197,6 @@ async def verificar(fetch, browser=None) -> list[tuple[str, bool, str]]:
     for store, term in CANARIES:
         sr = await search_store(store, Item(row=0, product=term, qty=Decimal(1), unit="un"), fetch, browser)
         problem = _problem(store, term, sr)
-        msg = problem or f"{len(sr.offers)} ofertas, mais barata {fmt_eur(sr.offers[0].price)}"
+        msg = problem or f"{len(sr.offers)} ofertas, mais barata {fmt_eur(sr.offers[0].price)} (método: {sr.offers[0].method})"
         rows.append((f"{store.NAME} ({term})", not problem, msg))
     return rows

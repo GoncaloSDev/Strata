@@ -360,7 +360,7 @@ def test_tres_lojas_pela_ordem_de_stores(monkeypatch):
 
 from strata.__main__ import main  # noqa: E402
 from strata.fetch import StoreBlocked  # noqa: E402
-from strata.stores import bricomarche, obras360  # noqa: E402
+from strata.stores import bricomarche, obramat, obras360  # noqa: E402
 
 BRICO = "bricomarche.pt/wp-json/wc/store/v1/products?search="
 SPLENDOR = "allmat.pt/produto/splendor/"
@@ -395,7 +395,8 @@ def brico_variation(variation="Loja: Coina - Barreiro"):
 
 
 def route_canaries(fake, *, allmat_cimento="allmat_products_search-cimento.json", box_page=BOX_PAGE,
-                   pavimento=None, brico_variations=None, o360_detail="obras360_product-details_osb-parent.json"):
+                   pavimento=None, brico_variations=None, o360_detail="obras360_product-details_osb-parent.json",
+                   obramat_product="obramat_product-osb-18_ctx201_tiers.html"):
     fake.route(SEARCH + "cimento", allmat_cimento)
     fake.route(SEARCH + "pavimento", pavimento or [m2_row()])
     fake.route(SPLENDOR, box_page.encode("utf-8"))
@@ -406,6 +407,8 @@ def route_canaries(fake, *, allmat_cimento="allmat_products_search-cimento.json"
     fake.route(O360_LIST + "osb", "obras360_product-list_osb.json")
     fake.route(O360_DETAIL + PLACA_ID, o360_detail)
     fake.route(O360_DETAIL, NO_DETAIL)  # a cola SikaBond: vai para a nota, não falha o verificar
+    fake.route("obramat.pt/search?q=osb", "obramat_search-osb_browser.html")
+    fake.route("obramat.pt/produtos/", obramat_product)
 
 
 def only(monkeypatch, store, term):
@@ -420,7 +423,7 @@ def test_verificar_quatro_lojas_ok(fake):
     route_canaries(fake)
     rows = check(fake)
     assert [label for label, _, _ in rows] == [
-        "Allmat (cimento)", "Allmat (pavimento)", "Bricomarché (cimento)", "Obras 360 (osb)"]
+        "Allmat (cimento)", "Allmat (pavimento)", "Bricomarché (cimento)", "Obras 360 (osb)", "Obramat (osb)"]
     assert all(ok for _, ok, _ in rows), rows
 
 
@@ -428,9 +431,9 @@ def test_verificar_comando_imprime_ok_e_sai_com_0(fake, capsys):
     route_canaries(fake)
     assert main(["verificar"], fetch=fake) == 0
     lines = capsys.readouterr().out.splitlines()
-    assert len([ln for ln in lines if ": OK — " in ln]) == 4
-    assert "Allmat (cimento): OK — 3 ofertas, mais barata 4,22 €" in lines
-    assert "Obras 360 (osb): OK — 7 ofertas, mais barata 15,02 €" in lines
+    assert len([ln for ln in lines if ": OK — " in ln]) == 5
+    assert "Allmat (cimento): OK — 3 ofertas, mais barata 4,22 € (método: API)" in lines
+    assert "Obras 360 (osb): OK — 7 ofertas, mais barata 15,02 € (método: API)" in lines
 
 
 def test_verificar_preco_zero_fica_na_nota(fake, monkeypatch):
@@ -492,6 +495,20 @@ def test_verificar_allmat_nenhuma_area_de_caixa_lida(fake, monkeypatch):
     route_canaries(fake, pavimento=[m2_row(cents="999")])  # preço da API sem bloco na página
     only(monkeypatch, allmat, "pavimento")
     assert check(fake) == [("Allmat (pavimento)", False, "nenhuma área de caixa lida")]
+
+
+def test_verificar_obramat_sem_armazem(fake, monkeypatch):
+    page = (FIXTURES / "obramat_product-osb-18_ctx201_tiers.html").read_text(encoding="utf-8").replace(
+        '"cdl_user_context_main_store","value":"201"', '"cdl_user_context_main_store","value":"no cookie here"')
+    route_canaries(fake, obramat_product=page.encode("utf-8"))
+    only(monkeypatch, obramat, "osb")
+    assert check(fake) == [("Obramat (osb)", False, "armazém por escolher no Chrome dedicado (escalões e stock por ler)")]
+
+
+def test_verificar_ofertas_lidas_por_ia_falham(fake, monkeypatch):
+    store = fake_store("Loja X", Found([offer(method="IA")], raw=1))
+    only(monkeypatch, store, "osb")
+    assert check(fake) == [("Loja X (osb)", False, "preços lidos por IA: os degraus estruturados falharam")]
 
 
 @pytest.mark.parametrize("answer, expected", [
