@@ -7,6 +7,7 @@ from types import SimpleNamespace
 
 import pytest
 
+import strata.ai
 import strata.fetch
 import strata.search
 from conftest import FIXTURES, FakeFetcher
@@ -301,3 +302,26 @@ def test_captcha_no_browser_da_allmat(fake):
     assert sr.detail == "CAPTCHA em browser: CAPTCHA da DataDome no browser; antes: API: HTTP 403; JSON-LD: HTTP 403"
     assert sr.link == "https://allmat.pt/?s=placa+osb&post_type=product"
     assert "Allmat" in fake.cache["captcha"]
+
+
+def test_degrau_ia_uma_so_chamada_sem_pesquisa_alargada(monkeypatch):
+    calls = []
+
+    async def ask(text):
+        calls.append(text)
+        return []  # a IA não viu nada: raw 0
+
+    monkeypatch.setattr(strata.ai, "ask", ask)
+    api, browser = transports()
+    store = fake_store("Falsa", StoreBlocked("HTTP 403"), StoreError("x"))
+    sr = go(store, api, browser, "placa osb 12mm")  # tem pesquisa alargada nos outros degraus
+    assert len(calls) == 1
+    assert sr.status == "sem resultados"
+
+
+def test_oferta_ia_fica_depois_da_estruturada_mesmo_mais_barata():
+    ia = offer("PLACA OSB IA", "1")
+    ia.method = "IA"
+    api, browser = transports()
+    sr = go(fake_store("Falsa", Found([ia, offer("PLACA OSB API", "9")], 2)), api, browser)
+    assert [(o.title, o.method) for o in sr.offers] == [("PLACA OSB API", "API"), ("PLACA OSB IA", "IA")]

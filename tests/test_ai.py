@@ -195,3 +195,100 @@ def test_degrau_ia_pede_a_pagina_com_idle_e_le_a_resposta(monkeypatch):
     assert seen == [(PAGE_URL, True)]
     assert [o.title for o in found.offers] == [OSB_ROW["title"]]
     assert ask.calls == [page_text(OSB_PAGE, PAGE_URL)]
+
+
+# --- motor da API (ANTHROPIC_API_KEY) e regras D-09/D-10/D-11 ---
+
+
+def test_ask_com_chave_usa_a_api_e_nao_o_claude(monkeypatch):
+    monkeypatch.setattr(strata.ai, "ask", REAL_ASK)
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "chave-de-teste")
+    used = []
+
+    async def api(text):
+        used.append("api")
+        return [OSB_ROW]
+
+    async def claude(path, text):
+        used.append("claude")
+        return []
+
+    monkeypatch.setattr(strata.ai, "_ask_api", api)
+    monkeypatch.setattr(strata.ai, "_ask_claude", claude)
+    monkeypatch.setattr(strata.ai.shutil, "which", lambda name: "C:/x/claude.exe")
+    assert asyncio.run(strata.ai.ask("x")) == [OSB_ROW]
+    monkeypatch.delenv("ANTHROPIC_API_KEY")
+    asyncio.run(strata.ai.ask("x"))
+    assert used == ["api", "claude"]
+
+
+class FakeMessages:
+    def __init__(self, result):
+        self.result, self.kwargs = result, None
+
+    async def create(self, **kwargs):
+        self.kwargs = kwargs
+        if isinstance(self.result, BaseException):
+            raise self.result
+        return self.result
+
+
+def fake_client(monkeypatch, result):
+    import anthropic
+
+    messages = FakeMessages(result)
+    monkeypatch.setattr(anthropic, "AsyncAnthropic", lambda **kw: SimpleNamespace(messages=messages))
+    return messages
+
+
+def reply(text, stop_reason="end_turn"):
+    return SimpleNamespace(stop_reason=stop_reason, content=[
+        SimpleNamespace(type="thinking", thinking=""), SimpleNamespace(type="text", text=text)])
+
+
+def test_ask_api_saida_estruturada_com_o_esquema(monkeypatch):
+    messages = fake_client(monkeypatch, reply(json.dumps({"offers": [OSB_ROW]})))
+    assert asyncio.run(strata.ai._ask_api("texto da página")) == [OSB_ROW]
+    kw = messages.kwargs
+    assert kw["model"] == "claude-haiku-5-5" and kw["system"] == strata.ai.PROMPT
+    assert kw["messages"] == [{"role": "user", "content": "texto da página"}]
+    assert kw["output_config"]["format"] == {"type": "json_schema", "schema": strata.ai.SCHEMA}
+    assert "tools" not in kw
+
+
+def test_ask_api_erro_da_api_vira_motivo(monkeypatch):
+    import anthropic
+    import httpx2
+
+    fake_client(monkeypatch, anthropic.APIConnectionError(request=httpx2.Request("POST", "https://api.anthropic.com")))
+    with pytest.raises(StoreError, match=r"^IA \(API\): "):
+        asyncio.run(strata.ai._ask_api("x"))
+
+
+@pytest.mark.parametrize("result, reason", [
+    (reply("não é json"), "resposta sem JSON"),
+    (reply("", stop_reason="refusal"), "recusou"),
+    (reply('{"offers": [', stop_reason="max_tokens"), "resposta cortada"),
+])
+def test_ask_api_resposta_inutil_vira_motivo(monkeypatch, result, reason):
+    fake_client(monkeypatch, result)
+    with pytest.raises(StoreError, match=reason):
+        asyncio.run(strata.ai._ask_api("x"))
+
+
+def test_offers_from_no_maximo_5():
+    rows = [dict(OSB_ROW, title=f"PLACA OSB {n}", price=f"{n},00 €") for n in range(1, 8)]
+    text = " ".join(f"PLACA OSB {n} {n},00 €" for n in range(1, 8))
+    found = offers_from(rows, text, obramat, "placa osb", PAGE_URL)
+    assert [o.title for o in found.offers] == [f"PLACA OSB {n}" for n in range(1, 6)]
+
+
+def test_offers_from_obras360_soma_o_iva_da_pagina():
+    from strata.money import add_vat
+    from strata.stores import obras360
+
+    page = obras360.search_page("placa osb")
+    row = {"title": "PLACA OSB 3 12MM", "price": "12,21 €", "url": "https://www.obras360.pt/placa-osb-3-12mm"}
+    [o] = offers_from([row], "PLACA OSB 3 12MM 12,21 € s/IVA", obras360, "placa osb", page).offers
+    assert o.price == add_vat(Decimal("12.21"), 23)
+    assert "+23%" in o.vat_evidence and MARK in o.vat_evidence
