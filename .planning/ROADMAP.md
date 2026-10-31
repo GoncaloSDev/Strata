@@ -86,7 +86,7 @@ Plans:
   2. Quando o método principal de uma loja falha (ex.: desativado à força num teste), a app tenta JSON-LD, browser automático e IA, por esta ordem, e cada oferta mostra o método que funcionou; se todos falharem, a loja aparece como falhada com o motivo
   3. Uma folha Excel de 10 itens fica resolvida nas 4 lojas fixas em menos de 5 minutos, cada item mostra o estado das 4 lojas e a verificação das lojas cobre as 4
 
-**Plans:** 2/6 plans executed
+**Plans:** 3/6 plans executed
 
 Plans:
 **Wave 1**
@@ -96,7 +96,7 @@ Plans:
 - [x] 02-02-PLAN.md — Checkpoint de pacotes; cadeia API → browser no Chrome dedicado (método por oferta, D-08) e `--sem-principal LOJA`
 
 **Wave 3** *(blocked on Wave 2 completion)*
-- [ ] 02-03-PLAN.md — CAPTCHA: "abrir à mão" com o link e sem mais pedidos à loja; verificação do DataDome no browser
+- [x] 02-03-PLAN.md — CAPTCHA: "abrir à mão" com o link e sem mais pedidos à loja; verificação do DataDome no browser
 
 **Wave 4** *(blocked on Wave 3 completion)*
 - [ ] 02-04-PLAN.md — Degrau JSON-LD (Allmat e Obramat) e falha rápida nas lojas montadas com JavaScript
@@ -183,7 +183,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Folha Excel e preços da Allmat, Bricomarché e Obras 360 | 12/12 | Complete    | 2026-10-30 |
-| 2. Obramat e cadeia de recurso | 2/6 | In Progress | - |
+| 2. Obramat e cadeia de recurso | 3/6 | In Progress | - |
 | 3. Especificações e classificação exato/parecido | 0/TBD | Not started | - |
 | 4. Embalagens, custo total e folha preenchida | 0/TBD | Not started | - |
 | 5. App no browser e exportação | 0/TBD | Not started | - |
