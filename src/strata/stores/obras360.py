@@ -13,6 +13,8 @@ from strata.words import broadened, title_matches, words
 NAME = "Obras 360"
 BASE = "https://www.obras360.pt"  # domínio com "s" (Pitfall 14)
 VAT_PT = Decimal(23)
+# shortcut: a página da Obras 360 mostra o preço sem IVA (às vezes por m², sondagem de 2026-10-22); só o degrau IA o usa
+PAGE_PRICES_WITHOUT_VAT = True
 PER_PAGE = 48
 MAX_PAGES = 3
 # shortcut: só os 20 pais mais baratos por artigo (A3) pedem o detalhe; subir se o `verificar` mostrar baratos de fora

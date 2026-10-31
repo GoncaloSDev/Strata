@@ -3,7 +3,7 @@
 import asyncio
 from decimal import Decimal
 
-from strata import jsonld
+from strata import ai, jsonld
 from strata.fetch import StoreBlocked, StoreCaptcha, StoreError, StoreTimeout
 from strata.models import Found, Item, ItemResult, StoreResult
 from strata.money import fmt_eur, in_unit
@@ -15,15 +15,18 @@ STORES = (allmat, bricomarche, obras360, obramat)
 DEADLINE_S = 90
 
 
-async def _attempt(search, fetch, item: Item) -> tuple[Found, str | None, int, int]:
-    """Um degrau: 1.ª pesquisa, pesquisa alargada (D-14) e filtro da pergunta completa (G-01-5)."""
+async def _attempt(search, fetch, item: Item, widen: bool = True) -> tuple[Found, str | None, int, int]:
+    """Um degrau: 1.ª pesquisa, pesquisa alargada (D-14) e filtro da pergunta completa (G-01-5).
+
+    widen=False: só a 1.ª pesquisa (degrau IA, D-10: 1 chamada por item e loja).
+    """
     b = None
     first_hidden = 0  # ofertas que a 1.ª pesquisa escondeu, quando a alargada a substitui
     wide_only = 0
     found = await search(item.product, fetch)  # D-13: só o Produto, tal como escrito
     all_hidden = found.hidden > 0 and not found.offers
     # D-14: uma só tentativa extra; também quando D-15 esconde tudo (WR-01)
-    if (found.raw == 0 or all_hidden) and (b := broadened(item.product)):
+    if widen and (found.raw == 0 or all_hidden) and (b := broadened(item.product)):
         # WR-17: o produto da linha só ordena os pais antes do corte K; a pesquisa enviada é b
         wide = await search(b, fetch, rank=item.product)
         if found.raw > 0 and not wide.offers:  # fica a 1.ª, com a contagem e as palavras pedidas
@@ -44,10 +47,12 @@ async def _attempt(search, fetch, item: Item) -> tuple[Found, str | None, int, i
 
 def _rungs(store, fetch, browser) -> list[tuple[str, object, object]]:
     """Degraus (nome, search, transporte); a loja que o browser resolveu fica no browser (D-08)."""
+    ia = ("IA", ai.rung(store), browser)  # último recurso: a página de pesquisa lida no browser (D-09 a D-12)
     if store.NAME in fetch.cache.get("browser_only", set()):
-        return [("browser", store.search, browser)]
-    # D-13: principal → JSON-LD (pedido simples) → browser
-    return [("API", store.search, fetch), ("JSON-LD", jsonld.rung(store), fetch), ("browser", store.search, browser)]
+        return [("browser", store.search, browser), ia]
+    # D-13: principal → JSON-LD (pedido simples) → browser → IA
+    return [("API", store.search, fetch), ("JSON-LD", jsonld.rung(store), fetch), ("browser", store.search, browser),
+            ia]
 
 
 async def search_store(store, item: Item, fetch, browser=None) -> StoreResult:
@@ -71,7 +76,7 @@ async def search_store(store, item: Item, fetch, browser=None) -> StoreResult:
                     kinds.add("erro")
                     continue
                 try:
-                    found, b, first_hidden, wide_only = await _attempt(search, f, item)
+                    found, b, first_hidden, wide_only = await _attempt(search, f, item, widen=stage != "IA")
                 except StoreCaptcha as e:  # D-07: acaba a cadeia desta loja; nenhum degrau seguinte corre
                     captcha.add(store.NAME)
                     detail = f"CAPTCHA em {stage}: {e}"
@@ -99,7 +104,7 @@ async def search_store(store, item: Item, fetch, browser=None) -> StoreResult:
                 if stage == "browser":
                     fetch.cache.setdefault("browser_only", set()).add(store.NAME)  # D-08
                 if tried:
-                    found.notes.append(f"antes do {stage}: {'; '.join(tried)}")
+                    found.notes.append(f"antes {'da' if stage == 'IA' else 'do'} {stage}: {'; '.join(tried)}")
                 break
     except TimeoutError:
         detail = f"mais de {DEADLINE_S} s durante {stage}"
@@ -117,15 +122,15 @@ async def search_store(store, item: Item, fetch, browser=None) -> StoreResult:
         key, reason = in_unit(o, item.unit)
         if reason:
             o.note = f"{o.note}; {reason}" if o.note else reason
-        keyed.append((key, o))
-    keyed.sort(key=lambda t: (t[0] is None, t[0] or 0))  # estável: empates pela ordem da loja
+        keyed.append((o.method == "IA", key, o))  # D-09: IA sempre no fim da loja, mesmo mais barata
+    keyed.sort(key=lambda t: (t[0], t[1] is None, t[1] or 0))  # estável: empates pela ordem da loja
     detail = ""  # STORE-05/D-01: nunca "ok" sozinho com zero ofertas; o motivo fica nas notas
     if not found.offers:
         detail = (f"0 ofertas mostradas; {found.hidden} escondidas pelo filtro de título" if found.hidden
                   else f"0 ofertas mostradas de {found.raw} resultados da loja")
     elif first_hidden:
         detail = f"1.ª pesquisa: {first_hidden} escondidas pelo filtro de título com '{item.product}'"  # WR-16
-    return StoreResult(store.NAME, "ok", [o for _, o in keyed], detail=detail, hidden=found.hidden,
+    return StoreResult(store.NAME, "ok", [o for *_, o in keyed], detail=detail, hidden=found.hidden,
                        wide_only=wide_only, notes=found.notes, broadened_query=b)
 
 

@@ -139,8 +139,16 @@ class BrowserFetcher:
                 raise StoreBlocked("página de desafio") from e
             raise StoreError("resposta não é JSON (layout mudou?)") from e
 
-    async def get_html(self, url: str, params: dict | None = None) -> str:
+    async def get_html(self, url: str, params: dict | None = None, idle: bool = False) -> str:
+        """idle: espera até 5 s que a rede acalme (páginas montadas com JavaScript, degrau IA)."""
+        from playwright.async_api import TimeoutError as PwTimeout
+
         async def read(page, resp):
+            if idle:
+                try:
+                    await page.wait_for_load_state("networkidle", timeout=5000)
+                except PwTimeout:
+                    pass  # segue com o que a página já tem
             return await past_challenge(page.content)
 
         return await self._open(url, params, read)

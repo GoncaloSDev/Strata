@@ -7,6 +7,7 @@ from types import SimpleNamespace
 
 import pytest
 
+import strata.ai
 import strata.fetch
 import strata.search
 from conftest import FIXTURES, FakeFetcher
@@ -46,10 +47,14 @@ def fake_store(name, *answers):
                            search_page=lambda q: f"https://x.pt/?s={q}")
 
 
+async def empty_page(url, params=None, idle=False):
+    return "<html><body></body></html>"
+
+
 def transports():
-    """API e browser falsos com a mesma cache, como o Fetcher e o BrowserFetcher."""
+    """API e browser falsos com a mesma cache, como o Fetcher e o BrowserFetcher (o browser dá ao degrau IA uma página)."""
     cache = {}  # "kind" distingue os dois: SimpleNamespace compara por atributos
-    return SimpleNamespace(kind="API", cache=cache), SimpleNamespace(kind="browser", cache=cache)
+    return SimpleNamespace(kind="API", cache=cache), SimpleNamespace(kind="browser", cache=cache, get_html=empty_page)
 
 
 def go(store, fetch, browser, product="osb"):
@@ -105,7 +110,7 @@ def test_todos_falham_bloqueada_com_o_motivo_de_cada_degrau():
     api, browser = transports()
     sr = go(fake_store("Falsa", StoreBlocked("HTTP 403"), StoreError("x")), api, browser)
     assert sr.status == "bloqueada"
-    assert sr.detail == f"API: HTTP 403; JSON-LD: {JS_PAGE}; browser: x"
+    assert sr.detail == f"API: HTTP 403; JSON-LD: {JS_PAGE}; browser: x; IA: IA desligada nos testes"
     assert "browser_only" not in api.cache
 
 
@@ -118,7 +123,7 @@ def test_todos_falham_estado_pela_prioridade(first, status):
     sr = go(fake_store("Falsa", first, StoreError("x")), api, browser)
     assert sr.status == status
     assert sr.detail.startswith("API: ")
-    assert sr.detail.endswith(f"; JSON-LD: {JS_PAGE}; browser: x")
+    assert sr.detail.endswith(f"; JSON-LD: {JS_PAGE}; browser: x; IA: IA desligada nos testes")
 
 
 def test_prazo_partilhado_acaba_no_browser(monkeypatch):
@@ -297,3 +302,26 @@ def test_captcha_no_browser_da_allmat(fake):
     assert sr.detail == "CAPTCHA em browser: CAPTCHA da DataDome no browser; antes: API: HTTP 403; JSON-LD: HTTP 403"
     assert sr.link == "https://allmat.pt/?s=placa+osb&post_type=product"
     assert "Allmat" in fake.cache["captcha"]
+
+
+def test_degrau_ia_uma_so_chamada_sem_pesquisa_alargada(monkeypatch):
+    calls = []
+
+    async def ask(text):
+        calls.append(text)
+        return []  # a IA não viu nada: raw 0
+
+    monkeypatch.setattr(strata.ai, "ask", ask)
+    api, browser = transports()
+    store = fake_store("Falsa", StoreBlocked("HTTP 403"), StoreError("x"))
+    sr = go(store, api, browser, "placa osb 12mm")  # tem pesquisa alargada nos outros degraus
+    assert len(calls) == 1
+    assert sr.status == "sem resultados"
+
+
+def test_oferta_ia_fica_depois_da_estruturada_mesmo_mais_barata():
+    ia = offer("PLACA OSB IA", "1")
+    ia.method = "IA"
+    api, browser = transports()
+    sr = go(fake_store("Falsa", Found([ia, offer("PLACA OSB API", "9")], 2)), api, browser)
+    assert [(o.title, o.method) for o in sr.offers] == [("PLACA OSB API", "API"), ("PLACA OSB IA", "IA")]

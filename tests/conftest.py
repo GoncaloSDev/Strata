@@ -7,6 +7,7 @@ from pathlib import Path
 import pytest
 from curl_cffi.requests import AsyncSession
 
+import strata.ai
 from strata.fetch import StoreError, fixture_name, full_url
 
 FIXTURES = Path(__file__).parent / "fixtures"
@@ -18,6 +19,15 @@ def no_network(monkeypatch):
         raise RuntimeError("rede bloqueada nos testes")
 
     monkeypatch.setattr(AsyncSession, "request", blocked)
+
+
+@pytest.fixture(autouse=True)
+def no_ai(monkeypatch):
+    """Nenhum teste chama a API nem o claude: quem quer IA troca strata.ai.ask por uma resposta gravada."""
+    async def off(text):
+        raise StoreError("IA desligada nos testes")
+
+    monkeypatch.setattr(strata.ai, "ask", off)
 
 
 class FakeFetcher:
@@ -61,7 +71,7 @@ class FakeFetcher:
             return json.loads(body, parse_float=Decimal)
         return body
 
-    async def get_html(self, url, params=None) -> str:
+    async def get_html(self, url, params=None, idle=False) -> str:
         body = self._body(url, params)
         return body.decode("utf-8") if isinstance(body, bytes) else body
 
