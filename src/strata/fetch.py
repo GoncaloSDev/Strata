@@ -3,6 +3,7 @@
 import asyncio
 import hashlib
 import json
+import random
 import time
 from decimal import Decimal
 from pathlib import Path
@@ -23,8 +24,13 @@ class StoreTimeout(Exception):
     pass
 
 
-# host -> (pedidos em simultâneo, intervalo mínimo entre pedidos em s)
-LIMITS = {"allmat.pt": (2, 0.5), "www.bricomarche.pt": (2, 0.5), "www.obras360.pt": (3, 0.3)}
+# host -> (pedidos em simultâneo, intervalo mínimo entre pedidos em s[, acaso a somar ao intervalo em s])
+LIMITS = {
+    "allmat.pt": (2, 0.5),
+    "www.bricomarche.pt": (2, 0.5),
+    "www.obras360.pt": (3, 0.3),
+    "www.obramat.pt": (1, 3.0, 2.0),  # STORE-04: um pedido de cada vez, 3 a 5 s entre inícios (testado a 4–10 s)
+}
 CHALLENGE = ("just a moment", "challenge-platform", "captcha", "datadome")
 
 
@@ -40,9 +46,10 @@ def fixture_name(full: str) -> str:
 class Host:
     """Semáforo + intervalo mínimo entre o início de dois pedidos ao mesmo host."""
 
-    def __init__(self, n: int, gap: float):
+    def __init__(self, n: int, gap: float, jitter: float = 0.0):
         self.sem = asyncio.Semaphore(n)
         self.gap = gap
+        self.jitter = jitter
         self.next = 0.0
         self.lock = asyncio.Lock()
 
@@ -51,7 +58,7 @@ class Host:
         try:
             async with self.lock:
                 await asyncio.sleep(max(0.0, self.next - time.monotonic()))
-                self.next = time.monotonic() + self.gap
+                self.next = time.monotonic() + self.gap + random.uniform(0, self.jitter)
         except BaseException:
             self.sem.release()  # cancelado à espera: não perder a vaga
             raise

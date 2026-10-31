@@ -6,11 +6,11 @@ from decimal import Decimal
 from strata.fetch import StoreBlocked, StoreTimeout
 from strata.models import Item, ItemResult, StoreResult
 from strata.money import fmt_eur, in_unit
-from strata.stores import allmat, bricomarche, obras360
+from strata.stores import allmat, bricomarche, obramat, obras360
 from strata.words import broadened, title_matches
 
 # Módulos com NAME e async search(query, fetch, rank=None) -> Found, pela ordem de D-01.
-STORES = (allmat, bricomarche, obras360)
+STORES = (allmat, bricomarche, obras360, obramat)
 DEADLINE_S = 90
 
 

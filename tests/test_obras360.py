@@ -257,7 +257,7 @@ def test_sem_resultados(fake):
 
 
 def test_stores_tem_obras360_a_seguir_a_bricomarche():
-    assert strata.search.STORES == (allmat, bm, obras360)
+    assert strata.search.STORES[:3] == (allmat, bm, obras360)
 
 
 def test_ponta_a_ponta_tres_lojas(tmp_path, fake, monkeypatch, capsys):
