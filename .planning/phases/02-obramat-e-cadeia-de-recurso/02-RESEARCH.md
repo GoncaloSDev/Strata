@@ -454,19 +454,19 @@ Com K = 3 e intervalo de 3–5 s: ~15–20 s por item na Obramat, em paralelo co
 | A7 | `messages.create` com `output_config` que junta `format` e `effort` é aceite pelo `anthropic` 2.3.0 | Pattern 5 | Erro 400 no primeiro uso; tirar o `effort` |
 | A8 | Só existe um armazém em Portugal hoje; um segundo aparecerá na janela do site | Pattern 3 | `location` fixo errado; o comentário `shortcut:` e o `verificar` devem apanhar |
 
-## Open Questions
+## Open Questions (RESOLVED)
 
-1. **D-03: a Obramat hoje só se lê pelo browser. Avançar assim?**
+1. **D-03: a Obramat hoje só se lê pelo browser. Avançar assim?** RESOLVED: sim, D-18 (browser via D-08, escalões e stock só nas 3 primeiras ofertas, K = 3); planos 02-01 e 02-02.
    - Números medidos: curl 3/3 a 403 (riskscore 0,39–0,55, interstitial `'rt':'i'`); browser 21/21 sem CAPTCHA, 1,7–1,8 s por página (1.ª 3,4–10 s); por item: 1 página de pesquisa para preço, título, link e armazém, mais 1 página por produto para escalões e stock exato.
    - O que já não é dúvida: só há um armazém e o preço nacional = preço de Alfragide, por isso não há escolha entre "preço nacional" e "preço por loja".
    - Recommendation: o planeamento pergunta ao utilizador antes de fechar os planos (como manda o D-03), propondo: browser como caminho real da Obramat via D-08; escalões e stock exato só para as 3 primeiras ofertas (K = 3).
-2. **Degrau JSON-LD sem fonte de links na Bricomarché e na Obras 360**
+2. **Degrau JSON-LD sem fonte de links na Bricomarché e na Obras 360** RESOLVED: D-19 (falha logo com motivo visível e segue para o browser); plano 02-04.
    - What we know: as páginas de pesquisa dessas lojas são montadas com JavaScript; sem a API não há URLs de produto.
    - Recommendation: o degrau corre e falha com "página de pesquisa sem links de produto (montada com JavaScript)". Confirmar com o utilizador que isto cumpre o D-13/D-16.
-3. **`claude -p` não autenticado nesta sessão**
+3. **`claude -p` não autenticado nesta sessão** RESOLVED: verificação humana no terminal do utilizador no plano 02-05; o degrau mostra o motivo quando falha.
    - What we know: lançado a partir desta sessão deu "OAuth session expired and could not be refreshed". Pode ser só deste ambiente de agente.
    - Recommendation: o plano inclui um passo manual em que o utilizador corre `echo teste | claude -p --model haiku --output-format json` no terminal dele; o degrau mostra sempre o motivo quando falha.
-4. **Status novo "abrir à mão"**
+4. **Status novo "abrir à mão"** RESOLVED: `Status` e `StoreResult.link` nos planos 02-01 e 02-03.
    - Recommendation: acrescentar `"abrir à mão"` ao `Status` (SC1 usa o nome) e `StoreResult.link`. O `_problem` do `verificar` trata-o como falha.
 
 ## Environment Availability
