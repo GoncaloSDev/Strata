@@ -8,7 +8,7 @@ import pytest
 from conftest import FIXTURES
 from strata import jsonld
 from strata.fetch import StoreError
-from strata.stores import allmat, bricomarche
+from strata.stores import allmat, bricomarche, obramat, obras360
 
 SEARCH_PAGE = "allmat_search-page_cimento.html"
 LIZ_PAGE = "allmat_product-page_liz-branco_jsonld.html"
@@ -102,7 +102,37 @@ def test_pagina_de_pesquisa_sem_links_escala(fake):
         asyncio.run(jsonld.rung(allmat)("cimento", fake))
 
 
-def test_loja_sem_links_falha_sem_pedidos(fake):
+@pytest.mark.parametrize("store", [bricomarche, obras360])
+def test_loja_montada_com_javascript_falha_sem_pedidos(fake, store):
     with pytest.raises(StoreError, match="página montada com JavaScript, sem links de produto"):
-        asyncio.run(jsonld.rung(bricomarche)("cimento", fake))
+        asyncio.run(jsonld.rung(store)("cimento", fake))
     assert fake.calls == []
+
+
+# --- Obramat: só a lista principal, nunca o carrossel "vistos recentemente" ---
+
+OSB_18 = "https://www.obramat.pt/produtos/placa-osb-3-250x125x1-8cm-25134518.html"
+
+
+def test_links_de_produto_da_obramat_so_da_lista_principal():
+    links = obramat.product_links(read("obramat_search-osb_browser.html"))
+    assert len(links) == 7 == len(set(links))
+    assert links[1] == OSB_18
+    assert all(u.startswith("https://www.obramat.pt/produtos/") and u.endswith(".html") for u in links)
+    assert obramat.product_links(read("obramat_search-no-results_browser.html")) == []
+
+
+def test_products_da_pagina_osb_da_obramat():
+    (node,) = jsonld.products(read("obramat_product-osb-18_ctx201_tiers.html"))
+    assert node["name"] == "PLACA OSB 3 250X125X1,8CM"
+    assert jsonld.offer_of(node) == (Decimal("28.5"), "em stock")
+
+
+def test_degrau_da_obramat(fake):
+    fake.route("obramat.pt/search?q=osb", "obramat_search-osb_browser.html")
+    fake.route("obramat.pt/produtos/", "obramat_product-osb-18_ctx201_tiers.html")
+    found = asyncio.run(jsonld.rung(obramat)("osb", fake))
+    assert len(found.offers) == jsonld.MAX_PAGES
+    assert all(o.location == "OBRAMAT Lisboa - Alfragide" and o.vat_evidence.endswith("(JSON-LD)")
+               and o.price == Decimal("28.5") and o.url == OSB_18 for o in found.offers)
+    assert "+2 produtos não lidos (limite de 5 páginas)" in found.notes

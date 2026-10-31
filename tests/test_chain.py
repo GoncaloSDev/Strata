@@ -153,7 +153,7 @@ def test_sem_principal_salta_a_api():
 def test_sem_principal_na_linha_de_comandos(fake, monkeypatch, capsys):
     monkeypatch.setattr("sys.stdin", io.StringIO("placa osb 3 un\n\n"))
     route_api_stores(fake)
-    route_obramat(fake)  # o pedido simples responderia bem
+    fake.route("obramat.pt", StoreBlocked("HTTP 403"))  # senão o JSON-LD respondia pelo pedido simples
     browser = FakeFetcher()
     browser.cache = fake.cache
     route_obramat(browser)
@@ -161,9 +161,10 @@ def test_sem_principal_na_linha_de_comandos(fake, monkeypatch, capsys):
     assert main(["pesquisar", "--sem-principal", "obramat"], fetch=fake, browser=browser) == 0
 
     osb = blocks(capsys.readouterr().out)["placa osb"]
-    assert not [c for c in fake.calls if "obramat" in c]
+    # o API desligado não pede nada; o JSON-LD pede a mesma página de pesquisa e leva o 403
+    assert [c for c in fake.calls if "obramat" in c] == ["https://www.obramat.pt/search?q=placa+osb"]
     assert "  Obramat: ok" in osb and "método: browser" in osb
-    assert "nota: antes do browser: API: desativado com --sem-principal" in osb
+    assert "nota: antes do browser: API: desativado com --sem-principal; JSON-LD: HTTP 403" in osb
     assert "  Allmat: sem resultados" in osb and "  Bricomarché: ok" in osb  # as outras lojas ficam na API
     assert not browser.missing
 
@@ -185,6 +186,31 @@ def test_allmat_sem_principal_responde_pelo_json_ld(fake):
     assert [o.method for o in sr.offers] == ["JSON-LD"]
     assert "antes do JSON-LD: API: desativado com --sem-principal" in sr.notes
     assert not [c for c in fake.calls if "wp-json" in c]
+
+
+def test_obramat_bloqueada_no_api_e_no_json_ld_vai_ao_browser(fake):
+    dd = StoreBlocked("HTTP 403 (verificação DataDome)")
+    fake.route("obramat.pt", dd)
+    browser = FakeFetcher()
+    browser.cache = fake.cache
+    route_obramat(browser)
+    sr = asyncio.run(search_store(obramat, item("placa osb"), fake, browser))
+    assert sr.status == "ok"
+    assert {o.method for o in sr.offers} == {"browser"}
+    assert ("antes do browser: API: HTTP 403 (verificação DataDome); JSON-LD: HTTP 403 (verificação DataDome)"
+            in sr.notes)
+
+
+def test_bricomarche_sem_principal_salta_o_json_ld_sem_pedidos(fake):
+    fake.cache["sem_principal"] = {"Bricomarché"}
+    browser = FakeFetcher()
+    browser.cache = fake.cache
+    route_api_stores(browser)
+    sr = asyncio.run(search_store(bricomarche, item("placa osb"), fake, browser))
+    assert sr.status == "ok"
+    assert {o.method for o in sr.offers} == {"browser"}
+    assert f"antes do browser: API: desativado com --sem-principal; JSON-LD: {JS_PAGE}" in sr.notes
+    assert fake.calls == []
 
 
 @pytest.mark.parametrize("cmd", ["pesquisar", "verificar"])
