@@ -5,7 +5,7 @@ import html
 import re
 from decimal import Decimal
 
-from strata.fetch import StoreError
+from strata.fetch import StoreError, full_url
 from strata.models import Found, Offer
 from strata.money import add_vat, fmt_qty
 from strata.words import broadened, title_matches, words
@@ -151,3 +151,8 @@ async def search(query: str, fetch, rank: str | None = None) -> Found:
     shown = [o for o in offers if title_matches(query, o.title)]  # o.title = pai + " — " + designação
     hidden = len(products) - len(kept) + len(offers) - len(shown)  # variantes cortadas também contam (D-02)
     return Found(offers=shown, raw=total, hidden=hidden, notes=notes)
+
+
+def search_page(query: str) -> str:
+    """Página de pesquisa para pessoas, para continuar à mão (D-07)."""
+    return full_url(BASE + "/pesquisa", {"search": query})

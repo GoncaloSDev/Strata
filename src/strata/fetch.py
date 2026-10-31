@@ -4,6 +4,7 @@ import asyncio
 import hashlib
 import json
 import random
+import re
 import time
 from decimal import Decimal
 from pathlib import Path
@@ -14,6 +15,10 @@ from curl_cffi.requests.exceptions import RequestException, Timeout
 
 class StoreBlocked(Exception):
     pass
+
+
+class StoreCaptcha(StoreBlocked):
+    """CAPTCHA: a loja fica 'abrir à mão' até ao fim da execução (D-07); a app nunca o resolve nem espera."""
 
 
 class StoreError(Exception):
@@ -32,6 +37,16 @@ LIMITS = {
     "www.obramat.pt": (1, 3.0, 2.0),  # STORE-04: um pedido de cada vez, 3 a 5 s entre inícios (testado a 4–10 s)
 }
 CHALLENGE = ("just a moment", "challenge-platform", "captcha", "datadome")
+DD = re.compile(r"var dd=\{([^}]*)\}")
+
+
+def challenge_kind(body: str) -> str | None:
+    """'captcha' (D-07: parar), 'interstitial' (verificação do dispositivo: escala para o browser) ou None."""
+    m = DD.search(body)
+    if not m:
+        return None
+    # A2: 'rt':'c' = CAPTCHA, 't':'bv' = bloqueio; 'rt':'i' = verificação do dispositivo (fontes de terceiros)
+    return "captcha" if ("'rt':'c'" in m[1] or "'t':'bv'" in m[1]) else "interstitial"
 
 
 def full_url(url: str, params: dict | None = None) -> str:
@@ -79,7 +94,10 @@ class Fetcher:
         if host not in self.hosts:
             raise ValueError(f"host sem limites definidos: {host}")
         full = full_url(url, params)
+        captcha = self.cache.setdefault("captcha_hosts", set())
         async with self.hosts[host]:
+            if host in captcha:  # D-07: pedidos já em fila quando o CAPTCHA chegou nunca saem
+                raise StoreCaptcha("CAPTCHA antes nesta execução")
             try:
                 r = await self.s.get(full)
             except Timeout as e:
@@ -87,6 +105,12 @@ class Fetcher:
             except RequestException as e:
                 raise StoreError(f"ligação: {e}") from e
         if r.status_code in (403, 429, 503) or r.headers.get("cf-mitigated"):
+            kind = challenge_kind(r.text[:4000])
+            if kind == "captcha":
+                captcha.add(host)
+                raise StoreCaptcha(f"CAPTCHA da DataDome (HTTP {r.status_code})")
+            if kind == "interstitial":
+                raise StoreBlocked(f"HTTP {r.status_code} (verificação DataDome)")
             raise StoreBlocked(f"HTTP {r.status_code}")
         if r.status_code >= 400:
             raise StoreError(f"HTTP {r.status_code}")

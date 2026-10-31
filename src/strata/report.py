@@ -54,6 +54,8 @@ def print_item(result: ItemResult, out) -> None:
         if sr.broadened_query:
             head += f" (pesquisa alargada: '{clean(sr.broadened_query)}')"
         print(head, file=out)
+        if sr.link:
+            print(f"    abrir à mão: {clean(sr.link)}", file=out)
         for o in sr.offers[:MAX_SHOWN]:
             for line in _offer_lines(o):
                 print(line, file=out)

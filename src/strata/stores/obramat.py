@@ -9,7 +9,7 @@ from urllib.parse import urljoin
 
 from selectolax.lexbor import LexborHTMLParser
 
-from strata.fetch import StoreError
+from strata.fetch import StoreError, full_url
 from strata.models import Found, Offer
 from strata.money import add_vat, content_from_title, fmt_eur, fmt_qty
 from strata.words import title_matches, words
@@ -141,6 +141,10 @@ async def _read_product(o: Offer, fetch) -> bool:
         o.stock = f"esgotado em {LOCATION}"
     o.note = "; ".join(notes)
     return False
+
+
+def search_page(query: str) -> str:
+    return full_url(SEARCH_URL, {"q": query})
 
 
 async def search(query: str, fetch, rank: str | None = None) -> Found:
