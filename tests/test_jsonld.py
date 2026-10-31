@@ -120,6 +120,9 @@ def test_links_de_produto_da_obramat_so_da_lista_principal():
     assert links[1] == OSB_18
     assert all(u.startswith("https://www.obramat.pt/produtos/") and u.endswith(".html") for u in links)
     assert obramat.product_links(read("obramat_search-no-results_browser.html")) == []
+    endcap = read("obramat_search-cimento-cola_endcap_browser.html")  # bloco promocional dentro da lista
+    products, _ = obramat.parse_search(endcap)
+    assert obramat.product_links(endcap) == list(dict.fromkeys(obramat.BASE + p["url"] for p in products))
 
 
 def test_products_da_pagina_osb_da_obramat():
@@ -133,6 +136,9 @@ def test_degrau_da_obramat(fake):
     fake.route("obramat.pt/produtos/", "obramat_product-osb-18_ctx201_tiers.html")
     found = asyncio.run(jsonld.rung(obramat)("osb", fake))
     assert len(found.offers) == jsonld.MAX_PAGES
-    assert all(o.location == "OBRAMAT Lisboa - Alfragide" and o.vat_evidence.endswith("(JSON-LD)")
-               and o.price == Decimal("28.5") and o.url == OSB_18 for o in found.offers)
+    assert all(o.location == "OBRAMAT Lisboa - Alfragide"
+               and o.vat_evidence == "price do ld+json = unitprice_ati, com IVA (JSON-LD)"
+               and o.price == Decimal("28.5") for o in found.offers)
+    links = obramat.product_links(read("obramat_search-osb_browser.html"))
+    assert [o.url for o in found.offers] == links[:jsonld.MAX_PAGES]  # o Product não tem url: fica o link
     assert "+2 produtos não lidos (limite de 5 páginas)" in found.notes

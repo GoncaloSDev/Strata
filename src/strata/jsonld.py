@@ -83,6 +83,7 @@ def rung(store):
         # O limite por host do Fetcher dá o ritmo. Esperar por todas antes de relançar a 1.ª falha.
         pages = await asyncio.gather(*(fetch.get_html(u) for u in read), return_exceptions=True)
         offers, failed, raw = [], [], 0
+        evidence = getattr(store, "JSONLD_VAT_EVIDENCE", store.VAT_EVIDENCE)
         for link, page in zip(read, pages):
             if isinstance(page, StoreError):  # StoreBlocked, StoreCaptcha e StoreTimeout sobem
                 failed.append(page)
@@ -99,7 +100,7 @@ def rung(store):
                     continue
                 content, content_unit = content_from_title(title) or (None, None)
                 offers.append(Offer(store=store.NAME, title=title, url=str(node.get("url") or link), price=price,
-                                    vat_origin="regra da loja", vat_evidence=f"{store.VAT_EVIDENCE} (JSON-LD)",
+                                    vat_origin="regra da loja", vat_evidence=f"{evidence} (JSON-LD)",
                                     content=content, content_unit=content_unit, stock=stock,
                                     location=getattr(store, "LOCATION", None)))
         notes = []
